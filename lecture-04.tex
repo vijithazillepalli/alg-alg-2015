@@ -59,10 +59,9 @@ Let $\tau:[n]\rightarrow[n]$ be the identity permuataion. That is, for all $i\in
 \end{obs}
 
 
+Are there other permutations from $[n]$ to $[n]$ that are in the set $Aut(G)$ ? How large can the set $Aut(G)$ be ?
 
-Are there other permutations from $[n]$ to $[n]$ that are in the set $Aut(G)$ ? Formally the graph rigidity problem is stated as follows.
-
-
+Formally, the graph rigidity problem is stated as follows.
 \begin{center}
 \fbox{
 \begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY}\\
@@ -72,18 +71,53 @@ Are there other permutations from $[n]$ to $[n]$ that are in the set $Aut(G)$ ? 
 }
 \end{center}
 
+\begin{obs}
+Let $G$ be the complete graph on $n$ vertices. Then $|Aut(G)|=n!$.  
+\end{obs}
+
 Is the set $Aut(G)$ just a set or does it have more algebraic structure ? 
 
+\begin{defn}(Groups.)
+A set $G$ together with a binary operation $*$ is said to be a group if the following four consitions are met
+\begin{itemize}
+\item \textbf{Closure} : $a,b\in G$, the element $a*b\in G$.
+\item \textbf{Associative} : For any $a,b,c\in G$, we have $(a*b)*c = a*(b*c)$.
+\item \textbf{Existence of Identity} : For any $a\in G$ there exists a unique element $e\in G$ such that $a*e =e*a =a$. 
+\item \textbf{Existence of Identity} : For any $a\in G$ there exists a unique element $b\in G$(denoted by $a^{-1}$) such that $a*b =b*a =e$. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}
+\begin{itemize}
+\item $S_n$ forms a group under composition.
+\item $(\mathbb{Z}_5,+)$ is a group.
+\end{itemize}
+\end{eg}
+
+From now on, we will use the letter $X$ to denote a graph and $G$ to denote a group.
+
+\begin{notn} 
+Let $(G,*)$ be a group. Let $H\subseteq G$ such that $(H,*)$ also forms a group. We say $H$ is a {\em subgroup} of $G$ and denote by $H\leq G$.   
+\end{notn}
+
+
 \begin{ex}
-The set $Aut(G)$ forms a group under the composition operation.
+For any graph X, the set $Aut(X)$ forms a group under the composition operation. That is, $Aut(G)\leq S_n$.
 \end{ex}
 
-\section{Euclidean Algorithm}
 
-\section{Termination \& Correctness}
+Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $g^2 =  g*g ,g^3 =  g*g*g $. Similarly $g^k = \underbrace{g*g*\cdots * g}_\text{k times}$. Now consider the set $H=\{g,g^2,g^3,\ldots\}$. Since $(G,*)$ is a finite group there must exist a $k$ such that $g^k=g$.
 
-\section{Solution to Ideal Membership Problem}
+\begin{lemma}
+Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $H=\{g,g^2,g^3,\ldots\}$ be a set of elements. The unique identity $e$ in $G$ is in $H$.
+\end{lemma}
+\begin{proof}
+By definition, $g^k = g^{k-1}*g = g$. \\
+As $(G,*)$ is a group, we have have the inverse of $g^{-1}$ in $G$.\\
+Therefore
+\begin{center}
+$g^{k-1}*g*g^{-1} = g*g^{-1} = e$ 
+\end{center}
+\end{proof}
 
-\section{Monomial Ideals}
 
-\section{Dickson's Lemma}
