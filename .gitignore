@@ -32,6 +32,8 @@
 *.pdfsync
 
 ## Auxiliary and intermediate files from other packages:
+.scr
+.instr
 
 # algorithms
 *.alg
