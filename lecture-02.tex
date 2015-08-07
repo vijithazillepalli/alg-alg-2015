@@ -56,7 +56,7 @@ In their result, they used the following
 polynomial characterisation for a prime number.
 \begin{theorem}[Polynomial formulation (Agarwal-Biswas 1999)] Let $N \ge 1$ be
 	an integer. Define a polynomial 
-	$p_N(z) = (1+z)^n - 1 - z^n$. Then \[ p_N(z) \equiv 0 (mod~ N)
+	$p_N(z) = (1+z)^N - 1 - z^N$. Then \[ p_N(z) \equiv 0 (mod~ N)
 	\iff n \text{ is prime} \]
 \end{theorem}
 By the notation $p_N(z) \equiv 0 (mod~ N)$, we mean that for all $a \in
@@ -80,16 +80,16 @@ Proof of the theorem is as follows.
 	\equiv 0 (mod~ N)$ which means that we need to produce an $a \in
 	\{1,2,\ldots, N-1\}$ such that $p_N(a) \ne 0 \mod N$. Suppose $N$ be
 	composite. Hence there exists a prime $p$ such that $p ~|~
-	N$.  Let $p^a \nmid N$ where $a \ge 1$ is the largest exponent of $p$ in
-	the prime factorisation of $n$. Hence $p^{a+1} \nmid N$.
+	N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$ in
+	the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
 	
 	We now need to show that there is an $a \in \{1,2\ldots, N-1\}$ such
 	that $p_N(a) \ne 0 \mod N$. For this, we first show that $p_N(z)$ is a 
 	non zero polynomial in this case, we 
 	show that the coefficient of $z^i$ for $i = p$, which is
-	$\binom{N}{p}$, is non zero modulo $p^a$ showing\footnote{Note that if
-		$N|\binom{N}{i}$ then $p^a | \binom{N}{i}$. Taking
-		contrapositive, we get that $\binom{N}{i} \not = 0 \mod p^a$
+	$\binom{N}{p}$, is non zero modulo $p^k$ showing\footnote{Note that if
+		$N|\binom{N}{i}$ then $p^k | \binom{N}{i}$. Taking
+		contrapositive, we get that $\binom{N}{i} \not = 0 \mod p^k$
 		implies $\binom{N}{i} \not = 0 \mod N$} $p_N(z)$ is not a zero
 		polynomial. As an exercise, the reader is asked to produce an
 		$a$ such that $p_N(a) \ne 0 \mod N$. We now proceed with the
