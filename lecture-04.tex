@@ -4,13 +4,13 @@
 
 
 \begin{definition}(Graph Isomorphism.)
-Let $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ be graphs. We say $G_1\stackrel{\sim}{=}G_2$(read as $G_1$ is \em isomorphic to $G_2$) if there exerciseists a bijection $\sigma : V_1\rightarrow V_2$ such that $\forall (u,v) \in V_1\times V_2$ we have
+Let $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ be graphs. We say $G_1\stackrel{\sim}{=}G_2$(read as $G_1$ is \em isomorphic to $G_2$) if there exists a bijection $\sigma : V_1\rightarrow V_2$ such that $\forall (u,v) \in V_1\times V_2$ we have
 \begin{center}
 $(u,v)\in E_1 \iff (\sigma(u),\sigma(v))\in E_2$
 \end{center}
 \end{definition}
 
-In other words, we say a graph $G_1$ is isomorphic to $G_2$ if there exerciseists a relabeling of the vertices in $G_1$  such that the the adjacency and non-adjacency relationships in $G_2$ is preserved. 
+In other words, we say a graph $G_1$ is isomorphic to $G_2$ if there exists a relabeling of the vertices in $G_1$  such that the the adjacency and non-adjacency relationships in $G_2$ is preserved. 
 \begin{observation}
 If $|V_1|\neq |V_2|$ we have that $G_1$ is not isomorphic to $G_2$.
 \end{observation}
@@ -79,8 +79,8 @@ A set $G$ together with a binary operation $*$ is said to be a group if the foll
 \begin{itemize}
 \item \textbf{Closure} : $a,b\in G$, the element $a*b\in G$.
 \item \textbf{Associative} : For any $a,b,c\in G$, we have $(a*b)*c = a*(b*c)$.
-\item \textbf{exerciseistence of Identity} : For any $a\in G$ there exerciseists a unique element $e\in G$ such that $a*e =e*a =a$. 
-\item \textbf{exerciseistence of Identity} : For any $a\in G$ there exerciseists a unique element $b\in G$(denoted by $a^{-1}$) such that $a*b =b*a =e$. 
+\item \textbf{existence of Identity} : For any $a\in G$ there exists a unique element $e\in G$ such that $a*e =e*a =a$. 
+\item \textbf{existence of Identity} : For any $a\in G$ there exists a unique element $b\in G$(denoted by $a^{-1}$) such that $a*b =b*a =e$. 
 \end{itemize}
 \end{definition}
 
@@ -103,7 +103,7 @@ For any graph X, the set $Aut(X)$ forms a group under the composition operation.
 \end{exercise}
 
 
-Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $g^2 =  g*g ,g^3 =  g*g*g $. Similarly $g^k = \underbrace{g*g*\cdots * g}_\text{k times}$. Now consider the set $H=  \{g,g^2,g^3,\ldots\}$. Since $(G,*)$ is a finite group there must exerciseist a $k$ such that $g^k=g$.
+Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $g^2 =  g*g ,g^3 =  g*g*g $. Similarly $g^k = \underbrace{g*g*\cdots * g}_\text{k times}$. Now consider the set $H=  \{g,g^2,g^3,\ldots\}$. Since $(G,*)$ is a finite group there must exist a $k$ such that $g^k=g$.
 
 \begin{lemma}
 Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $H=\{g,g^2,g^3,\ldots\}$ be a set of elements. The unique identity $e$ of $G$ is in $H$.
