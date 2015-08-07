@@ -1,10 +1,11 @@
-\Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and the Language}{Student}
+\Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and
+the Language}{K Dinesh}
 
 \noindent
 General Comments.
 
 \section{Overview of the course. Administrative, Academic policies}
-
+\newpage
 
 \section{Introduction and Motivation}
 Main theme of this course is to use algebra to solve computational problems.
@@ -22,14 +23,56 @@ the second case one could view the molecule being given as adjacency matrix.
 Our aim in both cases are similar which is to check if there is isomorphism
 between two graphs.
 
-\begin{definition}[Graph Isomorphism problem]
-	Two graphs $G_1(V_1,E_1)$, $G_2(V_2,E_2)$ are said to be isomorphic if
+\begin{definition}[Graph Isomorphism]
+	Two graphs $X_1(V_1,E_1)$, $X_2(V_2,E_2)$ are said to be isomorphic if
 	there is a bijective map $\sigma:V_1 \to V_2$ such that $\forall
 	(u,v) \in V_1 \times V_1$, \[(u,v) \in E_1 \iff (\sigma(u), \sigma(v))
 	\in E_2 \]
 \end{definition}
+\begin{problem}
+	The \emph{graph isomorphism problem} is the decision problem of
+	checking if given two graphs $X_1, X_2$ are isomorphic.
+\end{problem}
 
-One can also consider the following special case of the 
+We are also interested in the following special case of the above problem
+called graph automorphism problem. 
+
+\begin{definition}[Graph Automorphism]
+	For a graph $X(V,E)$, an automorphism of $X$ is a renaming of the
+	vertices of $X$ given by a bijective map $\sigma:V \to V$ such 
+	that $\forall
+	(u,v) \in V \times V$, \[(u,v) \in E \iff (\sigma(u), \sigma(v))
+	\in E \]
+\end{definition}
+We are interested in the set of all bijections such that they are
+automorphisms of $X$. We denote this by $Aut(X)$.
+\begin{definition}
+	For a graph $X$ on $n$ vertices, 
+	$Aut(X) = \{ \sigma ~|~ \sigma :[n] \to [n], \sigma \text{ is an
+	automorphism of }X \}$
+\end{definition}
+
+Note that an identity map which takes a vertex to itself always belongs to
+$Aut(X)$ for all graphs $X$. Hence the question is are there any bijections
+other than the identity map as automorphism of $X$.
+
+\begin{problem}[Graph Automorphism Problem]
+	Given a graph $X$ does $Aut(X)$ has any element other than the
+	identity element.
+\end{problem}
+
+One way to see bijections is via permutations. This is because, every
+bijection define a permutation and vice versa.
+
+Let $X$ be an $n$ vertex graph. 
+Denote $S_n$ to be the set of all permutations on $n$ elements. Hence $Aut(X)$
+can be defined as $\left\{ \sigma ~|~ \sigma \in S_n \text{ and $\sigma$ is an
+automorphism of } G\right\}$. 
+
+We now show that the set $Aut(X)$ has some nice properties. Given $\sigma_1,
+\sigma_2 \in Aut(X)$, we can compose two permutations as follows :$\sigma_1
+\circ \sigma_2 = (\sigma_1(\sigma_2(1)),\sigma_1(\sigma_2(2)), \ldots,  
+\sigma_1(\sigma_2(n)))$. This gives us many
 
 \section{Overview of the course}
 
