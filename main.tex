@@ -5,12 +5,11 @@
 \usepackage{graphicx}
 \usepackage{tocloft}
 \usepackage{xcolor}
-%\usepackage[all]{xy}
 \usepackage{amssymb}
 \usepackage{scribe-book}
 \usepackage{amsmath}
-%\usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage[all]{hypcap}
 \renewcommand{\E}{{\mathbb E}}
 
 
@@ -22,14 +21,13 @@
 \thispagestyle{empty}
 
 \begin{flushright}
-
 \vspace*{3cm}
 \makeatletter 
 \vskip 10\p@ 
 \hrule height 2pt
 \vskip 2\p@
 \hrule height 1pt
-\vskip 3\p@
+\vskip 11\p@
 {\huge Lecture Notes on}\\[3ex]
 {\Huge \textbf{Algorithmic Algebra}} 
 \end{flushright}
@@ -52,7 +50,6 @@ Draft---\today\ and forever
 \end{flushleft}
 
 \newpage
-\setcounter{page}{1}
 \pagenumbering{roman}  % Roman numbering in intro portion.
 \include{front-page}
 
@@ -61,12 +58,10 @@ Draft---\today\ and forever
 
 %\newpage
 %\listofinstr
-
 \newpage
 \tableofcontents
 
 \pagenumbering{arabic}  % Arabic page numbering for lectures.
-%\tableofcontents
 \newpage \input{preface.tex}
 %\part{Introduction, Motivation and the Language}
 \newpage \setcounter{page}{1} 
