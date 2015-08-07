@@ -1,7 +1,6 @@
 \Lecture{Jayalal Sarma M.N.}{Aug 21, 2013}{3}{Algebraic Approach to
-finding Perfect Matchings in Graphs}{Student}
+finding Perfect Matchings in Graphs}{K Dinesh}
 \noindent
-Preamble
 
 \section{Application to Graph algorithms}
 Consider the following problem of finding perfect matching.
@@ -26,9 +25,7 @@ sign(\sigma) = \begin{cases}
 \end{cases}\]
 and $inv(\sigma)$ is defined as 
 $\left |\{(i,j) ~|~ i < j \text{ and } \sigma(i) > \sigma(j), 1 \le i<j \le n\}
-\right |$\footnote{Every permutation can be decomposed to disjoint cycles. It
-can also be shown that $sign(\sigma) = (-1)^{(n - \text{\# of odd cycles})}$}.
-
+\right |$.
 We denote $f(x) \equiv 0$ to denote that polynomial $f(x)$ is the zero
 polynomial.
 \begin{lemma}
@@ -45,15 +42,15 @@ $E' = \{(i, \sigma(i)) ~|~ 1\le i\le n\}$ exists in $G$ and since $\sigma(i) =
 Note that converse of this statement is not true. For example, consider the
 bipartite graph whose $A$ matrix is $A = 
 \begin{bmatrix}
-		1 & 1 & 0 & 0 \\
-		0 & 1 & 1 & 0 \\
-		0 & 0 & 1 & 1 \\
-	        1 & 0 & 0 & 1
+		1 & 1 & 0  \\
+		1 & 1 & 0  \\
+		0 & 0 & 1  
 \end{bmatrix}
 $. It can be verified that $det(A) = 0$ but the bipartite graph associated has
 a perfect matching.
 
-Hence the next natural question to ask is what kind of modification to the
+Hence the next natural question, similar to our primality testing problem, is 
+to ask for some kind of modification so that 
 converse of previous lemma (lemma~\ref{lem:det_pm_simple}) is true. In the
 example considered, there were two perfect matchings in $G$ having opposite 
 sign due to which the determinant became $0$. So the modification should
@@ -66,10 +63,26 @@ One way to achieve this is as follows.  Define a matrix $T$ as
 		      0 & \text{ otherwise}
 	\end{cases}
 \]
-where $(i,j) \in V_1 \times V_2$.
+where $(i,j) \in V_1 \times V_2$. This matrix is called as the Tutte matrix.
 Now, if we consider determinant of this matrix, we can see that the monomials
-corresponding a $\sigma \in S_n$ can be a product of $n$ variables at most.
+corresponding a $\sigma \in S_n$ can be a product of at most $n$ variables.
 Hence $det(T)$ is a polynomial in $n^2$ variables with degree at most $n$.
+
+Also in the expansion of determinant, we can observe that each term picks
+exactly one entry from every row and column meaning each of the entries 
+picked is from a distinct row and column. Hence each of the them is a
+bijection and hence is a permutation on $n$ elements. Also correponding to any
+permutation on $n$ elements, we can get a term. This gives us the following
+observation.
+
+\begin{observation}
+	Set of monomials in $det(T)$ is in one-one correspondence with set of
+	all permutations on $n$.
+\end{observation}
+
+
+% TODO do 3x3 det example.
+
 We now give polynomial formulation for the problem of checking perfect
 matching in a bipartite graph.
 \begin{claim}
@@ -77,26 +90,41 @@ For the matrix $T$ as defined before, $det(T) \not \equiv 0 \iff \text{$G$
 has a perfect matching}$
 \end{claim}
 \begin{proof}
+	By $det(T) \equiv 0$, we mean that the polynomial $det(T)$ has all
+	coefficients as zero. 
 ($\Rightarrow$) Since $det(T) \not \equiv 0$, there exists a $\sigma \in S_n$
 such that the monomial corresponding is non-zero and by definition of
 deteminant it must be expressed as product of some $n$ set of variables
 $\prod_i T(i,\sigma(i))$. The variable indices gives a matching and since
 there are $n$ variables this is a perfect matching.
 
-($\Leftarrow$) Suppose $G$ has a perfect matching given by a $\sigma$ and it
-appears in $det(T)$ as $m$. Only way the term associated with this perfect
-matching can vanishes from $det(T)$ is via another perfect matching which
-appear as $-m$ in $det(T)$
+($\Leftarrow$) Suppose $G$ has a perfect matching given by a $M$. Let $\tau$ 
+denote the permutation corresponding to $M$. We now
+need to show that $det(T) \not \equiv 0$. To prove this, it suffices to show
+that there is a substition to $det(T)$ which evaluates to a non-zero value. 
 
-But note that for any two different perfect matchings in $G$ if we look at the
-permutations associated, they must differ in at least one edge. Hence the
-associated terms must differ in some variable. Hence there does not exists
-another matching which can vanish $m$ from $det(T)$ showing $det(T) \not \equiv
-0$.
+Consider the following assignment, $\forall~i,j$ 
+\[ a_{ij} = \begin{cases}
+		1 & \text{ if } (i,j) \in M \\
+		0 & \text{ otherwise}
+	\end{cases} 
+\]
+From the formula of determinant, 
+\begin{align*}
+	det(T) & = \sum_{\sigma \in S_n} sign(\sigma) \prod_{i=1}^n T_{i,
+	\sigma(i)}  \\
+	& = sign(\tau)\prod_{i=1}^n A_{i, \tau(i)} + \sum_{\sigma \in S_n
+	\setminus \{\tau\}} sign(\sigma)\prod_{i=1}^n T_{i, \sigma(i)}
+\end{align*}
+Now substituting $x_{ij} = a_{ij}$, we get that the first term evaluates to
+$sign(\tau)$ since all the entires are $1$. The second term evaluates to $0$
+since for all $\sigma \ne \tau$, there must be a $j$ such that $\sigma(j) \ne
+\tau(j)$. Hence it must be that $a_{j, \sigma(j)} = 0$ and hence the product
+corresponding to $\sigma$ goes to $0$.
 \end{proof}
 
 Hence to check if the bipartite graph $G$ has a perfect matching or not, it
-suffices to check if the polynomial $det(A)$ is identically zero or not.
+suffices to check if the polynomial $det(T)$ is identically zero or not.
 Checking if a polynomial is identically zero or not is one of the fundamental
 question in this area.
 
@@ -106,18 +134,20 @@ For example if we consider our problem, we are just given the $T$ matrix and
 $det(T)$ is the required polynomial. Trying to expand $det(T)$ and simplifying
 will involve dealing with $n!$ monomials which is not feasible.
 
-So far we have spoken about finding perfect matching in bipartite graphs. A
-similar result holds for general graphs also. 
-\begin{theorem}
-Given a graph $G(V,E)$ and for $i, j \in V$, $i \ne j$, define an $n \times n$
-matrix $T$ as
-\[T_{i,j} = \begin{cases}
-		x_{ij} & (i,j) \in E, i < j\\
-	       -x_{ji} & (i,j) \in E, i > j\\
-   	        0 & \text{otherwise}
-	    \end{cases}
-    \]
-	    Then, $det(T) \not \equiv 0 \iff \text{G has a perfect matching}$.
-\end{theorem}
+Hence the computational question again boils down to checking if a polynomial
+is identically zero or not.
+%So far we have spoken about finding perfect matching in bipartite graphs. A
+%similar result holds for general graphs also. 
+%\begin{theorem}
+%Given a graph $G(V,E)$ and for $i, j \in V$, $i \ne j$, define an $n \times n$
+%matrix $T$ as
+%\[T_{i,j} = \begin{cases}
+%		x_{ij} & (i,j) \in E, i < j\\
+%	       -x_{ji} & (i,j) \in E, i > j\\
+%   	        0 & \text{otherwise}
+%	    \end{cases}
+%    \]
+%	    Then, $det(T) \not \equiv 0 \iff \text{G has a perfect matching}$.
+%\end{theorem}
 
 
