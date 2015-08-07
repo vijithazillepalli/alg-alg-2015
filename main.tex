@@ -1,16 +1,16 @@
-\documentclass[12pt]{report}
+\documentclass[11pt]{report}
 \usepackage{amsfonts,amsthm,amsmath}
-\usepackage[margin=1.5in]{geometry}
+\usepackage{fullpage}
 \usepackage{complexity}
 \usepackage{graphicx}
 \usepackage{tocloft}
 \usepackage{xcolor}
 \usepackage[all]{xy}
-\usepackage{scribe-book}
 \usepackage{amssymb}
+\usepackage{scribe-book}
 \usepackage{amsmath}
 \usepackage{hyperref}
-\input{preamble.tex}
+%\input{preamble.tex}
 \renewcommand{\E}{{\mathbb E}}
 
 \author{}
@@ -18,7 +18,6 @@
 % Shows lecture titles and sections. Set 0 to list only chapters.
 \setcounter{tocdepth}{2}
 
-	
 \begin{document}
 \thispagestyle{empty}
 
@@ -30,10 +29,9 @@
 \hrule height 2pt
 \vskip 2\p@
 \hrule height 1pt
-
+\vskip 3\p@
 {\huge Lecture Notes on}\\[3ex]
-{\Huge \textbf{Algorithmic Algebra}} \\[2ex]
-
+{\Huge \textbf{Algorithmic Algebra}} \\[1ex]
 \end{flushright}
 
 \makeatletter 
@@ -61,8 +59,8 @@ Draft---\today\ and forever
 \newpage
 \listofscribe          % For automatic scribe list generation.
 
-\newpage
-\listofinstr
+%\newpage
+%\listofinstr
 
 \newpage
 \tableofcontents
@@ -73,44 +71,25 @@ Draft---\today\ and forever
 %\part{Introduction, Motivation and the Language}
 \newpage \setcounter{page}{1} 
 \input{lecture-01.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-02.tex}
 %\part{Algorithmic Ideas Related to Polynomials}
-\newpage \setcounter{section}{0}
 \input{lecture-03.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-04.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-05.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-06.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-07.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-08.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-09.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-10.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-11.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-12.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-13.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-14.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-15.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-16.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-17.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-18.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-19.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-20.tex}
 
 \end{document}
