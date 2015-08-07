@@ -1,20 +1,36 @@
-\Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and the Language}
+\Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and the Language}{Student}
 
 \noindent
 General Comments.
 
 \section{Overview of the course. Administrative, Academic policies}
-\newpage
-\section{The Basis Objects - Polynomials.}
-\newpage
-\section{Three Representative Applications}
-\subsection{From Graph Algorithms : Perfect Matching}
-\newpage \newpage \newpage
-\subsection{From Number Theory : Primality Checking}
-\newpage \newpage \newpage
-\subsection{From Robotics : Robot motion planning.}
-\newpage \newpage \newpage
+
+
+\section{Introduction and Motivation}
+Main theme of this course is to use algebra to solve computational problems.
+Let us consider the following two problems :
+\begin{description}
+	\item [Plagarism check]
+	Given two $C$ programs $P_1$ and $P_2$ check if they are the same
+	under renaming of variables
+	\item [Molecule detection]
+	Given two chemical moleculesm check if they have the same structure.
+\end{description}
+
+Note that both these problems can be modelled using a graph. For example, in
+the second case one could view the molecule being given as adjacency matrix.
+Our aim in both cases are similar which is to check if there is isomorphism
+between two graphs.
+
+\begin{definition}[Graph Isomorphism problem]
+	Two graphs $G_1(V_1,E_1)$, $G_2(V_2,E_2)$ are said to be isomorphic if
+	there is a bijective map $\sigma:V_1 \to V_2$ such that $\forall
+	(u,v) \in V_1 \times V_1$, \[(u,v) \in E_1 \iff (\sigma(u), \sigma(v))
+	\in E_2 \]
+\end{definition}
+
+One can also consider the following special case of the 
+
 \section{Overview of the course}
-\newpage \newpage
 
 

@@ -1,5 +1,34 @@
 \newtheoremstyle{myplain}      {10pt}{10pt}{\itshape}{}{\scshape}{.}{.5em}{}
 \newtheoremstyle{mydefinition} {10pt}{10pt}{}{}{\scshape}{.}{.5em}{}
+
+% Calligraphic letters
+\newcommand{\calA}{{\cal A}}
+\newcommand{\calB}{{\cal B}}
+\newcommand{\calC}{{\cal C}}
+\newcommand{\calD}{{\cal D}}
+\newcommand{\calE}{{\cal E}}
+\newcommand{\calF}{{\cal F}}
+\newcommand{\calG}{{\cal G}}
+\newcommand{\calH}{{\cal H}}
+\newcommand{\calI}{{\cal I}}
+\newcommand{\calJ}{{\cal J}}
+\newcommand{\calK}{{\cal K}}
+\newcommand{\calL}{{\cal L}}
+\newcommand{\calM}{{\cal M}}
+\newcommand{\calN}{{\cal N}}
+\newcommand{\calO}{{\cal O}}
+\newcommand{\calP}{{\cal P}}
+\newcommand{\calQ}{{\cal Q}}
+\newcommand{\calR}{{\cal R}}
+\newcommand{\calS}{{\cal S}}
+\newcommand{\calT}{{\cal T}}
+\newcommand{\calU}{{\cal U}}
+\newcommand{\calV}{{\cal V}}
+\newcommand{\calW}{{\cal W}}
+\newcommand{\calX}{{\cal X}}
+\newcommand{\calY}{{\cal Y}}
+\newcommand{\calZ}{{\cal Z}}
+
 \newtheoremstyle{myremark}     {10pt}{10pt}{}{}{\scshape}{.}{.5em}{}
 
 \renewcommand{\qedsymbol}{\leavevmode
@@ -16,6 +45,8 @@
 \newtheorem{corollary}     [theorem]{Corollary}
 \newtheorem{claim}         [theorem]{Claim}
 \newtheorem{fact}          [theorem]{Fact}
+\newtheorem{note}          [theorem]{Note}
+\newtheorem{observation}   [theorem]{Observation}
 
 \theoremstyle{mydefinition}
 \newtheorem{definition}    [theorem]{Definition}
@@ -23,6 +54,7 @@
 \newtheorem{assumption}    [theorem]{Assumption}
 \newtheorem{openproblem}   [theorem]{Open Problem}
 \newtheorem{problem}       [theorem]{Problem}
+\newtheorem{exercise}      [theorem]{exercise}
 
 \theoremstyle{myremark}
 \newtheorem{remark}        [theorem]{Remark}
@@ -36,6 +68,62 @@
 \renewcommand{\fnum@table}{\textsc{Table~\thetable}}
 
 
+
+\newcommand{\lep}{\leq _{\hbox{P}}}
+\newcommand{\lel}{\leq _{\hbox{L}}}
+\newcommand{\aspace}[1]{{\rm ASPACE}(#1)}
+\newcommand{\atime}[1]{{\rm ATIME}(#1)}
+\newcommand{\dtime}[1]{{\rm DTIME}(#1)}
+\newcommand{\spa}[1]{{\rm SPACE}(#1)}
+\newcommand{\ti}[1]{{\rm TIME}(#1)}
+\newcommand{\ap}{{\rm AP}}
+\newcommand{\al}{{\rm AL}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\Pr}[1]{\mathify{\mbox{Pr}\left[#1\right]}}
+\newcommand{\Exp}[1]{\mathify{\mbox{Exp}\left[#1\right]}}
+\newcommand{\bigO}O
+\newcommand{\set}[1]{\mathify{\left\{ #1 \right\}}}
+\def\half{\frac{1}{2}}
+
+\def\implies{\Rightarrow}
+\def\prob#1#2{{\mathop{{\rm Prob}}_{#1}}\left[#2 \right]}
+\def\var#1#2{{\mathop{{\rm Var}}_{#1}}[#2]}
+\def\expec#1#2{{\mathop{{\rm E}}_{#1}}[#2]}
+\def\sizeof#1{\left| #1\right|}
+\def\setof#1{\left\{ #1\right\}}
+
+\newcommand{\jsay}[1]{{ \color{red}{Jayalal says: #1}}}
+
+
+\newcommand{\F}{{\mathbb{F}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\C}{\mathbb{C}}
+%\newcommand{\qed}{\rule{7pt}{7pt}}
+
+% \makeatletter
+% \@addtoreset{figure}{section}
+% \@addtoreset{table}{section}
+% \@addtoreset{equation}{section}
+% \makeatother
+
+\newcommand{\FOR}{{\bf for}}
+\newcommand{\TO}{{\bf to}}
+\newcommand{\DO}{{\bf do}}
+\newcommand{\WHILE}{{\bf while}}
+\newcommand{\AND}{{\bf and}}
+\newcommand{\IF}{{\bf if}}
+\newcommand{\THEN}{{\bf then}}
+\newcommand{\ELSE}{{\bf else}}
+
+
+
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
 
 \newcommand{\listofscribes}{List of Scribes}
@@ -43,24 +131,30 @@
 \newlistof{scribe}{scr}{\listofscribes}
 \newlistof{instructors}{instr}{\listofinstr}
 
-\newcommand{\Lecture}[4]{
+\newcommand{\Lecture}[5]{
+\newpage
 \setcounter{chapter}{#3}
 \setcounter{lecture}{#3}
+
+% To reset numbering in a new lecture
+\setcounter{section}{0}  
+% To reset numbering within a section
+\setcounter{theorem}{0}  
 
 % For table of contents
 \addcontentsline{toc}{chapter}{Lecture \protect\numberline{#3}{#4}}
 % For list of scribes
-\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\em #1}}
+\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\em #5}}
 
 \addcontentsline{instr}{instructors}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\em #1}}
 
 \noindent
 \parbox{8cm}{
-	%Indian Institute of Technology Madras\\
+%	Indian Institute of Technology Madras\\
 	CS6842 Algorithmic Algebra\\
 	\rule{0mm}{6mm}%
-%	{\it Instructor:} #1 \\
-%	{\it Scribe:}	#1\\
+	{\it Instructor:} #1 \\
+	{\it Scribe:}	#5\\
 	{\it Date:}     #2
 }
 \hfill
