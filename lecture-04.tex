@@ -1,9 +1,82 @@
-\Lecture{Jayalal Sarma M.N.}{Aug 7, 2013}{4}{GCD and the Generator of the Ideal}
+\Lecture{Jayalal Sarma M.N.}{Aug 7, 2013}{4}{Graphs, Groups and Generators}
 \noindent
 Preamble
 
 
-\section{Arriving at the definition of GCD and properties}
+\section{Graph Isomorphism}
+
+
+\begin{defn}(Graph Isomorphism.)
+Let $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ be graphs. We say $G_1\stackrel{\sim}{=}G_2$(read as $G_1$ is \em isomorphic to $G_2$) if there exists a bijection $\sigma : V_1\rightarrow V_2$ such that $\forall (u,v) \in V_1\times V_2$ we have
+\begin{center}
+$(u,v)\in E_1 \iff (\sigma(u),\sigma(v))\in E_2$
+\end{center}
+\end{defn}
+
+In other words, we say a graph $G_1$ is isomorphic to $G_2$ if there exists a relabeling of the vertices in $G_1$  such that the the adjacency and non-adjacency relationships in $G_2$ is preserved. 
+\begin{obs}
+If $|V_1|\neq |V_2|$ we have that $G_1$ is not isomorphic to $G_2$.
+\end{obs}
+
+The graph isomorphism problem is stated as follows. 
+\begin{center}
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH ISOMORPHISM}\\
+\textbf{Input} : $G_1=(V_1,E_1), G_2=(V_2,E_2)$\\
+\textbf{Output} : Decide if $G_1\stackrel{\sim}{=}G_2$ or not.
+\end{minipage}
+}
+\end{center}
+
+A natural question to ask in this setting is that if there is an isomorphism from a graph $G$ to itself. 
+
+Let $[n]=\{1,2,\ldots,n\}$. Let $S_n$ denote the set of all permuatations from the set $[n]$ to $[n]$.
+
+\begin{defn}(Graph Automorphism.) 
+Let $G=(V,E)$ be a graph. An automorphism of $G$ is a bijection $\sigma:V\rightarrow V$ such that $\sigma(G)= G$. Let
+\begin{center}
+$Aut(G)= \{\sigma | \sigma\in S_n \text{~and~} \sigma(G)= G \}$
+\end{center}
+be the set of all automorphisms of $G$. 
+\end{defn}
+
+
+
+The graph automorphism problem is stated as follows. 
+\begin{center}
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : Construct $Aut(G)$.
+\end{minipage}
+}
+\end{center}
+
+
+
+\begin{obs}
+Let $\tau:[n]\rightarrow[n]$ be the identity permuataion. That is, for all $i\in[n],\tau(i)=i$. Then by definition $\tau\in Aut(G)$ for any graph $G=(V,E)$. This identity permuataion $\tau$ is in $Aut(G)$. 
+\end{obs}
+
+
+
+Are there other permutations from $[n]$ to $[n]$ that are in the set $Aut(G)$ ? Formally the graph rigidity problem is stated as follows.
+
+
+\begin{center}
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : Decide if $Aut(G)$ is trivial or not.
+\end{minipage}
+}
+\end{center}
+
+Is the set $Aut(G)$ just a set or does it have more algebraic structure ? 
+
+\begin{ex}
+The set $Aut(G)$ forms a group under the composition operation.
+\end{ex}
 
 \section{Euclidean Algorithm}
 
