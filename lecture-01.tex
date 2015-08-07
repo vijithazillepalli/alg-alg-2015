@@ -1,9 +1,6 @@
 \Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and
 the Language}{K Dinesh}
 
-\noindent
-General Comments.
-
 \section{Overview of the course. Administrative, Academic policies}
 \newpage
 
@@ -72,8 +69,51 @@ automorphism of } G\right\}$.
 We now show that the set $Aut(X)$ has some nice properties. Given $\sigma_1,
 \sigma_2 \in Aut(X)$, we can compose two permutations as follows :$\sigma_1
 \circ \sigma_2 = (\sigma_1(\sigma_2(1)),\sigma_1(\sigma_2(2)), \ldots,  
-\sigma_1(\sigma_2(n)))$. This gives us many
+\sigma_1(\sigma_2(n)))$. This is same as applying $\sigma_2$ on identity
+permutation and then applying $\sigma_1$ to the result. We show that
+$Aut(X)$ along with the composition operation $\circ$
+gives us many nice properties.
+\begin{itemize}
+	\item If $\sigma_1, \sigma_2 \in Aut(X)$, then $\sigma_1 \circ
+		\sigma_2$ is also an automorphism of $X$. The reason is that
+		for any $(u,v) \in X \times X$, $(u,v) \in E \iff
+		(\sigma_2(u), \sigma_2(v)) \in E$ Now applying $\sigma_1$ on
+		the previous tuple, we get that $(\sigma_2(u), \sigma_2(v)) 
+		\iff (\sigma_1 \circ \sigma_2(u), \sigma_1 \circ \sigma_2(v))
+		\in E$. Hence $(u,v) \in E \iff (\sigma_1 \circ \sigma_2(u),
+		\sigma_1 \circ \sigma_2(v)) \in E$.
+		This tells that $Aut(X)$ is \emph{closed} under $\circ$.
+	\item The composition operation is also \emph{associative}.
+	\item \emph{Identity} permutation belongs to $Aut(X)$ as observed
+	before.  
+	\item Since we are considering bijections, it is natural to
+		consider \emph{inverse} for a permutation $\sigma$ denoted
+		$\sigma^{-1}$ with the property that $\sigma \circ
+		\sigma^{-1}$ is identity permutation. 
+
+\end{itemize}
+We gave a definition of inverse for an arbitrary permutation. But then a
+natural question is : given $\sigma \in Aut(X)$, is it true that $\sigma^{-1}$
+also belongs to $Aut(X)$. It turns out that it is true.
+\begin{claim}
+	For the graph $X(V,E)$
+	$\sigma \in Aut(X) \iff \sigma^{-1} \in Aut(X)$
+\end{claim}
+\begin{proof}
+	Recall that $\sigma \in Aut(G)$ iff $\forall (u,v) \in V \times V$,
+	$(u,v) \in E \iff (\sigma(u), \sigma(v)) \in E$. In particular, this
+	must be true for $(\sigma^{-1}(u), \sigma^{-1}(v))$ also. This means,
+	\[ (\sigma^{-1}(u), \sigma^{-1}(v)) \in E \iff (\sigma(\sigma^{-1}(u)),
+	\sigma(\sigma^{-1}(v))) \in E \]
+	By definition of $\sigma^{-1}$ we get that 
+	$(\sigma^{-1}(u), \sigma^{-1}(v)) \in E \iff (u,v) \in E$. This shows
+	that $\sigma^{-1} \in Aut(X)$ 
+\end{proof}
+Objects which satisfy these kind of properties are called groups.
 
 \section{Overview of the course}
-
-
+There are two major themes. 
+\begin{itemize}
+	\item Algorithms for permutation groups.
+	\item Algorithms for polynomials.
+\end{itemize}
