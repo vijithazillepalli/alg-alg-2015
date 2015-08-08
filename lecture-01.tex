@@ -9,15 +9,15 @@ Main theme of this course is to use algebra to solve computational problems.
 Let us consider the following two problems :
 \begin{description}
 	\item [Plagarism check]
-	Given two $C$ programs $P_1$ and $P_2$ check if they are the same
-	under renaming of variables
+	Given two $C$ programs $P_1$ and $P_2$, check if they are the same
+	under renaming of variables.
 	\item [Molecule detection]
-	Given two chemical moleculesm check if they have the same structure.
+	Given two chemical molecules check if they have the same structure.
 \end{description}
 
 Note that both these problems can be modelled using a graph. For example, in
-the second case one could view the molecule being given as adjacency matrix.
-Our aim in both cases are similar which is to check if there is isomorphism
+the second case one could view the given molecules as adjacency matrix.
+Our aim in both cases is to check if there is isomorphism
 between two graphs.
 
 \begin{definition}[Graph Isomorphism]
@@ -50,7 +50,7 @@ automorphisms of $X$. We denote this by $Aut(X)$.
 \end{definition}
 
 Note that an identity map which takes a vertex to itself always belongs to
-$Aut(X)$ for all graphs $X$. Hence the question is are there any bijections
+$Aut(X)$ for all graphs $X$. Hence the question is : are there any bijections
 other than the identity map as automorphism of $X$.
 
 \begin{problem}[Graph Automorphism Problem]
@@ -67,7 +67,7 @@ can be defined as $\left\{ \sigma ~|~ \sigma \in S_n \text{ and $\sigma$ is an
 automorphism of } G\right\}$. 
 
 We now show that the set $Aut(X)$ has some nice properties. Given $\sigma_1,
-\sigma_2 \in Aut(X)$, we can compose two permutations as follows :$\sigma_1
+\sigma_2 \in Aut(X)$, we can compose two permutations as $\sigma_1
 \circ \sigma_2 = (\sigma_1(\sigma_2(1)),\sigma_1(\sigma_2(2)), \ldots,  
 \sigma_1(\sigma_2(n)))$. This is same as applying $\sigma_2$ on identity
 permutation and then applying $\sigma_1$ to the result. We show that

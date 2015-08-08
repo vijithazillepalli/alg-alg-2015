@@ -50,21 +50,21 @@ primality testing. For this, we need the notion of polynomials.
 	coefficients are zero.
 \end{definition}
 
-An algorithm for this problem has been found in 2002 by Manindra Agarwal,
-Neeraj Kayal and Nitin Saxena (which is now called as AKS algorithm). 
-In their result, they used the following
-polynomial characterisation for a prime number.
+A polynomial time algorithm for this problem has been found in 2002 by
+Manindra Agarwal, Neeraj Kayal and Nitin Saxena (called as the AKS algorithm). 
+In their result, they used the following polynomial characterisation for a
+prime number.
 \begin{theorem}[Polynomial formulation (Agarwal-Biswas 1999)] Let $N \ge 1$ be
 	an integer. Define a polynomial 
 	$p_N(z) = (1+z)^N - 1 - z^N$. Then \[ p_N(z) \equiv 0 (mod~ N)
-	\iff n \text{ is prime} \]
+	\iff N \text{ is prime} \]
 \end{theorem}
 By the notation $p_N(z) \equiv 0 (mod~ N)$, we mean that for all $a \in
 \{1,2,\ldots, N-1\}$, $p_N(a) = 0 \mod N$.
 
-Hence checking if $n$ is prime or not boils down to checking if $p_N(z)$ is
+Hence checking if $N$ is prime or not boils down to checking if $p_N(z)$ is
 identically $0$ or not except for the fact that the underlying operations are
-done modulo $n$.
+done modulo $N$.
 
 Proof of the theorem is as follows.
 \begin{proof}
@@ -78,20 +78,20 @@ Proof of the theorem is as follows.
 
 	If $N$ is composite, we need to show that $p_N(z) \not 
 	\equiv 0 (mod~ N)$ which means that we need to produce an $a \in
-	\{1,2,\ldots, N-1\}$ such that $p_N(a) \ne 0 \mod N$. Suppose $N$ be
+	\{1,2,\ldots, N-1\}$ such that $p_N(a) \ne 0 \mod N$. Suppose $N$ is
 	composite. Hence there exists a prime $p$ such that $p ~|~
 	N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$ in
 	the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
 	
 	We now need to show that there is an $a \in \{1,2\ldots, N-1\}$ such
 	that $p_N(a) \ne 0 \mod N$. For this, we first show that $p_N(z)$ is a 
-	non zero polynomial in this case, we 
-	show that the coefficient of $z^i$ for $i = p$, which is
-	$\binom{N}{p}$, is non zero modulo $p^k$ showing\footnote{Note that if
+	non zero polynomial by showing that the coefficient of $z^i$ for $i =
+	p$, which is $\binom{N}{p}$, is non zero modulo $p^k$
+	showing\footnote{Note that if
 		$N|\binom{N}{i}$ then $p^k | \binom{N}{i}$. Taking
 		contrapositive, we get that $\binom{N}{i} \not = 0 \mod p^k$
 		implies $\binom{N}{i} \not = 0 \mod N$} $p_N(z)$ is not a zero
-		polynomial. As an exercise, the reader is asked to produce an
+		polynomial modulo $N$. As an exercise, the reader is asked to produce an
 		$a$ such that $p_N(a) \ne 0 \mod N$. We now proceed with the
 		proof.
 
