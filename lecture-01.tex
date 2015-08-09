@@ -17,12 +17,17 @@ Let us consider the following two problems :
 
 Consider the following simpler variant of plagarism checking where the program
 submitted has just its variables renamed and all other portions of the program
-are the same. In this case, the pro
+are the same. In this case, given the two versions of the program, we need to
+check if there is a way to rename the variables of one program to get the
+other one. 
 
+In the second case one could view the given molecules as graphs. The problem
+is again similar problem, where we want to see if there is way to rename the
+vertex labels of the graph so that under the relabelling both the graphs are
+the same.
 
-the second case one could view the given molecules as adjacency matrix.
-Our aim in both cases is to check if there is isomorphism
-between two graphs.
+Our aim in both cases is to check whether the two structures are same under
+renaming. We are interested in solving this problem on graphs.
 
 \begin{definition}[Graph Isomorphism]
 	Two graphs $X_1(V_1,E_1)$, $X_2(V_2,E_2)$ are said to be isomorphic if
