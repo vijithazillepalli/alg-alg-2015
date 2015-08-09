@@ -46,8 +46,8 @@ primality testing. For this, we need the notion of polynomials.
 	A polynomial $p(x) = \sum_{i=0}^d a_ix^i$ with $a_d \ne 0$ denotes a
 	polynomial in one variable $x$ of degree $d$. Here $a_i$s are called
 	coefficients and each term excluding the coefficient is called a
-	monomial. \textbf{A polynomial is said to be identically zero, if all the
-	coefficients are zero.}
+	monomial. \textbf{A polynomial is said to be identically zero, if all
+	the coefficients are zero.}
 \end{definition}
 
 A polynomial time algorithm for this problem has been found in 2002 by
@@ -67,7 +67,7 @@ done modulo $N$.
 Proof of the theorem is as follows.
 \begin{proof}
 	Note that $p_N(z) = \sum_{i=1}^{N-1} \binom{N}{i} z^i$ and
-	$\binom{N}{i} = \frac{N(N-1)\ldots (N-i+1)}{1\cdot 2 \ldots i}$ with $2
+	$\binom{N}{i} = \frac{N(N-1)\ldots (N-i+1)}{1\cdot 2 \ldots i}$ with $1
 	\le i \le N-1$. 
 
 	If $N$ is prime, then $\binom{N}{i} = N \times k_i$ for some integer
@@ -77,7 +77,17 @@ Proof of the theorem is as follows.
 
 	If $N$ is composite, we need to show that $p_N(z) \not 
 	\equiv 0 (mod~ N)$ which means that there is at least one non-zero
-	coefficient $p_N(z) \mod N$. Suppose $N$ is
+	coefficient $p_N(z) \mod N$\footnote{In class we asked the following
+		question of finding an $a \in \{1,2,\ldots, N-1\}$ such that
+	$p_N(a) \ne 0 \mod N$. This has a counter example. Consider the case
+where $N$ is a Carmicahel number. By definition, Carmichael numbers are
+composite numbers that satisfy Fermat's Litte theorem.  Hence if $N$ is
+Carmichael,  $\forall~ a \in \{1,2,\ldots N-1 \}$, we get  $a^N = a \mod N$. This gives
+that $\forall~ a \in \{1,2,\ldots, N-1\}$
+\[	p_N(a)  = ((a+1)^N-a^N -1) \mod N 
+= ((a+1)-a-1) \mod N \]
+which is zero modulo $N$.
+}. Suppose $N$ is
 	composite. Hence there exists a prime $p$ such that $p ~|~
 	N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$ in
 	the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
