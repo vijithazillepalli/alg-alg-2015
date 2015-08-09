@@ -7,11 +7,14 @@
 \usepackage{xcolor}
 \usepackage{amssymb}
 \usepackage{scribe-book}
-\usepackage{amsmath}
+\usepackage{todonotes}
 \usepackage{hyperref}
-\usepackage[all]{hypcap}
+\usepackage{hypcap}
 \renewcommand{\E}{{\mathbb E}}
 
+\newcounter{todocounter}
+\newcommand{\todonum}[2][]{\stepcounter{todocounter}\todo[#1]{\thetodocounter: #2}}
+\newcommand{\jsay}[1]{\todonum[inline,color=red!20]{\small JS says: #1}}
 
 %\newcommand{\N}{\mathbb{N}}
 % Shows lecture titles and sections. Set 0 to list only chapters.
@@ -52,6 +55,8 @@ Draft---\today\ and forever
 \newpage
 \pagenumbering{roman}  % Roman numbering in intro portion.
 \include{front-page}
+\newpage
+\listoftodos
 
 \newpage
 \listofscribe          % For automatic scribe list generation.
