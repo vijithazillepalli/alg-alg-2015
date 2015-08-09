@@ -80,17 +80,15 @@ Proof of the theorem is as follows.
 	coefficient $p_N(z) \mod N$\footnote{In class we asked the following
 		question of finding an $a \in \{1,2,\ldots, N-1\}$ such that
 	$p_N(a) \ne 0 \mod N$. This has a counter example. Consider the case
-where $N$ is a Carmicahel number. By definition, Carmichael numbers are
-composite numbers that satisfy Fermat's Litte theorem.  Hence if $N$ is
-Carmichael,  $\forall~ a \in \{1,2,\ldots N-1 \}$, we get  $a^N = a \mod N$. This gives
-that $\forall~ a \in \{1,2,\ldots, N-1\}$
-\[	p_N(a)  = ((a+1)^N-a^N -1) \mod N 
-= ((a+1)-a-1) \mod N \]
-which is zero modulo $N$.
-}. Suppose $N$ is
-	composite. Hence there exists a prime $p$ such that $p ~|~
-	N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$ in
-	the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
+	where $N$ is a Carmicahel number. By definition, Carmichael numbers
+	are composite numbers that satisfy Fermat's Litte theorem.  Hence if
+	$N$ is Carmichael,  $\forall~ a \in \{1,2,\ldots N-1 \}$, we get  $a^N
+	= a \mod N$. This gives that $\forall~ a \in \{1,2,\ldots, N-1\}$
+	\[	p_N(a)  = ((a+1)^N-a^N -1) \mod N = ((a+1)-a-1) \mod N \]
+	which is zero modulo $N$.}. 	
+	Since $N$ is composite, there exists a prime $p$ such that $p
+	~|~ N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$
+	in the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
 	
 	We first show that $p_N(z)$ is a non zero polynomial by showing that
 	the coefficient of $z^i$ for $i = p$, which is $\binom{N}{p}$, is non
@@ -118,10 +116,30 @@ which is zero modulo $N$.
 
 Note that Fermat's Little Theorem is a special case of Agarwal-Biswas
 formulation of primality testing.
-\begin{exercise}
-Derive Fermat's Little Theorem from Agarwal-Biswas theorem. (Hint : Use
-induction on $a$)
-\end{exercise}
+\begin{claim}
+Fermat's Little Theorem is a special case of Agarwal-Biswas theorem.
+\end{claim}
+\begin{proof}
+	To prove Fermat's Little theorem, we need one direction of implication
+	of Agarwal-Biswas theorem : 
+	\begin{center}
+	``If $N$ is prime, then $(1+z)^N = (1+z^N) \mod N$''.
+	\end{center}
+
+	Note that Fermat's Little theorem asks about $a^N \mod N$ for $a \in
+	\{1,2,\ldots,N-1\}$. Since the implication talks about $z^N \mod N$
+	and $(1+z)^N \mod N$, this suggests an induction strategy on $a$.
+
+	Let $N$ be prime. We check the base case : for $a=1$, the
+	$1^N =1 \mod N$. Hence the base case is true. By induction, suppose
+	that $a^N = a \mod N$ for $a \in \{1,2,\ldots, N-1\}$. Now, 
+	\begin{align*}
+		(a+1)^N & = (a^N +1) \mod N && [\text{By Agarwal-Biswas as $N$
+		is prime}]\\
+		& = (a+1) \mod N && [\text{By inducive hypothesis}]
+	\end{align*}
+	This completes the inductive case. 
+\end{proof}
 
 This shows that checking if the polynomial $p_N(z)$ is a zero polynomial is an
 if and only if check for primality of $N$. There are two naive ways to do it.
