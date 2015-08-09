@@ -59,8 +59,6 @@ prime number.
 	$p_N(z) = (1+z)^N - 1 - z^N$. Then \[ p_N(z) \equiv 0 (mod~ N)
 	\iff N \text{ is prime} \]
 \end{theorem}
-By the notation $p_N(z) \equiv 0 (mod~ N)$, we mean that for all $a \in
-\{1,2,\ldots, N-1\}$, $p_N(a) = 0 \mod N$.
 
 Hence checking if $N$ is prime or not boils down to checking if $p_N(z)$ is
 identically $0$ or not except for the fact that the underlying operations are
@@ -71,30 +69,26 @@ Proof of the theorem is as follows.
 	Note that $p_N(z) = \sum_{i=1}^{N-1} \binom{N}{i} z^i$ and
 	$\binom{N}{i} = \frac{N(N-1)\ldots (N-i+1)}{1\cdot 2 \ldots i}$ with $2
 	\le i \le N-1$. 
+
 	If $N$ is prime, then $\binom{N}{i} = N \times k_i$ for some integer
 	$k_i$ as none of $1, 2, \ldots i$ divides $N$. Hence $\binom{N}{i}
 	\mod N = 0$ for every $i$ and $p_N(z) \equiv 0 \mod N$ since the
 	polynomial has all coefficients as zero.
 
 	If $N$ is composite, we need to show that $p_N(z) \not 
-	\equiv 0 (mod~ N)$ which means that we need to produce an $a \in
-	\{1,2,\ldots, N-1\}$ such that $p_N(a) \ne 0 \mod N$. Suppose $N$ is
+	\equiv 0 (mod~ N)$ which means that there is at least one non-zero
+	coefficient $p_N(z) \mod N$. Suppose $N$ is
 	composite. Hence there exists a prime $p$ such that $p ~|~
 	N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$ in
 	the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
 	
-	We now need to show that there is an $a \in \{1,2\ldots, N-1\}$ such
-	that $p_N(a) \ne 0 \mod N$. For this, we first show that $p_N(z)$ is a 
-	non zero polynomial by showing that the coefficient of $z^i$ for $i =
-	p$, which is $\binom{N}{p}$, is non zero modulo $p^k$
-	showing\footnote{Note that if
+	We first show that $p_N(z)$ is a non zero polynomial by showing that
+	the coefficient of $z^i$ for $i = p$, which is $\binom{N}{p}$, is non
+	zero modulo $p^k$ showing\footnote{Note that if
 		$N|\binom{N}{i}$ then $p^k | \binom{N}{i}$. Taking
 		contrapositive, we get that $\binom{N}{i} \not = 0 \mod p^k$
 		implies $\binom{N}{i} \not = 0 \mod N$} $p_N(z)$ is not a zero
-		polynomial modulo $N$. As an exercise, the reader is asked to produce an
-		$a$ such that $p_N(a) \ne 0 \mod N$. We now proceed with the
-		proof.
-
+		polynomial modulo $N$. 
 	Let $N = g \times p^k$. In $\binom{N}{p}$, $p$ of the denominator 
 	divides $N$. Note that $p$ cannot divide $g$, for if it does, then
 	$p^{k+1} | N$ which is not possible by choice of $p$ and $k$.
@@ -109,7 +103,7 @@ Proof of the theorem is as follows.
 	\ldots,
 	(N-p+1)$ can have $p$ as a factor since all these terms are obtained by
 	subtracting at most $p-1$ times from $N$. Hence $\binom{N}{p} \ne 0
-	\mod p^k$.
+	\mod p^k$. This completes the proof.
 \end{proof}
 
 Note that Fermat's Little Theorem is a special case of Agarwal-Biswas
