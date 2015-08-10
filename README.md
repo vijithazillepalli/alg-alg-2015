@@ -20,13 +20,14 @@ A. Following are the files and their purposes.
      date need to add lecture notes in this file.
   3. ``main.tex`` which is the main tex file. All of the above files are included
      here. To produce PDF, you should compile this file and not other files.
+  4. ``sample-scribe.tex`` gives generic guidlines on how to scribe, use math, claim theorems etc.
 
 Q. How to write the scribe ?
 
 A. Suppose you have booked a date say August 10th and 12th. There will be a
     file named ``Aug-10-12.tex`` in the repo. It contains a sample code
     demonstrating most of the enviornments in it. You do not need to edit any other file.
-    Instructions on where to add your name, lecture title etc are mentioned in the file. Check ``sample-scribe.tex`` to get an idea.
+    Instructions on where to add your name, lecture title etc are mentioned in the file. 
 
 Q. I have written part of the scribe and I want to see the output.
 
