@@ -36,3 +36,7 @@ A. You need to compile (that is, run latex on) ``main.tex``. And *not* Month-XX-
 Q. I have completed my scribe. How do I submit it ?
 
 A. Best way is to send a pull request on git to the maintainer. Alternatively, you can also email the TAs and email just the edited tex file. Make sure that it does compile properly.
+
+Q. Where can I get a quick introduction to git ?
+
+A. Here is a link : http://www.cse.iitm.ac.in/~agj/FOSS/i-just-dont-git-it.html
