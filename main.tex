@@ -1,48 +1,38 @@
-\documentclass[12pt]{report}
+\documentclass[11pt]{report}
 \usepackage{amsfonts,amsthm,amsmath}
-\usepackage[margin=1.5in]{geometry}
+\usepackage{fullpage}
 \usepackage{complexity}
 \usepackage{graphicx}
 \usepackage{tocloft}
 \usepackage{xcolor}
-\usepackage[all]{xy}
-\usepackage{scribe-book}
 \usepackage{amssymb}
-\usepackage{amsmath}
-%\usepackage{mathtools}
+\usepackage{scribe-book}
+\usepackage{todonotes}
 \usepackage{hyperref}
-\newtheorem{defn}{Definition}
-\newtheorem{obs}{Observation}
-\newtheorem{ex}{Exercise}
-\newtheorem{eg}{Example}
-\newtheorem{notn}{Notation}
-\input{preamble.tex}
+\usepackage{hypcap}
 \renewcommand{\E}{{\mathbb E}}
 
+\newcounter{todocounter}
+\newcommand{\todonum}[2][]{\stepcounter{todocounter}\todo[#1]{\thetodocounter: #2}}
+\newcommand{\jsay}[1]{\todonum[inline,color=red!20]{\small JS says: #1}}
 
-
-
-\author{}
 %\newcommand{\N}{\mathbb{N}}
 % Shows lecture titles and sections. Set 0 to list only chapters.
 \setcounter{tocdepth}{2}
 
-	
 \begin{document}
 \thispagestyle{empty}
 
 \begin{flushright}
-
 \vspace*{3cm}
 \makeatletter 
 \vskip 10\p@ 
 \hrule height 2pt
 \vskip 2\p@
 \hrule height 1pt
-
+\vskip 11\p@
 {\huge Lecture Notes on}\\[3ex]
-{\Huge \textbf{Algorithmic Algebra}} \\[2ex]
-
+{\Huge \textbf{Algorithmic Algebra}} 
 \end{flushright}
 
 \makeatletter 
@@ -55,7 +45,7 @@
 
 
 \begin{flushleft}
-{\large Jayalal Sarma M.~N.\\ 
+{\large Jayalal Sarma\\ 
 Department of Computer Science and Engineering\\
 IIT Madras, Chennai 600036 \\[2ex]
 Draft---\today\ and forever
@@ -63,63 +53,27 @@ Draft---\today\ and forever
 \end{flushleft}
 
 \newpage
-\setcounter{page}{1}
 \pagenumbering{roman}  % Roman numbering in intro portion.
 \include{front-page}
+\newpage
+\listoftodos
 
 \newpage
 \listofscribe          % For automatic scribe list generation.
 
-\newpage
-\listofinstr
-
+%\newpage
+%\listofinstr
 \newpage
 \tableofcontents
 
 \pagenumbering{arabic}  % Arabic page numbering for lectures.
-%\tableofcontents
-\newpage \input{preface.tex}
+\newpage 
+\input{preface.tex}
 %\part{Introduction, Motivation and the Language}
 \newpage \setcounter{page}{1} 
 \input{lecture-01.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-02.tex}
-%\part{Algorithmic Ideas Related to Polynomials}
-\newpage \setcounter{section}{0}
 \input{lecture-03.tex}
-\newpage \setcounter{section}{0}
 \input{lecture-04.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-05.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-06.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-07.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-08.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-09.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-10.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-11.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-12.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-13.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-14.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-15.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-16.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-17.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-18.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-19.tex}
-\newpage \setcounter{section}{0}
-\input{lecture-20.tex}
-
+\input{Aug-10-12.tex}
 \end{document}

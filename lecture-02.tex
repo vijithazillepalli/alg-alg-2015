@@ -1,14 +1,152 @@
-\Lecture{Jayalal Sarma M.N.}{Aug 2, 2013}{2}{Informal View and the Basic Algrebraic Structures}
-\noindent
-Preamble
+\Lecture{Jayalal Sarma}{Aug 4, 2015}{2}{Algebraic Approach to
+Primality Testing}{K Dinesh}
+In this lecture, we will see an algebraic approach to solving a fundamental
+problem in Number Theory.
+\section{Application to Number Theory}
+Following is an algorithmic question that we are interested.
+\begin{problem}
+Given a number $n$ in its binary representation, check if it is a prime or not
+in time $O(poly(\log N))$.
+\end{problem}
+\begin{note}
+The trivial algorithms that we can think of will depend on $n$ and hence takes
+time exponential in its input representation.
+\end{note}
 
-\section{Another Example Application - Geometric Theorem Proving}
-\newpage
-\newpage
-\newpage
-\newpage
-\newpage
+Consider the following property about prime number proved by Fermat which is
+of interest in this context.
+\begin{theorem}[Fermat's Little Theorem] If $N$ is a prime, then $\forall~a, 1
+	\le a \le N-1$, \[ a^N = a \mod N \]
+\end{theorem}
+\begin{proof}
+	Fix an $a \in \{1,2,\ldots N-1\}$. Now consider the sequence $a, 2a,
+	\ldots, (N-1)a$. The question we ask is : can any two of the numbers
+	in this sequence be the same modulo $N$. We claim that this cannot
+	happen. We give a proof by contradiction : suppose that there are two
+	distinct $r,s$ with $1 \le r < s \le N-1$ and $sa = ra \mod N$. Then
+	clearly $N | (s-r)a$ which means $N | a$ or $N | (s-r)$. But both
+	cannot happen as $a, s-r$ are strictly smaller than $N$.
 
-\section{An Informal View}
+	This gives that all the $N$ numbers in our list modulo $N$ are
+	distinct. Hence all numbers from $1,2,\ldots, N-1$ appear in the list
+	when we go modulo $N$. Taking product of the list and the list modulo
+	$N$, we get 
+	\[ (N-1)! a^{N-1} = (N-1)! \mod N \]
+	By cancelling $(N-1)!$, we get that $a^{N-1} = 1 \mod N$.
+\end{proof}
+This tells that the above condition is necessary for a number to be prime. If
+this test is also sufficient (i.e, if the converse of the above theorem is
+true), we have a test for checking primality of a number. But it turns out
+that this is not true due to the existance of Carmichael numbers which are not
+prime numbers but satisfy the above test.
 
-\section{Algebraic Preliminaries}
+So one want a necessary and sufficient condition which can be used for
+primality testing. For this, we need the notion of polynomials.
+\begin{definition}
+	A polynomial $p(x) = \sum_{i=0}^d a_ix^i$ with $a_d \ne 0$ denotes a
+	polynomial in one variable $x$ of degree $d$. Here $a_i$s are called
+	coefficients and each term excluding the coefficient is called a
+	monomial. \textbf{A polynomial is said to be identically zero, if all
+	the coefficients are zero.}
+\end{definition}
+
+A polynomial time algorithm for this problem has been found in 2002 by
+Manindra Agarwal, Neeraj Kayal and Nitin Saxena (called as the AKS algorithm). 
+In their result, they used the following polynomial characterisation for a
+prime number.
+\begin{theorem}[Polynomial formulation (Agarwal-Biswas 1999)] Let $N \ge 1$ be
+	an integer. Define a polynomial 
+	$p_N(z) = (1+z)^N - 1 - z^N$. Then \[ p_N(z) \equiv 0 (mod~ N)
+	\iff N \text{ is prime} \]
+\end{theorem}
+
+Hence checking if $N$ is prime or not boils down to checking if $p_N(z)$ is
+identically $0$ or not except for the fact that the underlying operations are
+done modulo $N$.
+
+Proof of the theorem is as follows.
+\begin{proof}
+	Note that $p_N(z) = \sum_{i=1}^{N-1} \binom{N}{i} z^i$ and
+	$\binom{N}{i} = \frac{N(N-1)\ldots (N-i+1)}{1\cdot 2 \ldots i}$ with $1
+	\le i \le N-1$. 
+
+	If $N$ is prime, then $\binom{N}{i} = N \times k_i$ for some integer
+	$k_i$ as none of $1, 2, \ldots i$ divides $N$. Hence $\binom{N}{i}
+	\mod N = 0$ for every $i$ and $p_N(z) \equiv 0 \mod N$ since the
+	polynomial has all coefficients as zero.
+
+	If $N$ is composite, we need to show that $p_N(z) \not 
+	\equiv 0 (mod~ N)$ which means that there is at least one non-zero
+	coefficient $p_N(z) \mod N$\footnote{In class we asked the following
+		question of finding an $a \in \{1,2,\ldots, N-1\}$ such that
+	$p_N(a) \ne 0 \mod N$. This has a counter example. Consider the case
+	where $N$ is a Carmicahel number. By definition, Carmichael numbers
+	are composite numbers that satisfy Fermat's Litte theorem.  Hence if
+	$N$ is Carmichael,  $\forall~ a \in \{1,2,\ldots N-1 \}$, we get  $a^N
+	= a \mod N$. This gives that $\forall~ a \in \{1,2,\ldots, N-1\}$
+	\[	p_N(a)  = ((a+1)^N-a^N -1) \mod N = ((a+1)-a-1) \mod N \]
+	which is zero modulo $N$.}. 	
+	Since $N$ is composite, there exists a prime $p$ such that $p
+	~|~ N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$
+	in the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
+	
+	We first show that $p_N(z)$ is a non zero polynomial by showing that
+	the coefficient of $z^i$ for $i = p$, which is $\binom{N}{p}$, is non
+	zero modulo $p^k$ showing\footnote{Note that if
+		$N|\binom{N}{i}$ then $p^k | \binom{N}{i}$. Taking
+		contrapositive, we get that $\binom{N}{i} \not = 0 \mod p^k$
+		implies $\binom{N}{i} \not = 0 \mod N$} $p_N(z)$ is not a zero
+		polynomial modulo $N$. 
+	Let $N = g \times p^k$. In $\binom{N}{p}$, $p$ of the denominator 
+	divides $N$. Note that $p$ cannot divide $g$, for if it does, then
+	$p^{k+1} | N$ which is not possible by choice of $p$ and $k$.
+		\begin{equation}
+		\binom{N}{p} = \frac{g\times p^k(N-1)\ldots (N-p+1)}
+		{1\cdot 2 \ldots p} = \frac{g\times p^{k-1}(N-1)\ldots 
+			\label{eq:ag-bis-proof}
+		(N-p+1)}{1\cdot 2 \ldots p-1} \end{equation}
+	Hence it must be that $p^{k-1}$ divides $\binom{N}{p}$. This is
+	because, there is no $p$ left now in the denominator to divide $N$.
+	Now $p^k \nmid \binom{N}{p}$ because, none of the terms $(N-1),
+	\ldots,
+	(N-p+1)$ can have $p$ as a factor since all these terms are obtained by
+	subtracting at most $p-1$ times from $N$. Hence $\binom{N}{p} \ne 0
+	\mod p^k$. This completes the proof.
+\end{proof}
+
+Note that Fermat's Little Theorem is a special case of Agarwal-Biswas
+formulation of primality testing.
+\begin{claim}
+Fermat's Little Theorem is a special case of Agarwal-Biswas theorem.
+\end{claim}
+\begin{proof}
+	To prove Fermat's Little theorem, we need one direction of implication
+	of Agarwal-Biswas theorem : 
+	\begin{center}
+	``If $N$ is prime, then $(1+z)^N = (1+z^N) \mod N$''.
+	\end{center}
+
+	Note that Fermat's Little theorem asks about $a^N \mod N$ for $a \in
+	\{1,2,\ldots,N-1\}$. Since the implication talks about $z^N \mod N$
+	and $(1+z)^N \mod N$, this suggests an induction strategy on $a$.
+
+	Let $N$ be prime. We check the base case : for $a=1$, the
+	$1^N =1 \mod N$. Hence the base case is true. By induction, suppose
+	that $a^N = a \mod N$ for $a \in \{1,2,\ldots, N-1\}$. Now, 
+	\begin{align*}
+		(a+1)^N & = (a^N +1) \mod N && [\text{By Agarwal-Biswas as $N$
+		is prime}]\\
+		& = (a+1) \mod N && [\text{By inducive hypothesis}]
+	\end{align*}
+	This completes the inductive case. 
+\end{proof}
+
+This shows that checking if the polynomial $p_N(z)$ is a zero polynomial is an
+if and only if check for primality of $N$. There are two naive ways to do it.
+One is to evaluate it at all the numbers from $1$ to $N$ or to expand out the
+polynomial and see if it is identically zero. But both operations are costly.
+
+So checking primality of a number now boils down to checking if a polynomial
+is identically zero or not. This is a fundamental problem of polynomial
+identity testing. We will be discussing about polynomial identity testing and 
+AKS algorithm in our next theme.

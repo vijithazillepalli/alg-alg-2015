@@ -1,20 +1,128 @@
-\Lecture{Jayalal Sarma M.N.}{July 31, 2013}{1}{Introduction, Motivation and the Language}
-
-\noindent
-General Comments.
+\Lecture{Jayalal Sarma}{Aug 3, 2015}{1}{Introduction, Motivation and
+the Language}{K Dinesh}
 
 \section{Overview of the course. Administrative, Academic policies}
 \newpage
-\section{The Basis Objects - Polynomials.}
-\newpage
-\section{Three Representative Applications}
-\subsection{From Graph Algorithms : Perfect Matching}
-\newpage \newpage \newpage
-\subsection{From Number Theory : Primality Checking}
-\newpage \newpage \newpage
-\subsection{From Robotics : Robot motion planning.}
-\newpage \newpage \newpage
+
+\section{Introduction and Motivation}
+Main theme of this course is to use algebra to solve computational problems.
+Let us consider the following two problems :
+\begin{description}
+	\item [Plagarism check]
+	Given two $C$ programs $P_1$ and $P_2$, check if they are the same
+	under renaming of variables.
+	\item [Molecule detection]
+	Given two chemical molecules check if they have the same structure.
+\end{description}
+
+Consider the following simpler variant of plagarism checking where the program
+submitted has just its variables renamed and all other portions of the program
+are the same. In this case, given the two versions of the program, we need to
+check if there is a way to rename the variables of one program to get the
+other one. 
+
+In the second case one could view the given molecules as graphs. The problem
+is again similar problem, where we want to see if there is way to rename the
+vertex labels of the graph so that under the relabelling both the graphs are
+the same.
+
+Our aim in both cases is to check whether the two structures are same under
+renaming. We are interested in solving this problem on graphs.
+
+\begin{definition}[Graph Isomorphism]
+	Two graphs $X_1(V_1,E_1)$, $X_2(V_2,E_2)$ are said to be isomorphic if
+	there is a bijective map $\sigma:V_1 \to V_2$ such that $\forall
+	(u,v) \in V_1 \times V_1$, \[(u,v) \in E_1 \iff (\sigma(u), \sigma(v))
+	\in E_2 \]
+\end{definition}
+\begin{problem}
+	The \emph{graph isomorphism problem} is the decision problem of
+	checking if given two graphs $X_1, X_2$ are isomorphic.
+\end{problem}
+
+We are also interested in the following special case of the above problem
+called graph automorphism problem. 
+
+\begin{definition}[Graph Automorphism]
+	For a graph $X(V,E)$, an automorphism of $X$ is a renaming of the
+	vertices of $X$ given by a bijective map $\sigma:V \to V$ such 
+	that $\forall
+	(u,v) \in V \times V$, \[(u,v) \in E \iff (\sigma(u), \sigma(v))
+	\in E \]
+\end{definition}
+We are interested in the set of all bijections such that they are
+automorphisms of $X$. We denote this by $Aut(X)$.
+\begin{definition}
+	For a graph $X$ on $n$ vertices, 
+	$Aut(X) = \{ \sigma ~|~ \sigma :[n] \to [n], \sigma \text{ is an
+	automorphism of }X \}$
+\end{definition}
+
+Note that an identity map which takes a vertex to itself always belongs to
+$Aut(X)$ for all graphs $X$. Hence the question is : are there any bijections
+other than the identity map as automorphism of $X$.
+
+\begin{problem}[Graph Automorphism Problem]
+	Given a graph $X$ does $Aut(X)$ has any element other than the
+	identity element.
+\end{problem}
+
+One way to see bijections is via permutations. This is because, every
+bijection define a permutation and vice versa.
+
+Let $X$ be an $n$ vertex graph. 
+Denote $S_n$ to be the set of all permutations on $n$ elements. Hence $Aut(X)$
+can be defined as $\left\{ \sigma ~|~ \sigma \in S_n \text{ and $\sigma$ is an
+automorphism of } G\right\}$. 
+
+We now show that the set $Aut(X)$ has some nice properties. Given $\sigma_1,
+\sigma_2 \in Aut(X)$, we can compose two permutations as $\sigma_1
+\circ \sigma_2 = (\sigma_1(\sigma_2(1)),\sigma_1(\sigma_2(2)), \ldots,  
+\sigma_1(\sigma_2(n)))$. This is same as applying $\sigma_2$ on identity
+permutation and then applying $\sigma_1$ to the result. We show that
+$Aut(X)$ along with the composition operation $\circ$
+gives us many nice properties.
+\begin{itemize}
+	\item If $\sigma_1, \sigma_2 \in Aut(X)$, then $\sigma_1 \circ
+		\sigma_2$ is also an automorphism of $X$. The reason is that
+		for any $(u,v) \in X \times X$, $(u,v) \in E \iff
+		(\sigma_2(u), \sigma_2(v)) \in E$ Now applying $\sigma_1$ on
+		the previous tuple, we get that $(\sigma_2(u), \sigma_2(v)) 
+		\iff (\sigma_1 \circ \sigma_2(u), \sigma_1 \circ \sigma_2(v))
+		\in E$. Hence $(u,v) \in E \iff (\sigma_1 \circ \sigma_2(u),
+		\sigma_1 \circ \sigma_2(v)) \in E$.
+		This tells that $Aut(X)$ is \emph{closed} under $\circ$.
+	\item The composition operation is also \emph{associative}.
+	\item \emph{Identity} permutation belongs to $Aut(X)$ as observed
+	before.  
+	\item Since we are considering bijections, it is natural to
+		consider \emph{inverse} for a permutation $\sigma$ denoted
+		$\sigma^{-1}$ with the property that $\sigma \circ
+		\sigma^{-1}$ is identity permutation. 
+
+\end{itemize}
+We gave a definition of inverse for an arbitrary permutation. But then a
+natural question is : given $\sigma \in Aut(X)$, is it true that $\sigma^{-1}$
+also belongs to $Aut(X)$. It turns out that it is true.
+\begin{claim}
+	For the graph $X(V,E)$
+	$\sigma \in Aut(X) \iff \sigma^{-1} \in Aut(X)$
+\end{claim}
+\begin{proof}
+	Recall that $\sigma \in Aut(G)$ iff $\forall (u,v) \in V \times V$,
+	$(u,v) \in E \iff (\sigma(u), \sigma(v)) \in E$. In particular, this
+	must be true for $(\sigma^{-1}(u), \sigma^{-1}(v))$ also. This means,
+	\[ (\sigma^{-1}(u), \sigma^{-1}(v)) \in E \iff (\sigma(\sigma^{-1}(u)),
+	\sigma(\sigma^{-1}(v))) \in E \]
+	By definition of $\sigma^{-1}$ we get that 
+	$(\sigma^{-1}(u), \sigma^{-1}(v)) \in E \iff (u,v) \in E$. This shows
+	that $\sigma^{-1} \in Aut(X)$ 
+\end{proof}
+Objects which satisfy these kind of properties are called groups.
+
 \section{Overview of the course}
-\newpage \newpage
-
-
+There are two major themes. 
+\begin{itemize}
+	\item Algorithms for permutation groups.
+	\item Algorithms for polynomials.
+\end{itemize}
