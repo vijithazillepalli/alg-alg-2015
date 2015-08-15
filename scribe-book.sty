@@ -38,7 +38,7 @@
   \vrule\hfil}}
 
 \newcounter{lecture}
-\theoremstyle{myplain}
+%\theoremstyle{myplain}
 \newtheorem{theorem}{Theorem}[lecture]
 \newtheorem{lemma}         [theorem]{Lemma}
 \newtheorem{proposition}   [theorem]{Proposition}
@@ -48,16 +48,16 @@
 \newtheorem{note}          [theorem]{Note}
 \newtheorem{observation}   [theorem]{Observation}
 
-\theoremstyle{mydefinition}
+%\theoremstyle{mydefinition}
 \newtheorem{definition}    [theorem]{Definition}
 \newtheorem{example}       [theorem]{Example}
 \newtheorem{assumption}    [theorem]{Assumption}
 \newtheorem{openproblem}   [theorem]{Open Problem}
-\newtheorem{problem}       [theorem]{Problem}
-\newtheorem{exercise}      [theorem]{exercise}
+\newtheorem{problem}	   [theorem]{Problem}
+\newtheorem{exercise}      [theorem]{Exercise}
 
-\theoremstyle{myremark}
 \newtheorem{remark}        [theorem]{Remark}
+\theoremstyle{myremark}
 \newtheorem{conjecture}    [theorem]{Conjecture}
 
 \numberwithin{equation} {lecture}
@@ -83,10 +83,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Useful Macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\Pr}[1]{\mathify{\mbox{Pr}\left[#1\right]}}
-\newcommand{\Exp}[1]{\mathify{\mbox{Exp}\left[#1\right]}}
+\renewcommand{\Pr}[1]{\mbox{Pr}\left[#1\right]}
+\newcommand{\Exp}[1]{{\mbox{Exp}\left[#1\right]}}
 \newcommand{\bigO}O
-\newcommand{\set}[1]{\mathify{\left\{ #1 \right\}}}
+\newcommand{\set}[1]{{\left\{ #1 \right\}}}
 \def\half{\frac{1}{2}}
 
 \def\implies{\Rightarrow}
@@ -95,9 +95,6 @@
 \def\expec#1#2{{\mathop{{\rm E}}_{#1}}[#2]}
 \def\sizeof#1{\left| #1\right|}
 \def\setof#1{\left\{ #1\right\}}
-
-\newcommand{\jsay}[1]{{ \color{red}{Jayalal says: #1}}}
-
 
 \newcommand{\F}{{\mathbb{F}}}
 \newcommand{\Z}{{\mathbb{Z}}}
@@ -122,7 +119,6 @@
 \newcommand{\IF}{{\bf if}}
 \newcommand{\THEN}{{\bf then}}
 \newcommand{\ELSE}{{\bf else}}
-
 
 
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
@@ -177,6 +173,6 @@
 {\Large \bf #4}
 \end{center}
 \vspace{1cm}
-\thispagestyle{empty}
+%\thispagestyle{empty}
 }
 

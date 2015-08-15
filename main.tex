@@ -7,11 +7,14 @@
 \usepackage{xcolor}
 \usepackage{amssymb}
 \usepackage{scribe-book}
-\usepackage{amsmath}
+\usepackage{todonotes}
 \usepackage{hyperref}
-\usepackage[all]{hypcap}
+\usepackage{hypcap}
 \renewcommand{\E}{{\mathbb E}}
 
+\newcounter{todocounter}
+\newcommand{\todonum}[2][]{\stepcounter{todocounter}\todo[#1]{\thetodocounter: #2}}
+\newcommand{\jsay}[1]{\todonum[inline,color=red!20]{\small JS says: #1}}
 
 %\newcommand{\N}{\mathbb{N}}
 % Shows lecture titles and sections. Set 0 to list only chapters.
@@ -42,7 +45,7 @@
 
 
 \begin{flushleft}
-{\large Jayalal Sarma M.~N.\\ 
+{\large Jayalal Sarma\\ 
 Department of Computer Science and Engineering\\
 IIT Madras, Chennai 600036 \\[2ex]
 Draft---\today\ and forever
@@ -52,6 +55,8 @@ Draft---\today\ and forever
 \newpage
 \pagenumbering{roman}  % Roman numbering in intro portion.
 \include{front-page}
+\newpage
+\listoftodos
 
 \newpage
 \listofscribe          % For automatic scribe list generation.
@@ -62,29 +67,14 @@ Draft---\today\ and forever
 \tableofcontents
 
 \pagenumbering{arabic}  % Arabic page numbering for lectures.
-\newpage \input{preface.tex}
+\newpage 
+\input{preface.tex}
 %\part{Introduction, Motivation and the Language}
 \newpage \setcounter{page}{1} 
 \input{lecture-01.tex}
 \input{lecture-02.tex}
-%\part{Algorithmic Ideas Related to Polynomials}
 \input{lecture-03.tex}
 \input{lecture-04.tex}
-\input{lecture-05.tex}
-\input{lecture-06.tex}
-\input{lecture-07.tex}
-\input{lecture-08.tex}
-\input{lecture-09.tex}
-\input{lecture-10.tex}
-\input{lecture-11.tex}
-\input{lecture-12.tex}
-\input{lecture-13.tex}
-\input{lecture-14.tex}
-\input{lecture-15.tex}
-\input{lecture-16.tex}
-\input{lecture-17.tex}
-\input{lecture-18.tex}
-\input{lecture-19.tex}
-\input{lecture-20.tex}
-
+\input{Aug-10-11.tex}
+\input{Aug-12-14.tex}
 \end{document}

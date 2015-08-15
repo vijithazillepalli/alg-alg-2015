@@ -1,13 +1,21 @@
 \Lecture{Jayalal Sarma M.N.}{Aug 7, 2015}{4}{Graphs, Groups and Generators}{Ramya C}
 
 In this lecture we will pose three graph theoretic questions and find answers using approaches in algebra.
+<<<<<<< HEAD
 
 
 \section{Graph Isomorphism, Automorphism and Rigidity}
+=======
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 
+\section{Graph Isomorphism, Automorphism and Rigidity}
 
 \begin{definition}(Graph Isomorphism.)
 Let $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ be graphs. We say $G_1\stackrel{\sim}{=}G_2$ (read as $G_1$ is \em isomorphic to $G_2$) if there exists a bijection $\sigma : V_1\rightarrow V_2$ such that $\forall (u,v) \in V_1\times V_2$ we have
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 \begin{center}
 $(u,v)\in E_1 \iff (\sigma(u),\sigma(v))\in E_2$
 \end{center}
@@ -16,66 +24,38 @@ $(u,v)\in E_1 \iff (\sigma(u),\sigma(v))\in E_2$
 In other words, we say a graph $G_1$ is isomorphic to $G_2$ if there exists a relabeling of the vertices in $G_1$  such that the the adjacency and non-adjacency relationships in $G_2$ is preserved. 
 \begin{observation}
 If $|V_1|\neq |V_2|$ ,then $G_1$ is not isomorphic to $G_2$.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 \end{observation}
 
 The graph isomorphism problem is stated as follows. 
-\begin{center}
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH ISOMORPHISM}\\
-\textbf{Input} : $G_1=(V_1,E_1), G_2=(V_2,E_2)$\\
-\textbf{Output} : Decide if $G_1\stackrel{\sim}{=}G_2$ or not.
-\end{minipage}
-}
-\end{center}
+
+\begin{problem}[{\bf Graph Isomorphism Problem}]
+Given two graphs $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$, test if $G_1\stackrel{\sim}{=}G_2$ or not.
+\end{problem}
 
 A natural question to ask in this setting is that if there is an isomorphism from a graph $G$ to itself. 
 
-Let $[n]=\{1,2,\ldots,n\}$. Let $S_n$ denote the set of all permuatations from the set $[n]$ to $[n]$.
+Let $[n]=\{1,2,\ldots,n\}$. Let $S_n$ denote the set of all permutations from the set $[n]$ to $[n]$. Let $G=(V,E)$ be a graph. An automorphism of $G$ is a bijection $\sigma:V\rightarrow V$ such that $\sigma(G)= G$. Let
+$$Aut(G)= \left\{\sigma | \sigma\in S_n \text{~and~} \sigma(G)= G \right\}$$
+be the set of all automorphisms of $G$. Ideally, we would like to compute the set of automorphism of a graph to itself.
 
-\begin{definition}(Graph Automorphism.) 
-Let $G=(V,E)$ be a graph. An automorphism of $G$ is a bijection $\sigma:V\rightarrow V$ such that $\sigma(G)= G$. Let
-\begin{center}
-$Aut(G)= \{\sigma | \sigma\in S_n \text{~and~} \sigma(G)= G \}$
-\end{center}
-be the set of all automorphisms of $G$. 
-\end{definition}
+\begin{problem}[{\bf Graph Automorphism Problem}]
+Given a graph $G$, list the elements of $Aut(G)$.
+\end{problem}
 
+The above problem can be expected to be solved in polynomial time only if the output expected is polynomial in length. This brings up the size of the $Aut(G)$ into question. Unfortunately, if $G$ is the complete graph on $n$ vertices. Then $|Aut(G)|=n!$. Hence the above question is not well-formulated.
 
-
-The graph automorphism problem is stated as follows. 
-\begin{center}
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : Construct $Aut(G)$.
-\end{minipage}
-}
-\end{center}
-
-
-
-\begin{observation}
-Let $\tau:[n]\rightarrow[n]$ be the identity permuataion. That is, for all $i\in[n],\tau(i)=i$. Then by definition $\tau\in Aut(G)$ for any graph $G=(V,E)$. This identity permuataion $\tau$ is in $Aut(G)$. 
-\end{observation}
-
-
-Are there other permutations from $[n]$ to $[n]$ that are in the set $Aut(G)$ ? How large can the set $Aut(G)$ be ?
+Since identity permutation is trivially an automorphism for any graph, the $Aut(G)$ is always a non-empty subset of $S_n$ where $n$ is the number of vertices. Hence, one can ask a natural decision variant of the above problem, namely the graph rigidity problem.
 
 Formally, the graph rigidity problem is stated as follows.
-\begin{center}
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : Decide if $Aut(G)$ is trivial or not.
-\end{minipage}
-}
-\end{center}
+\begin{problem}[{\bf Graph Rigidity Problem}]
+Given a graph $G$, test if $Aut(G)$ is trivial. That is, whether $Aut(G)$ contains only the identity permutation or not.
+\end{problem}
 
-\begin{observation}
-Let $G$ be the complete graph on $n$ vertices. Then $|Aut(G)|=n!$.  
-\end{observation}
-
-Is the set $Aut(G)$ just a set or does it have more algebraic structure ? 
+More than the size, in the first lecture of this course, we have seen that $Aut(G)$ forms a \textit{subgroup} of $S_n$. To utilize this structure, we first refresh the definition of an abstract group. From now on, we will use the letter $X$ to denote a graph and $G$ to denote a group. 
 
 
 \section{Groups and Generators}
@@ -97,6 +77,7 @@ A set $G$ together with a binary operation $*$ is said to be a group if the foll
 \end{itemize}
 \end{example}
 
+<<<<<<< HEAD
 From now on, we will use the letter $X$ to denote a graph and $G$ to denote a group.
 
 \begin{remark} 
@@ -107,6 +88,9 @@ Let $(G,*)$ be a group. Let $H\subseteq G$ such that $(H,*)$ also forms a group.
 \begin{exercise}
 For any graph X, the set $Aut(X)$ forms a group under the composition operation. That is, $Aut(G)\leq M$ where $M=(S_n,\circ)$ is the permutation group.
 \end{exercise}
+=======
+Let $(G,*)$ be a group. Let $H\subseteq G$ such that $(H,*)$ also forms a group. We say $H$ is a {\em subgroup} of $G$ and denote by $H\leq G$. We showed in the first lecture of the course that, for any graph X, the set $Aut(X)$ forms a group under the composition operation. That is, $Aut(G)\leq M$ where $M=(S_n,\circ)$ is the symmetric group.
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 
 Let $(G,+)$ be a finite group and $g\in G$ be an element. Let $g^2 =  g*g ,g^3 =  g*g*g $. Similarly $g^k = \underbrace{g*g*\cdots * g}_\text{k times}$. Now consider the set $H=  \{g,g^2,g^3,\ldots\}$. Since $(G,*)$ is a finite group there must exist a $k$ such that $g^k=g$ in $H$.
 
@@ -121,25 +105,39 @@ $g^{k-1}*g*g^{-1} = g*g^{-1} = e$
 \end{center}
 \end{proof}
 
+<<<<<<< HEAD
 \begin{definition}[Generator]
 Let $(G,+)$ be a finite group and $g\in G$ be an element. We say an element $g\in G$ is a generator of the set $H$ if for every element $h\in H$ there exists a $m$ such that $h=g^m$.  (denoted by $H=<g>$).
 \end{definition}
 
 \begin{observation}$H = <g>$ is a subgroup of $G$. That is, $H\leq G$.
+=======
+\begin{definition}[\textbf{Generator}]
+Let $(G,+)$ be a finite group and $g\in G$ be an element. We say an element $g\in G$ is a generator of the set $H$ if for every element $h\in H$ there exists a $m$ such that $h=g^m$.  (denoted by $H=\langle g \rangle$).
+\end{definition}
+
+\begin{observation}$H = \langle g \rangle$ is a subgroup of $G$. That is, $H\leq G$.
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 \end{observation}
 
-\begin{example}
-\begin{itemize}
-\item $<1> = (\mathbb{Z}_5,+)$
-\end{itemize}
-\end{example}
+A quick example is that $1$ is a generator for $(\mathbb{Z}_5,+)$
 
+<<<<<<< HEAD
 
 \begin{definition}An group $(G,*)$ that can be generated by a single element is called a {\em cyclic group}. For instance, $(\mathbb{Z}_5,+)$.
+=======
+\begin{definition}
+An group $(G,*)$ that can be generated by a single element is called a {\em cyclic group}. For instance, $(\mathbb{Z}_5,+)$.
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 \end{definition}
 
 Not every group is cyclic. For instance $S_3$ is not cyclic.
 
+<<<<<<< HEAD
+=======
+\jsay{reviewed this lecture's notes until here}
+
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
 \begin{definition}(Generating set.)
 Let $S\subseteq G$ be the set $\{u_1,\ldots,u_k\}$. $S$ is said to be {\em generating} if $<S>=G$.  
 \end{definition}
@@ -232,4 +230,9 @@ Let $H=<g>$ and $H'=<H,g'>$ where $g'\in G\backslash H$. Then $H\leq H'\leq G$. 
 
 \begin{remark}
 We know that $Aut(X)\leq S_n$ for any graph $X=(V,E)$. By Observation \ref{obs-genset} $Aut(X)$ has a generating set of size $\log|S_n| = log(n!) \in \mathcal{O}(n\log n)$ by Stirling's approximation.
+<<<<<<< HEAD
 \end{remark}  
+=======
+\end{remark}  
+
+>>>>>>> 43d9d1f90ad33333710d87eda7fb17a437fb405e
