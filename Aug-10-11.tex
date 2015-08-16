@@ -1,83 +1,95 @@
 \Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit Stabilizer Lemma}{Ameya Panse}
 
 
-\section{•}
+\section*{•}
 In this lecture we will understand and prove the Orbit Stabilizer Lemma, while defining the various terms associated with it.
 
 
-\begin{definition}(Order of a Group) Order of a group G is number of elements in the group, that is $\|G\|$ \end{definition}
+\begin{definition}(Order of a Group.) Order of a group $G$ is number of elements in the group denoted by $|G|$ .
+\end{definition}
 
-\begin{definition}(Right Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{definition}(Right coset.) Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
 \begin{center}
-$Hg = \{hg | h \in H\}$
+$Hg = \{hg \mid h \in H\}$
 \end{center}
- \end{definition}
+\end{definition}
 
-\begin{definition}(Left Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{definition}(Left coset.) Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
 \begin{center}
-$gH = \{gh | h \in H\}$
+$gH = \{gh \mid h \in H\}$
 \end{center}
 \end{definition}
 
 \begin{note}
-In general, it is not necessary that the left and right co-sets are the same.
+In general, it is not necessary that the left and right cosets are the same.
 \end{note}
 
-\begin{definition}(Normal SubGroup)
-Let $H \le G$, if we have 
+\begin{definition}(Normal Subgroup.)
+Let $H \le G$. $H$ is called a \em Normal Subgroup if it satisfies the following condition.
 \begin{center}
 $\forall g \in G, Hg= gH$
 \end{center}
-then H is called a \em Normal SubGroup
 \end{definition}
 
-Let H be a Normal SubGroup of G. Divide G into co-sets of H and take one element from each of these as a representative of the set.
+Let $H$ be a Normal subgroup of $G$. Divide $G$ into cosets of $H$ and take one element from each of these as a representative of the set.
 \begin{claim} These elements have a group structure among them. \end{claim}
 This will be proved in later classes.
 
 \section{Group Action and Orbits}
-Let G be a SubGroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
+Let $G$ be a subgroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
 
-\begin{note} $\alpha^g$ is the image of $\alpha$ in the permutation g. \end{note}
+\begin{notation}We denote by $\alpha^g$ the image of $\alpha$ under the permutation $g\in G$. \end{notation}
 
-\begin{definition}(Orbit)
+\begin{definition}(Orbit.) Let $\alpha \in [n]$ and $g \in G$. We define the {\em orbit of $\alpha$} as
 \begin{center}
-$\alpha^G = \{\alpha^g | g \in G\}$
+$\alpha^G = \{\alpha^g \mid g \in G\}$
 \end{center}
 \end{definition}
 
 \subsection{An Equivalence Realtion}
-Consider the following relation,
-\[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
 
-\begin{claim}
-The above realtion is an Equivalence Relation. 
-\end{claim}
-\\
-\textbf{Reflexive:} $e \in G$, where e is the identity element. Hence, $\alpha \backsim \alpha$ \\
-\textbf{Symmetric:} Let $\alpha \backsim \beta$. Thus $\exists g \in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$ \\
-\textbf{Transitive:} Let $\alpha \backsim \beta, \beta \backsim \gamma$. Thus $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permnutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$
+\begin{lemma}
+The relation 
+\[\alpha \backsim \beta \iff \exists g~ g\in G, \alpha^g = \beta\]
+is an equivalence relation.
+\end{lemma}
+\begin{proof}
+\textbf{Reflexive: } $e \in G$, where $e$ is the identity element. Hence, $\alpha \backsim \alpha$ \\
+\textbf{Symmetric: } Let $\alpha \backsim \beta$. Then by definition, $\exists g\in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$ \\
+\textbf{Transitive: } Let $\alpha \backsim \beta, \beta \backsim \gamma$. By definition, $\exists g_1,g_2\in G$ such that $\alpha^{g_1} = \beta$ and  $\beta^{g_2} = \gamma$. By composition of permutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$.
+\end{proof}
+
+Having defined orbits we noe look at permutations that fix elemets.
 
 
-\begin{definition}(Stabilizer of $\alpha$)
+\begin{definition}(Stabilizer of $\alpha$.)
+Let $G\leq S_n$, $\alpha \in [n]$ and $g \in G$. WE define the stabilizer of $\alpha$ to be the set
 \begin{center}
-$G_{\alpha} = \{g | \alpha^g = \alpha\}$
+$G_{\alpha} = \{g \mid \alpha^g = \alpha\}$
 \end{center}
 \end{definition}
 
+The set $G_\alpha$ is a subset of $G$. It is natural to ask if it is something more than just a sibset of $G$.
+Does it have a group structure ? 
+
 \begin{observation}
-$G_{\alpha}$ is a SubGroup of G.
+$G_{\alpha}$ is a subgroup of $G$.
 \end{observation}
 
 \subsection{Orbit Stabilizer Lemma}
-\[\forall \alpha \in [n] \|\alpha^G\|*\|G_{\alpha}\| = \|G\| \]
+
+
+
+
+
+\[\forall \alpha \in [n] |\alpha^G|*|G_{\alpha}| = |G| \]
 \begin{claim}
-There exists a bijection from $\alpha^G$ to Co-sets of $G_{\alpha}$ in G.
+There exists a bijection from $\alpha^G$ to cosets of $G_{\alpha}$ in G.
 \end{claim}
 \begin{corollary}
-Number of Co-sets of $G_{\alpha}$ = $\|\alpha^G\|$.
+Number of cosets of $G_{\alpha}$ = $\|\alpha^G\|$.
 \end{corollary}
-And, since $G_{\alpha}$ forms a SubGroup, applying Lagrange's Theorem, we get the Orbit Stabilizer Lemma.
+As $G_{\alpha}$ forms a subgroup, applying Lagrange's Theorem, we get the Orbit Stabilizer Lemma.
 
 \textbf{Proof of Claim:}
 The idea is that the set of permnutations that send $\alpha$ to $\beta$, form a Co-set of permutations that send $\alpha$ to $\alpha$.
