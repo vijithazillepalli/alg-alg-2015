@@ -1,0 +1,263 @@
+\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit Stabilizer Lemma}{Ameya Panse}
+In this lecture we will understand and prove the Orbit Stabilizer Lemma, while defining the various terms associated with it.
+
+
+\begin{definition}(Order of a Group) Order of a group G is number of elements in the group, that is $\|G\|$ \end{definition}
+
+\begin{definition}(Right Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{center}
+$Hg = \{hg | h \in H\}$
+\end{center}
+ \end{definition}
+
+\begin{definition}(Left Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{center}
+$gH = \{gh | h \in H\}$
+\end{center}
+\end{definition}
+
+\begin{note}
+In general, it is not necessary that the left and right co-sets are the same.
+\end{note}
+
+\begin{definition}(Normal SubGroup)
+Let $H \le G$, if we have 
+\begin{center}
+$\forall g \in G, Hg= gH$
+\end{center}
+then H is called a \em Normal SubGroup
+\end{definition}
+
+Let H be a Normal SubGroup of G. Divide G into co-sets of H and take one element from each of these as a representative of the set.
+\begin{claim} These elements have a group structure among them. \end{claim}
+This will be proved in later classes.
+
+\section{Group Action and Orbits}
+Let G be a SubGroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
+
+\begin{note} $\alpha^g$ is the image of $\alpha$ in the permutation g. \end{note}
+
+\begin{definition}(Orbit)
+\begin{center}
+$\alpha^G = \{\alpha^g | g \in G\}$
+\end{center}
+\end{definition}
+
+\subsection{An Equivalence Realtion}
+Consider the following relation,
+\[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
+
+\begin{claim}
+The above realtion is an Equivalence Relation. 
+\end{claim}
+\textbf{Reflexive:} $e \in G$, where e is the identity element. Hence, $\alpha \backsim \alpha$ \\
+\textbf{Symmetric:} Let $\alpha \backsim \beta$. Thus $\exists g \in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$ \\
+\textbf{Transitive:} Let $\alpha \backsim \beta, \beta \backsim \gamma$. Thus $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permnutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$
+
+
+\begin{definition}(Stabilizer of $\alpha$)
+\begin{center}
+$G_{\alpha} = \{g | \alpha^g = \alpha\}$
+\end{center}
+\end{definition}
+
+\begin{observation}
+$G_{\alpha}$ is a SubGroup of G.
+\end{observation}
+
+\subsection{Orbit Stabilizer Lemma}
+\[\forall \alpha \in [n] \|\alpha^G\|*\|G_{\alpha}\| = \|G\| \]
+\begin{claim}
+There exists a bijection from $\alpha^G$ to Co-sets of $G_{\alpha}$ in G.
+\end{claim}
+\begin{corollary}
+Number of Co-sets of $G_{\alpha}$ = $\|\alpha^G\|$.
+\end{corollary}
+And, since $G_{\alpha}$ forms a SubGroup, applying Lagrange's Theorem, we get the Orbit Stabilizer Lemma.
+
+\textbf{Proof of Claim:}
+The idea is that the set of permnutations that send $\alpha$ to $\beta$, form a Co-set of permutations that send $\alpha$ to $\alpha$.
+
+Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$.
+\begin{align*}
+\text{Consider} & \{g \in G| \beta = \alpha^g\}
+\text{  We have to show that this is a Co-set}\\
+ = & \{ g \in G | \alpha^h = \alpha^g \}\\
+ = & \{ g \in G | \alpha^{gh^{-1}} = \alpha\}\\
+\text{Thus } &  gh^{-1} \in G_{\alpha}\\
+ = & \{ g \in G | gh_{-1} \in G_{\alpha} \}\\
+ = & \{ g \in G | g \in G_{\alpha}h \}\\
+\end{align*}
+
+\begin{exercise}
+ Complete the above proof by showing a bijection between $\beta$'s and the Co-sets of $G_{\alpha}$.
+\end{exercise}
+
+\section{Graph Automorphism and Graph Isomorphism}
+We will now define and analyse various problems related to GI.\\
+\textbf{Graph Isomorphism [GI]: } Given graphs $G_1, G_2$,\\
+Output  $1$ \\ if $\exists \sigma : V_1 \rightarrow V_2, \forall (u,v) \in E_1, (\sigma(u),\sigma(v)) \in V_2$\\
+ else Output  $0$.
+
+\begin{definition}[Automorphism]
+A Graph G is said to be automorphic if it is non-trivially isomorphic to itself.
+\end{definition}
+
+\begin{definition}[$Aut(G)$]
+\[Aut(G) = \{\sigma \in S_n | G \cong \sigma(G)\}\]
+\end{definition}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : A Generating Set for $Aut(G)$.
+\end{minipage}
+}
+
+\vspace{3mm}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : Decide if $Aut(G)$ is trivial or not.
+\end{minipage}
+}
+
+\vspace{3mm}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF ISOMORPHISMS}\\
+\textbf{Input} : A graph $G_1=(V_1,E_1),G_2=(V_2,E_2)$\\
+\textbf{Output} : The number of Isomorphisms from $G_1$ to $G_2$.
+\end{minipage}
+}
+
+\vspace{3mm}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF AUTOMORPHISMS}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : $\|Aut(G)\|$.
+\end{minipage}
+}
+
+\vspace{3mm}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING ISOMORPHISM}\\
+\textbf{Input} : A graph $G_1=(V_1,E_1),G_2=(V_2,E_2)$\\
+\textbf{Output} : A permutation that 'morphs' $G_1$ to $G_2$.
+\end{minipage}
+}
+
+\vspace{3mm}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING AUTOMORPHISM}\\
+\textbf{Input} : A graph $G=(V,E)$\\
+\textbf{Output} : A non-trivial element of $Aut(G)$.
+\end{minipage}
+}
+
+\section{Informal Reduction} 
+Given two problems $A,B$, we say that $A \le B$ (A reduces to B), if given a polytime algorithm for B, we can give out a polytimeytime algorithm for A.
+
+In the next lecture we will talk about the relation among the above defined problems.
+
+
+
+\Lecture{Jayalal Sarma}{August, 11 2015}{06}{A Closer Look at Graph Isomorphism and Automorphism}{Ameya Panse}
+
+\section{Another related Problem}
+Here the vertex set is divided into $c$ color classes by the function 
+\begin{center} $\Psi : V(X) \rightarrow [c]$,\\
+ where $i \in [c]$ denotes a color and\\
+ the $i^{th}$ color class is $\Psi^{-1}(i)$.
+\end{center}
+
+\textbf{Colored Graph Isomorphism [CGI]:} Given two $C$-colored Graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$\\
+Output $1$ \\
+if $\exists \sigma : V(X_1) \rightarrow V(X_2)$ such that 
+$\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $\\
+ and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$ .
+
+\section{Relations Among the Problems}
+
+\subsection{GI $\le$ CGI}
+	Set $c=1$, and color all the vertices with the same color.
+
+\subsection{CGI $\le$ GI}
+Given $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$.\\
+\textbf[Gadget] : $\forall u \in V(X_1)$ such that $u \in \Psi_1^{-1}(i)$:
+\begin{enumerate}
+\item Add $ni$ extra vertices to $X_1$.
+\item Add edges from each of the extra vertices to u to get the graph $X_1'$.
+\end{enumerate}
+Do the same for $(X_2,\Psi_2)$ to get $X_2'$.\\
+Now run $GI$ on $X_1',X_2'$.
+
+\textbf{Correctness :}
+
+\textbf{Forward Direction:}
+
+Let $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$. To show that $X_1' \cong X_2'$.
+
+Hence $\exists \sigma : V(X_1) \rightarrow V(X_2)$ such that 
+$\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ 
+if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $ and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$. Additionally map the extra vertices added correspondingly. Thus $X_1' \cong X_2'$.
+
+
+\textbf{Backward Direction:}
+
+
+Let $X_1' \cong X_2'$. To show that $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.\\
+$X_1' \cong X_2'$, hence $ \exists \sigma : V(X_1') \rightarrow V(X_2'), \forall (u,v) \in E(X_1'), (\sigma(u),\sigma(v)) \in E(X_2')$.\\
+If possible let there exist $ u \in v(X_1), u \in \Psi^{-1}(i)$ such that $\sigma(u) \notin V(X_2)$. That is, u is mapped to one of the extra vertices. But $u \in X_1'$ and $deg(u) \ge ni$, whereas degree of any extra vertex is 1. Hence, we have a contradiction.
+
+Now, if possible let $u \notin \Psi_2^{-1}(i)$. Hence $\sigma(u) \in \Psi_2^{-1}(j)$ and $j \neq i$. Note that $ni + n$ \textgreater $deg(u) \ge ni \implies n(i+1)$ \textgreater $deg(u) \ge ni$.
+
+And, $\sigma(u) \in \Psi_2^{-1}(j) \implies n(j+1)$ \textgreater $deg(u) \ge nj$. Since both of these can not be true simultaneously, we have a contradiction.
+
+Hence, $\sigma(u) \in V(X_2) , \sigma(u) \in \Psi_2^{-1}(i)$. Thus, $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.
+
+\textbf{Time Complexity :} We have made only one query to GI. Hence, the reduction is polytime.
+
+\textbf{Hence Proved.}
+
+\subsection{Computing Isomorphism $\le GI$}
+Given $X_1,X_2$ Output a permutation that morphs $X_1$ to $x_2$.
+The Reduction is as follows:
+\begin{enumerate}
+\item Check if $X_1 \cong X_2$. If NO, end.
+\item For each vertex $i \in V_1$ 
+	Color $i$ with color $C_i$.
+	\begin{itemize}
+	\item Color $j \in V_2 -$ [Already Colored Vertices] with $C_i$, temporarily.
+	\item Query to CGI.
+	\item Repeat on $j$ untill you get a yes answer. Fix color of $j$ as $C_i$.
+	\end{itemize}
+Ouput the permutation.
+\end{enumerate}
+Here each vertex is colored with a different color, and hence we have a permutation.\\
+Also, if the graphs are isomorphic, then there will exists an $j \in V_2$, such that we get a yes answer.
+
+\textbf{Time Complexity:} We make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query to $GI$.\\Thus the reduction is polytime.
+
+
+
+
+\subsection{GI $\le$ GA}
+Take $X = X_1 \cup X_2$.\\
+Let S be the generating set of $Aut(G)$.
+\begin{claim}
+$X_1 \cong X_2$ if and only if $\exists \sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$.
+\end{claim}
+
+For the time being assume that the two graphs are connected graphs.\\
+\textbf{Forward Direction} Assume that $X_1 \cong X_2$.\\
+	$\exists \tau$ which is an isomorphism between $X_1,X_2$. $\tau \in Aut(X)$. Hence, there is a $\sigma$ that maps a vertex in $X_1$ to a vertex in $X_2$.\\
+\textbf{Backward Direction :} $\exists \sigma$ that maps $u \in X_1$ to $\sigma(u) \in X_2$. Let $v \in X_1$ be such that $\sigma(u) \in X_1$. Since $X_1$ is connected $u,v$ are connected. But $\sigma(u) \in X_2, \sigma(v) \in X_1$ are not connected. Hence, we have a contradiction. Thus, $\sigma$ maps all vertices in $X_1$ to $X_2$. Thus $X_1 \cong X_2$.
+
+In case the two are not connected, add an extra vertex to both the graphs that is adjeacent to all the vertices in the correcponding graphs. Since, the new vertices hace degree n, they can be mapped only to each other.\\
+\textbf{Hence Proved.}
+
