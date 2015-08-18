@@ -2,30 +2,29 @@
 In this lecture we will understand and prove the Orbit Stabilizer Lemma, while defining the various terms associated with it.
 
 
-\begin{definition}(Order of a Group) Order of a group G is number of elements in the group, that is $\|G\|$ \end{definition}
+\begin{definition}(Order of a Group.) Order of a group $G$ is number of elements in the group, that is $|G|$ \end{definition}
 
-\begin{definition}(Right Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{definition}(Right coset) Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
 \begin{center}
-$Hg = \{hg | h \in H\}$
+$Hg = \{hg \mid h \in H\}$
 \end{center}
  \end{definition}
 
-\begin{definition}(Left Co-set) Let $H \le G$, $g \in G$ Right co-set of $H$ in $G$ is defined as 
+\begin{definition}(Left coset) Let $H \le G$ and $g \in G$. The left cosets of $H$ in $G$ is defined as 
 \begin{center}
-$gH = \{gh | h \in H\}$
+$gH = \{gh \mid h \in H\}$
 \end{center}
 \end{definition}
 
 \begin{note}
-In general, it is not necessary that the left and right co-sets are the same.
+In general, it is not necessary that the left and right cosets are the same.
 \end{note}
 
-\begin{definition}(Normal SubGroup)
-Let $H \le G$, if we have 
+\begin{definition}(Normal Subgroup)
+Let $H \le G$. We say $H$ is a {\em Normal Subgroup} of $G$ if
 \begin{center}
 $\forall g \in G, Hg= gH$
 \end{center}
-then H is called a \em Normal SubGroup
 \end{definition}
 
 Let H be a Normal SubGroup of G. Divide G into co-sets of H and take one element from each of these as a representative of the set.
@@ -33,50 +32,75 @@ Let H be a Normal SubGroup of G. Divide G into co-sets of H and take one element
 This will be proved in later classes.
 
 \section{Group Action and Orbits}
-Let G be a SubGroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
+Let $G$ be a SubGroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
 
-\begin{note} $\alpha^g$ is the image of $\alpha$ in the permutation g. \end{note}
+\begin{notation} $\alpha^g$ is the image of $\alpha$ under the permutation $g$. 
+\end{notation}
 
-\begin{definition}(Orbit)
+Orbit of an element $\alpha$ in $G$ is the set of elements it gets mapped to under permutations in $G$. More formally,
+
+\begin{definition}(Orbit of $\alpha$ in $G$)
+The orbit of $\alpha$ in $G$ is defined as
 \begin{center}
-$\alpha^G = \{\alpha^g | g \in G\}$
+$\alpha^G = \{\alpha^g \mid g \in G\}$
 \end{center}
 \end{definition}
 
-\subsection{An Equivalence Realtion}
+Having defined orbits it is natural to partition $G$ into equi
+
+
+
+\subsection{An Equivalence Relation}
 Consider the following relation,
 \[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
 
 \begin{claim}
-The above realtion is an Equivalence Relation. 
+The relation 
+\[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
+is an equivalence relation. 
 \end{claim}
+\begin{proof}
 \textbf{Reflexive:} $e \in G$, where e is the identity element. Hence, $\alpha \backsim \alpha$ \\
 \textbf{Symmetric:} Let $\alpha \backsim \beta$. Thus $\exists g \in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$ \\
-\textbf{Transitive:} Let $\alpha \backsim \beta, \beta \backsim \gamma$. Thus $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permnutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$
+\textbf{Transitive:} Let $\alpha \backsim \beta, \beta \backsim \gamma$. By definition, $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permnutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$.
+\end{proof}
+
+Are there prmutations that map $\alpha$ to $\alpha$ ? i.e. Are there prmutations that stabilize $\alpha$ ?
 
 
-\begin{definition}(Stabilizer of $\alpha$)
+\begin{definition}(Stabilizer of $\alpha$.)
+The stabilizer of $\alpha$ in $G$ is 
 \begin{center}
-$G_{\alpha} = \{g | \alpha^g = \alpha\}$
+$G_{\alpha} = \{g \mid \alpha^g = \alpha\}$
 \end{center}
 \end{definition}
 
 \begin{observation}
-$G_{\alpha}$ is a SubGroup of G.
+$G_{\alpha}$ is a Subgroup of $G$.
 \end{observation}
 
-\subsection{Orbit Stabilizer Lemma}
-\[\forall \alpha \in [n] \|\alpha^G\|*\|G_{\alpha}\| = \|G\| \]
-\begin{claim}
-There exists a bijection from $\alpha^G$ to Co-sets of $G_{\alpha}$ in G.
-\end{claim}
-\begin{corollary}
-Number of Co-sets of $G_{\alpha}$ = $\|\alpha^G\|$.
-\end{corollary}
-And, since $G_{\alpha}$ forms a SubGroup, applying Lagrange's Theorem, we get the Orbit Stabilizer Lemma.
+\subsection{Orbit-Stabilizer Lemma}
+\begin{theorem}
+Let $G\leq S_n$. Then for any $\alpha \in [n]$,
+\begin{center}
+$|\alpha^G|*|G_{\alpha}| = |G|$ 
+\end{center}
+\end{theorem}
+\begin{proof}
+Since $G_{\alpha}$ forms a Subgroup of $G$, by Lagrange's Theorem,
+\begin{center}
+$\frac{|G|}{|G_{\alpha}|} = \mbox{number of distinct right cosets of $G_\alpha$ in $G$}$. 
+\end{center}
+In Lemma \ref{bijection} we show that There exists a bijection from $\alpha^G$ to cosets of $G_{\alpha}$ in $G$. Therefore, number of distinct right cosets of $G_{\alpha}$ = $|\alpha^G|$. 
+\end{proof}
 
-\textbf{Proof of Claim:}
-The idea is that the set of permnutations that send $\alpha$ to $\beta$, form a Co-set of permutations that send $\alpha$ to $\alpha$.
+
+\begin{lemma}
+\label{bijection}
+There exists a bijection $\eta$ from $\alpha^G$ to cosets of $G_{\alpha}$ in $G$.
+\end{lemma}
+\begin{proof}
+The idea is that the set of permutations that send $\alpha$ to $\beta$, form a coset of permutations that send $\alpha$ to $\alpha$.
 
 Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$.
 \begin{align*}
@@ -88,78 +112,88 @@ Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$.
  = & \{ g \in G | gh_{-1} \in G_{\alpha} \}\\
  = & \{ g \in G | g \in G_{\alpha}h \}\\
 \end{align*}
-
 \begin{exercise}
- Complete the above proof by showing a bijection between $\beta$'s and the Co-sets of $G_{\alpha}$.
+Complete the above proof by showing a bijection between $\beta$'s and the cosets of $G_{\alpha}$.
 \end{exercise}
+\end{proof}
+
+
+
 
 \section{Graph Automorphism and Graph Isomorphism}
 We will now define and analyse various problems related to GI.\\
-\textbf{Graph Isomorphism [GI]: } Given graphs $G_1, G_2$,\\
-Output  $1$ \\ if $\exists \sigma : V_1 \rightarrow V_2, \forall (u,v) \in E_1, (\sigma(u),\sigma(v)) \in V_2$\\
- else Output  $0$.
-
-\begin{definition}[Automorphism]
-A Graph G is said to be automorphic if it is non-trivially isomorphic to itself.
-\end{definition}
-
-\begin{definition}[$Aut(G)$]
-\[Aut(G) = \{\sigma \in S_n | G \cong \sigma(G)\}\]
-\end{definition}
+%\textbf{Graph Isomorphism [GI]: } Given graphs $G_1, G_2$,\\
+%Output  $1$ \\ if $\exists \sigma : V_1 \rightarrow V_2, \forall (u,v) \in E_1, (\sigma(u),\sigma(v)) \in V_2$\\
+% else Output  $0$.
+%
+%\begin{definition}[Automorphism]
+%A Graph G is said to be automorphic if it is non-trivially isomorphic to itself.
+%\end{definition}
+%
+%\begin{definition}[$Aut(G)$]
+%\[Aut(G) = \{\sigma \in S_n | G \cong \sigma(G)\}\]
+%\end{definition}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : A Generating Set for $Aut(G)$.
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH ISOMORPHISM [GI]}\\
+\textbf{Input} : A graph $X_1=(V_1,E_1)$ and $X_2=(V_2,E_2)$\\
+\textbf{Output} : Decide if $X_1\cong X_2$ or not.
+\end{minipage}
+}
+
+\fbox{
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM [GA]}\\
+\textbf{Input} : A graph $G=(X,E)$\\
+\textbf{Output} : A Generating Set for $Aut(X)$.
 \end{minipage}
 }
 
 \vspace{3mm}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : Decide if $Aut(G)$ is trivial or not.
+\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY [GR]}\\
+\textbf{Input} : A graph $X=(V,E)$\\
+\textbf{Output} : Decide if $Aut(X)$ is trivial or not.
 \end{minipage}
 }
 
 \vspace{3mm}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF ISOMORPHISMS}\\
-\textbf{Input} : A graph $G_1=(V_1,E_1),G_2=(V_2,E_2)$\\
-\textbf{Output} : The number of Isomorphisms from $G_1$ to $G_2$.
+\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF ISOMORPHISMS [\# GI]}\\
+\textbf{Input} : A graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$\\
+\textbf{Output} : The number of Isomorphisms from $X_1$ to $X_2$.
 \end{minipage}
 }
 
 \vspace{3mm}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF AUTOMORPHISMS}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : $\|Aut(G)\|$.
+\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF AUTOMORPHISMS [\# GA]}\\
+\textbf{Input} : A graph $X=(V,E)$\\
+\textbf{Output} : $|Aut(X)|$.
 \end{minipage}
 }
 
 \vspace{3mm}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING ISOMORPHISM}\\
-\textbf{Input} : A graph $G_1=(V_1,E_1),G_2=(V_2,E_2)$\\
-\textbf{Output} : A permutation that 'morphs' $G_1$ to $G_2$.
+\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING ISOMORPHISM [ISO]}\\
+\textbf{Input} : A graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$\\
+\textbf{Output} : An adjacency preserving bijection from $V_1$ to $V_2$.
 \end{minipage}
 }
 
 \vspace{3mm}
 
 \fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING AUTOMORPHISM}\\
-\textbf{Input} : A graph $G=(V,E)$\\
-\textbf{Output} : A non-trivial element of $Aut(G)$.
+\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING AUTOMORPHISM [AUT]}\\
+\textbf{Input} : A graph $X=(V,E)$\\
+\textbf{Output} : A non-trivial element of $Aut(X)$.
 \end{minipage}
 }
 
-\section{Informal Reduction} 
+\section{Informal notion of Reductions} 
 Given two problems $A,B$, we say that $A \le B$ (A reduces to B), if given a polytime algorithm for B, we can give out a polytimeytime algorithm for A.
 
 In the next lecture we will talk about the relation among the above defined problems.
