@@ -129,3 +129,5 @@ sympy-plots-for-*.tex/
 
 # vim
 *.swp
+
+main.pdf
