@@ -4,6 +4,7 @@
 \newcommand{\compiso}{{\sf COMPUTE-ISO}}
 \newcommand{\gi}{\mathcal{GI}}
 \newcommand{\ga}{\mathcal{GA}}
+\newcommand{\setstab}{ {\sf SETSTAB}}
 \section{Recap and Lecture overview}
 Let us denote by $\cgi$ the problem of finding whether there is a coloring
 preserving isomorphism.  In the previous few lectures we showed that $\cgi \le
@@ -281,7 +282,7 @@ Following are two natural question to ask.
 %to solve the problem once that is done.
 
 \begin{problem}[Problem 2 (Membership Testing)]
-	Given an element  g \in $G$ and an $H \le G$ expressed via a
+	Given an element  $g \in G$ and an $H \le G$ expressed via a
 	generating set $S$ (i,e. $\langle S \rangle = H$), test if $g \in H$
 	or not.
 \end{problem}
@@ -303,42 +304,123 @@ obtaining the size of orbit. This motivates the following question.
 	orbits of the action of $G$ on $[n]$.
 \end{problem}
 
-We show a different way
-of viewing a group wherein it will be clear that any generic group can be
-looked at as a permutation group. Consider an element $g \in G$. Consider any
-arbitrary ordering of the elements in $G$. Then the multiplication $G.g$ sends
-the elements of $G$ to a permutation of themselves. Hence, with each element
-$g \in G$, we can associate a permutation of the elements of $G$. If the order
-of the group, $|G| = k$, then the resulting group of permutations would be a
-sub-group of $S_{k}$. This defines the notion of a group acting on itself.
-Note that it is clear that the resulting set of permutations is a group since
-multiplication in original group translates to composition in the new group
+So far we were interested in groups which are subgroups of $S_n$. But how do
+we answer the same questions for general abstract groups ? We show a different
+way of viewing an abstract group can be looked at as a subgroup of a 
+permutation group. 
+
+\begin{claim}
+	An group $G$ acts on itself. 
+\end{claim}
+\begin{proof}
+Consider an element $g \in G$. Consider any arbitrary ordering of the elements
+in $G$. Then the multiplication of $G$ by $g$, $G.g$ sends
+the elements of $G$ to a permutation of themselves\footnote{The reason is that
+	the resulting
+operation acts bijectively on the elements. That is if $g_1 \ne g_2$ then
+$gg_1 \ne gg_2$. Also for any $h = g_ix$, there is a unique solution $x =
+hg_i^{-1}$ in $G$}. Hence, with each element
+$g \in G$, we can associate a permutation of the elements of $G$ in the
+following way : if $G = \{g_1,g_2,\ldots,g_k\}$. then for a $g_i \in G$,
+corresponding $\sigma_i \in S_k$ is defined as the one which satisfy
+$(g_ig_1,g_ig_2,\ldots,g_ig_n) = (g_{\sigma_i(1)}, g_{\sigma_i(2)}, \ldots, 
+g_{\sigma_i(k)})$
+
+Collect all the permutations associated with the group elements and call it
+$H$. Note that the resulting set of permutations is forms a group since
+multiplication in original group translates to composition in the new
+group\footnote{ The statement amounts to showing that for 
+	any $g_1,g_2 \in G$ with $\sigma_1, \sigma_2 \in H$ as
+	the corresponding elements defined by the map, 
+	$g_1g_2 \in G \iff \sigma_1 \circ \sigma_2 \in H$. This is because, 
+	\begin{align*}
+		g_1g_2 (g_1, g_2, \ldots, g_k) 
+		= & (g_1 g_{\sigma_2(1)}, g_1 g_{\sigma_2(2)}, \ldots, 
+		g_1 g_{\sigma_2(k)} \\
+		= & (g_{\sigma_1(\sigma_2(1))}, g_{\sigma_1(\sigma_2(2))},
+		\ldots, g_{\sigma_1(\sigma_2(k))})
+	\end{align*}
+}
 and the identity element in the original group is associated with the identity
-permutation and so on.\\\\ 
+permutation and so on.
 
+Hence if the order of the group is $k$, then the resulting group of
+permutations is a sub-group of $S_{k}$. This defines the notion of a group
+acting on itself.
+\end{proof}
+\begin{note}
+Hence from now on, we will assume that $G$ acts on an arbitrary set $\Omega$
+which we can think $[n]$.
+\end{note}
 
-We know, due to the orbit stabilizer lemma that for
-any $\alpha \in  G$ $$|\alpha ^{G}|*|G_{\alpha}| = |G|$$ This equation
-alongwith Problem 3 can be used for solving Problem 1 since if we can copute
-the orbit size of $\alpha$ then we can recurse for the sub-group $G_{\alpha}$. 
-\section{Problem 4}
-We know that $Aut(X)$ acts on $[n]$. This can also be visualized as $Aut(X)$ acting on the set of edges $E(X)$. This is because the automorphisms map edges to edges and non-edges to non-edges. Hence, any edge of the graph gets maped to another edge. Hence we can think of $Aut(X)$ as acting on the set of edges.\\\\
-Extending this idea, we can also think of $S_n$ which is a super-group of $Aut(X)$ as acting on the set of all potential edges given by $K = \{ \{i, j\} | i, j \in [n]$ and $i \le j\}$. 
+There is another motivation for studying this problem. We know, due to the 
+orbit stabilizer lemma that for any $\alpha \in  G$, $$|\alpha^{G}|\cdot
+|G_{\alpha}| = |G|$$ This gives us a recursive strategy to solve problem 1
+(Order computation). Suppose we can estimate $|\alpha^{G}|$ which is the size
+of the orbit, then to compute $|G|$, we are left with the smaller recursive
+subproblem of estimating the size of $|G_{\alpha}|$. 
 
-\begin{definition}
-	Set Stabilizer of $\Sigma$:
-	\begin{center}
-	$\cal{SETSTAB}$$(\Sigma) := \{ g \in G | \Sigma^{g} = \Sigma\}$
-	\end{center}
+\section{Set Stabilizer Problem}
+We know that $Aut(X)$ acts on $[n]$. This can also be visualized as $Aut(X)$
+acting on the set of edges $E(X)$. This is because the automorphisms map edges
+to edges and non-edges to non-edges. Hence, any edge of the graph gets maped
+to another edge. Hence we can think of $Aut(X)$ as acting on the set of
+edges.
+
+Extending this idea, we can also think of $S_n$ which is a
+super-group of $Aut(X)$ as acting on the set of all potential edges given by
+$K = \{ \{i, j\} | i, j \in [n]$ and $i \le j\}$. Note that both these actions
+are different in the following sense : permutations in $S_n$ need not map
+edges to edges and non-edges to non-edges and hence edge set is not preserved
+in the action, while permutations in $Aut(X)$ even
+though maps different vertices differently, preserves the edge set. In other
+words, the action of $Aut(X)$ on the set $E(X)$ does not changes $E(X)$ or it
+\emph{fixes} $E(X)$. This leads us to the fourth problem called the \emph{Set
+Stabilizer problem}
+
+\begin{definition}[Set Stabilizer of $\Sigma$]
+	Given a $G$ and a subset $\Sigma \subseteq \Omega$, 
+	\[ 	\setstab(\Sigma) = \{ g \in G ~|~ \Sigma^{g} = \Sigma\} \]
+
+	where $\Sigma^g = \{ \alpha^g ~|~ \alpha \in \Sigma \}$
 \end{definition}
-Given a group $G \le S_n$ which acts on a set $\Omega$, we define the Set Stabilizer of $\Sigma \subseteq \Omega$ as the set of all permutations in $G$ which map elements of $\Sigma$ to elements of $\Sigma$ and all non elements of $\Sigma$ to non-elements of $\Sigma$. Note that $\cal{SETSTAB}$$(\Sigma)$ is a sub-group of $G$. In the case of automorphism groups, the mapping is $G = S_n$, $\Omega = K$, $\Sigma = E(X)$ and $\cal{SETSTAB}$$(\Sigma)$$=$$Aut(X)$.\\\\
-Having set up all the notation, let us state the computational question we seek to answer:\\\\
-Given a group $G$ via its generating set $S$, a set $\Omega$ on which it acts and a subset $\Sigma \subseteq \Omega$, output a generating set for $\cal{SETSTAB}$$(\Sigma)$.
 
-\section{Solution to Problem 3}
-For completeness's sake, let us restate the question.\\
-{\bf Orbit Computation} : Given a group $G \le S_{n}$ (via its generating set $S$), compute the orbits of the action of $G$ on $[n]$.\\\\
-We can see that the orbits of the action of $G$ on $[n]$ partition the set into different sub-sets. Hence, what we would want to do is to compute the partition. We try to cast this problem as a graph-theoretic problem.
-The vertices are the numbers in the set $[n]$.
-If $j \in [n]$ lies in the orbit of $i \in [n]$, then there is an edge from $i$ to $j$. We know due to the manner in which orbits are constructed and the fact that they induce partitions that the final graph looks like a set of cliques. Hence, we can try to compute the graph partitially (by finding some edges) and make use of transitive closures for finding the rest of the edges in the graph until we reach a fixed point, at which point we can say that we have computed the partition and hence the orbits.  
+Given a group $G \le S_n$ which acts on a set $\Omega$, we define the Set
+Stabilizer of $\Sigma \subseteq \Omega$ as the set of all permutations in $G$
+which map elements of $\Sigma$ to elements of $\Sigma$ and all non elements of
+$\Sigma$ to non-elements of $\Sigma$. Note that $\setstab(\Sigma)$ is a
+sub-group of $G$. In the case of automorphism groups, the mapping is $G =
+S_n$, $\Omega = K$, $\Sigma = E(X)$ and
+$\setstab(\Sigma)$$=$$Aut(X)$.
 
+Having set up all the notation, let us state the computational question we
+seek to answer.
+\begin{problem}[Problem 4 (Set Stabilizer Problem)]
+Given a group $G$ via its generating set $S$, a set $\Omega$ on
+which it acts and a subset $\Sigma \subseteq \Omega$, output a generating set
+for the group $\setstab(\Sigma)$.
+\end{problem}
+
+By our previous discussion on $Aut(X)$ fixing the edges of $X$, we can
+conclude that $Aut(X)$ is the stabilizer of $E(X)$. Hence the problem $\ga$
+reduces to the problem $\setstab$.
+
+\section{Solution to Problem 3 (Orbit Computation)}
+For completeness's sake, let us restate the question. 
+
+{\bf Orbit Computation} : Given a group $G \le S_{n}$ (via its generating set
+$S$), compute the orbits of the action of $G$ on $[n]$.
+
+We can see that the orbits of the action of $G$ on $[n]$ partition the set
+into different sub-sets. Hence, we would want to compute the
+partition. We try to cast this problem as a graph-theoretic problem. We will
+see a solution to this in next lecture.
+
+%The vertices are the numbers in the set $[n]$.
+%If $j \in [n]$ lies in the orbit of $i \in [n]$, then there is an edge from
+%$i$ to $j$. We know due to the manner in which orbits are constructed and the
+%fact that they induce partitions, the final graph looks like a set of
+%cliques. Hence, we can try to compute the graph partitially (by finding some
+%edges) and make use of transitive closures for finding the rest of the edges
+%in the graph until we reach a fixed point, at which point we can say that we
+%have computed the partition and hence the orbits.  
