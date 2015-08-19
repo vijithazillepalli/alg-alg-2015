@@ -54,7 +54,7 @@ Draft---\today\ and forever
 
 \newpage
 \pagenumbering{roman}  % Roman numbering in intro portion.
-\include{front-page}
+\input{preface}
 \newpage
 \listoftodos
 
@@ -66,9 +66,8 @@ Draft---\today\ and forever
 \newpage
 \tableofcontents
 
-\pagenumbering{arabic}  % Arabic page numbering for lectures.
 \newpage 
-\input{preface.tex}
+\pagenumbering{arabic}  % Arabic page numbering for lectures.
 %\part{Introduction, Motivation and the Language}
 \newpage \setcounter{page}{1} 
 \input{lecture-01.tex}
@@ -77,4 +76,5 @@ Draft---\today\ and forever
 \input{lecture-04.tex}
 \input{Aug-10-11.tex}
 \input{Aug-12-14.tex}
+\input{Aug-17-18.tex}
 \end{document}
