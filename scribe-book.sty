@@ -130,7 +130,7 @@
 \newlistof{scribe}{scr}{\listofscribes}
 \newlistof{instructors}{instr}{\listofinstr}
 
-\newcommand{\Lecture}[5]{
+\newcommand{\Lecture}[6]{
 \newpage
 \setcounter{chapter}{#3}
 \setcounter{lecture}{#3}
@@ -162,7 +162,8 @@
 	\rule{0mm}{6mm}%
 	{\it Instructor:} #1 \\
 	{\it Scribe:}	#5\\
-	{\it Date:}     #2
+	{\it Date:}     #2 \\
+	{\it \bf Status:} #6
 }
 \hfill
 \begin{tabular}{c@{}}
