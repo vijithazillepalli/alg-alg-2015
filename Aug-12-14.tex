@@ -412,9 +412,18 @@ For completeness's sake, let us restate the question.
 $S$), compute the orbits of the action of $G$ on $[n]$.
 
 We can see that the orbits of the action of $G$ on $[n]$ partition the set
-into different sub-sets. Hence, we would want to compute the
-partition. We try to cast this problem as a graph-theoretic problem. We will
-see a solution to this in next lecture.
+into different subsets. Hence, we would want to compute the partitions. We
+cast this problem as a graph theoretic problem.
+
+Let $\Omega = [n]$. We construct a directed graph $X$ with $V(X) = \Omega$ and
+$E(X) = \{(\alpha, \beta) ~ | ~ \exists g \in G, \beta = \alpha^g \} \subseteq
+V(X) \times V(X)$.  We can have the edge $(\alpha, \beta) \in E(X)$ labelled
+by $g \in G$ if $\alpha^g = \beta$. To check if two elements $\alpha, \beta$
+lie in the same partition, it suffices to check if there is a directed path
+from $\alpha$ to $\beta$ (or from $\beta$ to $\alpha$). Hence the connected
+components of the graph corresponds to the orbits. In the next lecture, we
+will give another algorithm for solving this problem.
+
 
 %The vertices are the numbers in the set $[n]$.
 %If $j \in [n]$ lies in the orbit of $i \in [n]$, then there is an edge from
