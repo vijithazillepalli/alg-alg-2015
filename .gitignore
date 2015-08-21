@@ -130,5 +130,3 @@ sympy-plots-for-*.tex/
 # vim
 *.swp
 
-# ignore main pdf
-*main.pdf
