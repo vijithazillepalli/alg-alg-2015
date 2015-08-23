@@ -1,199 +1,92 @@
+\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit-Stabilizer Lemma}{Ameya Panse}{$\delta$}
 
-\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit Stabilizer Lemma}{Ameya Panse}{$\gamma$}
+We first start with some notations and definitions. Order of a group $G$ is number of elements in the group, that is $|G|$. Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
+$Hg = \{hg \mid h \in H\}$. If the mutliplication is on the left, we call it the left coset. That is, $gH = \{gh \mid h \in H\}$. In general, it is not necessary that the left and right cosets are the same.
+If $H$ is a group such that left and right cosets are the same element-wise, (that is, $\forall g \in G, Hg= gH$), $H$ is a said to be a normal subgroup of $G$.
 
-In this lecture we will understand and prove the Orbit Stabilizer Lemma, while defining the various terms associated with it.
-
-
-\begin{definition}(Order of a Group.) Order of a group $G$ is number of elements in the group, that is $|G|$ \end{definition}
-
-\begin{definition}(Right coset) Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
-\begin{center}
-$Hg = \{hg \mid h \in H\}$
-\end{center}
- \end{definition}
-
-\begin{definition}(Left coset) Let $H \le G$ and $g \in G$. The left cosets of $H$ in $G$ is defined as 
-\begin{center}
-$gH = \{gh \mid h \in H\}$
-\end{center}
-\end{definition}
-
-\begin{note}
-In general, it is not necessary that the left and right cosets are the same.
-\end{note}
-
-\begin{definition}(Normal Subgroup)
-Let $H \le G$. We say $H$ is a {\em Normal Subgroup} of $G$ if
-\begin{center}
-$\forall g \in G, Hg= gH$
-\end{center}
-\end{definition}
-
-Let H be a Normal SubGroup of G. Divide G into co-sets of H and take one element from each of these as a representative of the set.
-\begin{claim} These elements have a group structure among them. \end{claim}
-This will be proved in later classes.
+Let $H$ be a normal subgroup of $G$. Choose one element from each of these as a representative of the set (say $[g]$ denote the coset representative of the coset $Hg = gH$). These elements have a group structure among them. This requires a proof, which we will come to in the next few lectures.
 
 \section{Group Action and Orbits}
-Let $G$ be a SubGroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$.
 
-\begin{notation} $\alpha^g$ is the image of $\alpha$ under the permutation $g$. 
-\end{notation}
-
+Let $G$ be a Subgroup of $S_n$. Let $\alpha \in [n]$ and $g \in G$. We denote by $\alpha^g$ is the image of $\alpha$ under the permutation $g$. 
 Orbit of an element $\alpha$ in $G$ is the set of elements it gets mapped to under permutations in $G$. More formally,
 
-\begin{definition}(Orbit of $\alpha$ in $G$)
+\begin{definition}[\textbf{Orbit of $\alpha$ in $G$}]
 The orbit of $\alpha$ in $G$ is defined as
 \begin{center}
 $\alpha^G = \{\alpha^g \mid g \in G\}$
 \end{center}
 \end{definition}
 
-Having defined orbits it is natural to partition $G$ into equi
+This defines a natural relation among elements of $[n]$.
+$$\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta$$
 
+We check that this is an equivalence relation. $e \in G$, where e is the identity element. Hence, $\alpha \backsim \alpha$. Let $\alpha \backsim \beta$. Thus $\exists g \in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$. The relation $\backsim$ is an equivalence relation. For transitivity, let $\alpha \backsim \beta, \beta \backsim \gamma$. By definition, $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$.
 
-
-\subsection{An Equivalence Relation}
-Consider the following relation,
-\[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
-
-\begin{claim}
-The relation 
-\[\alpha \backsim \beta \leftrightarrow \exists g \in G, \alpha^g = \beta\]
-is an equivalence relation. 
-\end{claim}
-\begin{proof}
-\textbf{Reflexive:} $e \in G$, where e is the identity element. Hence, $\alpha \backsim \alpha$ \\
-\textbf{Symmetric:} Let $\alpha \backsim \beta$. Thus $\exists g \in G, \alpha^g = \beta$. Hence, $\alpha = \beta^{g^{-1}}$. Thus, $\beta \backsim \alpha$ \\
-\textbf{Transitive:} Let $\alpha \backsim \beta, \beta \backsim \gamma$. By definition, $\exists g_1, g_2 \alpha^{g_1} = \beta, \beta^{g_2} = \gamma$. By composition of permnutations, $(\alpha^{g_1})^{g_2} = \gamma$. Hence, $\alpha \backsim \gamma$.
-\end{proof}
-
-Are there prmutations that map $\alpha$ to $\alpha$ ? i.e. Are there prmutations that stabilize $\alpha$ ?
-
-
-\begin{definition}(Stabilizer of $\alpha$.)
-The stabilizer of $\alpha$ in $G$ is 
-\begin{center}
-$G_{\alpha} = \{g \mid \alpha^g = \alpha\}$
-\end{center}
-\end{definition}
-
-\begin{observation}
-$G_{\alpha}$ is a Subgroup of $G$.
-\end{observation}
+The stabilizer of $\alpha$ in $G$ is $$G_{\alpha} = \{g \mid \alpha^g = \alpha\}$$. This is the set of elements in $G$ which sends $\alpha$ to $\alpha$ itself. 
 
 \subsection{Orbit-Stabilizer Lemma}
-\begin{theorem}
+
+Is there any connection between the number of permutations in $G$ that fixes $\alpha$ and the number of elements to which $\alpha$ can be taken to? The orbit stabilizer lemma, which is an easy consequences of Lagrange's theorem gives a neat answer.
+
+\begin{lemma}[\textbf{Orbit-Stabilizer Lemma}]
 Let $G\leq S_n$. Then for any $\alpha \in [n]$,
-\begin{center}
-$|\alpha^G|*|G_{\alpha}| = |G|$ 
-\end{center}
-\end{theorem}
-\begin{proof}
-Since $G_{\alpha}$ forms a Subgroup of $G$, by Lagrange's Theorem,
-\begin{center}
-$\frac{|G|}{|G_{\alpha}|} = \mbox{number of distinct right cosets of $G_\alpha$ in $G$}$. 
-\end{center}
-In Lemma \ref{bijection} we show that There exists a bijection from $\alpha^G$ to cosets of $G_{\alpha}$ in $G$. Therefore, number of distinct right cosets of $G_{\alpha}$ = $|\alpha^G|$. 
-\end{proof}
-
-
-\begin{lemma}
-\label{bijection}
-There exists a bijection $\eta$ from $\alpha^G$ to cosets of $G_{\alpha}$ in $G$.
+$$|\alpha^G|*|G_{\alpha}| = |G|$$
 \end{lemma}
 \begin{proof}
-The idea is that the set of permutations that send $\alpha$ to $\beta$, form a coset of permutations that send $\alpha$ to $\alpha$.
+We quickly observe that $G_{\alpha}$ is a Subgroup of $G$. Indeed, identity belongs to $G_\alpha$ trivially. If $g$ and $g'$ both fixes $\alpha$, then so does $gg'$ and $g'g$. If $g$ fixes $\alpha$, then so does $g^{-1}$. Since $G_{\alpha}$ forms a Subgroup of $G$, by Lagrange's Theorem,
+$$\frac{|G|}{|G_{\alpha}|} = \mbox{number of distinct right cosets of $G_\alpha$ in $G$}$$ 
 
-Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$. Consider the map
-$\eta : \beta \rightarrow \{g \in G| \alpha^g = \beta \} $. We need to show that  $\{g \in G| \alpha^g = \beta \} $ is a right coset of $G_\alpha$ in $G$.
-\begin{align*}
-\{g \in G\mid \beta = \alpha^g\} &= \{ g \in G \mid \alpha^h = \alpha^g \}\\
- &=  \{ g \in G \mid \alpha^{gh^{-1}} = \alpha\}
-\end{align*}
-Thus $gh^{-1} \in G_{\alpha}$.
-\begin{align*}
-\{g \in G\mid \beta = \alpha^g\}  &= \{ g \in G \mid gh_{-1} \in G_{\alpha} \}\\
- &=  \{ g \in G \mid g \in G_{\alpha}h \}
-\end{align*}
-Observe that $\eta$ is well defined.
 
-\begin{exercise}
-Complete the above proof by showing that $\eta$ is both injective and surjective .
-\end{exercise}
+To complete the proof, it suffices to argue that the number if distinct cosets of $G_\alpha$ in $G$ is the size of the orbit of $\alpha$ under the action of $G$. We now show the bijection.
+
+Let $\beta \in \alpha^G$ via $h \in G$. That is,$\alpha^h = \beta$. Consider the map,
+$$\Gamma : \beta \rightarrow \{g \in G| \alpha^g = \beta \} $$
+
+We first show that this is well-defined map between the elements in the orbit of $\alpha$ to the cosets. For that, we first show that  $\{g \in G| \alpha^g = \beta \}$ is indeed a right coset of $G_\alpha$ in $G$. To argue this, it suffices to show that 
+\begin{align*}
+\Gamma(\beta) = \{g \in G\mid \beta = \alpha^g\} &= \{ g \in G \mid \alpha^h = \alpha^g \} = \{ g \in G \mid \alpha^{gh^{-1}} = \alpha\} \\
+ & = \{ g \in G \mid gh^{-1} \in G_{\alpha} \} = \{ g \in G \mid g \in G_{\alpha}h = G_\alpha h
+\end{align*}
+Thus $\Gamma$ is a function.
+
+We now show that the function $\Gamma$ is injective. Let $\beta$ and $\gamma$ be two different elements of the orbit of $\alpha$ via the group elements $h_{\beta}$ and $h_{\gamma}$. That is, 
+$$ \Gamma(\beta) = \{ g \in G \mid \alpha^g = \beta \} $$
+$$ \Gamma(\gamma) = \{ g \in G \mid \alpha^g = \gamma \} $$
+Indeed, these two sets cannot have an intersection since $\beta \neq \gamma$. Thus, $\Gamma(\beta) \ne \Gamma(\gamma)$.
+
+We now argue that the function $\Gamma$ is surjective. Consider any coset $C = G_\alpha g$ of $G_\alpha$ in $G$, where $g \in G$. We show that there is a $\beta \in \alpha^G$ such that $\Gamma(\beta) = C$. Indeed, define $\beta$ to be $\alpha^g$. Consider any $h \in G$ such that $\alpha^h = \beta$. 
+\jsay{Surjectivity proof to be completed}
 \end{proof}
 
-
-
-
 \section{Graph Automorphism and Graph Isomorphism}
-We will now define and analyse various problems related to GI.\\
+We define the problems that we are interested in, technically.
 
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH ISOMORPHISM [GI]}\\
-\textbf{Input} : A graph $X_1=(V_1,E_1)$ and $X_2=(V_2,E_2)$\\
-\textbf{Output} : Decide if $X_1\cong X_2$ or not.
-\end{minipage}
-}
-\vspace{3mm}
+\begin{problem}[\textsc{Graph Isomorphism Problem (GI)}]
+Given a graph $X_1=(V_1,E_1)$ and $X_2=(V_2,E_2)$, decide if $X_1\cong X_2$ or not.
+\end{problem}
+\begin{problem}[\textsc{Graph Automorphism Problem (GA)}]
+Given a graph $X=(V,E)$, compute a Generating Set for $Aut(X)$.
+\end{problem}
 
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH AUTOMORPHISM [GA]}\\
-\textbf{Input} : A graph $X=(V,E)$\\
-\textbf{Output} : A Generating Set for $Aut(X)$.
-\end{minipage}
-}
+\begin{problem}[\textsc{Graph Rigidity Problem (GR)}]
+Given a graph $X=(V,E)$, decide if $Aut(X)$ is trivial or not.
+\end{problem}
 
-\vspace{3mm}
+\begin{problem}[\textsc{Counting Isomorphisms (\#GI)}]
+Given a graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$, output the number of Isomorphisms from $X_1$ to $X_2$, in binary.
+\end{problem}
 
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH RIGIDITY [GR]}\\
-\textbf{Input} : A graph $X=(V,E)$\\
-\textbf{Output} : Decide if $Aut(X)$ is trivial or not.
-\end{minipage}
-}
+\begin{problem}[\textsc{Counting Automorphisms (\#GA)}]
+Given a graph $X=(V,E)$, compute the size of the automorphism group, $|Aut(X)|$, in binary.
+\end{problem}
 
-\vspace{3mm}
+\begin{problem}[\textsc{Computing the Isomorphism (ISO)}]
+Given a graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$, output an isomorphism map between $V_1$ and $V_2$ if it exists.
+\end{problem}
 
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF ISOMORPHISMS [\# GI]}\\
-\textbf{Input} : A graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$\\
-\textbf{Output} : The number of Isomorphisms from $X_1$ to $X_2$.
-\end{minipage}
-}
-
-\vspace{3mm}
-
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : NUMBER OF AUTOMORPHISMS [\# GA]}\\
-\textbf{Input} : A graph $X=(V,E)$\\
-\textbf{Output} : $|Aut(X)|$.
-\end{minipage}
-}
-
-\vspace{3mm}
-
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING ISOMORPHISM [ISO]}\\
-\textbf{Input} : A graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$\\
-\textbf{Output} : An adjacency preserving bijection from $V_1$ to $V_2$.
-\end{minipage}
-}
-
-\vspace{3mm}
-
-\fbox{
-\begin{minipage}{10 cm}\textbf{PROBLEM : COMPUTING AUTOMORPHISM [AUT]}\\
-\textbf{Input} : A graph $X=(V,E)$\\
-\textbf{Output} : A non-trivial element of $Aut(X)$.
-\end{minipage}
-}
-
-\section{Informal notion of Reductions} 
-Given two problems $A,B$, we say that $A \le B$ (A reduces to B), if given a polytime algorithm for B, we can give out a polytimeytime algorithm for A.
-
-In the next lecture we will talk about the relation among the above defined problems.
-
-
+We use the notion of polynomial time reducibility between two problems. Given two problems $A,B$, we say that $A \le B$ (A reduces to B), if given a polynomial time (in terms of input size $n$) algorithm for $B$, we can give out a polynomial time algorithm for $A$. We quickly observe some easy relationship among these problems. Indeed, if we can solve $GA$, we can solve $GR$ as well. Given a graph $X$, to check if it is rigid, it is only a matter of checking if there is a nontrivial element in the generating set for the group $Aut(X)$. Hence we conclude that 
+$GR \le GA$. The same is the case for $GR$ and $\#GA$ as well. That is, $GR \le \#GA$. Similarly, if we can compute the isomorphism, we can decide it as well. Trivially, $GI \le ISO$. It is interesting to think about whether $\#GA$ can be done using $\GA$. That is, given the generating set of a permutation group (that is, subgroup of $S_n$), can we compute the size of the generated group?
 
 \Lecture{Jayalal Sarma}{August, 11 2015}{06}{A Closer Look at Graph
 Isomorphism and Automorphism}{Ameya Panse}{$\gamma$}
@@ -214,7 +107,6 @@ $(u,v) \in V(X_1)\times V(X_2)$,  $(u,v) \in E(X_1)$ if and only if $(\sigma(u),
  and for every $u \in V(X_1),\Psi_1(u) = \Psi_2(\sigma(u))$ .
 
 \section{Relationships Among the Problems}
-
 
 \subsection{GI $\le$ CGI}
 GI trivially reduces to CGI.	Set $c=1$, and color all the vertices with the same color.
