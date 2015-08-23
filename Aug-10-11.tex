@@ -1,4 +1,4 @@
-\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit Stabilizer Lemma}{Ameya Panse}
+\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit Stabilizer Lemma}{Ameya Panse}{Gamma}
 In this lecture we will understand and prove the Orbit Stabilizer Lemma, while defining the various terms associated with it.
 
 
@@ -102,18 +102,21 @@ There exists a bijection $\eta$ from $\alpha^G$ to cosets of $G_{\alpha}$ in $G$
 \begin{proof}
 The idea is that the set of permutations that send $\alpha$ to $\beta$, form a coset of permutations that send $\alpha$ to $\alpha$.
 
-Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$.
+Let $\beta \in \alpha^G$ and $h \in G,\alpha^h = \beta$. Consider the map
+$\eta : \beta \rightarrow \{g \in G| \alpha^g = \beta \} $. We need to show that  $\{g \in G| \alpha^g = \beta \} $ is a right coset of $G_\alpha$ in $G$.
 \begin{align*}
-\text{Consider} & \{g \in G| \beta = \alpha^g\}
-\text{  We have to show that this is a Co-set}\\
- = & \{ g \in G | \alpha^h = \alpha^g \}\\
- = & \{ g \in G | \alpha^{gh^{-1}} = \alpha\}\\
-\text{Thus } &  gh^{-1} \in G_{\alpha}\\
- = & \{ g \in G | gh_{-1} \in G_{\alpha} \}\\
- = & \{ g \in G | g \in G_{\alpha}h \}\\
+\{g \in G\mid \beta = \alpha^g\} &= \{ g \in G \mid \alpha^h = \alpha^g \}\\
+ &=  \{ g \in G \mid \alpha^{gh^{-1}} = \alpha\}
 \end{align*}
+Thus $gh^{-1} \in G_{\alpha}$.
+\begin{align*}
+\{g \in G\mid \beta = \alpha^g\}  &= \{ g \in G \mid gh_{-1} \in G_{\alpha} \}\\
+ &=  \{ g \in G \mid g \in G_{\alpha}h \}
+\end{align*}
+Observe that $\eta$ is well defined.
+
 \begin{exercise}
-Complete the above proof by showing a bijection between $\beta$'s and the cosets of $G_{\alpha}$.
+Complete the above proof by showing that $\eta$ is both injective and surjective .
 \end{exercise}
 \end{proof}
 
@@ -122,17 +125,6 @@ Complete the above proof by showing a bijection between $\beta$'s and the cosets
 
 \section{Graph Automorphism and Graph Isomorphism}
 We will now define and analyse various problems related to GI.\\
-%\textbf{Graph Isomorphism [GI]: } Given graphs $G_1, G_2$,\\
-%Output  $1$ \\ if $\exists \sigma : V_1 \rightarrow V_2, \forall (u,v) \in E_1, (\sigma(u),\sigma(v)) \in V_2$\\
-% else Output  $0$.
-%
-%\begin{definition}[Automorphism]
-%A Graph G is said to be automorphic if it is non-trivially isomorphic to itself.
-%\end{definition}
-%
-%\begin{definition}[$Aut(G)$]
-%\[Aut(G) = \{\sigma \in S_n | G \cong \sigma(G)\}\]
-%\end{definition}
 
 \fbox{
 \begin{minipage}{10 cm}\textbf{PROBLEM : GRAPH ISOMORPHISM [GI]}\\
@@ -204,48 +196,44 @@ In the next lecture we will talk about the relation among the above defined prob
 \Lecture{Jayalal Sarma}{August, 11 2015}{06}{A Closer Look at Graph Isomorphism and Automorphism}{Ameya Panse}
 
 \section{Another related Problem}
-Here the vertex set is divided into $c$ color classes by the function 
-\begin{center} $\Psi : V(X) \rightarrow [c]$,\\
- where $i \in [c]$ denotes a color and\\
- the $i^{th}$ color class is $\Psi^{-1}(i)$.
-\end{center}
+Let $X=(V,E)$ be a graph. Consider the vertex set 
+$V$ to be divided into $c$ color classes. That is there exists a function $\Psi : V(X) \rightarrow [c]$,
+where $i \in [c]$ denotes a color and the $i^{th}$ color class is $\Psi^{-1}(i)$.
 
-\textbf{Colored Graph Isomorphism [CGI]:} Given two $C$-colored Graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$\\
-Output $1$ \\
-if $\exists \sigma : V(X_1) \rightarrow V(X_2)$ such that 
-$\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $\\
- and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$ .
+We say a graph $X=(V,E)$ is {\em $C$-colored} if
+the vertex set $V$ is partitioned into $C$ color classes.
 
-\section{Relations Among the Problems}
+Consider the colored version of GI,
+
+\textbf{Colored Graph Isomorphism [CGI]:} Given two $C$-colored Graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$
+decide if there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that for all
+$(u,v) \in V(X_1)\times V(X_2)$,  $(u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $
+ and for every $u \in V(X_1),\Psi_1(u) = \Psi_2(\sigma(u))$ .
+
+\section{Relationships Among the Problems}
+
 
 \subsection{GI $\le$ CGI}
-	Set $c=1$, and color all the vertices with the same color.
+GI trivially reduces to CGI.	Set $c=1$, and color all the vertices with the same color.
+
 
 \subsection{CGI $\le$ GI}
-Given $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$.\\
-\textbf[Gadget] : $\forall u \in V(X_1)$ such that $u \in \Psi_1^{-1}(i)$:
+Given $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ construct graphs $X_1'$ and $X_2'$ such that 
+\[ ((X_1,\Psi_1),(X_2,\Psi_2))\in CGI \iff (X_1',X_2')\in GI \]
+The construction of $X_1'$ and $X_2'$ are as follows :
+For every vertex $u \in V(X_1)$ such that $u \in \Psi_1^{-1}(i)$:
 \begin{enumerate}
 \item Add $ni$ extra vertices to $X_1$.
-\item Add edges from each of the extra vertices to u to get the graph $X_1'$.
+\item Add edges from each of the extra vertices to $u$.
 \end{enumerate}
 Do the same for $(X_2,\Psi_2)$ to get $X_2'$.\\
-Now run $GI$ on $X_1',X_2'$.
 
-\textbf{Correctness :}
-
-\textbf{Forward Direction:}
-
-Let $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$. To show that $X_1' \cong X_2'$.
-
-Hence $\exists \sigma : V(X_1) \rightarrow V(X_2)$ such that 
-$\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ 
-if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $ and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$. Additionally map the extra vertices added correspondingly. Thus $X_1' \cong X_2'$.
-
-
-\textbf{Backward Direction:}
-
-
-Let $X_1' \cong X_2'$. To show that $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.\\
+\begin{claim}
+$((X_1,\Psi_1),(X_2,\Psi_2))\in CGI \iff (X_1',X_2')\in GI$
+\end{claim}
+\begin{proof}
+($\Rightarrow$)Let $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$. To show that $X_1' \cong X_2'$. Since  $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$ we know that there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that $\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $ and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$. Additionally map the extra vertices added correspondingly. Thus $X_1' \cong X_2'$.\\
+($\Leftarrow$)Let $X_1' \cong X_2'$. To show that $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.\\
 $X_1' \cong X_2'$, hence $ \exists \sigma : V(X_1') \rightarrow V(X_2'), \forall (u,v) \in E(X_1'), (\sigma(u),\sigma(v)) \in E(X_2')$.\\
 If possible let there exist $ u \in v(X_1), u \in \Psi^{-1}(i)$ such that $\sigma(u) \notin V(X_2)$. That is, u is mapped to one of the extra vertices. But $u \in X_1'$ and $deg(u) \ge ni$, whereas degree of any extra vertex is 1. Hence, we have a contradiction.
 
@@ -255,44 +243,51 @@ And, $\sigma(u) \in \Psi_2^{-1}(j) \implies n(j+1)$ \textgreater $deg(u) \ge nj$
 
 Hence, $\sigma(u) \in V(X_2) , \sigma(u) \in \Psi_2^{-1}(i)$. Thus, $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.
 
-\textbf{Time Complexity :} We have made only one query to GI. Hence, the reduction is polytime.
+We have made only one query to GI. Hence, the reduction is polytime.
+\end{proof}
 
-\textbf{Hence Proved.}
+
 
 \subsection{Computing Isomorphism $\le GI$}
-Given $X_1,X_2$ Output a permutation that morphs $X_1$ to $x_2$.
+We show that computing isomorphism reduces to colored graph isomorphism. As $CGI\leq GI$ we have $Computing Isomorphism \le GI$.  Given $X_1,X_2$ Output a permutation that maps $X_1$ to $x_2$.
 The Reduction is as follows:
 \begin{enumerate}
 \item Check if $X_1 \cong X_2$. If NO, end.
 \item For each vertex $i \in V_1$ 
 	Color $i$ with color $C_i$.
 	\begin{itemize}
-	\item Color $j \in V_2 -$ [Already Colored Vertices] with $C_i$, temporarily.
-	\item Query to CGI.
-	\item Repeat on $j$ untill you get a yes answer. Fix color of $j$ as $C_i$.
+	\item Color $j \in V_2$ that is not already colored with $C_i$, temporarily.
+	\item Query CGI to check if $X_1\cong X_2$.
+	\item Repeat on $j$ untill you get a "yes" answer. Fix color of $j$ as $C_i$.
 	\end{itemize}
 Ouput the permutation.
 \end{enumerate}
 Here each vertex is colored with a different color, and hence we have a permutation.\\
 Also, if the graphs are isomorphic, then there will exists an $j \in V_2$, such that we get a yes answer.
 
-\textbf{Time Complexity:} We make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query to $GI$.\\Thus the reduction is polytime.
-
-
+Observe that we make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query to $GI$. Thus the reduction is polytime.
 
 
 \subsection{GI $\le$ GA}
-Take $X = X_1 \cup X_2$.\\
-Let S be the generating set of $Aut(G)$.
+Take $X = X_1 \cup X_2$. We need to construct a graph $G$ such that the generating set $S$ of $Aut(G)$ enables to decide if $X_1\equiv X_2$.
+
 \begin{claim}
-$X_1 \cong X_2$ if and only if $\exists \sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$.
+$X_1 \cong X_2$ if and only if there exists a $\sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$.
 \end{claim}
 
-For the time being assume that the two graphs are connected graphs.\\
-\textbf{Forward Direction} Assume that $X_1 \cong X_2$.\\
-	$\exists \tau$ which is an isomorphism between $X_1,X_2$. $\tau \in Aut(X)$. Hence, there is a $\sigma$ that maps a vertex in $X_1$ to a vertex in $X_2$.\\
-\textbf{Backward Direction :} $\exists \sigma$ that maps $u \in X_1$ to $\sigma(u) \in X_2$. Let $v \in X_1$ be such that $\sigma(u) \in X_1$. Since $X_1$ is connected $u,v$ are connected. But $\sigma(u) \in X_2, \sigma(v) \in X_1$ are not connected. Hence, we have a contradiction. Thus, $\sigma$ maps all vertices in $X_1$ to $X_2$. Thus $X_1 \cong X_2$.
+\begin{proof}
+\textbf{Case 1 : $X_1$ and $X_2$ are connected.}
 
-In case the two are not connected, add an extra vertex to both the graphs that is adjeacent to all the vertices in the correcponding graphs. Since, the new vertices hace degree n, they can be mapped only to each other.\\
-\textbf{Hence Proved.}
+($\Rightarrow$) Suppose $X_1 \cong X_2$. Then there exists a $\tau$ which is an isomorphism from $X_1,$ to $X_2$. $\tau \in Aut(X)$. Hence, there is a $\sigma$ that maps a vertex in $X_1$ to a vertex in $X_2$.\\
+
+($\Leftarrow$) Let there exist a $\sigma\in S$ such that $\sigma$ maps $u \in X_1$ to a vertex in $X_2$. Let $v \in X_1$ be such that $\sigma(u) \in X_1$. Since $X_1$ is connected $u,v$ are connected. But $\sigma(u) \in X_2, \sigma(v) \in X_1$ are not connected which is a contradiction. Therefore for $\sigma\in S$, $\sigma$ maps all the vertices in $X_1$ to $X_2$. Thus $X_1 \cong X_2$.
+
+\textbf{Case 2 : $X_1$ and $X_2$ are not connected.}
+
+In case the two are not connected, add an extra vertex to both the graphs that is adjacent to all the vertices in the corresponding graphs. Since, the new vertices have degree $n$, they can only be mapped to each other.
+\end{proof}
+
+Thus GI $\le$ GA.
+
+
 
