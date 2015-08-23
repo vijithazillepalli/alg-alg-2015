@@ -1,13 +1,283 @@
-\Lecture{Jayalal Sarma}{*Month, XX 2015*}{42}{*Title of Lecture*}{*Student name*}
+\Lecture{Jayalal Sarma}{August, 17 2015}{9}{Set Stabilizers and Point-wise Stabilisers}{Aditi Raghunathan}{$\delta$}
 
-\begin{note}
-	Enter date, lecture number, title and your name. 
-\end{note}
-\jsay{This is a sample comment}
+\section{Recap and Exercise}
+In the previous class, we were looking at ways to solve $\cal{AUT}(X)$.  We looked at $4$ different problems in this context. Consider \emph{Problem 3} of finding the orbit. We are interested in computing the size of the orbit of  $\alpha \in G$. Since some of the students expressed difficulty in coming up with an algorithm, we decide to state the algorithm and leave the correctness proofs as an exercise.
 
-Check {\tt sample-scribe.tex} for general LaTeX and enviornment usage.
+\subsection{Orbit Computation}
+The following is an algorithm to calculate the orbit of $\alpha$
+
+\begin{algorithm}
+\caption{Algorithm for Orbit Computation}\label{orbit}
+\label{alg:orbit_alg}
+\begin{algorithmic}[1]
+\Procedure{Orbit Computation}{ Input : Generating set $S$ }
+\State $\Delta = \lbrace \alpha \rbrace$
+
+\Repeat{}
+\State $\Delta^1 = \Delta$
+\For {$g \in S$ and $\delta \in \Delta$}
+\State $\Delta = \Delta^1 \cup \lbrace \delta^g \rbrace$
+\EndFor
+\Until {$\Delta^1 \neq \Delta$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+The algorithm was developed as step by step in the lecture which also developed its correctness. However, the formal proofs are left as an exercise. To be precise, it is left as an exercise to the reader to do the following : (1)~Prove that Algorithm \ref{alg:orbit_alg} eventually terminates. (2)~Prove that Algorithm \ref{alg:orbit_alg} terminates with $\Delta$ = Orbit($\alpha$)
+(3)~Calculate the running time of Algorithm \ref{alg:orbit_alg}.
+
+%\subsection{Algorithm 2 to compute orbit}
+The problem can be viewed in terms of the graph. Consider the following definition of a directed graph $X$. $V(X)$, the vertex set of the graph $G$ is equal to the set $\Omega$. 
+$E(X) = \lbrace (\alpha, \beta) \mid \exists g \in S \text{ such that } \alpha^g = \beta \rbrace $
+
+The key observation is that, if there is a path in $X$ from $\alpha$ to $\gamma$ then $\gamma$ is in the orbit of $\alpha$.
+Finding the orbit of $\alpha$ is equivalent to computing the 
+transitive closure of the graph $X$. It is left as an exercise to the reader to complete the details of the above algorithm including rigorous proof of correctness.
+
+\section{Set Stabilisers Problem}
+
+We recall the problem that we defined in the last lecture. Given group $G \leq S_n$ and a set $\Sigma \subseteq \Omega$, where $G$ acts on $\Omega$ and $|\Omega| = n$, we are interested in computing the generating set of the following group :
+\begin{align}
+\mathcal{SETSTAB} (\Sigma) = \lbrace g \in G \mid \Sigma^g = \Sigma \rbrace \text{ where }\\
+\Sigma^g = \lbrace \alpha^g \mid \alpha \in \Sigma \rbrace 
+\end{align}
+
+As we saw in the last lecture, solving the set stabiliser problem gives an algorithm for obtaining $\mathcal{AUT}(X)$.
+
+We now define a variant of the problem called the \textit{Point Stabiliser Problem}
+
+\paragraph{Point-wise Stabiliser Problem}
+\begin{align}
+\mathcal{POINTSTAB} (\Sigma) = \lbrace g \in G \mid \forall \alpha \in \Sigma, \alpha^g = \alpha \rbrace
+\end{align}
+$\mathcal{POINTSTAB}$ is \emph{easier} to solve than $\mathcal{SETSTAB}$
+The Point Stabilizer Problem is to obtain a generating set for the
+group $\mathcal{POINTSTAB} (\Sigma)$. It is easy to check that $\mathcal{POINTSTAB} (\Sigma)$ is indeed a group.
+
+In the reduction from $\mathcal{GA}$ to $\mathcal{GI}$, we defined
+a tower of sub-groups  where
+\begin{align}
+G^{(i)} = \lbrace g \in G \mid \forall 1 \leq j \leq i j^g = j \rbrace 
+\end{align}
+Observe that each tower here is a point-wise stabiliser of $\lbrace 1, 2, \cdots i \rbrace$
+For each $G^{(i)}$, we have \\
+$\Omega = \lbrace 1, 2, \cdots n \rbrace$  and $\Sigma = \lbrace 1, 2, \cdots i \rbrace$ 
+
+Here is a general strategy for solving point-wise stabilizer problem. Without loss of generality, as above, assume that $\Sigma$ is the first $i$ elements of $\Omega$. The problem to solve is precisely the following, given the generators $S$ of a group $G$, find the generators of $G^{(i)}$. A natural attack on the problem is stepwise, given the generating set of $G$, find that of $G^{(1)}$, and then using that to find the generating set of $G^{(2)}$ and so on. In $i$ levels of this recursion, we will be done.
+
+The key problem that we identified for solving the order computation as well as point-stabilizer problem is the following. Given the generating set of $G^{(i-1)}$, find that of $G^{(i)}$. This is exactly what we will do in the next section.
+
+\subsection{Schreier's Lemma}
+
+Schrier gave a clever way of completing our task. If in addition to the generating set of $G^{i-1}$, we are also given the coset representatives of $G^{i}$ as a subgroup in $G^{(i-1)}$.
+
+In the following, we will call $G$ to be the bigger group ($G^{(i-1)}$) and $H$ to be the subgroup $G^{(i-1)}$. Let $R$ be set of right coset representatives of the subgroup $H$ in $G$. 
+The following lemma gives a direct way of writing the generating set for $H$. 
+
+\begin{lemma}[\textbf{Schreier's Lemma}]
+Let $S$ be the generating set of $G$ and $R$ be 
+the set of coset representatives of $H$.
+%\begin{align}
+$S' = \lbrace r_1 g r_2^{-1} \mid r_1, r_2 \in R, g \in S \rbrace$ 
+$S^\prime \cap H$ forms a generating set for $H$.
+%\end{align}
+\end{lemma}
+%\begin{remark}
+%\label{rem1}
+Before we prove this, notice that $R$ contains the identity of the groups. Hence the Set $S \subseteq S'$. By taking $S' \cap H$, we are extracting the elements in $S'$ which are also in $H$. In order to do this, we do need a membership testing method for $H$. In our context, $H$ is $G^{(i)}$ and has an easy membership test given an element $g \in G^{(i-1)}$.
+%\end{remark}
+
+\begin{proof}
+
+Define, 
+$$RS = \lbrace rs \mid r \in R, s \in S \rbrace$$
+
+Since each element in $RS$ can be written as $(r s r_1^{-1}) r_1$, we immediately get that,
+\begin{equation}
+RS \subseteq S^\prime R
+\label{thm:obs1}
+\end{equation}
+
+Let $\gen{S^\prime}$ denotes the group generated by $S^\prime$. By definition, $S^\prime R \subseteq \gen{S^\prime}R$. From \ref{thm:obs1}, we have $RS \subseteq \langle S^\prime \rangle R$
+Therefore, $RSS \subseteq \gen{S^\prime} RS$, and hence $RSS \subseteq \gen{S^\prime} RS$. Repeating this process, we have
+$\forall t \geq 0, RS^t \subseteq \langle S^\prime \rangle R$
+
+Since $R$ contains the identity, and $S$ generates $G$, $G \subseteq \bigcup\limits_{i=1}^k RS^t$ for some fixed finite $k$. In fact, we will see later that $k \le |G|$, but we do not need this bound here.
+
+We argue that $H \le \gen{S^\prime}$. Sinec $G \subseteq \langle S^\prime \rangle R$, if $\langle S^\prime \rangle$ does not contain $H$, $\langle S^\prime \rangle R $ cannot cover $G$ Hence proved by contradiction. Therefore, $S^\prime \cap H$ generates $H$.
+\jsay{To be completed, why should it exactly generate $H$?}
+\end{proof}
 
 
-\Lecture{Jayalal Sarma}{*Month, XX 2015*}{43}{*Title of Lecture*}{*Student name*}
 
-\section{Add details of next lecture}
+\Lecture{Jayalal Sarma}{August, 18 2015}{10}{Point stabiliser algorithms
+continued }{Aditi Raghunathan}{$\alpha$}
+
+%%%%%%%%%%%%% Length of the generating sequence %%%%%%%%%%%%%%%
+\section{Bounds on length of generating sequence}
+In this section, we take a small detour to 
+understand the length of the generating sequence of
+element $k$ of any $g \in G$ given the generating set $S$ of $G$.
+
+\begin{proposition}
+$k \leq |G|$
+\end{proposition}
+\begin{proof}
+We prove the statement by contradiction. 
+
+Let the smallest length of the generating sequence of 
+some element $g_1 \in G$ be $|G| + m$, $m>0$.
+\begin{align}
+g_1 = \prod\limits_{i=1}^{|G|+m} a_i
+\end{align}
+
+Consider partial products of the sequence above : 
+\begin{align}
+S_l = \prod\limits_{i=1}^{l} a_i
+\end{align}
+
+There are $|G|+m$ partial products.
+There are only $G$ possible values for $S_i$ 
+By Pigeon Hole Principle, we have the following :
+\begin{align}
+\label{eqn:php}
+\exists l_1, l_2 ~~ l_1 < l_2 ~~ S_{l_1} = S_{l_2}
+\end{align}
+
+This means, we can remove the elements of the generating
+sequence between $l_1$ and $l_2$, which will generate the
+same element $g_1$ (From Equation ~\ref{eqn:php})
+
+Hence we get a shorter generating sequence for $g_1$ 
+which contradicts the original claim.
+Therefore, by contradiction, we get that $k \leq |G|$
+\end{proof}
+
+A natural follow question is whether this bound is tight.
+
+%%%%%%%%%%%%%%%%%%% Lower bound on the size %%%%%%%%%%%%%%%%
+
+\begin{proposition}
+There are groups $G$ with generating sets $S$ where 
+there are elements in the group which have generating
+sequences as large as $|G|$ 
+\end{proposition}
+\begin{proof}
+
+To claim the above, we give an example of $G$, $S$
+and $g \in G$ such that $g$ has a generating sequence of 
+length $O(|G|)$
+
+$G \subseteq S_n$
+
+Let $p_1, p_2, \cdots p_m$ be the first $m$ distinct prime numbers
+such that $n = p_1p_2 \cdots p_m$
+
+Consider $a \in S_n$ 
+\begin{align}
+a = (1, 2, \cdots p_1) (p_1+1, p_1+2 \cdots p_2) \cdots (\cdots)
+\end{align}
+$a$ is the product of disjoint cycles of length $p_i$.
+
+Let $G$ be the group generated by $\lbrace a \rbrace$.
+
+Clearly, if $a^M = \text{id}$, we can say $M = \prod\limits_{i=1}^n p_i$
+
+The element $a^{M-1}$ cannot have a shorter representation than 
+as the product of $a$ $M-1$ times.
+
+From prime number theorem (some rearrangement of the statement),
+\begin{align}
+m \geq \Omega(\frac{p_m}{\log p_m}) \\
+n = \sum\limits_{i = 1}^m p_i \leq 1 + 2 + 3 \cdots + p_m \leq p_m^2 \\
+p_m \geq \sqrt n
+\end{align}
+Hence, 
+\begin{align}
+m \geq \Omega(\frac{\sqrt n}{\log \sqrt n}) \\
+n \geq 2^m - 1 ~\text{(Primes after $2$ are greater than $2$)} \\ 
+n \geq 2^{\frac{c \sqrt n}{\log n }} - 1 \\
+\end{align}
+
+Clearly in this example, we have an element that
+cannot be expressed as an explicit product of polynomial
+length. 
+
+\begin{remark}
+The above does not rule out the existence of a polynomial 
+length expression or computation for the element. 
+
+For example, $a^{M-1}$ can be expressed in terms of
+$a$ through repeated squaring.
+\end{remark}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We now return to the algorithm to compute the generators
+of a sub group. 
+Using Schreir's lemma, we concluded that it's sufficient 
+to compute the set $S^\prime \cap H$. 
+
+Before getting into the algorithm for the same, let's first
+look at the size of the set that is generated. 
+
+By the definition of the set $S^\prime$, we can only say
+\begin{align}
+|S^{\prime}| \leq |S| |R|^2 
+\end{align}
+If we have to implement this recursively, we see
+that each level we are incurring a $|R|^2$ term. 
+Hence 
+\begin{align}
+|S^{\prime}| \leq |S| l_1^2 \cdot l_2^2 \cdots 
+\end{align}
+
+We need to carefully control the size of the generating
+set $S^\prime$ at each level.
+
+\subsection{REDUCE algorithm}
+
+Consider $\pi, \psi \in S^\prime$ such that
+$$1^\pi = 1^\psi = k$$
+
+\textbf{Proposal} : Replace $\lbrace \pi, \psi \rbrace$ 
+with $\lbrace \pi, \pi^{-1} \psi \rbrace $. 
+
+We can observe the following : 
+\begin{enumerate}
+
+\item We can still obtain all the elements because $a^{\psi}$ can
+      be obtained by $(a^{\pi})^{\pi^{-1} \psi}$
+
+      Observe that we also do not add any new elements 
+      in the process as well. Hence by this change, the 
+      sub group that is generated remains the same.
+
+\item Doing the above process of replacement for every pair
+      of elements that map $1$ to the same element, 
+      we end up with elements that all map $1$ to different 
+      elements (except those that fix $1$).
+
+\item $\pi^{-1}\psi$ fixes $1$. Hence all the newly added elements
+      fix $1$
+
+
+\item We can repeat the same procedure for $2, 3, \cdots n$ 
+
+\end{enumerate}
+
+\begin{claim}
+At the end of the above procedure, for every pair $(i,j)$, we
+have exactly one $\pi$ such that $i^{\pi} = j$.
+\end{claim}
+The proof of the above claim is left as an exercise
+to the reader.  
+\begin{corollary}
+We have a bound on the size of $S^\prime$
+\begin{align}
+|S^\prime| \leq n^2
+\end{align}
+
+\end{corollary}

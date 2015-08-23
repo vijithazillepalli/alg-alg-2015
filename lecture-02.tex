@@ -1,5 +1,4 @@
-\Lecture{Jayalal Sarma}{Aug 4, 2015}{2}{Algebraic Approach to
-Primality Testing}{K Dinesh}
+\Lecture{Jayalal Sarma}{Aug 4, 2015}{2}{Algebraic Approach to Primality Testing }{K Dinesh}{$\delta$}
 In this lecture, we will see an algebraic approach to solving a fundamental
 problem in Number Theory.
 \section{Application to Number Theory}
@@ -141,12 +140,9 @@ Fermat's Little Theorem is a special case of Agarwal-Biswas theorem.
 	This completes the inductive case. 
 \end{proof}
 
-This shows that checking if the polynomial $p_N(z)$ is a zero polynomial is an
-if and only if check for primality of $N$. There are two naive ways to do it.
-One is to evaluate it at all the numbers from $1$ to $N$ or to expand out the
-polynomial and see if it is identically zero. But both operations are costly.
+This shows that checking if the polynomial $p_N(z)$ is a zero polynomial is an if and only if check for primality of $N$. 
+So checking primality of a number now boils down to checking if a polynomial is identically zero or not. This is a fundamental problem of polynomial identity testing. We will be discussing about polynomial identity testing and AKS algorithm in our next theme.
 
-So checking primality of a number now boils down to checking if a polynomial
-is identically zero or not. This is a fundamental problem of polynomial
-identity testing. We will be discussing about polynomial identity testing and 
-AKS algorithm in our next theme.
+\begin{remark}
+One could consider two possible definitions of a polynomial being identically zero and they are not equivalent. Indeed, if all coefficients of a polynomial are zeros then it evaluates to zero on all substitutions of the variables. However, the converse need not be true in all underlying algebraic structures. For example, consider the polynomials $x^p -  x$ in a field $\Z_p$ (operations are $+$ and $\times$ modulo $p$). This is indeed a non-zero polynomial but all evaluations modulo $p$ are zero.
+\end{remark}
