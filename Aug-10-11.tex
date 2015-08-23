@@ -1,4 +1,4 @@
-\Lecture{Jayalal Sarma}{August, 10 2015}{05}{Orbit-Stabilizer Lemma}{Ameya Panse}{$\delta$}
+\Lecture{Jayalal Sarma}{August, 10 2015}{5}{Orbit-Stabilizer Lemma}{Ameya Panse}{$\delta$}
 
 We first start with some notations and definitions. Order of a group $G$ is number of elements in the group, that is $|G|$. Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
 $Hg = \{hg \mid h \in H\}$. If the mutliplication is on the left, we call it the left coset. That is, $gH = \{gh \mid h \in H\}$. In general, it is not necessary that the left and right cosets are the same.
@@ -88,101 +88,105 @@ Given a graph $X_1=(V_1,E_1),X_2=(V_2,E_2)$, output an isomorphism map between $
 We use the notion of polynomial time reducibility between two problems. Given two problems $A,B$, we say that $A \le B$ (A reduces to B), if given a polynomial time (in terms of input size $n$) algorithm for $B$, we can give out a polynomial time algorithm for $A$. We quickly observe some easy relationship among these problems. Indeed, if we can solve $GA$, we can solve $GR$ as well. Given a graph $X$, to check if it is rigid, it is only a matter of checking if there is a nontrivial element in the generating set for the group $Aut(X)$. Hence we conclude that 
 $GR \le GA$. The same is the case for $GR$ and $\#GA$ as well. That is, $GR \le \#GA$. Similarly, if we can compute the isomorphism, we can decide it as well. Trivially, $GI \le ISO$. It is interesting to think about whether $\#GA$ can be done using $\GA$. That is, given the generating set of a permutation group (that is, subgroup of $S_n$), can we compute the size of the generated group?
 
-\Lecture{Jayalal Sarma}{August, 11 2015}{06}{A Closer Look at Graph
-Isomorphism and Automorphism}{Ameya Panse}{$\gamma$}
 
-\section{Another related Problem}
-Let $X=(V,E)$ be a graph. Consider the vertex set 
-$V$ to be divided into $c$ color classes. That is there exists a function $\Psi : V(X) \rightarrow [c]$,
-where $i \in [c]$ denotes a color and the $i^{th}$ color class is $\Psi^{-1}(i)$.
+\Lecture{Jayalal Sarma}{August, 11 2015}{6}{Reduction Between Variants of {\sc GI}}{Ameya Panse}{$\gamma$}
 
-We say a graph $X=(V,E)$ is {\em $C$-colored} if
-the vertex set $V$ is partitioned into $C$ color classes.
+Our aim is to understand the relationship between various problems related to graph isomorphism that we listed in the last lecture. To quote the names, we talked about, graph isomorphism problem ({\sc GI}), graph automorphism problem ({\sc GA}), graph rigidity problem ({\sc GR}), counting isomorphisms ({\sc \#GI}), counting automorphisms ({\sc GA}), and computing the isomorphism ({\sc Iso}). As a main tool towards understanding these, we now introduced a colored version of graph isomorphism.
 
-Consider the colored version of GI,
+\section{Colored Graph Isomorphism Problem}
 
-\textbf{Colored Graph Isomorphism [CGI]:} Given two $C$-colored Graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$
-decide if there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that for all
-$(u,v) \in V(X_1)\times V(X_2)$,  $(u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $
- and for every $u \in V(X_1),\Psi_1(u) = \Psi_2(\sigma(u))$ .
+The driving thought is the following. Consider the following problem. Given two graphs $X_1$ and $X_2$, and consider a vertex $u \in V_1$ and $v \in V_2$. Can we test if there is an isomorphism between $X_1$ and $X_2$ that maps $u$ to $v$ itself? To create a terminology, the scenario can also be described as : we will color vertex $u$ and $v$ with a color (say {\em blue}), the rest of the vertices in both $X_1$ and $X_2$ as red, and ask if there is a {\em color preserving isomorphism} between the graphs.
 
-\section{Relationships Among the Problems}
+More formally, let $X=(V,E)$ be a graph. Consider a coloring function function $\Psi : V(X) \rightarrow [c]$, where $i \in [c]$ denotes a color. Thus, for a vertex $v$, $\Psi(v)$ denotes its color. We call the set of vertices $\Psi^{-1}(i)$ as the $i^{th}$ color class, and we call the graph as $c$-colored.
 
-\subsection{GI $\le$ CGI}
-GI trivially reduces to CGI.	Set $c=1$, and color all the vertices with the same color.
+\begin{problem}[\textsc{Colored Graph Isomorphism (CGI)}]
+Given two $c$-colored graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ decide if there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that 
+\begin{itemize}
+\item for all $(u,v) \in V(X_1)\times V(X_2)$,  $(u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2)$
+\item for every $u \in V(X_1),\Psi_1(u) = \Psi_2(\sigma(u))$ .
+\end{itemize}
+\end{problem}
 
+How hard can colored graph isomorphism be? In general can there be an efficient algorithm which solves $CGI$ for any $c$? Indeed, an easy observation is that $GI$ is a special case when $c=1$. That is, give all vertices in the graphs the same color so that any isomorphism preserves the colors. Thus, CGI seems harder when number of vertices in a color class is allowed to be large. Indeed, later in the course, when the number of vertices in any color class is bounded by a constant, we will give a polynomial time algorithm for the problem. However, without any restrictions the problem is as hard as graph isomorphism. However, what about the cases when $c>1$. at a first sight, they dont seem easier than $GI$. We start by showing that they are not harder for sure.
 
-\subsection{CGI $\le$ GI}
-Given $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ construct graphs $X_1'$ and $X_2'$ such that 
+\subsection{Gadget Trick : From Colored GI to Non-colored GI}
+
+We show that $CGI \le GI$. That task is as follows, given $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ construct graphs $X_1'$ and $X_2'$ (uncolored graphs) such that 
 \[ ((X_1,\Psi_1),(X_2,\Psi_2))\in CGI \iff (X_1',X_2')\in GI \]
+
 The construction of $X_1'$ and $X_2'$ are as follows :
 For every vertex $u \in V(X_1)$ such that $u \in \Psi_1^{-1}(i)$:
 \begin{enumerate}
 \item Add $ni$ extra vertices to $X_1$.
 \item Add edges from each of the extra vertices to $u$.
 \end{enumerate}
-Do the same for $(X_2,\Psi_2)$ to get $X_2'$.\\
+Do the same for $(X_2,\Psi_2)$ to get $X_2'$. This completes the reduction.
+
+We denote by $Y_u$ the extra vertices that we added for the vertex $u$. Notice that the degree of all extra vertices added is $1$ each, and the degree of all original vertices in color class $i$ ($i \ge 1$) is at least $ni$. The number of vertices in the new graph produced is at most $n+\sum_{i=1}^c ni \le O(n^2)$. The reduction runs in polynomial time since we can construct the graphs $X_1'$ and $X_2'$ in polynomial time. Thus the only thing remaining is to prove the correctness of the reduction which we do by the following claim.
 
 \begin{claim}
 $((X_1,\Psi_1),(X_2,\Psi_2))\in CGI \iff (X_1',X_2')\in GI$
 \end{claim}
 \begin{proof}
-($\Rightarrow$)Let $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$. To show that $X_1' \cong X_2'$. Since  $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ $\in CGI$ we know that there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that $\forall (u,v) \in V(X_1)\times V(X_2), (u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $ and $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$. Additionally map the extra vertices added correspondingly. Thus $X_1' \cong X_2'$.\\
-($\Leftarrow$)Let $X_1' \cong X_2'$. To show that $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.\\
-$X_1' \cong X_2'$, hence $ \exists \sigma : V(X_1') \rightarrow V(X_2'), \forall (u,v) \in E(X_1'), (\sigma(u),\sigma(v)) \in E(X_2')$.\\
-If possible let there exist $ u \in v(X_1), u \in \Psi^{-1}(i)$ such that $\sigma(u) \notin V(X_2)$. That is, u is mapped to one of the extra vertices. But $u \in X_1'$ and $deg(u) \ge ni$, whereas degree of any extra vertex is 1. Hence, we have a contradiction.
+($\Longrightarrow$)
+Let $((X_1,\Psi_1),(X_2,\Psi_2)) \in CGI$. We need to show that $X_1' \cong X_2'$. From the assumption, we know that there exists $\sigma : V(X_1) \rightarrow V(X_2)$ such that :
+\begin{enumerate}
+\item $\forall (u,v) \in V(X_1) \times V(X_2), (u,v) \in E(X_1)$ if and only if $(\sigma(u), \sigma(v)) \in E(X_2) $.
+\item $\forall u \in V(X_1) , \Psi_1(u) = \Psi_2(\sigma(u))$.
+\end{enumerate}
+To extend this to an isomorphism $\sigma'$ between $X_1'$ and $X_2'$, we need to define the images of the extra vertices that we added in the above construction. However, since the $\sigma$ is color preserving, we know that for any $u \in V(X_1$, $|Y_u| = |Y_{\sigma(u)}|$. Extend $\sigma$ to $\sigma'$ by choosing any bijection between the vertices $Y_u$ and $Y_{\sigma(u)}$.
 
-Now, if possible let $u \notin \Psi_2^{-1}(i)$. Hence $\sigma(u) \in \Psi_2^{-1}(j)$ and $j \neq i$. Note that $ni + n$ \textgreater $deg(u) \ge ni \implies n(i+1)$ \textgreater $deg(u) \ge ni$.
+We now argue that $\sigma'$ is an isomorphism. Observe that, for any $u \in V(X_1)$, the only edges incident on $Y_u$ are of the form $(a,u)$ where $a \in Y_u$. Consider the pair $(\sigma'(a),\sigma'(u)$ which is same as $(a',\sigma(u)$ where $a' \in Y_{\sigma(u)}$. This is an edge in $X_2'$ by construction. The converse of the above implications also hold, and hence $X_1' \cong X_2'$.
 
-And, $\sigma(u) \in \Psi_2^{-1}(j) \implies n(j+1)$ \textgreater $deg(u) \ge nj$. Since both of these can not be true simultaneously, we have a contradiction.
+\noindent ({$\Longleftarrow$})
+Suppose $X_1' \cong X_2'$. We need to show that $(X_1,\Psi_1) \cong (X_2,\Psi_2)$. By assumption, there is a bijection $\sigma~:~V(X_1') \rightarrow V(X_2')$ such that $\forall (u,v) \in E(X_1'), (\sigma(u),\sigma(v)) \in E(X_2')$. 
 
-Hence, $\sigma(u) \in V(X_2) , \sigma(u) \in \Psi_2^{-1}(i)$. Thus, $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.
+To begin with, we argue that $\sigma$ must map elements of $V(X_1)$ to $V(X_2)$ itself. This is simply because the degrees of the vertices outside $V(X_2)$ are all 1 and the degree of all vertices in $V(X_1)$ in the graph $X_1'$ are all at least $n$. Since $\sigma$ is originally an isomorphism, $\sigma$ restricted to $V(X_1)$ immediately gives an isomorphism between $X_1$ and $X_2$.
+%Suppose not, let there exist $u \in V(X_1), u \in \Psi^{-1}(i)$ such that $\sigma(u) \notin V(X_2)$. That is, $u$ is mapped to one of the extra vertices. But $u \in X_1'$ and $deg(u) \ge ni$, whereas degree of any extra vertex is $1$. Hence, we have a contradiction.
 
-We have made only one query to GI. Hence, the reduction is polytime.
+We now need to argue that the map $\sigma$ preserves color. Suppose not. Let $u \notin \Psi_2^{-1}(i)$. Hence $\sigma(u) \in \Psi_2^{-1}(j)$ and $j \neq i$. Note that $ni + n > deg(u) \ge ni$. This implies $n(i+1) > deg(u) \ge ni$. And, $\sigma(u) \in \Psi_2^{-1}(j) \implies n(j+1) > deg(u) \ge nj$. Since both of these can not be true simultaneously, we have a contradiction. Hence, $\sigma(u) \in \Psi_2^{-1}(i)$. Thus, $(X_1,\Psi_1) \cong (X_2,\Psi_2)$.
 \end{proof}
 
 
+\subsection{Computing Isomorphism $\le$ {\sc GraphIso}}
 
-\subsection{Computing Isomorphism $\le GI$}
-We show that computing isomorphism reduces to colored graph isomorphism. As $CGI\leq GI$ we have $Computing Isomorphism \le GI$.  Given $X_1,X_2$ Output a permutation that maps $X_1$ to $x_2$.
+We show that {\sc ISO} $\le CGI$. As $CGI \leq GI$ we have {\sc ISO} $\le GI$. 
+
+Given $X_1,X_2$ and oracle access to a blackbox which checks for isomorphism between any two given graphs, output a permutation that maps $X_1$ to $x_2$.
+
 The Reduction is as follows:
 \begin{enumerate}
 \item Check if $X_1 \cong X_2$. If NO, end.
-\item For each vertex $i \in V_1$ 
-	Color $i$ with color $C_i$.
+\item For each vertex vertex $i_1 \in [n] = V_1$ \\
+	Get $X_1'$ by coloring $i_1$ with color $i_1$.
 	\begin{itemize}
-	\item Color $j \in V_2$ that is not already colored with $C_i$, temporarily.
-	\item Query CGI to check if $X_1\cong X_2$.
-	\item Repeat on $j$ untill you get a "yes" answer. Fix color of $j$ as $C_i$.
+	\item Get $X_2'$ by coloring $i_2 \in V_2$ with color $i_1$.
+	\item Query CGI to check if $X_1' \cong X_2'$.
+	\item Remove colors from $X_2'$ and repeat the last two steps for $i_2 \in V_2$ until we get a "yes" answer. For the $i_2$ on which we get a "yes" answer, fix the color as $i_1$ and do not reuse color $i_1$ again in the outer loop.
 	\end{itemize}
-Ouput the permutation.
+\item Ouput the permutation.
 \end{enumerate}
-Here each vertex is colored with a different color, and hence we have a permutation.\\
-Also, if the graphs are isomorphic, then there will exists an $j \in V_2$, such that we get a yes answer.
 
-Observe that we make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query to $GI$. Thus the reduction is polytime.
+To see the correctness : suppose the graphs are isomorphic. That is the algorithm reaches step (2), 3rd subpart is guaranteed to find a $j$ for each vertex $i$. Observing that we will color a vertex on the left and the right with some color $i_1$ on if we are sure that there is a color preserving isomorphism. Hence the isomorphism map, if exists, will be found.
+To see the running time, observe that we make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query each to $GI$. Thus we can solve {\sc ISO} using at most $O(n^2)$ queries to {\sc GI}.
 
 
-\subsection{GI $\le$ GA}
-Take $X = X_1 \cup X_2$. We need to construct a graph $G$ such that the generating set $S$ of $Aut(G)$ enables to decide if $X_1\equiv X_2$.
+\subsection{{\sc GraphIso} $\le$ {\sc GraphAuto}}
+
+We need to construct a graph $G$ such that the generating set $S$ of $Aut(G)$ enables to decide if $X_1\equiv X_2$. 
+
+Assume that the graphs are connected to begin with. The reduction is simply to take $X = X_1 \cup X_2$. Let $S$ be the generating set of the reduction, check if there exists a $\sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$. We directly show the correctness of the reduction.
 
 \begin{claim}
-$X_1 \cong X_2$ if and only if there exists a $\sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$.
+$X_1 \cong X_2$ if and only if there exists a $\sigma \in S$ and $v \in V(X_1)$ such that $\sigma(v) \in V(X_2)$.
 \end{claim}
-
 \begin{proof}
-\textbf{Case 1 : $X_1$ and $X_2$ are connected.}
-
-($\Rightarrow$) Suppose $X_1 \cong X_2$. Then there exists a $\tau$ which is an isomorphism from $X_1,$ to $X_2$. $\tau \in Aut(X)$. Hence, there is a $\sigma$ that maps a vertex in $X_1$ to a vertex in $X_2$.\\
+($\Rightarrow$) Suppose $X_1 \cong X_2$. Then there exists a $\tau$ which is an isomorphism from $X_1,$ to $X_2$. $\tau \in Aut(X)$. Hence, there is a $\sigma$ that maps a vertex in $X_1$ to a vertex in $X_2$.
 
 ($\Leftarrow$) Let there exist a $\sigma\in S$ such that $\sigma$ maps $u \in X_1$ to a vertex in $X_2$. Let $v \in X_1$ be such that $\sigma(u) \in X_1$. Since $X_1$ is connected $u,v$ are connected. But $\sigma(u) \in X_2, \sigma(v) \in X_1$ are not connected which is a contradiction. Therefore for $\sigma\in S$, $\sigma$ maps all the vertices in $X_1$ to $X_2$. Thus $X_1 \cong X_2$.
-
-\textbf{Case 2 : $X_1$ and $X_2$ are not connected.}
-
-In case the two are not connected, add an extra vertex to both the graphs that is adjacent to all the vertices in the corresponding graphs. Since, the new vertices have degree $n$, they can only be mapped to each other.
 \end{proof}
 
-Thus GI $\le$ GA.
+What do we do if the graphs are not connected? We simply add an extra vertex each to both the graphs that is adjacent to all the vertices in the corresponding graphs. Since the new vertices have degree $n$, they can only be mapped to each other by any isomorphism (or an automorphism of $X$). Thus GI $\le$ GA.
 
 
 
