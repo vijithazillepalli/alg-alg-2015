@@ -108,6 +108,35 @@ We argue that $H \le \gen{S^\prime}$. Sinec $G \subseteq \langle S^\prime \rangl
 \jsay{To be completed, why should it exactly generate $H$?}
 \end{proof}
 
+The following is a different view of the above proof. This was not done in the lecture, but we record this for completeness of this notes and for future use. We derive an equivalent statement to the above, by observing that for every $r_1$ and $a$, there is a unique $r_2$ such that $r_1ar_2^{-1} \in H$. Call this $r_2$ as $\overline{r_1a}$. Hence the following is an equivalent restatement.
+
+\begin{lemma}[\textbf{Schreier's Lemma restated}]
+Let $H$ be a subgroup of $G$, $S$ be the generating set of $G$ and $R$ be the set of right coset representatives (containing identity), then,
+$$T = \left\{ rs (\overline{rs})^{-1} \mid r \in R, s \in S \right\}$$
+is a generating set for $H$, where $\overline{g}$ denotes the coset representative corresponding to the element $g$ (that is, the unique element in $Hg \cap R$).
+\end{lemma}
+\begin{proof}
+First observe that the elements of $T$ are in $H$ (that is the way we redefined it to begin with). Hence, it cannot generate a larger group. It is enough to show that $T \cup T^{-1}$ generates all the elements of $H$.
+
+Consider an arbitrary element $h \in H$. Since $H \le G$, it can be written as the product of elements from $S \cup S^{-1}$. Let $h = s_1s_2 \ldots s_k$. We will incrementally keep modifying this product representations from left to right to obtain a product representation of $h$ using elements of $T \cup T^{-1}$. We call this modification sequence to be $h_1, h_2 \ldots h_k$ where each $h_i = h$.
+%
+%Let $r_1 = 1$. The sequence goes as follows.
+%
+%$$h_1 = r_1 s_1 s_2 \ldots s_{i+1} s_{i+1} s_{i+3} \ldots s_k$$
+%$$h_2 = t_1 r_1 s_2 \ldots s_{i+1} s_{i+1} s_{i+3} \ldots s_k$$
+%$$h_3 = t_1 t_2 r_2 s_3 \ldots s_{i+1} s_{i+2} s_{i+3} \ldots s_k$$
+%$$\vdots$$
+%$$h_{i-1} = t_1 t_2 t_3 \ldots t_{i-1} t_{i+1} r_{i+2} s_{i+2} s_{i+2} \ldots 
+%$$h_i = t_1 t_2 t_3 \ldots t_i t_{i+1} r_{i+2} s_{i+2} s_{i+2} \ldots s_k$$
+%$$\vdots$$
+%$$h_{k} = t_1 t_2 \ldots t_{i+1} s_{i+2} s_{i+3} \ldots s_k$$
+In general, $$h_i = t_1 t_2 t_i r_{i+1} s_{i+1} s_{i+2} \ldots s_k$$
+where $t_i \in T \cup T^{-1}$ and $r_{i+1} \in R$.
+
+The initial element $h_0 = \prod_{i=1}^k s_i$ with $r_1 = 1$, which is exactly the original representation, and the final element $h_k = (\prod_{i=1}^k t_i)r_{k+1}$. Since $h_k = h \in H$, it must be that $r_{k+1}$ is the identity. This gives the representation for $h$ in terms of $T \cup T^{-1}$.
+
+Now we complete the proof by defining $h_{i+1}$ from $h_i$. We just need to define $t_{i+1}$ and $r_{i+2}$. Take, $t_{i+1} = r_{i+1}s_{i+1}\overline{r_{i+1}s_{i+1}}^{-1}$ and $r_{i+2} = \overline{r_{i+1}s_{i+1}}$. Clearly, the product $h_{i+1}$ has the required form, $t_{i+1} \in T \cup T^{-1}$ and $r_{i+2} \in R$.
+\end{proof}
 
 
 \Lecture{Jayalal Sarma}{August, 18 2015}{10}{Using Schreier's Lemma - Reduce Algorithm}{Aditi Raghunathan}{$\beta$}
