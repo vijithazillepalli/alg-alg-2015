@@ -1,0 +1,169 @@
+\Lecture{Jayalal Sarma}{August, 24 2015}{13}{Group Intersection Problem under Special Cases-I}{Monosij Maitra}{$\alpha$}
+
+\section{Recap}
+In the previous lecture, we looked at \emph{Jernim's filter} algorithm to reduce the size of the generating set $\langle S\rangle$ of a subgroup $G$ of $S_n$ to at most $n-1$. Thereafter we looked at the \emph{Group Intersection Problem} which is as follows:
+\begin{problem}[\textbf{Group Intersection}]\label{1}
+	Given two groups $G$ and $H$ via their generating sets $\langle A\rangle$ and $\langle B\rangle$ respectively, with $G\leq S_n$ and $H\leq S_n$, can we compute the generating set for the group $G\cap H$?
+\end{problem}
+We also saw that the \emph{Group Intersection Problem} can be reduced to the \emph{Set Stabilizer Problem} and vice-versa. But both are  harder than \emph{Graph Automorphism Problem} as in we know of the fact that $GA\leq SetStab\equiv\text{ Group Intersection Problem}$. In this lecture we are interested in solving Problem \ref{1} in a special setting of \emph{Normal Subgroups}. But before that let's review the basics of \emph{Normal Subgroups}.
+
+\section{Normal Subgroups}
+We already know that if $H$ and $G$ are two groups and $H\leq G$, then the right cosets of $H$ in $G$ are given by $Hg = \{hg~|~h\in H\text{ and }g\in G\}$. Similarly the left cosets are given by $gH = \{gh~|~h\in H\text{ and }g\in G\}$. By \emph{Lagrange's Theorem} we also know that any two right cosets of a subgroup $H$ are either \emph{disjoint} or \emph{equal} i.e. for any $g_1,g_2\in G$ with $g_1\neq g_2$, either $Hg_1\cap Hg_2 = \emptyset$ or $Hg_1 = Hg_2$. The same conditions hold true for the left cosets of $H$ too.\\\\In a general setting for $H\leq G$ it may not be the case that $Hg = gH$. But when this happens, some special structures follow automatically from the context. In that context we define the following:
+\begin{definition}
+	Let $H\leq G$ such that $\forall g\in G,~Hg = gH.$ Then $H$ is called a {\bf Normal Subgroup} of $G$ and is denoted by $H\triangleleft G$.
+\end{definition}
+One special property of such a subgroup $H$ follows directly from the definition: The set of all left cosets and right cosets remain the same. Another special property of $H$ is that the set of all cosets \emph{follows a group structure} with respect to the following operation $*$ defined as $Hg_1*Hg_2 = Hg_1g_2~\forall g_1,g_2\in G$. The proof of the this fact is an easy argument since the set of cosets can be verified easily to follow the four properties of any group as follows:
+\begin{itemize}
+	\item {\bf Closure} Since $G$ has closure property and $Hg_1*Hg_2 = Hg_1g_2$, hence this itself implies closure of the set of cosets under $*$.
+	\item {\bf Existence of Identity} The subgroup $H$ itself serves as the identity element in the set since $\forall g\in G,~Hg*H = Hg$.
+	\item {\bf Existence of Inverse} Since $\forall g\in G,~Hg*Hg^{-1} = Hgg^{-1} = H$, therefore inverse exists.
+	\item {\bf Associativity} Follows easily from the definition.
+\end{itemize}
+The set of all cosets of a normal subgroup $H$ of $G$ has a distinct name in the literature of Group theory. It is defined as follows:
+\begin{definition}\label{QG}
+	Let $H\triangleleft G$. The set of all cosets $\{Hg~|~g\in G, h\in H\}$ under the binary operation $*$ is called the {\bf Quotient Group} of $G$ by $H$.
+\end{definition}
+We know that if $g'\in Hg$, then $Hg' = Hg$ i.e. $Hg$ and $Hg'$ refers to the same coset. We want to claim the following:
+\begin{claim}
+	Let $g_1'\in Hg_1,~g_2'\in Hg_2$ and $H\triangleleft G$. $Hg_1'*Hg_2'=Hg_1'g_2'$ and $Hg_1*Hg_2 = Hg_1g_2 \Longrightarrow Hg_1'g_2' = Hg_1g_2$. 
+\end{claim}
+\begin{proof}
+	\begin{eqnarray}
+		Hg_1g_2 &=& Hg_1'g_2~~~\text{[Since }g_1'\in Hg_1\text{]}\\
+				&=& g_1'Hg_2~~~\text{[Since }H\triangleleft G\text{]}\\
+				&=& g_1'Hg_2'~~~\text{[Since }g_2'\in Hg_2\text{]}\\
+				&=& Hg_1'g_2'~~~\text{[Since }H\triangleleft G\text{]}
+	\end{eqnarray}
+\end{proof}
+We want to emphasize two things here: firstly, the above claim shows that $*$ is well-defined whenever $H\triangleleft G$. Secondly, note that this claim holds only when $H\triangleleft G$. Otherwise, the operation $*$ on the set of cosets is in general not well-defined. However, the other direction of the above claim also holds as shown by the following claim.
+\begin{claim}
+	If $H\leq G$, then $\forall g_1,g_2\in G,~Hg_1*Hg_2 = Hg_1g_2~\Longrightarrow H\triangleleft G$. 
+\end{claim}
+\begin{proof}
+	It suffices to argue that $\forall g\in G,~ gHg^{-1}\subseteq H\Longleftrightarrow Hg=gH$ i.e. $H\triangleleft G$, by definition. We observe the following: $\forall g\in G,$
+	\begin{eqnarray*}
+		gHg^{-1}&\subseteq& gHg^{-1}H\text{ [since }e\in H]\\
+				&=&(gH)(g^{-1}H)\text{ [By Associativity]}\\
+				&=&gg^{-1}H\text{ [By hypothesis]}\\
+				&=&eH\\
+				&=&H
+	\end{eqnarray*}
+	Thus $gHg^{-1}\subseteq H \Longleftrightarrow \exists h' \in H$ such that $ghg^{-1} = h'\text{ i.e. }gh = h'g \Longleftrightarrow gH = Hg \Longleftrightarrow H\triangleleft G$.
+\end{proof}
+Having geared up with the basic notions of Normal Subgroups, now we can ask the following computational question.
+\begin{problem}[\textbf{Group Normality}]\label{2}
+	Given two groups $G$ and $H$ via their generating sets $\langle A\rangle$ and $\langle B\rangle$ respectively, can we check if $H\triangleleft G$?
+\end{problem}
+\subsection{Normalizer and Normal Closure of a Group}
+Suppose for some groups $H$ and $G$ where $H\leq G$, $H\ntriangleleft G$. This happens because there is at least one $g\in G$ such that $Hg\neq gH$. In this context observe the set of all $g\in G$ such that they make $H$ \emph{look like} a normal subgroup in $G$. In other words, collect all such $g\in G$ such that $Hg = gH$ is true. This leads us to the following definition in the literature of Group theory again.
+\begin{definition}\label{normalizer}
+	The set $N_G(H) = \{g\in G~|~Hg = gH\}$ is called the {\bf Normalizer} of $H$ in $G$.
+\end{definition}
+Observe that for any $H\leq G$, $N_G(H) \neq \emptyset$. More concretely speaking $H\in N_G(H)$. This follows easily since $h\in H\Longrightarrow h\in G\text{ and }hH = Hh = H$. Therefore $N_G(H)$ is at least containing the set $H$ itself. Another interpretation is that $|H|\leq |N_G(H)| \leq |G|$(since every group $G$ is a normal subgroup of itself trivially.) Once we are comfortable with the definition of $N_G(H)$, an easy observation is that the algebraic structure $(N_G(H),*)$ is again a group under the operation $*$ defined in Definition \ref{QG}. One more computational question arises in this context.
+\begin{problem}[\textbf{Normalizer Computation}]\label{3}
+	Given two groups $G$ and $H$ via their generating sets $\langle A\rangle$ and $\langle B\rangle$ respectively, output the generating set of $N_G(H)$.
+\end{problem}
+Clearly, the \emph{normalizer} gives the \emph{largest subgroup} of $G$ in which $H$ is a normal subgroup. Then a natural question arises about seeking the smallest normal subgroup of $G$ that contains $H$ in it. Thus the following definition comes naturally.
+\begin{definition}
+	The smallest normal subgroup of $G$ that contains $H$ is called the {\bf Normal Closure} of $H$ in $G$.
+\end{definition}
+Keeping the above definition in our mind another question pops up naturally regarding the computability of normal closure of a group as defined formally below.
+\begin{problem}[\textbf{Normal Closure Computation}]\label{3}
+	Can we give an efficient algorithm for computing the generating set of the normal closure of a subgroup $H$ of $G$? 
+\end{problem}
+\jsay{To think on this, how to come up with such an algorithm for a subgroup $H$?}
+
+\section{Group Intersection Problem in the Context of Normalizers}
+Now let us get back to the source of our original motivation which is the Permutation group $S_n$. As usual we take $G\leq S_n$, $H\leq S_n$. By Definition \ref{normalizer}, $N_{S_{n}}(H)$ is the normalizer of $H$ in $S_n$. We consider \emph{a special case when} $G$ \emph{normalizes} $H$ i.e. $\forall g\in G, Hg = gH$. This means $G\leq N_{S_{n}}(H)$.\\\\We are already aware of the fact that for general groups $G$ and $H$, we do not have an efficient algorithm for computing the generating set $\langle S\rangle$ of $G\cap H$. Before getting on to the actual algorithm for computing the generating set of $G$ and $H$ in the special setting defined above let us have some more observations. Observe the set $GH = \{gh~|~g\in G, h\in H\}$. $GH$ forms a group again since
+\begin{itemize}
+	\item {\bf Closure} If $g_1h_1,g_2h_2\in G$, then
+	\begin{eqnarray*}
+		g_1h_1.g_2h_2 &=& g_1g_2.h_1'h_2~~ [\text{Since }G\text{ normalizes }H]\\
+		&=&gh\in GH.
+	\end{eqnarray*}
+	\item {\bf Existence of Identity} Setting $g = h = e$ it is trivial to observe that $e\in GH$.
+	\item {\bf Existence of Inverse} $\forall gh\in GH,~ h^{-1}g^{-1}\in GH$. Thus,
+	\begin{eqnarray*}
+		gh.(h^{-1}g^{-1}) &=& g(hh^{-1})g^{-1}\\
+						  &=& g(e)g^{-1}\\
+						  &=& gg^{-1}\\
+						  &=& e\in GH.
+	\end{eqnarray*} 
+	\item {\bf Associativity} Follows naturally from the definition.
+\end{itemize}
+Another observation is that for our setting where $G$ and $H$ are subgroups of $S_n$, if $G$ normalizes $H$ and since $GH$ is a group itself, then $GH\leq S_n$. This may not hold in general though. We are now just a few steps away from describing the algorithm for Problem \ref{1}. Although the algorithm will be given explicitly in the next lecture, the first idea is again to observe the set $G^{(1)}$ which fixes the element $1$. By the previous observation just described above, we can infer that $G^{(1)}H\leq S_n$, since any subgroup of $G$ will also normalize $H$. In general while constructing the set $G^{(i)}$ which fixes $1,2,\ldots,i$, $G^{(i)}H\leq S_n$. Now we are ready to describe the construction of the \emph{Tower of Subgroups} as follows:
+\begin{eqnarray*}
+	G\cap G^{(0)}H \geq G\cap G^{(1)}H \geq G\cap G^{(2)}H \geq \ldots \geq G\cap G^{(n-1)}H
+\end{eqnarray*}
+Two quick observations are:\\\\{\bf Observation 1.} On the right end of the above chain $G^{(n-1)}$ is the subgroup which \emph{fixes} all the elements $1,2,\ldots,n-1$. Hence it gives the identity permutation in $S_n$ exactly. Thus $G\cap G^{(n-1)}H  = G\cap H$.\\\\{\bf Observation 2.} On the left end of the above chain $G\cap G^{(0)}H = G\cap GH = G$. This is because $GH = G$ as $H$ is contained in $G$ as we proved earlier and $G\leq S_n$. Hence $G\cap GH = G$.\\\\Thus the above tower of subgroups really look like that as shown below.
+\begin{eqnarray*}
+	G\geq G\cap G^{(1)}H \geq G\cap G^{(2)}H \geq \ldots \geq G\cap H
+\end{eqnarray*}
+
+
+%==========================================================================================================================================
+
+
+\Lecture{Jayalal Sarma}{August, 25 2015}{14}{Group Intersection Problem under Special Cases-II}{Monosij Maitra}{$\alpha$}
+\section{Recap}
+In the previous lecture, we were devising the tools that we need for solving Problem \ref{1} under the special setting of a group $G$ acting as a {\bf normalizer} for group $H$.. We discussed {\bf Normal Subgroups} along with the concepts of {\bf Normalizers} and {\bf Normal Closure} in this context also. Then we looked at the \emph{Tower of Subgroups} that we are going to use to give the algorithm for Problem \ref{1}. The \emph{Tower of Subgroups} looked like the following:
+\begin{eqnarray*}
+	G\geq G\cap G^{(1)}H \geq G\cap G^{(2)}H \geq \ldots \geq G\cap H
+\end{eqnarray*}
+\section{Getting to the Algorithm }
+In the above chain of subgroups we are already given the generating set of $G$. We can apply {\bf Schreier's Lemma} to this chain of subgroups to get the generating set of $G\cap H$. But before doing that we must ensure of three things:
+\begin{enumerate}
+	\item Computation of the coset representatives of the subgroups at each level in the chain.
+	\item Testing membership in the subgroups.
+	\item Ensuring that the number of cosets at all level must be small.
+\end{enumerate}
+These three properties must be satisfied in order to get a \emph{strong generating set}. 
+\begin{itemize}
+	\item We can apply our known algorithm to find the set of coset representatives of the subgroup $G^{(i)}H$ in $G^{(i-1)}H$.
+	\item For the second property, since we already have a generating set $\langle A\rangle$ for $G$ as input, we have to find the generating set of $G^{(1)}H$ such that the membership testing of elements of the subgroup can be done efficiently. Now $G^{(1)}H$ is defined as the product of all the elements in $G^{(1)}$ and $H$. Hence the generating set of $G^{(1)}H$ is the \emph{union} of the generating set $S_1$ of $G^{(1)}$ and that of $H$ i.e. $\langle S_1 \rangle\cup \langle B \rangle$. Once we get these, we can easily apply our \emph{Membership Testing algorithm} which was done in a previous lecture.
+	\item For an assurance of the third property we need to prove the following lemma.
+\end{itemize}
+\begin{claim}\label{coset}
+	The index of any subgroup in its parent group i.e. $[G\cap G^{(i)}H~:~G\cap G^{(i-1)}H]\leq (n-i)$.
+\end{claim}
+The crux of the proof of the above claim lies in the following arguments about how a coset of $G^{(i)}H$ actually looks like which is inside $G^{(i-1)}H$. In other words, $G^{(i)}Hg$ is a coset of $G^{(i)}H$ inside $G^{(i-1)}H$ if and only if $g\in G^{(i-1)}H$. This implies that $g = g'h'$, where $g'\in G^{(i-1)}$ and $h'\in H$. Thus we see that 
+\begin{eqnarray*}
+	G^{(i)}Hg &=& G^{(i)}Hg'h'\\
+			  &=& G^{(i)}g'Hh'~~[\text{Since }G^{(i-1)}\text{ normalizes }H]\\
+			  &=& G^{(i)}g'H~~[\text{Since }Hh' = H]\\
+			  &=& (G^{(i)}g')H.
+\end{eqnarray*}
+The rest of the proof is left as an exercise. Performing an intersection with $G$ changes the cosets but we need to argue that the \emph{number of cosets} still remains the same and is essentially bounded above by $(n-i)$ in the $i$-$th$ level of the tower of subgroups. As an intermediate observation, we claim the following:
+\begin{claim}
+	$H\triangleleft GH$.
+\end{claim}
+\begin{proof}
+	Let $g'\in GH$. Then $g' = gh$ for some $g\in G, h\in H$. For deducing $H\triangleleft GH$, we need to show that $\forall g'\in GH, Hg' = g'H$. So we proceed as follows:
+	\begin{eqnarray*}
+		Hg' &=& Hgh\\
+			&=& gHh~~[\text{Since }G\text{ normalizes }H]\\
+			&=& ghH~~[\text{Since }Hh = hH]\\
+			&=& g'H.
+	\end{eqnarray*}
+\end{proof}
+\subsection{The Algorithm}
+Now we are in a perfect set up to describe the algorithm for computing the generating set of $G\cap H$. The algorithm just applies {\bf Schreier's Lemma} \emph{recursively} at all the $(n-1)$ levels in the tower of subgroups to compute the generating set of $G\cap G^{(i)}H,~\forall i=1,2,3,\ldots,(n-1)$.\\\\We know that the number of cosets in the $i$-$th$ level is bounded above by a small quantity $(n-i)$ as Claim \ref{coset} shows. From the REDUCE algorithm that we saw in a previous lecture we know that the size of the generating set at each of the $(n-1)$ levels of the tower of subgroups computed by {\bf Schreier's Lemma} is $O(n^2)$. Therefore the asymptotic running time of this algorithm is $O(n^3)$.
+
+\section{Another Special Case of Group Intersection Problem}
+In this section we are going to solve the Problem \ref{1} in another special setting. We have already mentioned of the fact that $GA\leq SetStab\equiv\text{ Group Intersection Problem}$. We are also aware that there are no efficient efficient algorithms for Graph Isomorphism problem in general. In this context we have seen that $\mathcal{COLOR-GI}\leq \mathcal{GA}$. However, the hard case of this scenario arises when the number of colours, $k=1$. In that case it gets mapped to the same problem of Graph Isomorphism. Thus instead of getting our attention to the \emph{number of colours}, we focus on the size of each colour class, i.e. $\psi^{-1}(i), i\in \{1,2,\ldots,k\}$ as per our notations discussed earlier. We assume that $\forall i\in\{1,2,\ldots,k\}, |\psi^{-1}(i)|\leq b, b\in \mathbb{N}$ i.e. the size of each colour class in bounded by a {\bf \emph{small constant}} $b$ ($b$ is independent of the number of vertices, $n$ in the corresponding graph). Now the question we ask is the following:
+\begin{problem}
+	Given two graphs $\mathcal{X}_1(V_1,E_2)$ and $\mathcal{X}_2(V_2,E_2)$ with the above setting, can we check if they are isomorphic efficiently?
+\end{problem}
+Since we know that checking Isomorphism between $\mathcal{X}_1$ and $\mathcal{X}_2$ can be reduced to checking Automorphism group of $\mathcal{X}(V,E)=\mathcal{X}_1\cup \mathcal{X}_2$. This additional constraint of colour imposes  an association between an edge in the graph with another one whose vertices are of same colour so that it becomes a \emph{colour preserving map}. In other words,
+\begin{equation*}
+	Aut(\mathcal{X})\leq Sym(C_1)\times Sym(C_2)\times Sym(C_2)\times \ldots \times Sym(C_k)
+\end{equation*}
+where $k =$ number of colours and $C_i = \psi^{-1}(i), \forall i\in \{1,2,\ldots,k\}$. We must note that all elements in the right hand side of the above may not be elements in $Aut(\mathcal{X})$. Thus we have shown that $\mathcal{COLOR-GI}\leq \mathcal{COLOR-GA}$. Now the idea is to use the known $SetStab$ reduction so that we can compute the stabilizer set efficiently. From that context we denote $E_i = E\cap \dbinom{C_i}{2}$ to be the set of all {\bf \emph{intracolour edges}} for each colour $i$ and $E_{ij} = E\cap (C_i\times C_j)$ to be the set of all {\bf \emph{intercolour edges}} between any two \emph{distinct} colour classes $i$ and $j$. Note that an edge inside $E_i$ is mapped within $E_i$ again and an edge inside $E_{ij}$ is mapped within itself too, thereby obtaining a \emph{colour preserving map}. In other words, any permutation $g \in Sym(C_i)$ is an automorphism if and only if $E_i^g = E_i$ and $E_{ij}^g = E_{ij}$ i.e. we have got the desired $SetStab$ form.\\\\Now we view this with respect to the $PointStab$ form by taking all the $E_i$ and $E_{ij}$ as points. Thus we view $S_n$ as acting on the following $\Omega$ given by
+\begin{equation*}
+\Omega = \left(\bigcup_iC_i\right)\cup \left(\bigcup_i2^{\dbinom{C_i}{2}}\right) \cup\left(\bigcup_i2^{C_i\times C_j}\right)
+\end{equation*}
+where the term $2^{\dbinom{C_i}{2}}$ gives the potential subsets of all \emph{intracolour edges} while the term $2^{(C_i\times C_j)}$ gives the potential subsets of all \emph{intercolour edges}. Now we bound the size of $\Omega$ as follows:
+\begin{equation*}
+|\Omega| \leq n + k.2^{\dbinom{b}{2}} + \dbinom{b}{2}.2^{b^2}
+\end{equation*}
+Since $b$ is a small constant thus $|\Omega|$ is polynomial in $n$.
