@@ -1,5 +1,5 @@
 \Lecture{Jayalal Sarma}{August 19, 2015}{11}{Pointwise Stabilizer, Membership
-Testing and Group Intersection}{Samir Otiv}{$\beta$}
+Testing and Group Intersection}{Samir Otiv}{$\gamma$}
 
 \section{Recap}
 We first attacked the Membership Problem. We saw that this reduces to the
@@ -12,86 +12,150 @@ finding the size of $G_\alpha$ which is the stabiliser group of $\alpha$.
 Product of these two gives the order of the group.
 %We use the tower of subgroups to do this.
 
-We used Schreier's Lemma to find a generating set for each subgroup, but
-unfortunately we didn't have a handle on the size of the generating set. Using
-the Reduction algorithm that Aditi very kindly explained in the previous
-lecture, we could ensure that the size of the generating set always stayed to
-within $O(n^2)$.
-
-We're now left with the problem of finding the coset reps in the tower of subgroups in order to finish the membership 
+Note that in the above approach, $G$ is specified via a generating set. Hence
+before we recurse, we need to obtain a generating set for
+$G_\alpha$. For this purpose, we used Schreier's lemma to find a generating
+set. We also observed that size of the generating set can grow very fast. Using
+the reduction algorithm that Aditi very kindly explained in the previous
+lecture, we could ensure that the size of the generating set always stayed 
+within $O(n^2)$ (where $n = |\Omega|$).
 
 \section{Finding Coset Representatives in the tower of subgroups}
-We want to obtain R - the set of coset reps of $G^{(i+1)}$  in $G^i$
+\label{sec:find-coset}
+Now that we have obtained a way of obtaining a generating set for the
+subgroup, we are left with the problem of finding the orbit size. 
+By Orbit-Stabiliser Lemma (Lemma~\ref{lem:os}), due to one-one correspondence
+with cosets, we get that to estimate orbit size, it suffices to estimate the
+number of cosets of the subgroup. In our setting this can be achieved by
+finding the coset representatives in the tower of subgroups.
 
-Max number of cosets = n-i, since i+1 can be taken to atmost n-i different places.\newline
-$(i+1)^{(G^{(i)})}=\{ k \in \{i+1, . . ., n\} | \exists g \in G^{(i)} \: (i+1)^g = k\} $
+Denote $R$ as the set of right coset representatives of $G^{(i+1)}$  in $G^i$
+for $i \ge 0$. Note that there are at most  $n-i$ cosets, since $i+1^{th}$
+location can be taken to at most $n-i$ different places. Recall that the set of
+locations where $i+1$ is taken to by $G^{(i)}$ is precisely $i+1$.
+\[ (i+1)^{G^{(i)}}=\{ k \in \{i+1, \ldots, n\} | \exists g \in G^{(i)},
+(i+1)^g = k\} \]
 
-Let X be the orbit of (i+1). For each $k \in X$, let $g_{i+1, k}$ be an element in G that maps 1 to k.\newline
-$\therefore G^{(i)} = \bigcap_{k \in X} G^{(i+1)} .k$
+Let $X_i \subseteq \{i+1, \ldots, n\}$ be the orbit of $i+1$ in $G^{(i)}$ (We
+have seen an algorithm to do it in Section~\ref{sec:orbit-comp}). 
+For each $k \in X_i$, let $g_{i+1, k}$ be an element in $G^{(i)}$ that maps
+$1$ to $k$. Note that such an element must exists in $G^{(i)}$. To find this
+group element, it suffices to obtain a path from $i+1$ to $k$ in the graph of
+generating set (see Section~\ref{sec:orbit-comp} for definition) and take the
+product of edge labels on the path. The set $R$ is now the collection of all
+$g_{i+1,k}$ for each $k \in X_i$.
 
-R can be computed by obtaining for each $k \in X_i$, an element in $G^{(i)}$  that maps (i+1) to k. (This can easily be formulated as a reachability problem, on the graph with nodes as [n].)
+\section{Algorithm for Pointwise Stabiliser Problem}
+We now piece together the above ideas to show that for any
+$\Sigma\subseteq\Omega$, the Generator set of $\pointstab(\Sigma) \le S_n$ can
+be computed in $poly(|\Omega|)$ time. Let $i \ge 1$. Recall that
+$\pointstab(\{1,2,\ldots,i\}) = G^{(i)}$. 
 
-\section{The Pointwise Stabiliser Problem}
-Input: Generators of G and a set of right coset reps R of H in G.\newline
-Task: To find a generating set for H\newline
+To compute a generating set for $G^{(i)}$
+\begin{enumerate}
+	\item Use the technique specified above to find coset representative for
+		$G^{(1)}$ in $G$. We consider $G^{(0)} = S_n$ and use the
+		generator set for $S_n$ as $\{ (1)(2)\ldots(n), (1~2), \ldots,
+		(n-1~n)\}$ while constructing the graph for generating set.
+	\item  Previous step gives us the set $R$ which consists of the right
+		coset representatives of $G^{(1)}$ in $G^{(0)}$. Now we can
+		apply Schreier's Lemma to obtain the generating set for
+		$G^{(1)}$. 
+	\item  Apply the {\sc Reduce} algorithm (Algorithm~\ref{alg:reduce})
+		to obtain a smaller generator set.
+	\item  Recurse by following the same procedure, and finding the
+		generating set of $G^{(2)}$ given $G^{(1)}$, until the desired
+		$G^{(i)}$ is found. 
+\end{enumerate}
+It can be seen the each step terminates in $\poly(|\Omega|)$ time and the
+number of recursive calls is at most $i \le |\Omega|$. Hence overall runtime is
+polynomial.
 
 
+\section{Algorithm for Membership Testing}
+Note that we already saw how to check membership of an element in a group
+using an algorithm to compute order of the group. But this does not tell
+anything about how the element is expressed in terms of its generators. Hence
+we consider the following stronger version of Membership problem. 
+\begin{problem}[Stronger Membership Test]
+Given a generating set $A$ of $G$ with, $G \leq S_n$ and a $g\in S_n$, give a
+representation in terms of any desired generating set, and the generating set 
+itself.
+\end{problem} 
 
-
-\subsection{Algorithm}
-For any $\Sigma\subseteq\Omega$, the Generator Set of PointStab can be computed in $poly(\|\Omega\|^{'} )$  time. In general, to compute a generating set for $G^{(i)}$,\newline
-	- Use the technique specified above to find coset reps for $G^{(1)}$ in G.
-	- Apply Schreier's Lemma to obtain the generating set for $G^{(i)}$ \newline
-	- Reduce this set using the procedure from the previous lecture.\newline
-	- Recurse by following the same procedure, and finding the generating set of $G^{(2)}$ given $G^{(1)}$, until the desired $G^{(i)}$ is found. \newline
-
-\section{Membership Testing}
-Input:
-
-	Generating set of $G \leq S_n: G= <A>$,
-	$g\in S_n$\newline
-Output:
-
-	Representation in terms of any desired generating set, and the generating set itself (This is the new set of coset reps formed).
-
-\subsection{Tail Recursion Algorithm Z}
-\begin{algorithm}
-\caption{Algorithm for Membership Testing. Input: g, generating set A for $G^i$ and index i.}
+\begin{algorithm}[htp!]
+\caption{\textsc{MemberTest} : Algorithm for Membership Testing}
+\label{alg:memtest}
 \begin{algorithmic}[1]
-\If{if g = id} 
+	\Procedure{\textsc{MemberTest}}{Input : Element $g$, Generating set
+$A$ for $G^{(i)}$, Index $i$}
+
+\If{$g = id$} 
 \State{return true}
 \EndIf
-\State{$X_i = (i+1)^{G^{(i)}}$}
-\State{Compute R: The set of distinct coset representatives.}
-\State{$k = (i+1)^g$ (image of i+1 on action of g)}
+\State{$X_i = (i+1)^{G^{(i)}}$ (Use Orbit Computation Algorithm~\ref{alg:orbit_alg})}
+\State{Compute $R$, the set of coset representatives of $G^{(i+1)}$ 
+in $G^{(i)}$ (see Section~\ref{sec:find-coset}) }
+\State{$k = (i+1)^g$ (Image of $i+1$ on action of $g$)}
 \If{$k \notin X_i$}
 \State{return false}
-\EndIf
-\State{A' = Generating set of $G^{(i+1)}$ (Use Schreier's Lemma)}
-\State{Reduce the size of B using procedure above}
-\State{Pick $g_{ik}$ from R (The element that maps i to k)}
+\Else
+\State{$B$ = Generating set of $G^{(i+1)}$ (Use Schreier's Lemma)}
+\State{Apply Algorithm {\sc Reduce} to $B$ and denote
+$A'$ for the reduced set obtained}
+\State{Pick $g_{ik}$ from $R$ that maps $i$ to $k$}
 \State{$g' = g.g_{ik}^{-1}$}
-\State{return $Z(g', A', i+1)$}
+\State{return \textsc{MemberTest}$(g', A', i+1)$}
+\EndIf
+\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
+Note that if insisting on giving the representation of $g$ in terms of $A$,
+then the problem may not be solvable in polynomial time since there are groups
+which require large size to represent in terms of its generators
+(Proposition~\ref{prop:repr-large}). Now we call \textsc{MemberTest} 
+on the input $(g,A,0)$ for checking if $g \in \langle A \rangle$ or not. It is
+left as an exercise to show that the algorithm terminates in $poly(|\Omega|)$
+time.
 
+\section{Group Intersection Problem}
+We consider the following two problem :
+\begin{problem}[Subgroup Problem]
+	Given groups $G$ and $H$ via their generating sets $A$ and $B$ 
+	respectively, test if $H \leq G$
+\end{problem}
+\begin{problem}[Group Intersection Problem]
+	Given groups $G$ and $H$ via their generating sets $A$ and $B$
+	respectively, find the generating set of $G\cap H$\footnote{Verify that if $G$
+	and $H$ are groups then $G \cap H$ is also a group}.
+\end{problem}
 
-\section{Some other problems}
-\subsection{Subgroup Problem}
-Given G and H, generated by A and B respectively, test if H$\leq$G?\newline \newline
-Algorithm:
-\,For each b$\in$B check if b$\in$G (membership problem)
+Since we have already given an algorithm for membership checking, Subgroup
+problem has the following algorithm : for each $b\in B$ check if $b \in G$ 
+using {\sc MemberTest} algorithm.
 
-\subsection{Group Intersection Problem}
-Given G and H generated by A and B respectively, find the gen set of G$\cap$H.
-
-
-\subsubsection{SetStab reduces to GroupInter}
-Let $\{Sym_{\Sigma} * Sym_{\Omega - \Sigma}\} = H$\newline
-The generator set for $Sym_n$ is known: (1, . . n), (1 2), (2 3), . . (n-1 n)\newline
-If we want to stabilize $\Sigma$, all we need to do is compute $G \cap H$. This intersection gives us the stabilizing subgroup of G.
-
+So how about Group Intersection problem ? We show that this problem is as hard
+as the Set Stabilizer Problem. We show this by first reducing $\setstab$ to
+$\groupintr$.
+\begin{claim}
+$\setstab \le \groupintr$
+\end{claim}
+\begin{proof}
+	Given $\Sigma \subseteq \Omega$, generating set $K$ of $G$ we need to
+	produce groups $J,H$ via generators $A,B$ such that $J \cap H =
+	\setstab(\Sigma)$. Consider the group, $H = Sym(\Sigma) \times
+	Sym(\Omega \setminus \Sigma)$ where $Sym(T)$  
+	consists of all permutations defined over $T$ of length $|T|$. Hence
+	$Sym(T)$ fixes $T$. Note that $H \le S_n$ and consists of all
+	permutations that have $\Sigma$ mapped to $\Sigma$. Since
+	$\setstab(\Sigma)$ talks about permutations in $G$ that fix $\Sigma$,
+	$G \cap H$ is the $\setstab(\Sigma)$. Now it remains to give a
+	generator for $Sym(\Sigma)$. It can be shown that if $\Sigma
+	=\{1,2,\ldots,n\}$, then the generator set for $Sym(\Sigma)$ is
+	$(1,\ldots, n), (1~2),(2~3),
+	\ldots, (n-1~ n)$.
+\end{proof}
 
 
 \Lecture{Jayalal Sarma}{August 21, 2015}{12}{Group Intersection to Set Stabiliser and Jerrum's Filter}{Samir Otiv}{$\beta$}
