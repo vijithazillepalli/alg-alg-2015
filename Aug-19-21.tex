@@ -1,77 +1,76 @@
-\Lecture{Jayalal Sarma}{August 19, 2015}{11}{Coset Reps, Pointwise Stabilizer, Membership Testing, GI.}{Samir Otiv}{$\beta$}
+\Lecture{Jayalal Sarma}{August 19, 2015}{11}{Pointwise Stabilizer, Membership Testing and Group Intersection.}{Samir Otiv}{$\beta$}
+
+\section{Recap}
+We first attacked the Membership Problem. We saw that this reduces to the problem of Order Computation. (Section 8.2) 
+
+To solve this problem of Order Computation, we resorted to use the Orbit-Stabiliser Lemma. This involved finding out the size orbit of an element $\alpha$ (which we reduced to Graph Reachability), and then recursing on the Stabiliser Subgroup $G_\alpha$. We choose to use the tower of subgroups to do this.
+
+We used Schreier's Lemma to find a generating set for each subgroup, but unfortunately we didn't have a handle on the size of the generating set. Using the Reduction algorithm that Aditi very kindly explained in the previous lecture, we could ensure that the size of the generating set always stayed to within $O(n^2)$.
+
+We're now left with the problem of finding the coset reps in the tower of subgroups in order to finish the membership 
+
+\section{Finding Coset Representatives in the tower of subgroups}
+We want to obtain R - the set of coset reps of $G^{(i+1)}$  in $G^i$
+
+Max number of cosets = n-i, since i+1 can be taken to atmost n-i different places.\newline
+$(i+1)^{(G^{(i)})}=\{ k \in \{i+1, . . ., n\} | \exists g \in G^{(i)} \: (i+1)^g = k\} $
+
+Let X be the orbit of (i+1). For each $k \in X$, let $g_{i+1, k}$ be an element in G that maps 1 to k.\newline
+$\therefore G^{(i)} = \bigcap_{k \in X} G^{(i+1)} .k$
+
+R can be computed by obtaining for each $k \in X_i$, an element in $G^{(i)}$  that maps (i+1) to k. (This can easily be formulated as a reachability problem, on the graph with nodes as [n].)
 
 \section{The Pointwise Stabiliser Problem}
 Input: Generators of G and a set of right coset reps R of H in G.\newline
 Task: To find a generating set for H\newline
 
-We're faced with the challenge of controlling the size of the generating set at each level
-
-\subsection{Controlling the size of the generating set}
-$\pi, \psi \in S'$
-$1^\pi = 1^\psi$
-
-Replace $\{ \pi, \psi \}$ with $\{ \pi, \pi^{-1} \psi\}$
-
-Ensuring that in our set S there is exactly one element sending 1 to k.
-
-Observation\newline
-1. By doing this repeatedly for every $\psi$ which maps 1 to k, $\pi$ is the only element that maps 1 to k.\newline
-2. The extra elements that we put in fixes 1.\newline
-3. We did not change $<S>$\newline
-Note that this is because you can always create $\pi^{-1}$  from $\pi$ by multiplying by itself until you get 1.\newline
 
 
 
-\subsection{Task Remaining}
-Obtain R - the set of coset reps of $G^{(i+1)}$  in $G^i$
-
-Max number of cosets = n-i, since i+1 can be taken to atmost n-i different places.\newline
-$(i+1)^{(G^{(i)})}=\{ k \in \{i+1, . . ., n\} | \exists g \in G^{(i)} \: (i+1)^g = k\} $
-
-Let X be the orbit of (i+1), R can be computed by obtaining for each $k \in X_i$, an element in $G^((i) )$  that maps (i+1) to k.
-
-\subsection{Claim}
-For any $\Sigma\subseteq\Omega$, the Generator Set of PointStab can be computed in $poly(\|\Omega\|^{'} )$  time\newline
-	- Apply Schreier's Lemma\newline
-	- Reduce\newline
-	- Recurse\newline
+\subsection{Algorithm}
+For any $\Sigma\subseteq\Omega$, the Generator Set of PointStab can be computed in $poly(\|\Omega\|^{'} )$  time. In general, to compute a generating set for $G^{(i)}$,\newline
+	- Use the technique specified above to find coset reps for $G^{(1)}$ in G.
+	- Apply Schreier's Lemma to obtain the generating set for $G^{(i)}$ \newline
+	- Reduce this set using the procedure from the previous lecture.\newline
+	- Recurse by following the same procedure, and finding the generating set of $G^{(2)}$ given $G^{(1)}$, until the desired $G^{(i)}$ is found. \newline
 
 \section{Membership Testing}
-Input\newline
-	Generating set of $G \leq S_n: G= <A>$
-	$g\in S_n$
+Input:
 
-Output
-	Representation in terms of the generating set (This alone is not possible as we showed yesterday)
-	Representation in terms of any desired generating set, and the generating set.
+	Generating set of $G \leq S_n: G= <A>$,
+	$g\in S_n$\newline
+Output:
+
+	Representation in terms of any desired generating set, and the generating set itself (This is the new set of coset reps formed).
 
 \subsection{Tail Recursion Algorithm Z}
 \begin{algorithm}
-\caption{Algorithm for Membership Testing}\label{orbit}
-\label{alg:tail_rec_membership}
+\caption{Algorithm for Membership Testing. Input: g, generating set A for $G^i$ and index i.}
 \begin{algorithmic}[1]
-\item 
-Input: g, generating set A for $G^i$ and index i.\newline
-
-if g = id return true\newline
-$X_i = (i+1)^{G^{(i)}}$\newline
-Compute R: The set of distinct coset representatives.\newline
-$k = (i+1)^g$ (image of i+1 on action of g)\newline
-$if k \notin X_i$ return false\newline
-A' = Generating set of $G^{(i+1)}$ (Use Schreier's Lemma)\newline
-Reduce the size of B using procedure above\newline
-Pick $g_{ik}$ from R (The element that maps i to k)\newline
-$g' = g.g_{ik}^{-1}$\newline
-return $Z(g', A', i+1)$\newline
+\If{if g = id} 
+\State{return true}
+\EndIf
+\State{$X_i = (i+1)^{G^{(i)}}$}
+\State{Compute R: The set of distinct coset representatives.}
+\State{$k = (i+1)^g$ (image of i+1 on action of g)}
+\If{$k \notin X_i$}
+\State{return false}
+\EndIf
+\State{A' = Generating set of $G^{(i+1)}$ (Use Schreier's Lemma)}
+\State{Reduce the size of B using procedure above}
+\State{Pick $g_{ik}$ from R (The element that maps i to k)}
+\State{$g' = g.g_{ik}^{-1}$}
+\State{return $Z(g', A', i+1)$}
 \end{algorithmic}
 \end{algorithm}
 
+
+
 \section{Some other problems}
 \subsection{Subgroup Problem}
-Given G and H, generated by A and B respectively, test if H$\leq$G?
-
-Algorithm
-For each b$\in$B check if b$\in$G (membership problem)
+Given G and H, generated by A and B respectively, test if H$\leq$G?\newline \newline
+Algorithm:
+\,For each b$\in$B check if b$\in$G (membership problem)
 
 \subsection{Group Intersection Problem}
 Given G and H generated by A and B respectively, find the gen set of G$\cap$H.
@@ -80,25 +79,25 @@ Given G and H generated by A and B respectively, find the gen set of G$\cap$H.
 \subsubsection{SetStab reduces to GroupInter}
 Let $\{Sym_{\Sigma} * Sym_{\Omega - \Sigma}\} = H$\newline
 The generator set for $Sym_n$ is known: (1, . . n), (1 2), (2 3), . . (n-1 n)\newline
-If we want to stabilize $\Sigma$, all we need to do is compute $G \cap H$\newline. This intersection gives us the stabilizing subgroup of G.
+If we want to stabilize $\Sigma$, all we need to do is compute $G \cap H$. This intersection gives us the stabilizing subgroup of G.
 
 
 
-\Lecture{Jayalal Sarma}{August 21, 2015}{12}{GroupInter to SetStab and Jerrum's Filter}{Samir Otiv}{$\beta$}
+\Lecture{Jayalal Sarma}{August 21, 2015}{11}{Group Intersection to Set Stabiliser and Jerrum's Filter}{Samir Otiv}{$\beta$}
 
 \section{GroupInter to SetStab}
 Before we start, let's look at ways of combining groups.
 
 \subsection{Direct Product}
-$G*H=\{(g,h?g \in G,hH\}$
-
-$(\alpha,\beta)^((g,h )=(\alpha^g,\beta^h)$
+$G*H=\{(g,h | g \in G,hH\}$
+$(\alpha,\beta)^{(g,h )}=(\alpha^g,\beta^h)$
 
 \subsection{The reduction is almost done}
 Let $\Sigma=\{ (i,i)| i \in O\}$
 
 \subsection{Claim}
-$G \cap H=SetStab(\Sigma)$
+$(G \cap H)_{duplicate} = SetStab(\Sigma)$\newline
+where $(G \cap H)_{duplicate} = \{ (a,a) | a\in G \cap H \}$
 
 \subsection{Proof}
 Forward:\newline
@@ -116,8 +115,8 @@ Backward:\newline
 
 
 \section{Jerrum's Filter: Reduce the size of the generating set to n-1}
-So far we know a way of constructing it in $n^2$. We're going to take this to the next level.
-Another result: Neomann $ \lfloor n/2 \rfloor $
+So far we know a way of constructing it in $n^2$. Jerrum's Filter can do it in n-1 instead.
+Another result: Neomann $ \lfloor n/2 \rfloor $, which we're not going to discuss further in this lecture.
 
 \subsubsection{Jerrum's Filter}
 S is a given set of permutations\newline
