@@ -1,11 +1,22 @@
-\Lecture{Jayalal Sarma}{August 19, 2015}{11}{Pointwise Stabilizer, Membership Testing and Group Intersection.}{Samir Otiv}{$\beta$}
+\Lecture{Jayalal Sarma}{August 19, 2015}{11}{Pointwise Stabilizer, Membership
+Testing and Group Intersection}{Samir Otiv}{$\beta$}
 
 \section{Recap}
-We first attacked the Membership Problem. We saw that this reduces to the problem of Order Computation. (Section 8.2) 
+We first attacked the Membership Problem. We saw that this reduces to the
+problem of Order Computation. (See section~\ref{sec:comp-questions}) 
 
-To solve this problem of Order Computation, we resorted to use the Orbit-Stabiliser Lemma. This involved finding out the size orbit of an element $\alpha$ (which we reduced to Graph Reachability), and then recursing on the Stabiliser Subgroup $G_\alpha$. We choose to use the tower of subgroups to do this.
+To solve this problem of Order Computation, we use the
+Orbit-Stabiliser Lemma. This involved finding out the size orbit of an element
+$\alpha$ (which we reduced to Graph Reachability), and then recursively
+finding the size of $G_\alpha$ which is the stabiliser group of $\alpha$.
+Product of these two gives the order of the group.
+%We use the tower of subgroups to do this.
 
-We used Schreier's Lemma to find a generating set for each subgroup, but unfortunately we didn't have a handle on the size of the generating set. Using the Reduction algorithm that Aditi very kindly explained in the previous lecture, we could ensure that the size of the generating set always stayed to within $O(n^2)$.
+We used Schreier's Lemma to find a generating set for each subgroup, but
+unfortunately we didn't have a handle on the size of the generating set. Using
+the Reduction algorithm that Aditi very kindly explained in the previous
+lecture, we could ensure that the size of the generating set always stayed to
+within $O(n^2)$.
 
 We're now left with the problem of finding the coset reps in the tower of subgroups in order to finish the membership 
 
@@ -83,7 +94,7 @@ If we want to stabilize $\Sigma$, all we need to do is compute $G \cap H$. This 
 
 
 
-\Lecture{Jayalal Sarma}{August 21, 2015}{11}{Group Intersection to Set Stabiliser and Jerrum's Filter}{Samir Otiv}{$\beta$}
+\Lecture{Jayalal Sarma}{August 21, 2015}{12}{Group Intersection to Set Stabiliser and Jerrum's Filter}{Samir Otiv}{$\beta$}
 
 \section{GroupInter to SetStab}
 Before we start, let's look at ways of combining groups.
