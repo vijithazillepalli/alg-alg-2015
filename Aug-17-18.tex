@@ -3,10 +3,10 @@
 \section{Recap and Exercise}
 In the previous class, we were looking at ways to solve $\cal{AUT}(X)$.  We looked at $4$ different problems in this context. Consider \emph{Problem 3} of finding the orbit. We are interested in computing the size of the orbit of  $\alpha \in G$. Since some of the students expressed difficulty in coming up with an algorithm, we decide to state the algorithm and leave the correctness proofs as an exercise.
 
-\subsection{Orbit Computation}
+\subsection{Orbit Computation} \label{sec:orbit-comp}
 The following is an algorithm to calculate the orbit of $\alpha$
 
-\begin{algorithm}
+\begin{algorithm}[htp!]
 \caption{Algorithm for Orbit Computation}\label{orbit}
 \label{alg:orbit_alg}
 \begin{algorithmic}[1]
@@ -184,7 +184,7 @@ Unfortunately we end up proving that the bound is tight.
 
 \begin{proposition}
 There is an $n \in N$, group $G \le S_n$ and a generating set $S$ of $G$, and a $g \in G$ such that the shortest product representation of 
-sequence is of length $|G|$.
+sequence is of length $|G|$. \label{prop:repr-large}
 \end{proposition}
 \begin{proof}
 Let $p_1, p_2, \cdots p_m$ be the first $m$ distinct prime numbers.
@@ -255,6 +255,7 @@ To clarify this, we write this entire algorithm as a procedure.
 
 \begin{algorithm}
 \caption{\textsc{Reduce} Algorithm. Input : Generating set $S$, Output: Reduced Generating Set}
+\label{alg:reduce}
 \begin{algorithmic}[1]
 \State{$B_0 = B$}
 \State{$A[\ ][\ ]$, an empty $n\times n$ array}
