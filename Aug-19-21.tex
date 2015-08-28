@@ -104,7 +104,7 @@ in $G^{(i)}$ (see Section~\ref{sec:find-coset}) }
 \State{Apply Algorithm {\sc Reduce} to $B$ and denote
 $A'$ for the reduced set obtained}
 \State{Pick $g_{ik}$ from $R$ that maps $i$ to $k$}
-\State{$g' = g.g_{ik}^{-1}$}
+\State{$g' = g \circ g_{ik}^{-1}$}
 \State{return \textsc{MemberTest}$(g', A', i+1)$}
 \EndIf
 \EndProcedure
@@ -127,8 +127,9 @@ We consider the following two problem :
 \end{problem}
 \begin{problem}[Group Intersection Problem]
 	Given groups $G$ and $H$ via their generating sets $A$ and $B$
-	respectively, find the generating set of $G\cap H$\footnote{Verify that if $G$
-	and $H$ are groups then $G \cap H$ is also a group}.
+	respectively, find the generating set of $G\cap H$\footnote{Verify
+		that if $G$ and $H$ are groups then $G \cap H$ is also a
+	group}.
 \end{problem}
 
 Since we have already given an algorithm for membership checking, Subgroup
@@ -156,84 +157,144 @@ $\setstab \le \groupintr$
 	$(1,\ldots, n), (1~2),(2~3),
 	\ldots, (n-1~ n)$.
 \end{proof}
+In the next lecture, we will show $\groupintr$ reduces to $\setstab$ thereby
+showing that they are equally hard.
 
+\Lecture{Jayalal Sarma}{August 21, 2015}{12}{Group Intersection to Set
+Stabiliser and Jerrum's Filter}{Samir Otiv}{$\gamma$}
 
-\Lecture{Jayalal Sarma}{August 21, 2015}{12}{Group Intersection to Set Stabiliser and Jerrum's Filter}{Samir Otiv}{$\beta$}
+In last lecture, we completed the discussion on algorithms for Pointwise
+Stabilizer problem and Membership testing. We saw two new problems -- Subgroup
+problem and Group Intersection problem and showed that Subgroup problem can be
+reduced to Membership testing and hence polytime solvable while Set Stabilizer
+problem reduces to Group Intersection problem. We continue with our discussion
+on Group Intersection and Set Stabilizer problem.
 
-\section{GroupInter to SetStab}
-Before we start, let's look at ways of combining groups.
+\section{$\groupintr \le \setstab$}
+We show that Group Intersection problem reduces to Set Stabilizer problem. 
+Before we start, let us look at ways of combining groups.
+\begin{definition}[Direct Product]
+For groups $G,H$, define direct product of $G$ and $H$ denoted $G \times H$ as
+the group 
+\[ G \times H = \{(g,h) ~|~ g \in G,h \in H\} \]
+with group operation for $(g_1, h_1), (g_2,h_2)$ defined as,
+\[ (g_1,h_1)(g_2,h_2) = (g_1g_1,h_1h_2) \]
 
-\subsection{Direct Product}
-$G*H=\{(g,h | g \in G,hH\}$
-$(\alpha,\beta)^{(g,h )}=(\alpha^g,\beta^h)$
+If $G,H$ are subgroups of $S_n$ acting on the set $\Omega$, then the group $G
+\times H$ acts on $\Omega \times \Omega$ with the action defined as
+$(\alpha,\beta)^{(g,h)}=(\alpha^g,\beta^h)$
+where $\alpha, \beta \in \Omega$ and $(g,h) \in G \times H$.
+\end{definition}
 
-\subsection{The reduction is almost done}
-Let $\Sigma=\{ (i,i)| i \in O\}$
+The reduction is as follows : given groups $G$ and $H$, consider the group $G
+\times H$  and $\Sigma'=\{ (i,i)~|~ i \in \Omega \}$. To establish correctness,
+we show that if we consider the action of $G \times H$ on $\Omega \times
+\Omega$, then $\setstab(\Sigma')$ is $G \cap H$. More precisely,
+\begin{claim}
+$(G \cap H)_{duplicate} = \setstab(\Sigma')$ where $(G \cap H)_{duplicate} = \{
+(g,g) ~|~ g\in G \cap H \}$ and Set Stabilizer computation is with respect to
+the action of $G \times H$ on $\Omega \times \Omega$.
+\end{claim}
+\begin{proof} We show containment in both ways.
 
-\subsection{Claim}
-$(G \cap H)_{duplicate} = SetStab(\Sigma)$\newline
-where $(G \cap H)_{duplicate} = \{ (a,a) | a\in G \cap H \}$
-
-\subsection{Proof}
-Forward:\newline
-	$a \in G \cap H$\newline
-	$(a,a) \in S_n*S_n$\newline
-	(i,i) $\in \Sigma, (i,i)^{(a,a) } \in \Sigma$\newline
-	$\therefore (a,a) \in SetStab(\Sigma)$\newline\newline
-Backward:\newline
-	$(a,b) \in SetStab(\Sigma)$\newline
-	$\therefore \forall (i,i) \in \Sigma:(i,i)^{(a,b)}=(j,j)$\newline
-	$j=i^a$\newline
-	$j=i^b$\newline
-	$\therefore a=b \in$ G,H respectively.\newline
-	$\therefore a \in G \cap H$\newline
-
-
-\section{Jerrum's Filter: Reduce the size of the generating set to n-1}
-So far we know a way of constructing it in $n^2$. Jerrum's Filter can do it in n-1 instead.
-Another result: Neomann $ \lfloor n/2 \rfloor $, which we're not going to discuss further in this lecture.
-
-\subsubsection{Jerrum's Filter}
-S is a given set of permutations\newline
-$G = <S>$\newline
-G acts on $\Omega$
-
-\subsubsection{Define a graph}
-$X_S (V,E)$, where $V=\Omega$\newline
-$\forall g \in S$, if $i_g \in \Omega$  is the smallest index moved by g, put an edge $(i_g,i_g^g ) \in E$\newline
-View this as an undirected graph.
-
-\subsubsection{Observation}
-$g^{-1}$  maps $i_g^g$  to $i_g$
-
-\subsubsection{Measure of weight}
-$T \subseteq S_n$
-$wt(X_T )=\Sigma _{g \in T}¦i_g$
-
-\subsubsection{Crude bound on $wt(X_T )$}
-$wt(X_T )\leq \|T\|n$
-
-\subsubsection{The algorithm}
-Maintain a set A such that $X_A$  is acyclic. This is the invariant of the algorithm. (If a new element g comes in, we modify the graph to maintain the acyclicness)\newline
-Process each $g \in S$ one by one.\newline\newline
-For a given g:
-
-	If $g \notin  <A>$, then add g to A and add $e_g$  to the graph $X_A$.
-
-	If there's no cycle created, there's nothing to be done. If there is, consider the cycle created. Let $i_0$  be the least index in the cycle.
-
-	Now, both the edges in the cycle incident to $i_0$ must correspond to $i_0$. (If they didn't then the neighbour of $i_0$ wouldn't be the least moved element by the corresponding group element).
+	 [$(G \cap H)_{duplicate} \subseteq
+	\setstab(\Sigma')$] Consider $g \in G \cap H$.  Clearly
+	$(g,g) \in G \times H$.  For $(i,i) \in \Sigma'$,
+	$(i,i)^{(g,g)} = (i^g, i^g) \in \Sigma'$ by definition of
+	$\Sigma'$. Hence $(g,g) \in \setstab(\Sigma')$.
 	
-	Now consider the walk around the circle from $i_0$ to $i_0$. This corresponds to a product of group elements of the form $g_0 g_1^{\epsilon_1} . . g_k^{\epsilon_k}$. Now, just get rid of $g_0$, and insert h in its place. This will not change the group generated by S, since reachability is preserved.
+	[$SetStab(\Sigma') \subseteq (G \cap H)_{duplicate}$]
+	Let $(g,h) \in SetStab(\Sigma')$. By definition, $\forall
+	(i,i) \in \Sigma'$ we have $(i,i)^{(g,h)} = (i^g,i^g) =(j,j)$
+	for some $j \in \Omega$. In other words, $i^g = i^h$ for all
+	$i$. Hence it must be that $g$ and $h$ are the same giving 
+	$g= h  \in G \cap H$. Hence $(g,h) \in (G \cap
+	H)_{duplicate}$.
+\end{proof}
 	
-	Now since $i_0$ is fixed by all of $g_0, g_1, . . g_k$, therefore the least element moved by h is $>$ i. Therefore, the weight of the graph increases on doing this operation.
+\section{Jerrum's Filter: Obtaining generating set of size $n-1$}
+We know from Schrier's lemma how to obtain a strong generating set for $G \le
+S_n$ of size $O(n^2)$. We also know that for any subgroup of $S_n$, there
+exists a generating set of size $O(n\log n)$. A natural question is : can we
+improve this bound further ?
+
+Mark Jerrum showed that one can give a generator of size $n-1$ instead. The
+process is algorithmic and is called as Jerrum' filter\footnote{It turns out
+	that this can be improved to $\lfloor n/2 \rfloor$ (Neumann) and is
+	tight.  We will not be discussing it in this lecture.}.
+
+\subsection{Main ideas}
+Given a generating set $S$ of $G$ and $G$ acts on a set $\Omega$, our aim is 
+to obtain another generating set $A$ for $G$ of size $\le n-1$.
+
+Given a set $S$ of group elements, we define a undirected graph $X_S(V,E)$ with
+$V= \Omega$ and $E \subseteq V \times V$ is defined as for each $g \in S$, let
+$i_g$ denote the least index moved by $g$ as $i_g$ i,e.  $\forall i \le i_g$
+$i^g = i$.  Now we add the edge $(i_g,i_g^g)$ to $E$. We also 
+label this edge by $g$. 
+
+From the definition of $X_S$, the following can be observed.
+\begin{observation}
+	For a $g \in S$, $i_g \le i_g^g$. Also $g^{-1}$ maps $i_g^g$ to $i_g$.
+	Both $g$, $g^{-1}$ has the same least index. 
+\end{observation}
+The main idea is the following : we maintain a set $A$ of generators in such a
+way that $X_A$ is acyclic. When we get a new $g \in S$, we add $g$ to $A$ and
+compute $X_{A \cup \{a\}}$. Now we make some operation on this graph 
+$X_{A \cup \{g\}}$ in such a way that the resultant graph has no cycles and
+the updated set $A$ still generates $G$. This process is \emph{online},
+since we update the graph as and when $g$ arrives and do not need the entire
+$S$ a priori. Continuing in this manner, we get the $X_A$ to be a forest and
+hence has $n-1$ edges.
+
+Before explaining the details, we need the following measure.
+\begin{definition}[Weight of $T$]
+	Let $T \subseteq S_n$. Then \[ wt(X_T )=\sum_{g \in T} i_g \]
+\end{definition}
+Observe that for any $T$, $wt(T) \le |T|n$.
+
+\newpage
+\subsection{The Algorithm}
+Following is the algorithm.
+\begin{algorithm}[htp!]
+\caption{\textsc{JerrumFilter} : Computing a generating set of size at most
+$n-1$}
+\label{alg:jerfilter}
+\begin{algorithmic}[1] \Procedure{\textsc{JerrumFilter}}{Input :  Generating
+	set $S$ for $G$ given in online fashion}
+	\State{Let $A$ be generating set maintained. Initially $A = \emptyset$}
+	\For{a given $g \in S$}
+		\State{If $g \notin A$, then add $g$ to $A$ and 
+		add $e_g$  to the graph $X_A$}
+		\If{a cycle is created in $X_A$}
+		\State{Let $C$ be the unique cycle created of length $k$}
+		\State{Let $i_0$  be the least index in the cycle $C$, $g_0$ 
+		be an element corresponding to $i_0$}		  
+		\State{Let $\{g_t^{\epsilon_t}\}$ be the edge labels on the
+		  cycle $C$ with $g_0$ as label of edge incident to $i_0$, 
+	  $\epsilon_t \in \{1,-1\}$}
+		  \State{Denote $g_0 g_1^{\epsilon_1}, \ldots
+		  g_k^{\epsilon_k}$ as $h$ }
+		  \State{Remove $g_0$ and add $h$ to the set $A$. If $h$ is
+		  identity, ignore by not adding it to $A$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+%\State{Now, both the edges in the cycle incident to $i_0$
+%			  must correspond to $i_0$. (If they didn't then the
+%			  neighbour of $i_0$ wouldn't be the least moved
+%		  element by the corresponding group element)}
+
+Since $i_0$ is the least index in the cycle, it is fixed by all of 
+$g_0, g_1,\ldots,  g_k$ and therefore the least element moved by $h$ is
+strictly more than $i$. Therefore, the weight of the graph increases by at
+least on $1$ on performing this operation. 
+Since the weight of $S$ is upper bounded by $\poly(|S|,n)$, the process 
+terminates in in polynomially many steps. 
 	
-	Therefore, in polynomially many steps, we will hit the upper bound, and will end up with an acyclic graph.
-	
-	On repeating this with all elements, we have a generating set A' with an acyclic graph $X_{A'}$, and therefore $|A|\leq n-1$.
-
-
-
-
-
+On repeating this with all elements, we have a generating set $A$ with an
+acyclic graph $X_{A}$, and therefore $|A|\leq n-1$.
 
