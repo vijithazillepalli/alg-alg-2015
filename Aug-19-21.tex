@@ -235,8 +235,8 @@ label this edge by $g$.
 
 From the definition of $X_S$, the following can be observed.
 \begin{observation}
-	For a $g \in S$, $i_g \le i_g^g$. Also $g^{-1}$ maps $i_g^g$ to $i_g$.
-	Both $g$, $g^{-1}$ has the same least index. 
+	For a $g \in S$ $g^{-1}$ maps $i_g^g$ to $i_g$. Also 
+	both $g$, $g^{-1}$ has the same least index. 
 \end{observation}
 The main idea is the following : we maintain a set $A$ of generators in such a
 way that $X_A$ is acyclic. When we get a new $g \in S$, we add $g$ to $A$ and
@@ -272,7 +272,7 @@ $n-1$}
 	\State{Let $A$ be generating set maintained. Initially $A = \emptyset$}
 	\For{a given $g \in S$}
 		\State{If $g \notin A$, then add $g$ to $A$ and 
-		add $e_g$  to the graph $X_A$}
+		add $e_g = (i_g, i_g^g)$  to the graph $X_A$}
 		\If{a cycle is created in $X_A$} \label{step:cyc}
 		\State{Let $C$ be the unique cycle created of length $k$}
 		\State{Let $i_0$  be the least index in the cycle $C$, $g_0$ 
@@ -291,7 +291,9 @@ $n-1$}
 \end{algorithmic}
 \end{algorithm}
 
-The algorithm is self explanatory till step~\ref{step:cyc}. 
+The algorithm is self explanatory till step~\ref{step:cyc}. Note that there is
+exactly one cycle formed by adding of $e_g$. This is because, so far we have
+maintained the invariant that $X_A$ is acyclic.
 Let $i$ be the least index in the cycle $C$. We claim that
 one of the edges incident to $i_0$ labelled by $g$ in $C$ must have $i =
 i_0^g$ as its least index.  If not then the
