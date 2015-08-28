@@ -253,9 +253,16 @@ Before explaining the details, we need the following measure.
 \end{definition}
 Observe that for any $T$, $wt(T) \le |T|n$.
 
-\newpage
 \subsection{The Algorithm}
-Following is the algorithm.
+The main idea of the algorithm is to maintain a set $A$ such that $X_A$ is
+acyclic. In the construction, we ensure that we add edges
+corresponding to element only in $A$ (as explained while we defined $X_A$) 
+and remove those edges not in $A$.
+
+At the end of the process, we get an acyclic graph which is a forest with
+number of edges at most $n-1$. Hence $|A|$ is upper bounded by number of
+edges in the graph which is at most $n-1$.
+
 \begin{algorithm}[htp!]
 \caption{\textsc{JerrumFilter} : Computing a generating set of size at most
 $n-1$}
@@ -270,23 +277,25 @@ $n-1$}
 		\State{Let $C$ be the unique cycle created of length $k$}
 		\State{Let $i_0$  be the least index in the cycle $C$, $g_0$ 
 		be an element corresponding to $i_0$}		  
-		\State{Let $\{g_t^{\epsilon_t}\}$ be the edge labels on the
-		  cycle $C$ with $g_0$ as label of edge incident to $i_0$, 
-	  $\epsilon_t \in \{1,-1\}$}
+		\State{Let $\{g_t\}_{t \in [k]}$ be the edge labels on the
+	cycle $C$ with $g_0$ as label of edge incident to $i_0$}
 		  \State{Denote $g_0 g_1^{\epsilon_1}, \ldots
-		  g_k^{\epsilon_k}$ as $h$ }
-		  \State{Remove $g_0$ and add $h$ to the set $A$. If $h$ is
-		  identity, ignore by not adding it to $A$}
+		  g_k^{\epsilon_k}$ as $h$  where $\epsilon_i \in \{1,-1\}$ 
+		  defines the  direction}
+		  \State{Remove $g_0$ and add $h$ to the set $A$ and update
+		  $X_A$ to reflect the changes}
+		  \State{If $h$ is identity, ignore by not adding it to $A$}
 		\EndIf
 	\EndFor
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-The above algorithm self explanatory till step~\ref{step:cyc}. We claim that
-one of the edges incident to $i_0$ in $C$ must have $i_0$ as its least index.
-This must be the case because, if not then the
-neighbour of $i_0$ would not be the least moved element by the corresponding
+The algorithm is self explanatory till step~\ref{step:cyc}. 
+Let $i$ be the least index in the cycle $C$. We claim that
+one of the edges incident to $i_0$ labelled by $g$ in $C$ must have $i =
+i_0^g$ as its least index.  If not then the
+neighbours of $i_0$ would not be the least moved element by the corresponding
 group element.
 
 Since $i_0$ is the least index in the cycle, it is fixed by all of 
