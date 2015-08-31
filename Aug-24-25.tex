@@ -44,12 +44,9 @@ Hg_1g_2 &= Hg_1'g_2  & \text{[Since $Hg_1'= Hg_1$]}\\
 \end{eqnarray*}
 \end{proof}
 
-\textcolor{red}{
 We want to emphasize two things here: firstly, the above claim shows that $*$ is well-defined whenever $H\triangleleft G$. Secondly, note that this claim holds only when $H\triangleleft G$. Otherwise, the operation $*$ on the set of cosets is in general not well-defined. 
-}
 
-
-It is natural to ask if the above claim characterizes normal subgroups. That is is the conerse of the above claim true ? 
+It is natural to ask if the above claim characterizes normal subgroups. That is is the converse of the above claim true ? 
 
 \begin{claim}
 Let $H\leq G$. Let $g_1,g_1',g_2,g_2'\in G$ be such that if $Hg_1=Hg_1'$ and $Hg_2=Hg_2'$ implies $Hg_1g_2 = Hg_1'g_2'$. Then $H\triangleleft G$.
@@ -109,8 +106,7 @@ Let $G,H\leq S_n$ and $N_{S_{n}}(H)$ be the normalizer of $H$ in $S_n$.
 We say $G$ \emph{normalizes} $H$when $\forall g\in G, Hg = gH$. This means $G\leq N_{S_{n}}(H)$. We solve the Group Intersection problem
 for this special case.
 
-\textcolor{red}
-{We are already aware of the fact that for general groups $G$ and $H$, we do not have an efficient algorithm for computing the generating set $\langle S\rangle$ of $G\cap H$.} 
+%We are already aware of the fact that for general groups $G$ and $H$, we do not have an efficient algorithm for computing the generating set $\langle S\rangle$ of $G\cap H$.
 
 For general groups $G$ and $H$, we are not aware of an efficient algorithm for computing the generating set of $G\cap H$. Before getting on to the actual algorithm for computing the generating set of $G$ and $H$ in the special setting let us have some more observations.
 
@@ -151,10 +147,7 @@ Two quick observations are:
 
 {\bf Observation 1.} On the right end of the above chain $G^{(n-1)}$ is the subgroup which \emph{fixes} all the elements $1,2,\ldots,n-1$. Hence it gives the identity permutation in $S_n$ exactly. Thus $G\cap G^{(n-1)}H  = G\cap H$.
 
-{\bf Observation 2.} On the left end of the above chain $G\cap G^{(0)}H = G\cap GH$ 
-\textcolor{red}{
-This is because $GH = G$ as $H$ is contained in $G$ as we proved earlier and $G\leq S_n$. Hence $G\cap GH = G$.}
-As $G\subseteq GH$, we have $G\cap G^{(0)}H = G\cap GH = G$.   
+{\bf Observation 2.} On the left end of the above chain $G\cap G^{(0)}H = G \cap GH$. As $G\subseteq GH$, we have $G\cap G^{(0)}H = G\cap GH = G$.   
 
 Thus the above tower of subgroups really look like that as shown below.
 \begin{eqnarray*}
@@ -182,6 +175,7 @@ These three properties must be satisfied in order to get a \emph{strong generati
 \begin{itemize}
 	\item We can apply our known algorithm to find the set of coset representatives of the subgroup $G^{(i)}H$ in $G^{(i-1)}H$.
 	\item For the second property, since we already have a generating set $\langle A\rangle$ for $G$ as input, we have to find the generating set of $G^{(1)}H$ such that the membership testing of elements of the subgroup can be done efficiently. Now $G^{(1)}H$ is defined as the product of all the elements in $G^{(1)}$ and $H$. Hence the generating set of $G^{(1)}H$ is the \emph{union} of the generating set $S_1$ of $G^{(1)}$ and that of $H$ i.e. $\langle S_1 \rangle\cup \langle B \rangle$. Once we get these, we can easily apply our \emph{Membership Testing algorithm} which was done in a previous lecture.
+	\jsay{A detail is missing here: why is the union the generating set?}
 	\item For an assurance of the third property we need to prove the following lemma.
 \end{itemize}
 \begin{claim}\label{coset}
@@ -196,7 +190,7 @@ The crux of the proof of the above claim lies in the following arguments about h
 			  &= G^{(i)}g'H & \text{[As $h'\in H , Hh' = H$]}\\
 			  &= (G^{(i)}g')H.
 \end{eqnarray*}
-The rest of the proof is left as an exercise. Performing an intersection with $G$ changes the cosets but we need to argue that the \emph{number of cosets} still remains the same and is essentially bounded above by $(n-i)$ in the $i$-$th$ level of the tower of subgroups. As an intermediate observation, we claim the following:
+The rest of the proof is left as an exercise. What remains to be argued is that after the intersection with $G$ \emph{number of cosets} still bounded above by $(n-i)$ in the $i$-$th$ level of the tower of subgroups. As an intermediate observation, we claim the following:
 \begin{claim}
 	$H\triangleleft GH$.
 \end{claim}
@@ -212,8 +206,12 @@ The rest of the proof is left as an exercise. Performing an intersection with $G
 \subsection{The Algorithm}
 Now we are in a perfect set up to describe the algorithm for computing the generating set of $G\cap H$. The algorithm just applies {\bf Schreier's Lemma} \emph{recursively} at all the $(n-1)$ levels in the tower of subgroups to compute the generating set of $G\cap G^{(i)}H,~\forall i=1,2,3,\ldots,(n-1)$.\\\\We know that the number of cosets in the $i$-$th$ level is bounded above by a small quantity $(n-i)$ as Claim \ref{coset} shows. From the REDUCE algorithm that we saw in a previous lecture we know that the size of the generating set at each of the $(n-1)$ levels of the tower of subgroups computed by {\bf Schreier's Lemma} is $O(n^2)$. Therefore the asymptotic running time of this algorithm is $O(n^3)$.
 
-\section{Another Special Case of Group Intersection Problem}
-In this section we are going to solve the Problem \ref{1} in another special setting. We have already mentioned of the fact that $GA\leq SetStab\equiv\text{ Group Intersection Problem}$. Graph Isomorphism problem is hard in general. In this context we have seen that $\mathcal{COLOR-GI}\leq \mathcal{GA}$. When the number of colours, $k=1$, colored graph isomorphism is the same problem of Graph Isomorphism. Thus instead of getting our attention to the \emph{number of colours}, we focus on the size of each colour class, i.e. $|\psi^{-1}(i)|, i\in \{1,2,\ldots,k\}$. We assume that $\forall i\in\{1,2,\ldots,k\}, |\psi^{-1}(i)|\leq b, b\in \mathbb{N}$ i.e. the size of each colour class in bounded by a {\bf \emph{small constant}} $b$. Now the question we ask is the following:
+%\section{Another Special Case of Group Intersection Problem}
+%In this section we are going to solve the Problem \ref{1} in another special setting. 
+
+\section{From Setwise Stabilizers to Point-wise Stabilizers : Bounded Color Class Graph Isomorphism Problem}
+
+We have already mentioned of the fact that $GA\leq SetStab\equiv\text{ Group Intersection Problem}$. Graph Isomorphism problem is hard in general. In this context we have seen that $\mathcal{COLOR-GI}\leq \mathcal{GA}$. When the number of colours, $k=1$, colored graph isomorphism is the same problem of Graph Isomorphism. Thus instead of getting our attention to the \emph{number of colours}, we focus on the size of each colour class, i.e. $|\psi^{-1}(i)|, i\in \{1,2,\ldots,k\}$. We assume that $\forall i\in\{1,2,\ldots,k\}, |\psi^{-1}(i)|\leq b, b\in \mathbb{N}$ i.e. the size of each colour class in bounded by a {\bf \emph{constant}} $b$. Now the question we ask is the following:
 \begin{problem}
 	Given two graphs $X_1(V_1,E_2)$ and $X_2(V_2,E_2)$ with sizes of the color classes bounded by a constant, can we check if they are isomorphic?
 \end{problem}
