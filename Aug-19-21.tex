@@ -211,17 +211,22 @@ the action of $G \times H$ on $\Omega \times \Omega$.
 	$g= h  \in G \cap H$. Hence $(g,h) \in (G \cap
 	H)_{duplicate}$.
 \end{proof}
-	
+
+Now that we know that $\groupintr$ and $\setstab$ problems are equivalent to each other and are both seemingly harder than the graph automorphism problem which we want to solve. Our next aim would be to solve special cases of these problems.
+
+Before we do the special cases, we would like to do one interesting optimization for the {\sc Reduce} algorithm.
+
 \section{Jerrum's Filter: Obtaining generating set of size $n-1$}
-We know from Schrier's lemma how to obtain a strong generating set for $G \le
+
+\jsay{All the arguments are in place after the edit. A little more cleanup is to be done, will do that at the end of the semester.}
+
+We know from Schreier's lemma how to obtain a strong generating set for $G \le
 S_n$ of size $O(n^2)$. We also know that for any subgroup of $S_n$, there
 exists a generating set of size $O(n\log n)$. A natural question is : can we
 improve this bound further ?
 
 Mark Jerrum showed that one can give a generator of size $n-1$ instead. The
-process is algorithmic and is called as Jerrum' filter\footnote{It turns out
-	that this can be improved to $\lfloor n/2 \rfloor$ (Neumann) and is
-	tight.  We will not be discussing it in this lecture.}.
+process is algorithmic and is called as Jerrum's filter\footnote{It turns out that this can be improved to $\lfloor n/2 \rfloor$ (Neumann) and is tight.  We will not be discussing it in this lecture.}.
 
 \subsection{Main ideas}
 Given a generating set $S$ of $G$ and $G$ acts on a set $\Omega$, our aim is 
