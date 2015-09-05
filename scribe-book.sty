@@ -211,30 +211,28 @@
 
 \newcommand{\homework}[3]
 {
-	\ifthenelse {\equal{\psnumber}{0}} 
-	% If psnumber is 0, we include only one with matching pslabel.
+	\ifthenelse {\equal{\psnumber}{-1}} 
+	% If psnumber is -1, we include only one with matching pslabel.
 	{
 		\ifthenelse {\equal{\pslabel}{#2}}
 		{
-			\begin{exercise}[Problem \theproblemsetcounter.\ref{problem:#2}]
+			\begin{exercise}[Problem Set #1, Question \ref{problem:#2}]
 			\label{exercise:#2}
 			#3 	
 			\end{exercise}
 		}
 	}
 	{
-	% If psnumber is not 0, include all psnumber matches.
+	% If psnumber is not -1, include all psnumber matches.
 	% check if it is standalone
 		\ifthenelse {\equal{\psnumber}{#1}} 
 		{
 			\stepcounter{problemcounter}
-			\ifthenelse {\equal{\standalonepsflag}{1}}	
-				{\sc Flag Error} %standalone pset question-should not come here.
-				{\item\label{problem:#2}
-					\makeatletter
-					\@ifundefined{r@exercise:#2}{}{(See Exercise \ref{exercise:#2})}
-					\makeatother
-				 #3} % in-lecturenote question.
+			\item\label{problem:#2}
+			\makeatletter
+			\@ifundefined{r@exercise:#2}{}{(See Exercise \ref{exercise:#2})}
+			\makeatother
+			 #3 % in-lecturenote question.
 		}
 	}
 }
@@ -242,7 +240,7 @@
 \newcommand{\printexercise}[1]
 {
 \def\standalonepsflag{0} % 1 if standalone, 0 if in lecturenotes
-\def\psnumber{0} % 0 if only labelled one needs to be printed.
+\def\psnumber{-1} % 0 if only labelled one needs to be printed.
 \def\pslabel{#1} % ignored if psnumber is not 0.
 \input{problemsets.tex}
 }
