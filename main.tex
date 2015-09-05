@@ -4,6 +4,9 @@
 \usepackage{complexity}
 \usepackage{graphicx}
 \usepackage{tocloft}
+\usepackage{standalone}
+\usepackage{enumerate}
+
 \usepackage{xcolor}
 \usepackage{color}
 \definecolor{delta}{rgb}{0,0.2,0}
@@ -102,5 +105,9 @@ Draft---\today\ and forever
 \input{lecture-11-12.tex}
 \input{lecture-13-14.tex}
 \input{lecture-15-16.tex}
+
+\def\psnumber{\theproblemsetcounter}
+\input{problemsets.tex}
+\stepcounter{problemsetcounter}
 
 \end{document}
