@@ -206,7 +206,8 @@
 \stepcounter{problemsetcounter}
 \newcounter{problemcounter}
 \stepcounter{problemcounter}
-\usepackage{showlabels}
+%\usepackage{showlabels}
+\usepackage{etoolbox}
 
 \newcommand{\homework}[3]
 {
@@ -230,8 +231,9 @@
 			\ifthenelse {\equal{\standalonepsflag}{1}}	
 				{\sc Flag Error} %standalone pset question-should not come here.
 				{\item\label{problem:#2}
-					\ifdefined\exercise:#2
-				    {(See Exercise \ref{exercise:#2})}
+					\makeatletter
+					\@ifundefined{r@exercise:#2}{}{(See Exercise \ref{exercise:#2})}
+					\makeatother
 				 #3} % in-lecturenote question.
 		}
 	}
