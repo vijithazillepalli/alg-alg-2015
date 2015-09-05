@@ -7,20 +7,22 @@
 \newtheorem{exercise}[theorem]{Exercise}
 
 \def\standalonepsflag{1} % 1 if standalone, 0 if in lecturenotes
-\def\psnumber{1} % 0 if only labelled one needs to be printed.
-\def\pslabel{graph-iso-problem} % ignored if psnumber is not 0.
+\def\psnumber{1} 
+%  -1 if only labelled one needs to be printed.
+%   0 if exercises 
+% > 0 if specific problem set number
+\def\pslabel{} % ignored if psnumber is not 0.
 
 \newcommand{\homework}[3]
 {
-	\ifthenelse {\equal{\psnumber}{0}} 
-	% If psnumber is 0, we include only one with matching pslabel.
+	\ifthenelse {\equal{\psnumber}{-1}} 
 	{
 		\ifthenelse {\equal{\pslabel}{#2}}
 		{
 			\begin{exercise}
 			\label{exercise:#2}
 			#3 	
-			\end{exercise}
+			\end	{exercise}
 		}
 	}
 	{
@@ -41,15 +43,17 @@
 
 \ifthenelse {\equal{\standalonepsflag}{0}}
 {
-	\ifthenelse {\not\equal{\psnumber}{0}}
+	\ifthenelse {\not\equal{\psnumber}{-1}}
 	{
 		\newpage
-		\section*{Problem Set \#\psnumber}
-		\begin{enumerate}[(\theproblemsetcounter.1)]	
+		\ifthenelse {\equal{\psnumber}{0}}
+		{\section*{Exercises}}
+		{\section*{Problem Set \#\psnumber}}		
+		\begin{enumerate}[(\psnumber.1)]	
 	}
 }
 {
-	\ifthenelse {\not\equal{\psnumber}{0}}
+	\ifthenelse {\not\equal{\psnumber}{-1}}
 		{\begin{questions}}
 }
 
@@ -101,11 +105,11 @@ For any group $G$, the commutator subgroup $G'$ of the groups, sometimes denoted
 
 \ifthenelse {\equal{\standalonepsflag}{0}}
 {
-	\ifthenelse {\not\equal{\psnumber}{0}}
+	\ifthenelse {\not\equal{\psnumber}{-1}}
 		{\end{enumerate}}
 }
 {
-	\ifthenelse {\not\equal{\psnumber}{0}}
+	\ifthenelse {\not\equal{\psnumber}{-1}}
 	    	{\end{questions}}
 }
 
