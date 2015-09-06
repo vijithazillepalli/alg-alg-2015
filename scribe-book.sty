@@ -131,7 +131,7 @@
 \newlistof{scribe}{scr}{\listofscribes}
 \newlistof{instructors}{instr}{\listofinstr}
 
-\newcommand{\Lecture}[6]{
+\newcommand{\Lecture}[7]{
 \newpage
 \setcounter{chapter}{#3}
 \setcounter{lecture}{#3}
@@ -170,12 +170,14 @@
 \phantomsection		% for fixing hyperref link
 \addcontentsline{instr}{instructors}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\em #1}}
 \noindent
-\parbox{8cm}{
+\parbox{9cm}{
 %	Indian Institute of Technology Madras\\
 	CS6842 -- Algorithmic Algebra\\
 	\rule{0mm}{6mm}%
 	{\it Instructor:} #1 \\
-	{\it Scribe:}	#5\\
+	\ifthenelse{\equal{#6}{$\gamma$}}{({\it TA :} #7) \\}{
+		\ifthenelse{\equal{#6}{$\delta$}}{({\it TA :} #7) \\}
+	}{ {\it Scribe:} #5 \\}
 	{\it Date:}     #2 \\
 	{\it \bf Status:} #6
 }
