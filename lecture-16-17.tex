@@ -1,115 +1,257 @@
-\Lecture{Jayalal Sarma}{Aug 31, 2015}{16}{Transitivite Group Actions}{Mitali Bafna}{$\beta$}{K Dinesh}
-\newtheorem{defn}{Defn}
-\setlength{\parindent}{0pt}
+\Lecture{Jayalal Sarma}{Aug 31, 2015}{16}{On Transitive Group Actions and their properties}{Mitali Bafna}{$\gamma$}{K Dinesh}
 
-Lets consider some examples of Group Action.
+In the last lecture, we saw algorithms for solving coloured $\gi$ when the
+colour class are bounded size. In this lecture, we will see some new concepts 
+for computing $Aut(X)$ for graph $X$ which has more a divide and conquer
+flavour.
 
-\begin{itemize}
-\item
-Consider the complete binary tree of depth $k$. Since any isomorphism will send leaves to leaves, $G = Aut(X)$ acts on the leaves and we observe that given any 2 leaves we can get an isomorphism which sends one leaf to the other.\\
+\section{Transitive Group action and Blocks}
+We start with the following example. Consider a complete binary tree $T$ of 
+depth $k$. Let us ask : how does $Aut(X)$ act on the leaves of $T$. If we
+consider the action of $Aut(X)$ on set the leaves of $T$, then we can
+observe that there is an automorphism that maps any leaf to any other leaf.
+For example, the permutation which takes $1$ to $3$ and $2$ to $4$ and fixes
+the rest takes leaf $1$ to leaf $3$.
+\begin{figure}[htp!]
+	\centering
+	\includegraphics[scale=0.68]{images/transitive}
+	\caption{Transitive group action}
+	\label{fig:transitive}
+\end{figure}
 
-\item
-Consider $X = k$ triangles. $Aut(X)$ acts on the vertices and here too given any two vertices there is a permutation in $Aut(X)$ that sends one to the other. \\
+This property of the group action is called Transitive.
+\begin{definition}[Transitive Group Action]
+	For a group $G \le S_n$ acting on a set $\Omega$, the action is said
+	to be transitive if, for all $\alpha, \beta \in \Omega$, there exists
+	a $g \in G$ such that $\alpha^g = \beta$.
+\end{definition}
+In the above example, we can see $Aut(X)$ acts transitively on the set of
+leaves of $T$.
 
-\end{itemize}
+Observe that any nontrivial automorphism can either map $1$ and $2$ among
+each other (i,e. $1$ to $2$ and $2$ to $1$) or map both $1$ and $2$ to say
+$3$ and $4$. But it can never map say $1$ to $2$ and $2$ to $3$ as it violate
+adjaceny. Hence the leaves with common ancestors always gets moved in a pair.
 
+Consider another graph $X$ which is $k$ vertex disjoint triangles. Consider
+the action of $Aut(X)$ on $V(X)$. We again observe a similar phenomena as
+before. There is an automorphism that takes any vertex to any vertex. Also
+any automorphism maps vertices in a triangle to itself or to a totally 
+different triangle. Hence either a triangle is mapped to itself or is moved
+whole together as a block.
 
-These 2 examples motivate the following definition:
+These two examples motivate the notion of blocks.
 
-\begin{defn}{Transitivity:}
-G acts on $\Omega$ transitively if there is only one orbit, i.e. $\forall \alpha,\beta \in \Omega$, $\exists g \in G$, such that $\alpha^g = \beta$.
-\end{defn}
+\begin{definition}[Blocks]
+	For a group $G$ acting on $\Omega$, a set $\Delta \subseteq \Omega$ 
+	is a block if $\forall g \in G, \Delta^g = \Delta$ or 
+	$\Delta^g \cap \Delta = \phi$.
+\end{definition}
+We observe that $\Omega$ and the singletons sets $\{\alpha\}$
+where $\alpha \in \Delta$ form blocks trivially. 
 
+Apart from the fact that such block structure naturally arise in the action
+in many graphs, they also can be potentially used to compute $Aut(X)$. In the
+case of trees, we can start with trivial blocks whose automorphisms are also
+trivial, combine the blocks and obtain the automorphism for larger blocks and
+proceed in a bottom up manner building larger blocks and thereby get the
+automorphism of the entire tree\footnote{This is not a rigoruos argument and
+is more of an idea to use blocks for computing automorphism.}.
 
-In example 2, any $g \in Aut(x)$ will send a triangle to itself or another triangle. Similarly for example 1, this property holds for the leaves taken in pairs, where the pair has all ancestors common.\\
+\section{Primitive actions}
+We saw that for $\Omega = [n]$ and $G = S_n$, the sets $\Omega$, $\{1\}, \{2\},
+\ldots, \{n\}$ does form blocks. Are there any other blocks ? The answer is
+no since for any $T \subsetneq \Omega$ of size at least $2$, there is a
+permutation in $G$ that fixes one and moves the other. Hence these are the only
+blocks and we call such blocks trivial blocks and the action as
+\emph{primitive}.
 
-\begin{defn}{Block:}
-$\Delta$ is a said to be a block if $\forall g \in G, \Delta^g = \Delta$ or $\Delta^g \cap \Delta = \phi$.
-\end{defn}
+\begin{definition}[Primitive action]
+	A group action of $G$ on $\Omega$ is primitive if there are no
+	non-trivial blocks. An action which is not primitive is called
+	imprimitive.
+\end{definition}
 
-\begin{defn}{Primitive:}
-We say that the group action is primitive if there are no blocks other than $\Omega$ and the singletons. 
-\end{defn}
+Let us consider another action where $G \subseteq S_n$ acts on itself via
+right multiplication (see Lecture 8). That is for $g' \in G$, the action
+takes $g$ to $gg'$ with $\Omega = G$. This action is clearly transitive as
+given any $g,h \in G$, $g' = g^{-1}h$ takes $g$ to $h$. Also, if $G$ has a 
+non-trivial \footnote{That is $H$ is not $G$ or $\{id\}$} subgroup $H$ then
+the action is not primitive.  This is because, the cosets of $H$ in $G$ form 
+the non-trivial blocks. That is, for any two shift of $H$ say $Hg_1, Hg_2$,
+either $Hg_1 = Hg_2$ or $Hg_1 \cap Hg_2 = \emptyset$ (Lemma~\ref{lag1}) which
+we observed in the proof of Lagrange's theorem.
 
-Examples of block structure:
+This shows that if $G$ has a non-trivial subgroup, then the action is not
+primitive. Is the converse observation that $G$ has only trivial
+subgroup imply the action is primitive also true ? We will see in the next 
+lecture that the converse holds too. This gives a very interesting
+characterisation or a ``connection'' between blocks which are combinatorial in
+nature and subgroups which are algebraic in nature.
 
-\begin{itemize}
-\item
-$G = S_n$ 
+We first show that action of $G$ on $\Omega$ induces a partition to form a
+block system.
 
-Action is trivially transitive. No non-trivial blocks hence primitive.
-
-\item
-$G \leq S_n$ acts on itself (right-multiplication, $\Omega = G$).
-
-This is a transitive action because given $g,h \in G, g' = g^{-1}h$ will take $g \rightarrow h$. If $G$ has a non-trivial subgroup $H$ then the action is not primitive. Namely the cosets of $H$ in $G$ form the non-trivial blocks. We will see in the next lecture that the converse holds too. 
-
-({\sf Hint}: consider $SetStab(\Delta)$.)
-
-\end{itemize}
-
-\begin{defn}{Block System:}
+\begin{definition}[Block System]
 A partition of $\Omega$ into sets such that each part is a block under the action of G.
-\end{defn}
+\end{definition}
 
-{\sf A Series of Claims:}
-
-\begin{itemize}
-\item
-Claim 1: $\Delta^g$ is a block if $\Delta$ is a block. 
-
+To see this, we will explore some properties of blocks.
+\begin{claim}
+	Let $G \le S_n$ be a group acting on $\Omega$ and $\Delta \subseteq \Omega$
+	be a block. 
+	Then for any $g \in G$, the
+	following holds.
+	\begin{enumerate}
+		\item  $\Delta^g$ is also a block
+		\item  $|\Delta^g|  = |\Delta|$
+	\end{enumerate} \label{cl:block-prop}
+\end{claim}
 \begin{proof}
-Suppose not. Implies $\exists h \in G, \Delta^{gh} \ne \Delta^g$ and $\Delta^{gh} \cap \Delta^g \ne \phi$.
+	\begin{description}
+		\item[Proof of 1] We give a proof by contradiction. Suppose
+			there exists a $g \in G$ for which $\Delta^g$ is not a
+			block. By definition, since $\Delta^g$ is not a
+			block, there exists an $h \in G$ such that 
+			\[ \Delta^{gh} \ne \Delta^g \text{ and } 
+			\Delta^{gh} \cap \Delta^g \ne \emptyset\]
+			Hence there exists $\beta \in \Delta^g$ but $\beta^h
+			\not \in \Delta^g$ and there is a $\gamma \in
+			\Delta^{gh} \cap \Delta^g$.
+			Since $\beta \in \Delta^g$, there exists an $\alpha
+			\in \Delta$ such that $\alpha^{gh} \not \in
+			\Delta^g$. Hence $\alpha^{ghg^{-1}} \not \in \Delta$
+			while $\alpha^{ghg^{-1}} \in \Delta^{ghg^{-1}}$. Hence
+			$\Delta \ne \Delta^{ghg^{-1}}$. 
 
-Consider the action of $g' = (gh)^{-1}$ on $\Delta^{gh}, \Delta^g$. We have that $(\Delta^{gh})^{g'} = \Delta$.
-
-Since $\Delta^{gh} \ne \Delta^g \Rightarrow \exists \beta \in \Delta^{gh}, \beta \notin \Delta^g$. Since any group element permutes $\Omega$, $x^g = y^g \Leftrightarrow x = y$. So $\beta^{g'} \in \Delta$ and $\notin \Delta^{gg'}$.
-
-But $\Delta^{gh} \cup \Delta^g \ne \phi \Rightarrow \exists \alpha \in \Delta^{gh}, \in \Delta^g$. This means that $\alpha^{g'} \in \Delta$ and $\in \Delta^{gg'}$. 
-
-Combining these two we get that $\Delta \ne \Delta^{gg'}$ and $\Delta \cap \Delta^{gg'} \ne \phi$, which contradicts the fact that $\Delta$ is a block.
-
+			Since $\gamma \in \Delta^g$ and $\gamma \in
+			\Delta^{gh}$, there exists an $\omega,\delta \in 
+			\Delta$ such that $\gamma = \omega^g = \delta^{gh}$. 
+			Hence $\omega =	\gamma^{ghg^{-1}} \in 
+			\Delta^{ghg^{-1}}$. Along with the fact that
+			$\omega \in \Delta$, we get that $\Delta \cap
+			\Delta^{ghg^{-1}}\ne \emptyset$. But $\Delta \ne
+			\Delta^{ghg^{-1}}$ and $\Delta \cap
+			\Delta^{ghg^{-1}}\ne \emptyset$ contradicts the fact
+			that $\Delta$ is a block. Hence it must be that
+			$\Delta^g$ is also a block.
+		\item[Proof of 2] 
+		This follows from the fact that $g \in G$ is a permutation
+		and it is a bijection map.
+	\end{description}
 \end{proof}
 
-\item
-Claim 2: $|\Delta^g| = |\Delta|$
+If the group action is transitive, then $\Omega$ is partitioned by the
+blocks.
+\begin{claim} For a group $G \le S_n$ that acts transitively on $\Omega$ with
+	$\Delta \subseteq \Omega$ as a block, the following holds.
+	\begin{enumerate}
+		\item $\bigcup_{g \in G} \Delta^g = \Omega$
+		\item For any $g_1, g_2 \in G$,  $\Delta^{g_1} \cap
+			\Delta^{g_2} \ne \phi \Rightarrow \Delta^{g_1} =
+			\Delta^{g_2}$.  
+		\item $|\Delta|$ must divide $|\Omega|$.
+	\end{enumerate}
+\end{claim}
+\begin{proof}
+	\begin{description}
+		\item[Proof of 1] 
+Let $k \in \Delta$. For any $k' \in \Omega$, since the action is transitive
+$\exists g$ such that  $k^g = k'$ giving $k' \in \Delta^g$. Hence $\Omega
+\subseteq \bigcup_{g \in G} \Delta^g $. The other containment is direct and
+hence they are equal.
+		\item[Proof of 2]
+		This is true since, with $\Delta^{g_1}$ being a block
+		(Claim~\ref{cl:block-prop}(1)), either $\Delta^{g_1} =
+		\Delta^{g_1(g_1^{-1}g_2)}$ or  $\Delta^{g_1} \cap
+		\Delta^{g_1(g_1^{-1}g_2)} = \emptyset$.
+	\item[Proof 3] The above two claims prove that $\Omega$ is partitioned
+		into subsets with equal cardinality and all of them have the
+		same size as $|\Delta|$ (Claim~\ref{cl:block-prop}(2)). So
+		$|\Delta|$ must divide $|\Omega|$.  \end{description}
+\end{proof}
 
-This follows from the fact that $g \in G$ permutes the elements of $\Omega$.
+We get an immediate sufficient condition on $\Omega$ for the action of any 
+$G$ to be primitive. 
+\begin{corollary}
+	If $|\Omega |$ is prime, then the action of any $G \le S_n$ on
+	$\Omega$ is bound to be primitive.  
+\end{corollary}
 
-\item
+Before ending, let us see why transitive actions are important. For a general
+group $G$ whose action is not necessarily transitive, if we look at the
+action on elements of an orbit, the action becomes transitive. Hence we can
+use our divide and conquer strategy to build blocks and at least obtain
+automorphism group for the orbits.
+%\dsay{I am not very clear about this para}
 
-Claim 3: $\bigcup_{g \in G} \Delta^g = \Omega$
+\Lecture{Jayalal Sarma}{Sep 1 2015}{17}{Characterisation of
+Primitivity}{Mitali Bafna}{$\gamma$}{K Dinesh}
 
-Let $k \in \Delta$ and $k' \in \Omega$. Since the action is transitive $\exists g, k^g = k'$. So $k' \in \Delta^g$. Hence $\Omega \subseteq \bigcup_{g \in G} \Delta^g $. The other containment is trivial and hence they are equal.
+In the last lecture, we saw transitive and primitive group action. In this
+lecture, we give an algebraic characterisation of primitive group actions.
 
-\item
+We need the notion of maximal subgroup of a group.
+\begin{definition}[Maximal Subgroup]
+$H \leq G$ is a maximal subgroup if there does not exist an $H'$ such that 
+$H \lneq H' \lneq G$ where
+$\lneq$ denotes strict subgroup containment.
+\end{definition}
 
-Claim 4: $\Delta^{g_1} \cap \Delta^{g_2} \ne \phi \Rightarrow \Delta^{g_1} = \Delta^{g_2}$. 
+The main theorem is the following.
+\begin{theorem}
+	Suppose $G \le S_n$ acts transitively on $\Omega$. Then the action is
+	primitive if and only if $\exists \alpha \in \Omega$ such that
+	$G_{\alpha}$ is the maximal subgroup of $G$ where $G_\alpha$ is the
+	stabilizer of $\alpha$
+	\label{thm:primitive-action}
+\end{theorem}
 
-This is true because $\Delta^{g_1}$ is a block (Claim 1).
+Recall the action (in the last lecture) for $G \le S_n$ where $G$ acts on
+itself. We saw that if $G$ has any non-trivial subgroup $H'$, the the action is
+not primitive. If $H'$ has a super group $H$ then, there is a nice relation
+between the cosets induced by $H$ and $H'$ on $G$ described as an exercise
+below.
+\printexercise{subgroup-cost-structure}
 
-\item
+\begin{figure}[htp!]
+	\centering
+	\includegraphics[scale=0.7]{images/coset}
+	\caption{Coset structure of subgroups $H$ and $H'$. Dotted ones are
+	cosets if $H'$.}
+	\label{fig:coset}
+\end{figure}
 
-Claim 5: For any block $\Delta , |\Delta|$ must divide $|\Omega|$.
+With this structure in place, we can also consider the cosets of $H'$ 
+as the elements and consider the action of $G$ on this set. Since $H$ has a
+smaller subgroup $H'$, there are non-trivial blocks for this action. The
+action moves all those cosets of $H'$ that fall in a coset of $H$. This must
+happen as this is precisely the action of $G$ on the cosets of $H$.
+Hence the collection of cosets of $H'$ within a cost of $H$ forms a block.
+The characterisation theorem for primitive action tells that if $H'$ does not
+have a larger subgroup $H$, then the action is bound to be primitive. We state
+this as a corollary.
 
-The above claims prove that $\Omega$ is partitioned into subsets with equal cardinality, one of which is $\Delta$. So $|\Delta|$ must divide $|\Omega|$. 
+\begin{corollary}
+	For $H' \lneq G$ and $H'$ does not have a supergroup $H$ in $G$, the
+	action of $G$ on the cosets of $H'$ in $G$ must be primitive.
+\end{corollary}
 
-\item
-Claim 6:
+Before going to the proof, we first show that the following variant of 
+Theorem~\ref{thm:primitive-action} where $\exists \alpha$ is replaced by 
+$\forall \alpha$ is also true. For this, it suffices to prove the following
+claim.
 
-If $|\Omega |$ is prime, the group action is bound to be primitive. 
+\begin{claim}
+	For a group $G$ acting on $\Omega$, if there exists an $\alpha \in
+	\Omega$ such that $G_\alpha$ is maximal subgroup of $G$, then for all
+	$\beta \in \Omega$ $G_\beta$ is also maximal.
+\end{claim}
+\begin{proof}
+	
+\end{proof}<++>
 
-\end{itemize}
-
-\Lecture{Jayalal Sarma}{Sep 1 2015}{17}{Characterisation of Primitivity}{Mitali Bafna}{$\beta$}{K Dinesh}
-
-\begin{defn}{Maximal Subgroup:}
-$H \leq G$ is a maximal subgroup if $\not \exists H',H < H' < G$.
-\end{defn}
-
-\begin{lemma}
-Let $G$ act transitively on $\Omega$. The action is primitive iff $\forall \alpha \in G, G_\alpha$ is a maximal sugroup of G. 
-\end{lemma}
+\section{Proof of characterisation}
 
 \begin{proof}
 The Backward Direction:
