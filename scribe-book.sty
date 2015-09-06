@@ -176,8 +176,10 @@
 	\rule{0mm}{6mm}%
 	{\it Instructor:} #1 \\
 	\ifthenelse{\equal{#6}{$\gamma$}}{ {\it Scribe:} #5 ({\it TA :} #7) \\}{
-		\ifthenelse{\equal{#6}{$\delta$}}{ {\it Scribe:} #5 ({\it TA :} #7) \\}
-	}{ {\it Scribe:} #5 \\}
+	\ifthenelse{\equal{#6}{$\delta$}}{ {\it Scribe:} #5 ({\it TA :} #7) \\}{
+	\ifthenelse{\equal{#6}{$\alpha$}}{ {\it Scribe:} #5 \\}{
+	\ifthenelse{\equal{#6}{$\beta$}}{ {\it Scribe:} #5 \\}{
+	}}}}
 	{\it Date:}     #2 \\
 	{\it \bf Status:} #6
 }
