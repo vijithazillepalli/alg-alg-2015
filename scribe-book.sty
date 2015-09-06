@@ -152,15 +152,15 @@
 
 % Adding the correctly colored line to scribe list.
 
-\ifthenelse{\equal{#6}{$\alpha$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{alpha}{#5} - (#6)}}}
+\ifthenelse{\equal{#6}{$\alpha$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{alpha}{#5} - (#6) \tiny{TA : #7}}}}
 {
-\ifthenelse{\equal{#6}{$\beta$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{beta}{#5} - (#6)}}}
+\ifthenelse{\equal{#6}{$\beta$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{beta}{#5} - (#6) \tiny{TA : #7}}}}
 {
-\ifthenelse{\equal{#6}{$\gamma$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{gamma}{#5} - (#6)}}}
+\ifthenelse{\equal{#6}{$\gamma$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{gamma}{#5} - (#6) \tiny{TA : #7}}}}
 {
-\ifthenelse{\equal{#6}{$\delta$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{delta}{#5} - (#6)}}}
+\ifthenelse{\equal{#6}{$\delta$}}{\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\color{delta}{#5} - (#6) \tiny{TA : #7}}}}
 {
-\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {{#5} - (Incorrect Labelling)}}
+\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {{#5} - (Incorrect Labelling) \tiny{TA: #7}}}
 }}}}
 
 %\addcontentsline{scr}{scribe}{\protect {\sf Lecture } \numberline{\sf \thelecture} {\em #5} (#6)}
@@ -175,11 +175,7 @@
 	CS6842 -- Algorithmic Algebra\\
 	\rule{0mm}{6mm}%
 	{\it Instructor:} #1 \\
-	\ifthenelse{\equal{#6}{$\gamma$}}{ {\it Scribe:} #5 ({\it TA :} #7) \\}{
-	\ifthenelse{\equal{#6}{$\delta$}}{ {\it Scribe:} #5 ({\it TA :} #7) \\}{
-	\ifthenelse{\equal{#6}{$\alpha$}}{ {\it Scribe:} #5 \\}{
-	\ifthenelse{\equal{#6}{$\beta$}}{ {\it Scribe:} #5 \\}{
-	}}}}
+	{\it Scribe:} #5 ({\it TA :} #7) \\
 	{\it Date:}     #2 \\
 	{\it \bf Status:} #6
 }
