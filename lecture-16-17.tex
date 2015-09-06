@@ -186,7 +186,7 @@ automorphism group for the orbits.
 %\dsay{I am not very clear about this para}
 
 \Lecture{Jayalal Sarma}{Sep 1 2015}{17}{Characterisation of
-Primitivity}{Mitali Bafna}{$\gamma$}{K Dinesh}
+Primitivity}{Mitali Bafna}{$\beta$}{K Dinesh}
 
 In the last lecture, we saw transitive and primitive group action. In this
 lecture, we give an algebraic characterisation of primitive group actions.
@@ -194,8 +194,7 @@ lecture, we give an algebraic characterisation of primitive group actions.
 We need the notion of maximal subgroup of a group.
 \begin{definition}[Maximal Subgroup]
 $H \leq G$ is a maximal subgroup if there does not exist an $H'$ such that 
-$H \lneq H' \lneq G$ where
-$\lneq$ denotes strict subgroup containment.
+$H \lneq H' \lneq G$ where $\lneq$ denotes strict subgroup containment.
 \end{definition}
 
 The main theorem is the following.
@@ -243,26 +242,68 @@ $\forall \alpha$ is also true. For this, it suffices to prove the following
 claim.
 
 \begin{claim}
-	For a group $G$ acting on $\Omega$, if there exists an $\alpha \in
-	\Omega$ such that $G_\alpha$ is maximal subgroup of $G$, then for all
-	$\beta \in \Omega$ $G_\beta$ is also maximal.
+	For a group $G$ acting transitively on $\Omega$, if there exists an
+	$\alpha \in \Omega$ such that $G_\alpha$ is maximal subgroup of $G$,
+	then for all $\beta \in \Omega$ $G_\beta$ is also maximal.
+	\label{cl:prop-trans}
 \end{claim}
 \begin{proof}
-	
-\end{proof}<++>
+	Suppose there exists $\alpha$ such that $G_\alpha$ is maximal subgroup
+	of $G$. Since $G$ is transitive, for any $\beta \in \Omega$, there
+	exist a $g$ such that $\alpha^g = \beta$. Note that $G_\alpha$ and
+	$G_\beta$ can be related as $g^{-1}G_\alpha g =
+	G_\beta$. This is because,
+	\begin{align*}
+		G_\beta  =&  \{ g' ~|~ \beta^{g'} = \beta \} \\
+			= & \{ g' ~|~ \alpha^{gg'} = \alpha^g \} \\
+			= & \{ g' ~|~ \alpha^{gg'g^{-1}} = \alpha \} \\
+			= & \{ g^{-1} hg ~|~ \alpha^{h} = \alpha \} &&
+			[\text{Renaming $gg'g^{-1}$ as $h$}] \\
+			= & g^{-1}G_\alpha g
+	\end{align*}
+	Now if $G_\beta$ has a larger subgroup containing
+	it in $G$, then we can give a larger
+	subgroup for $G_\alpha$ also which contradicts maximality\footnote{ If
+		there is an $H'$ such that $G_\beta \lneq H' \lneq G$ then
+		consider $g^{-1}H'g$ as it satisfy $G_\alpha \lneq g^{-1}H'g
+	\lneq G$.}. 
+\end{proof}
+The pair of groups $G_\alpha$, $G_\beta$ in the previous claim are sometimes
+called as conjugate pairs.
+\begin{definition}[Conjugates]
+	Subgroups $H,H'$ of a group $G$ are said to be conjugates, if there 
+	exists a $g \in G$ such that $gHg^{-1} =H'$.
+\end{definition}
 
 \section{Proof of characterisation}
+We restate the characterisation in the light of Claim~\ref{cl:prop-trans}.
+\begin{theorem}
+	Suppose $G \le S_n$ acts transitively on $\Omega$. Then the action is
+	primitive if and only if $\forall \alpha \in \Omega$ such that
+	$G_{\alpha}$ is the maximal subgroup of $G$ where $G_\alpha$ is the
+	stabilizer of $\alpha$
+	\label{thm:primitive-action-strong}
+\end{theorem}
+Note that both these theorems are equivalent. We now give a proof.
 
-\begin{proof}
-The Backward Direction:
+\begin{proof}[Proof of Theorem~\ref{thm:primitive-action-strong}]
 
-We will prove the contrapositive that is: Action is not primitive $\Rightarrow$ $\exists \alpha, G_\alpha$ is not a maximal subgroup.
+The backward direction: if $\forall \alpha \in G$, $G_\alpha$ is maximal the
+maximal subgroup of $G$, then the action is primitive.
 
-Suppose $G's$ action is not primitive. Take any $\alpha \in \Omega$. $\{\alpha\} \subsetneq \Delta \subsetneq \Omega$. 
+We will prove the contrapositive that is, suppose that the action is not 
+primitive then $\exists \alpha \in G$ such that , $G_\alpha$ is not a maximal 
+subgroup.
 
-Take $H = Setstab(\Delta)$. $H$ is a subgroup of G.
-
-Let $g \in G_\alpha$. Since $\alpha^g = \alpha$, $\Delta^g = \Delta$ and $g \in H$. Hence $G_\alpha \leq H$.
+Suppose $G$ does not act primitively on $\Omega$. Then there must be
+non-trivial block $\Delta$ and $\alpha \in \Omega$ such that $\{\alpha\}
+\subsetneq \Delta \subsetneq \Omega$. We need to show that there exists an $H$
+such that $G_\alpha \lneq H \lneq G$. Consider $H = \setstab(\Delta) = \{g \in
+G ~|~ \Delta^g =\Delta \}$. We now show that $G_\alpha$ is a subgroup of $H$.
+To show this, let $g \in G_\alpha$. Hence $\alpha^g = \alpha$ and $\alpha$ is
+a common element in $\Delta$ and $\Delta^g$. Along with the fact that $\Delta$
+is a block, we get that $\Delta = \Delta^g$. Since $H$ fixes $\Delta$, we have
+$g \in H$.  Hence $G_\alpha \leq H$. 
 
 Let $\beta \neq \alpha \in \Delta$ and $g, \alpha^g = \beta$. $g \notin G_\alpha$ but $g \in H$. 
 
