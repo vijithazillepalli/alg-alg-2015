@@ -1,48 +1,61 @@
-\Lecture{Jayalal Sarma}{Aug 31, Sep 1 2015}{15}{*Title of Lecture*}{Mitali Bafna}{$\alpha$}
-Example 1:
+\Lecture{Jayalal Sarma}{Aug 31, 2015}{15}{Transitivite Group Actions}{Mitali Bafna}{$\beta$}
+\newtheorem{defn}{Defn}
+\setlength{\parindent}{0pt}
 
+Lets consider some examples of Group Action.
+
+\begin{itemize}
+\item
 Consider the complete binary tree of depth $k$. Since any isomorphism will send leaves to leaves, $G = Aut(X)$ acts on the leaves and we observe that given any 2 leaves we can get an isomorphism which sends one leaf to the other.\\
 
-Example 2:
+\item
+Consider $X = k$ triangles. $Aut(X)$ acts on the vertices and here too given any two vertices there is a permutation in $Aut(X)$ that sends one to the other. \\
 
-Consider $X = k$ traingles. $Aut(X)$ acts on the vertices and here too given any two vertices there is a permutation in $Aut(X)$ that sends one to the other. \\
+\end{itemize}
 
 
 These 2 examples motivate the following definition:
 
-\begin{definition}{Transitivity:}
+\begin{defn}{Transitivity:}
 G acts on $\Omega$ transitively if there is only one orbit, i.e. $\forall \alpha,\beta \in \Omega$, $\exists g \in G$, such that $\alpha^g = \beta$.
-\end{definition}
+\end{defn}
 
 
 In example 2, any $g \in Aut(x)$ will send a triangle to itself or another triangle. Similarly for example 1, this property holds for the leaves taken in pairs, where the pair has all ancestors common.\\
 
-\begin{definition}{Block:}
-$\Delta$ is a said to be a block if $\forall g \in G, \Delta^g = \Delta$ or $\Delta^g \cup \Delta = \phi$.
-\end{definition}
+\begin{defn}{Block:}
+$\Delta$ is a said to be a block if $\forall g \in G, \Delta^g = \Delta$ or $\Delta^g \cap \Delta = \phi$.
+\end{defn}
 
-
-We observe that trivially $\Omega$ and the singletons form blocks. We say that the group action is primitive if there are no non-trivial blocks.\\
-
+\begin{defn}{Primitive:}
+We say that the group action is primitive if there are no blocks other than $\Omega$ and the singletons. 
+\end{defn}
 
 Examples of block structure:
 
-1) $G = S_n$ 
+\begin{itemize}
+\item
+$G = S_n$ 
 
 Action is trivially transitive. No non-trivial blocks hence primitive.
 
-2) $G \leq S_n$ acts on itself (right-multiplication, $\Omega = G$).
+\item
+$G \leq S_n$ acts on itself (right-multiplication, $\Omega = G$).
 
-Transitive action. $g g' = h$
+This is a transitive action because given $g,h \in G, g' = g^{-1}h$ will take $g \rightarrow h$. If $G$ has a non-trivial subgroup $H$ then the action is not primitive. Namely the cosets of $H$ in $G$ form the non-trivial blocks. We will see in the next lecture that the converse holds too. 
 
-Not primitive: Consider a non-trivial subgroup $H$. $Hg = H$ or $Hg$ is a coset, i.e. $Hg \cup H = \phi$.
+({\sf Hint}: consider $SetStab(\Delta)$.)
 
-Converse holds.
+\end{itemize}
 
-\begin{definition}{Block System:}
+\begin{defn}{Block System:}
 A partition of $\Omega$ into sets such that each part is a block under the action of G.
-\end{definition}
+\end{defn}
 
+{\sf A Series of Claims:}
+
+\begin{itemize}
+\item
 Claim 1: $\Delta^g$ is a block if $\Delta$ is a block. 
 
 \begin{proof}
@@ -54,45 +67,56 @@ Since $\Delta^{gh} \ne \Delta^g \Rightarrow \exists \beta \in \Delta^{gh}, \beta
 
 But $\Delta^{gh} \cup \Delta^g \ne \phi \Rightarrow \exists \alpha \in \Delta^{gh}, \in \Delta^g$. This means that $\alpha^{g'} \in \Delta$ and $\in \Delta^{gg'}$. 
 
-Combining these two we get that $\Delta \ne \Delta^{gg'}$ and $\Delta \cap \Delta^{gg'} \ne \phi$, which condraticts the fact that $\Delta$ is a block.
+Combining these two we get that $\Delta \ne \Delta^{gg'}$ and $\Delta \cap \Delta^{gg'} \ne \phi$, which contradicts the fact that $\Delta$ is a block.
 
 \end{proof}
 
-
+\item
 Claim 2: $|\Delta^g| = |\Delta|$
 
 This follows from the fact that $g \in G$ permutes the elements of $\Omega$.
-\\
-Claim 3: $\bigcup_g \in G \Delta^g = \Omega$
 
-Let $k \in \Delta$ and $k' \in \Omega$. Since the action is transitive $\exists g, k^g = k'$. So $k' \in \Delta^g$. Hence $\Omega \subseteq \bigcup_g \in G \Delta^g $. The other containment is trivial and hence they are equal.
-\\
+\item
+
+Claim 3: $\bigcup_{g \in G} \Delta^g = \Omega$
+
+Let $k \in \Delta$ and $k' \in \Omega$. Since the action is transitive $\exists g, k^g = k'$. So $k' \in \Delta^g$. Hence $\Omega \subseteq \bigcup_{g \in G} \Delta^g $. The other containment is trivial and hence they are equal.
+
+\item
+
 Claim 4: $\Delta^{g_1} \cap \Delta^{g_2} \ne \phi \Rightarrow \Delta^{g_1} = \Delta^{g_2}$. 
 
 This is true because $\Delta^{g_1}$ is a block (Claim 1).
-\\
-Claim 4: For any block $\Delta , |\Delta|$ must divide $|\Omega|$.
+
+\item
+
+Claim 5: For any block $\Delta , |\Delta|$ must divide $|\Omega|$.
 
 The above claims prove that $\Omega$ is partitioned into subsets with equal cardinality, one of which is $\Delta$. So $|\Delta|$ must divide $|\Omega|$. 
 
-Just an Observation: If $|\Omega |$ is prime, the group action is bound to be primitive. 
+\item
+Claim 6:
 
-.........................................................................................................
+If $|\Omega |$ is prime, the group action is bound to be primitive. 
 
-\begin{definition}{Maximal Subgroup:}
+\end{itemize}
+
+\Lecture{Jayalal Sarma}{Sep 1 2015}{15}{Characterisation of Primitivity}{Mitali Bafna}{$\beta$}
+
+\begin{defn}{Maximal Subgroup:}
 $H \leq G$ is a maximal subgroup if $\not \exists H',H < H' < G$.
-\end{definition}
+\end{defn}
 
 \begin{lemma}
 Let $G$ act transitively on $\Omega$. The action is primitive iff $\forall \alpha \in G, G_\alpha$ is a maximal sugroup of G. 
 \end{lemma}
 
 \begin{proof}
-$\Leftarrow$ 
+The Backward Direction:
 
-We will prove the contrapositive that is: Action is not primitive $\Leftarrow$ $\exists \alpha G_\alpha$ is not a maximal subgroup)
+We will prove the contrapositive that is: Action is not primitive $\Rightarrow$ $\exists \alpha, G_\alpha$ is not a maximal subgroup.
 
-Suppose $G's$ action is not primitive $\Rightarrow \{\alpha\} \subsetneq \Delta \subsetneq \Omega$. 
+Suppose $G's$ action is not primitive. Take any $\alpha \in \Omega$. $\{\alpha\} \subsetneq \Delta \subsetneq \Omega$. 
 
 Take $H = Setstab(\Delta)$. $H$ is a subgroup of G.
 
@@ -100,30 +124,38 @@ Let $g \in G_\alpha$. Since $\alpha^g = \alpha$, $\Delta^g = \Delta$ and $g \in 
 
 Let $\beta \neq \alpha \in \Delta$ and $g, \alpha^g = \beta$. $g \notin G_\alpha$ but $g \in H$. 
 
-Hence $G_\alpha \lneq H$ and $G_\alpha$ is not maximal. 
+Hence $G_\alpha \lneq H$ and $G_\alpha$ is not maximal. \\
 
-$\Rightarrow$
+The Forward Direction:
 
-$G_\alpha \lneq H \lneq G$. To produce a $\Delta,\{\alpha\} \subsetneq \Delta \subsetneq \Omega$, such that $\Delta$ is a block.
+We will again prove the contrapositive that is: $\exists \alpha, G_\alpha$ is not a maximal subgroup $\Rightarrow$ Action is not primitive.
 
-Define $\Delta = \alpha^H$. 
+We have that $G_\alpha \lneq H \lneq G$. We will produce a $\Delta$ such that $\Delta$ is a non-trivial block.
 
-$\alpha \subsetneq \Delta$
 
-Since $G_\alpha \not \leq $...
+Define $\Delta = \alpha^H$. \\
 
-$\Delta \not \subseteq \Omega$
+From the Orbit-Stabiliser Theorem(Section 5.1) we have that each coset of $G_\alpha$ in $G$ corresponds to a different element in the orbit of $\alpha$. That is all the elements in a coset take $\alpha$ to the same element and if two cosets are different then their action on $\alpha$ is too. Mathematically, $g_1G_\alpha = g_2G_\alpha \Leftrightarrow \alpha^{g_1} = \alpha^{g_2}$.\\
 
-$G = \bigcup_{g_\beta :\alpha \rightarrow \beta } G_\alpha g_\beta $.
+Since $G_\alpha \lneq H,\exists$ a coset $C \neq G_\alpha \in H$. \\$G_\alpha \neq C \Rightarrow \alpha = \alpha^{G_\alpha} \not = \alpha^C = \beta$ But $\beta = \alpha^C \subseteq \alpha^H = \Delta$. So we have that $\{\alpha\} \subsetneq \Delta$. \\
 
-Obs: $\beta \in \Delta \Leftrightarrow G_\alpha g_\beta \subseteq H$.
+Since $H \lneq G$ and $G_\alpha \lneq G, \exists$ a coset $C$ of $G_\alpha$ in $G$ which doesn't belong to $H$. Since different cosets take $\alpha$ to different elements $\alpha^C \notin \alpha^H$. So we have that $\Delta = \alpha^H \subsetneq \alpha^G = \Omega$. \\
 
-$\Delta$ is a block.
+We now prove that $\Delta$ is indeed a block. 
 
-$\Delta ^g \cap \Delta \neq \phi$
+Suppose $\Delta^g \cap \Delta \neq \phi$. We get the following set of implications:
 
-$\exists h \in H,\alpha ^h \in \Delta ,\alpha^h$
+$\delta \in \Delta^g,\Delta \\
+\Rightarrow \exists h',h \in H, \delta = \alpha^{h'g} = \alpha^h \\
+\Rightarrow h'gh^{-1} \in G_\alpha \subseteq H \\
+\Rightarrow g \in H \\
+\Rightarrow \Delta^g = \alpha^{Hg} = \alpha^H = \Delta$. 
+
+This means that $\Delta^g \cap \Delta \neq \phi \Rightarrow \Delta^g = \Delta$ or in other words $\Delta$ is a block.
 
 \end{proof}
+
+
+
 
 
