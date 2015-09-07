@@ -31,7 +31,7 @@ leaves of $T$.
 Observe that any nontrivial automorphism can either map $1$ and $2$ among
 each other (i,e. $1$ to $2$ and $2$ to $1$) or map both $1$ and $2$ to say
 $3$ and $4$. But it can never map say $1$ to $2$ and $2$ to $3$ as it violate
-adjaceny. Hence the leaves with common ancestors always gets moved in a pair.
+adjacency. Hence the leaves with common ancestors always gets moved in a pair.
 
 Consider another graph $X$ which is $k$ vertex disjoint triangles. Consider
 the action of $Aut(X)$ on $V(X)$. We again observe a similar phenomena as
@@ -55,8 +55,9 @@ in many graphs, they also can be potentially used to compute $Aut(X)$. In the
 case of trees, we can start with trivial blocks whose automorphisms are also
 trivial, combine the blocks and obtain the automorphism for larger blocks and
 proceed in a bottom up manner building larger blocks and thereby get the
-automorphism of the entire tree\footnote{This is not a rigoruos argument and
-is more of an idea to use blocks for computing automorphism.}.
+automorphism of the entire tree.
+%\footnote{This is not a rigorous argument and
+%is more of an idea to use blocks for computing automorphism.}.
 
 \section{Primitive actions}
 We saw that for $\Omega = [n]$ and $G = S_n$, the sets $\Omega$, $\{1\}, \{2\},
@@ -165,7 +166,7 @@ hence they are equal.
 		(Claim~\ref{cl:block-prop}(1)), either $\Delta^{g_1} =
 		\Delta^{g_1(g_1^{-1}g_2)}$ or  $\Delta^{g_1} \cap
 		\Delta^{g_1(g_1^{-1}g_2)} = \emptyset$.
-	\item[Proof 3] The above two claims prove that $\Omega$ is partitioned
+	\item[Proof of 3] The above two claims prove that $\Omega$ is partitioned
 		into subsets with equal cardinality and all of them have the
 		same size as $|\Delta|$ (Claim~\ref{cl:block-prop}(2)). So
 		$|\Delta|$ must divide $|\Omega|$.  \end{description}
@@ -186,7 +187,7 @@ automorphism group for the orbits.
 %\dsay{I am not very clear about this para}
 
 \Lecture{Jayalal Sarma}{Sep 1 2015}{17}{Characterisation of
-Primitivity}{Mitali Bafna}{$\beta$}{K Dinesh}
+Primitivity}{Mitali Bafna}{$\gamma$}{K Dinesh}
 
 In the last lecture, we saw transitive and primitive group action. In this
 lecture, we give an algebraic characterisation of primitive group actions.
@@ -217,7 +218,7 @@ below.
 	\centering
 	\includegraphics[scale=0.7]{images/coset}
 	\caption{Coset structure of subgroups $H$ and $H'$. Dotted ones are
-	cosets if $H'$.}
+	cosets of $H'$.}
 	\label{fig:coset}
 \end{figure}
 
@@ -244,7 +245,8 @@ claim.
 \begin{claim}
 	For a group $G$ acting transitively on $\Omega$, if there exists an
 	$\alpha \in \Omega$ such that $G_\alpha$ is maximal subgroup of $G$,
-	then for all $\beta \in \Omega$ $G_\beta$ is also maximal.
+	then for all $\beta \in \Omega$, $G_\beta$ is also maximal subgroup of
+	$G$.
 	\label{cl:prop-trans}
 \end{claim}
 \begin{proof}
@@ -288,8 +290,9 @@ Note that both these theorems are equivalent. We now give a proof.
 
 \begin{proof}[Proof of Theorem~\ref{thm:primitive-action-strong}]
 
-The backward direction: if $\forall \alpha \in G$, $G_\alpha$ is maximal the
-maximal subgroup of $G$, then the action is primitive.
+The backward direction ($\Longleftarrow$): if $\forall \alpha \in G$,
+$G_\alpha$ is maximal the maximal subgroup of $G$, then the action is
+primitive.
 
 We will prove the contrapositive that is, suppose that the action is not 
 primitive then $\exists \alpha \in G$ such that , $G_\alpha$ is not a maximal 
@@ -298,44 +301,82 @@ subgroup.
 Suppose $G$ does not act primitively on $\Omega$. Then there must be
 non-trivial block $\Delta$ and $\alpha \in \Omega$ such that $\{\alpha\}
 \subsetneq \Delta \subsetneq \Omega$. We need to show that there exists an $H$
-such that $G_\alpha \lneq H \lneq G$. Consider $H = \setstab(\Delta) = \{g \in
+such that $G_\alpha \lneq H \lneq G$. We show this in two steps.
+
+\begin{description}
+	\item [Show that $G_\alpha \le H \le G$ :]
+Consider $H = \setstab(\Delta) = \{g \in
 G ~|~ \Delta^g =\Delta \}$. We now show that $G_\alpha$ is a subgroup of $H$.
 To show this, let $g \in G_\alpha$. Hence $\alpha^g = \alpha$ and $\alpha$ is
 a common element in $\Delta$ and $\Delta^g$. Along with the fact that $\Delta$
-is a block, we get that $\Delta = \Delta^g$. Since $H$ fixes $\Delta$, we have
-$g \in H$.  Hence $G_\alpha \leq H$. 
+is a block, we get that $\Delta = \Delta^g$. Hence $g$ fixes $\Delta$ which
+gives that $g \in H$.  Hence $G_\alpha \leq H$. By definition of $H$, we have $H \le G$.
+	\item [Both containments are strict :]
+Let $\beta \neq \alpha$ belongs to $\Delta$. Such a $\beta$ must exist as
+$\{\alpha\} \subsetneq \Delta$. Since $G$ is transitive, there exists a  $g
+\in G$ such that $\alpha^g = \beta$.  Clearly 
+$g \notin G_\alpha$. Now since $\beta \in \Delta \cap \Delta^g$ and $\Delta$
+is a block, we get $\Delta^g = \Delta$ and $g \in H$.
+\end{description}
+Hence $G_\alpha \lneq H \lneq G$ and $G_\alpha$ is not maximal.
 
-Let $\beta \neq \alpha \in \Delta$ and $g, \alpha^g = \beta$. $g \notin G_\alpha$ but $g \in H$. 
+The forward direction ($\Longrightarrow$):
+We again prove the contrapositive : if $\exists \alpha \in \Omega$ such that 
+$G_\alpha$ is not a maximal subgroup, then the action is not primitive (i,e.
+come up with a non-trivial block).
 
-Hence $G_\alpha \lneq H$ and $G_\alpha$ is not maximal. \\
+Suppose $\alpha \in \Omega$ be such that $G_\alpha \lneq H \lneq G$.  We will
+produce a $\Delta$ such that $\Delta$ is a non-trivial block. We define 
+$\Delta = \alpha^H$. Now we are left to show that the $\Delta$ chosen is
+indeed a non-trivial block. To prove this, we need to show the following:
+\begin{description}
+	\item[$\{\alpha\} \subsetneq \Delta$ :] 
+		From the Orbit-Stabiliser lemma (Lemma~\ref{lem:os}), we have
+		that each coset of $G_\alpha$ in $G$ corresponds to a
+		different element in the orbit of $\alpha$.  That is all the
+		elements in a coset take $\alpha$ to the same element and if
+		two cosets are different then their action on $\alpha$ is too.
+		Mathematically, for $g_1,g_2 \in G$, 
+		$g_1G_\alpha = g_2G_\alpha \Leftrightarrow
+		\alpha^{g_1} = \alpha^{g_2}$.
 
-The Forward Direction:
+	Since $G_\alpha \lneq H,\exists$ a coset $C \neq G_\alpha \in H$. Let
+	$C = G_\alpha h$ where $h \in H$ is the coset representative.
+	Now, $G_\alpha \neq C \Rightarrow \alpha  \ne
+	\alpha^h = \beta$ for some $\beta \in \Omega$. But $\beta = \alpha^h
+	\in \alpha^H = \Delta$.  So we have that $\{\alpha\} \subsetneq
+	\Delta$.
+	% proof done in class:
+	%	Since $G_\alpha \lneq H$,
+	%	there exists $g \in H$ such that $ g\not \in G_\alpha$. Hence
+	%	$\alpha^g = \beta$ where $\beta \ne \alpha$. Also $\beta \in
+	%	\Delta$ as $\beta$ is in the orbit of $g$. Hence $\{\alpha
+	%	\} \subsetneq \{\alpha, \beta\} \subseteq \Delta$.
 
-We will again prove the contrapositive that is: $\exists \alpha, G_\alpha$ is not a maximal subgroup $\Rightarrow$ Action is not primitive.
+	\item[$\Delta \subsetneq \Omega$ :] 
+	Since $H \lneq G$ and $G_\alpha \lneq H, \exists$ a coset $C$ of
+	$G_\alpha$ in $G$ which does not belong to $H$. Let $g \in G$ be its
+	coset representative. Since different cosets
+	take $\alpha$ to different elements $\alpha^g \notin \alpha^H$. So we
+	have that $\Delta = \alpha^H \subsetneq \alpha^G = \Omega$. 
 
-We have that $G_\alpha \lneq H \lneq G$. We will produce a $\Delta$ such that $\Delta$ is a non-trivial block.
-
-
-Define $\Delta = \alpha^H$. \\
-
-From the Orbit-Stabiliser Theorem(Section 5.1) we have that each coset of $G_\alpha$ in $G$ corresponds to a different element in the orbit of $\alpha$. That is all the elements in a coset take $\alpha$ to the same element and if two cosets are different then their action on $\alpha$ is too. Mathematically, $g_1G_\alpha = g_2G_\alpha \Leftrightarrow \alpha^{g_1} = \alpha^{g_2}$.\\
-
-Since $G_\alpha \lneq H,\exists$ a coset $C \neq G_\alpha \in H$. \\$G_\alpha \neq C \Rightarrow \alpha = \alpha^{G_\alpha} \not = \alpha^C = \beta$ But $\beta = \alpha^C \subseteq \alpha^H = \Delta$. So we have that $\{\alpha\} \subsetneq \Delta$. \\
-
-Since $H \lneq G$ and $G_\alpha \lneq G, \exists$ a coset $C$ of $G_\alpha$ in $G$ which doesn't belong to $H$. Since different cosets take $\alpha$ to different elements $\alpha^C \notin \alpha^H$. So we have that $\Delta = \alpha^H \subsetneq \alpha^G = \Omega$. \\
-
-We now prove that $\Delta$ is indeed a block. 
-
-Suppose $\Delta^g \cap \Delta \neq \phi$. We get the following set of implications:
-
-$\delta \in \Delta^g,\Delta \\
-\Rightarrow \exists h',h \in H, \delta = \alpha^{h'g} = \alpha^h \\
-\Rightarrow h'gh^{-1} \in G_\alpha \subseteq H \\
-\Rightarrow g \in H \\
-\Rightarrow \Delta^g = \alpha^{Hg} = \alpha^H = \Delta$. 
-
-This means that $\Delta^g \cap \Delta \neq \phi \Rightarrow \Delta^g = \Delta$ or in other words $\Delta$ is a block.
-
+	\item[$\Delta$ is a block :]
+		We show that for any $g \in G$, either $\Delta^g = \Delta$ or
+		$\Delta^g \cap \Delta = \emptyset$. Suppose $\Delta^g \cap
+		\Delta = \emptyset$, we are done. Suppose $\Delta^g \cap
+		\Delta \neq \emptyset$. We then show that $\Delta^g = \Delta$.
+		
+		Recall that $\Delta = \alpha^H$. Since $\Delta^g \cap \Delta
+		\ne \emptyset$, 
+		\begin{align*}
+		& \exists h',h \in H, \alpha^{h'g} = \alpha^h \\ 
+		\implies & h'gh^{-1} \in G_\alpha \\
+		\implies & g \in H && [\text{Using $G_\alpha$ is a subgroup of
+		$H$}] \\
+		\implies & \Delta^g = \alpha^{Hg} = \alpha^H = \Delta
+		\end{align*}
+\end{description}
+This completes the proof.
 \end{proof}
 
 
