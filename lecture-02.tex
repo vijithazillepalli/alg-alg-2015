@@ -36,7 +36,7 @@ of interest in this context.
 This tells that the above condition is necessary for a number to be prime. If
 this test is also sufficient (i.e, if the converse of the above theorem is
 true), we have a test for checking primality of a number. But it turns out
-that this is not true due to the existance of Carmichael numbers which are not
+that this is not true due to the existence of Carmichael numbers which are not
 prime numbers but satisfy the above test.
 
 So one want a necessary and sufficient condition which can be used for
@@ -51,7 +51,7 @@ primality testing. For this, we need the notion of polynomials.
 
 A polynomial time algorithm for this problem has been found in 2002 by
 Manindra Agarwal, Neeraj Kayal and Nitin Saxena (called as the AKS algorithm). 
-In their result, they used the following polynomial characterisation for a
+In their result, they used the following polynomial characterization for a
 prime number.
 \begin{theorem}[Polynomial formulation (Agarwal-Biswas 1999)] Let $N \ge 1$ be
 	an integer. Define a polynomial 
@@ -79,15 +79,15 @@ Proof of the theorem is as follows.
 	coefficient $p_N(z) \mod N$\footnote{In class we asked the following
 		question of finding an $a \in \{1,2,\ldots, N-1\}$ such that
 	$p_N(a) \ne 0 \mod N$. This has a counter example. Consider the case
-	where $N$ is a Carmicahel number. By definition, Carmichael numbers
-	are composite numbers that satisfy Fermat's Litte theorem.  Hence if
+	where $N$ is a Carmichael number. By definition, Carmichael numbers
+	are composite numbers that satisfy Fermat's Little theorem.  Hence if
 	$N$ is Carmichael,  $\forall~ a \in \{1,2,\ldots N-1 \}$, we get  $a^N
 	= a \mod N$. This gives that $\forall~ a \in \{1,2,\ldots, N-1\}$
 	\[	p_N(a)  = ((a+1)^N-a^N -1) \mod N = ((a+1)-a-1) \mod N \]
 	which is zero modulo $N$.}. 	
 	Since $N$ is composite, there exists a prime $p$ such that $p
 	~|~ N$.  Let $p^k | N$ where $k \ge 1$ is the largest exponent of $p$
-	in the prime factorisation of $n$. Hence $p^{k+1} \nmid N$.
+	in the prime factorization of $n$. Hence $p^{k+1} \nmid N$.
 	
 	We first show that $p_N(z)$ is a non zero polynomial by showing that
 	the coefficient of $z^i$ for $i = p$, which is $\binom{N}{p}$, is non
@@ -135,7 +135,7 @@ Fermat's Little Theorem is a special case of Agarwal-Biswas theorem.
 	\begin{align*}
 		(a+1)^N & = (a^N +1) \mod N && [\text{By Agarwal-Biswas as $N$
 		is prime}]\\
-		& = (a+1) \mod N && [\text{By inducive hypothesis}]
+		& = (a+1) \mod N && [\text{By inductive hypothesis}]
 	\end{align*}
 	This completes the inductive case. 
 \end{proof}

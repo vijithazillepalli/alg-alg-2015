@@ -289,9 +289,9 @@ unequal we conclude that $g$ was not in $H$. This is because if $g$ were in
 $H$, then the generating set $S$ could have generated $g$ as well and adding
 it to $S$ could not have resulted in any new elements.  
 
-Here is a recursive strategy to solve Problem 1 (Order computation). The orbit stabilizer lemma that for any $\alpha \in  G$, $$|\alpha^{G}|\cdot |G_{\alpha}| = |G|$$. Suppose we can estimate $|\alpha^{G}|$ which is the size of the orbit, then to compute $|G|$, we are left with the smaller recursive subproblem of estimating the size of $|G_{\alpha}|$. 
+Here is a recursive strategy to solve Problem 1 (Order computation). The orbit stabilizer lemma that for any $\alpha \in  G$, $$|\alpha^{G}|\cdot |G_{\alpha}| = |G|$$. Suppose we can estimate $|\alpha^{G}|$ which is the size of the orbit, then to compute $|G|$, we are left with the smaller recursive sub problem of estimating the size of $|G_{\alpha}|$. 
 
-To implement this strategy, we need to solve the two subproblems. (1) finding the size of the orbit and (2) finding the generating set of $G_\alpha$. Moreover, in last lecture, we also wanted to count the number of permutations in $G^{(i)}$ which first $i$ elements identically and maps the $i+1^{th}$ element
+To implement this strategy, we need to solve the two sub problems. (1) finding the size of the orbit and (2) finding the generating set of $G_\alpha$. Moreover, in last lecture, we also wanted to count the number of permutations in $G^{(i)}$ which first $i$ elements identically and maps the $i+1^{th}$ element
 to any of the $n-i$ elements. We saw that this is actually a question of obtaining the size of orbit. This motivates the following question.
 
 \begin{problem}[\textbf{Orbit Computation}] 
@@ -330,7 +330,7 @@ Hence from now on, we will assume that $G$ acts on an arbitrary set $\Omega$ whi
 End of diversion.
 
 \section{Set Stabilizer Problem}
-We know that $Aut(X)$ acts on $[n]$. This can also be visualized as $Aut(X)$ acting on the set of potential edges in the graph $X$. What does it do to the actual edges in this action? Indeed, the automorphisms map edges to edges and non-edges to non-edges. Hence, any edge of the graph gets maped to another edge. To be more precise, we can also think of $S_n$ as acting on the set of all potential edges given by 
+We know that $Aut(X)$ acts on $[n]$. This can also be visualized as $Aut(X)$ acting on the set of potential edges in the graph $X$. What does it do to the actual edges in this action? Indeed, the automorphisms map edges to edges and non-edges to non-edges. Hence, any edge of the graph gets mapped to another edge. To be more precise, we can also think of $S_n$ as acting on the set of all potential edges given by 
 $K = \{ \{i, j\} | i, j \in [n]$ and $i \le j\}$. In other
 words, the action of $Aut(X)$ on the set $E(X)$ does not changes $E(X)$ or it \emph{fixes} $E(X)$. This leads us to the fourth problem called the \emph{Set Stabilizer problem}.
 

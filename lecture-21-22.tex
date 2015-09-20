@@ -7,7 +7,7 @@ degree 3. We in turn reduced this problem to solving the set stabilizer
 problem for the special case where the group is a 2-group that is $|G|$ =
 $2^{k}$.  Given G, a 2-group acting on $\Omega$ and $\Delta \subseteq \Omega$,
 find the generating set of setstab ($\Delta$). In order to solve the set
-stabilizer problem for this group, first we shall charaterise the structure of
+stabilizer problem for this group, first we shall characterize the structure of
 groups for graphs with maximum degree d.
 
 \begin{definition}[\textbf{Composition Series}]
@@ -57,7 +57,7 @@ If there is a prime p and positive integer r, such that gcd (p,r) = 1, then p $\
 
 This can be extended for the case where gcd (p,r) $\neq$ 1, as follows.
 \begin{theorem}
-If there is a prime p and postive integer r such that $p^{k} \;|$ r and $p^{k+1}$ $\nmid$ r, then $p^{k+1}$ $\nmid$ $p^{m}r \choose p^{m}$. 
+If there is a prime p and positive integer r such that $p^{k} \;|$ r and $p^{k+1}$ $\nmid$ r, then $p^{k+1}$ $\nmid$ $p^{m}r \choose p^{m}$. 
 \end{theorem}
 \begin{proof}
 The proof is quite simple. We just have to expand the term $p^{m}r \choose p^{m}$
@@ -90,9 +90,9 @@ Since $|A|$ = $p^{m}$, this implies
 \[ p^{m} \; | \; |G_{A}| \text{ and } p^m \geq |G_{A}| \]
 Therefore $|G_{A}| = p^{m}$. Thus for any $p^{l}$ such that $p^{l}$ divides $|G|$, we can prove the existence of a subgroup of size $p^{l}$.
 
-Coming back to our original problem of proving the existence of a compostion series for $Aut_{e}(X)$, since this is a 2-group of size $2^{k}$, by Sylow's theorem we know that a normal subgroup of size $2^{k-1}$ exists for $Aut_{e}(X)$. We can inductively extend this proof to each subgroup, $G_{i}$ and thus prove the existence of a compostion series.
+Coming back to our original problem of proving the existence of a composition series for $Aut_{e}(X)$, since this is a 2-group of size $2^{k}$, by Sylow's theorem we know that a normal subgroup of size $2^{k-1}$ exists for $Aut_{e}(X)$. We can inductively extend this proof to each subgroup, $G_{i}$ and thus prove the existence of a composition series.
 
-In general, for any group G, G $\in$ $B_{d}$ if there exists a chain of normal subgroups such that each compostion factor is isomorphic to $S_{d-1}$. We call such a group to be structured. For the trivalent graph case, d = 3 and hence the compostion factor is isomorphic to $S_{2}$, which is what we have shown. Here $S_{d-1}$ refers to a symmetric group on $d - 1$ elements.
+In general, for any group G, G $\in$ $B_{d}$ if there exists a chain of normal subgroups such that each composition factor is isomorphic to $S_{d-1}$. We call such a group to be structured. For the trivalent graph case, d = 3 and hence the composition factor is isomorphic to $S_{2}$, which is what we have shown. Here $S_{d-1}$ refers to a symmetric group on $d - 1$ elements.
 \end{proof}
 
 \section{Structure Forests}
@@ -115,7 +115,7 @@ In the next lecture, we'll formally define structure forests and use them to for
 \Lecture{Jayalal Sarma}{September, 09 2015}{22}{Solving Restricted Set
 Stabilizer Problem}{Sanjay Ganapathy}{$\beta$}{K Dinesh}
 
-We will formalise the notion of structure forests that we motivated in the last lecture.
+We will formalize the notion of structure forests that we motivated in the last lecture.
 
 \section{Structure Forests}
 \begin{enumerate}
@@ -176,7 +176,7 @@ Consider $H$ = \{ $g$ $\in$ $G$ $|$ $\forall$ $i$ $\Gamma_{i}^{g}$ = $\Gamma_{i}
 \[ G =  \bigcup_{i=1}^kH\tau_{i} \]
 \[ G_{\Delta} = \bigcup_{i=1}^k(H\tau_{i})_{\Delta} \]
 
-We need to find the elements in each coset of $H$, which stabilizes $\Delta$. This leads to a natural recursive formulation which we formalise below. 
+We need to find the elements in each coset of $H$, which stabilizes $\Delta$. This leads to a natural recursive formulation which we formalize below. 
 
 \subsection{Generalized Set Stabilizer} 
 Given $\Delta$, $H$ and $\sigma$, such that $H$ stabilizes $\Omega'$, where $\Omega'$ $\subseteq$ $\Omega$, find $(H\sigma)_{\Delta}$. 

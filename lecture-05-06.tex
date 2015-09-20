@@ -1,7 +1,7 @@
 \Lecture{Jayalal Sarma}{August, 10 2015}{5}{Orbit-Stabilizer Lemma}{Ameya Panse}{$\delta$}{Ramya C}
 
 We first start with some notations and definitions. Order of a group $G$ is number of elements in the group, that is $|G|$. Let $H \le G$ and $g \in G$. The right coset of $H$ in $G$ is defined as 
-$Hg = \{hg \mid h \in H\}$. If the mutliplication is on the left, we call it the left coset. That is, $gH = \{gh \mid h \in H\}$. In general, it is not necessary that the left and right cosets are the same.
+$Hg = \{hg \mid h \in H\}$. If the multiplication is on the left, we call it the left coset. That is, $gH = \{gh \mid h \in H\}$. In general, it is not necessary that the left and right cosets are the same.
 If $H$ is a group such that left and right cosets are the same element-wise, (that is, $\forall g \in G, Hg= gH$), $H$ is a said to be a normal subgroup of $G$.
 
 Let $H$ be a normal subgroup of $G$. Choose one element from each of these as a representative of the set (say $[g]$ denote the coset representative of the coset $Hg = gH$). These elements have a group structure among them. This requires a proof, which we will come to in the next few lectures.
@@ -108,7 +108,7 @@ Given two $c$-colored graphs $(X_1,\Psi_1)$ and $(X_2,\Psi_2)$ decide if there e
 \end{itemize}
 \end{problem}
 
-How hard can colored graph isomorphism be? In general can there be an efficient algorithm which solves $CGI$ for any $c$? Indeed, an easy observation is that $GI$ is a special case when $c=1$. That is, give all vertices in the graphs the same color so that any isomorphism preserves the colors. Thus, CGI seems harder when number of vertices in a color class is allowed to be large. Indeed, later in the course, when the number of vertices in any color class is bounded by a constant, we will give a polynomial time algorithm for the problem. However, without any restrictions the problem is as hard as graph isomorphism. However, what about the cases when $c>1$. at a first sight, they dont seem easier than $GI$. We start by showing that they are not harder for sure.
+How hard can colored graph isomorphism be? In general can there be an efficient algorithm which solves $CGI$ for any $c$? Indeed, an easy observation is that $GI$ is a special case when $c=1$. That is, give all vertices in the graphs the same color so that any isomorphism preserves the colors. Thus, CGI seems harder when number of vertices in a color class is allowed to be large. Indeed, later in the course, when the number of vertices in any color class is bounded by a constant, we will give a polynomial time algorithm for the problem. However, without any restrictions the problem is as hard as graph isomorphism. However, what about the cases when $c>1$. at a first sight, they don't seem easier than $GI$. We start by showing that they are not harder for sure.
 
 \subsection{Gadget Trick : From Colored GI to Non-colored GI}
 
@@ -153,7 +153,7 @@ We now need to argue that the map $\sigma$ preserves color. Suppose not. Let $u 
 
 We show that {\sc ISO} $\le CGI$. As $CGI \leq GI$ we have {\sc ISO} $\le GI$. 
 
-Given $X_1,X_2$ and oracle access to a blackbox which checks for isomorphism between any two given graphs, output a permutation that maps $X_1$ to $x_2$.
+Given $X_1,X_2$ and oracle access to a black box which checks for isomorphism between any two given graphs, output a permutation that maps $X_1$ to $x_2$.
 
 The Reduction is as follows:
 \begin{enumerate}
@@ -165,18 +165,18 @@ The Reduction is as follows:
 	\item Query CGI to check if $X_1' \cong X_2'$.
 	\item Remove colors from $X_2'$ and repeat the last two steps for $i_2 \in V_2$ until we get a "yes" answer. For the $i_2$ on which we get a "yes" answer, fix the color as $i_1$ and do not reuse color $i_1$ again in the outer loop.
 	\end{itemize}
-\item Ouput the permutation.
+\item Output the permutation.
 \end{enumerate}
 
-To see the correctness : suppose the graphs are isomorphic. That is the algorithm reaches step (2), 3rd subpart is guaranteed to find a $j$ for each vertex $i$. Observing that we will color a vertex on the left and the right with some color $i_1$ on if we are sure that there is a color preserving isomorphism. Hence the isomorphism map, if exists, will be found.
-To see the running time, observe that we make atmost $O(n^2)$ queries to $CGI$ which in turn makes a single query each to $GI$. Thus we can solve {\sc ISO} using at most $O(n^2)$ queries to {\sc GI}.
+To see the correctness : suppose the graphs are isomorphic. That is the algorithm reaches step (2), 3rd sub part is guaranteed to find a $j$ for each vertex $i$. Observing that we will color a vertex on the left and the right with some color $i_1$ on if we are sure that there is a color preserving isomorphism. Hence the isomorphism map, if exists, will be found.
+To see the running time, observe that we make at most $O(n^2)$ queries to $CGI$ which in turn makes a single query each to $GI$. Thus we can solve {\sc ISO} using at most $O(n^2)$ queries to {\sc GI}.
 
 
 \subsection{{\sc GraphIso} $\le$ {\sc GraphAuto}}
 
 We need to construct a graph $G$ such that the generating set $S$ of $Aut(G)$ enables to decide if $X_1\equiv X_2$. 
 
-Assume that the graphs are connected to begin with. The reduction is simply to take $X = X_1 \cup X_2$. Let $S$ be the generating set of the reduction, check if there exists a $\sigma \in S$ such that $\sigma$ maps atleast one vertex in $X_1$ to a vertex in $X_2$. We directly show the correctness of the reduction.
+Assume that the graphs are connected to begin with. The reduction is simply to take $X = X_1 \cup X_2$. Let $S$ be the generating set of the reduction, check if there exists a $\sigma \in S$ such that $\sigma$ maps at least one vertex in $X_1$ to a vertex in $X_2$. We directly show the correctness of the reduction.
 
 \begin{claim}
 $X_1 \cong X_2$ if and only if there exists a $\sigma \in S$ and $v \in V(X_1)$ such that $\sigma(v) \in V(X_2)$.

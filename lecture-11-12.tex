@@ -6,9 +6,9 @@ We first attacked the Membership Problem. We saw that this reduces to the
 problem of Order Computation. (See section~\ref{sec:comp-questions}) 
 
 To solve this problem of Order Computation, we use the
-Orbit-Stabiliser Lemma. This involved finding out the size orbit of an element
+Orbit-Stabilizer Lemma. This involved finding out the size orbit of an element
 $\alpha$ (which we reduced to Graph Reachability), and then recursively
-finding the size of $G_\alpha$ which is the stabiliser group of $\alpha$.
+finding the size of $G_\alpha$ which is the stabilizer group of $\alpha$.
 Product of these two gives the order of the group.
 %We use the tower of subgroups to do this.
 
@@ -68,7 +68,7 @@ To compute a generating set for $G^{(i)}$
 		$G^{(i)}$ is found. 
 \end{enumerate}
 It can be seen the each step terminates in $\poly(|\Omega|)$ time and the
-number of recursive calls is at most $i \le |\Omega|$. Hence overall runtime is
+number of recursive calls is at most $i \le |\Omega|$. Hence overall run time is
 polynomial.
 
 
@@ -166,7 +166,7 @@ Stabiliser and Jerrum's Filter}{Samir Otiv}{$\gamma$}{K Dinesh}
 In last lecture, we completed the discussion on algorithms for Pointwise
 Stabilizer problem and Membership testing. We saw two new problems -- Subgroup
 problem and Group Intersection problem and showed that Subgroup problem can be
-reduced to Membership testing and hence polytime solvable while Set Stabilizer
+reduced to Membership testing and hence poly time solvable while Set Stabilizer
 problem reduces to Group Intersection problem. We continue with our discussion
 on Group Intersection and Set Stabilizer problem.
 

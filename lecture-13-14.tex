@@ -5,11 +5,11 @@ In the previous lecture, we used \emph{Jerrum's filter} to reduce the size of th
 \begin{problem}[\textbf{Group Intersection}]\label{1}
 	Given two groups $G$ and $H$ via their generating sets $\langle A\rangle$ and $\langle B\rangle$ respectively, with $G\leq S_n$ and $H\leq S_n$, compute the generating set for the group $G\cap H$?
 \end{problem}
-We also showed that the \emph{Group Intersection Problem} can be reduced to the \emph{Set Stabilizer Problem} and vice-versa. As $GA\leq SETSTAB \equiv\text{ Group Intersection Problem}$ both are harder than \emph{Graph Automorphism Problem}. In this lecture we will be interested in solving Problem \ref{1} in a special setting oF \emph{Normal Subgroups}. But before that let's review the basics of \emph{Normal Subgroups}.
+We also showed that the \emph{Group Intersection Problem} can be reduced to the \emph{Set Stabilizer Problem} and vice-versa. As $GA\leq SETSTAB \equiv\text{ Group Intersection Problem}$ both are harder than \emph{Graph Automorphism Problem}. In this lecture we will be interested in solving Problem \ref{1} in a special setting of \emph{Normal Subgroups}. But before that let's review the basics of \emph{Normal Subgroups}.
 
 \section{Normal Subgroups}
 We already know that if $H$ and $G$ are two groups and $H\leq G$, then the right cosets of $H$ in $G$ are given by $Hg = \{hg\mid h\in H\text{ and }g\in G\}$. Similarly the left cosets are given by $gH = \{gh~|~h\in H\text{ and }g\in G\}$. By \emph{Lagrange's Theorem} we also know that any two right cosets of a subgroup $H$ are either \emph{disjoint} or \emph{equal} i.e. for any $g_1,g_2\in G$ with $g_1\neq g_2$, either $Hg_1\cap Hg_2 = \emptyset$ or $Hg_1 = Hg_2$. The same conditions hold true for the left cosets of $H$ too.\\
-For any $H\leq G$ it is not neccessary that $Hg = gH$.  Normal subgroups acheive the above condition. 
+For any $H\leq G$ it is not necessary that $Hg = gH$.  Normal subgroups achieve the above condition. 
 \begin{definition}
 	Let $H\leq G$ such that $\forall g\in G,~Hg = gH.$ Then $H$ is called a {\em Normal Subgroup} of $G$ and is denoted by $H\triangleleft G$.
 \end{definition}
@@ -66,7 +66,7 @@ Let us collect all such $g\in G$ such that $Hg = gH$. This leads us to the follo
 \begin{definition}\label{normalizer}
 	The set $N_G(H) = \{g\in G~|~Hg = gH\}$ is called the {\bf Normalizer} of $H$ in $G$.
 \end{definition}
-Observe that for any $H\leq G$, $N_G(H) \neq \emptyset$ as $H\in N_G(H)$. AS every group is a normal supgroup of itselt we have $|H|\leq |N_G(H)| \leq |G|$.
+Observe that for any $H\leq G$, $N_G(H) \neq \emptyset$ as $H\in N_G(H)$. AS every group is a normal subgroup of itself we have $|H|\leq |N_G(H)| \leq |G|$.
 % Another interpretation is that $|H|\leq |N_G(H)| \leq |G|$(since every group $G$ is a normal subgroup of itself trivially.) 
 
 \begin{observation}
@@ -173,7 +173,7 @@ These three properties must be satisfied in order to get a \emph{strong generati
 \begin{claim}\label{coset}
 	The index of 
 	%any subgroup in its parent group i.e. 
-	$G\cap G^{(i)}H$ in $G\cap G^{(i-1)}H$  is atmost $(n-i)$.
+	$G\cap G^{(i)}H$ in $G\cap G^{(i-1)}H$  is at most $(n-i)$.
 \end{claim}
 The crux of the proof of the above claim lies in the following arguments about how a coset of $G^{(i)}H$ actually looks like which is inside $G^{(i-1)}H$. In other words, $G^{(i)}Hg$ is a coset of $G^{(i)}H$ inside $G^{(i-1)}H$ if and only if $g\in G^{(i-1)}H$. This implies that $g = g'h'$, where $g'\in G^{(i-1)}$ and $h'\in H$. Thus we see that 
 \begin{eqnarray*}
@@ -208,7 +208,7 @@ We have already mentioned of the fact that $GA\leq SetStab\equiv\text{ Group Int
 	Given two graphs $X_1(V_1,E_2)$ and $X_2(V_2,E_2)$ with sizes of the color classes bounded by a constant, can we check if they are isomorphic?
 \end{problem}
 
-We reduce colored graph isomrphism problem to the colored graph automorphism problem.
+We reduce colored graph isomorphism problem to the colored graph automorphism problem.
 
 Since we know that checking Isomorphism between $X_1$ and $X_2$ can be reduced to checking Automorphism group of $X = X_1 \cup X_2$. This additional constraint of colour imposes an association between an edge in the graph with another edge whose vertices are of same colour so that it becomes a colour preserving map. In other words,
 \begin{equation*}

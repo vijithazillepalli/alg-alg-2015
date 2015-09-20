@@ -1,4 +1,4 @@
-\Lecture{Jayalal Sarma}{September 2, 2015}{18}{Characterising Primitive
+\Lecture{Jayalal Sarma}{September 2, 2015}{18}{Characterizing Primitive
 Actions(Continuation), Minimal Block Problem}{Arinjita Paul}{$\alpha$}{Ramya
 C}
 
@@ -6,7 +6,7 @@ C}
 
 
 \section{Recap}
-In the last lecture, we discussed about the algebraic characterisation of primitive actions. We add to the previous lecture by checking for primitivity of the transitive action of $G$ on $\Omega$, and further continue with an algorithm that finds out the minimum sized block containing $\{\alpha,\beta\}$.
+In the last lecture, we discussed about the algebraic characterization of primitive actions. We add to the previous lecture by checking for primitivity of the transitive action of $G$ on $\Omega$, and further continue with an algorithm that finds out the minimum sized block containing $\{\alpha,\beta\}$.
 
 \begin{problem}
 Let $G=\langle A \rangle$ act transitively on $\Omega$.
@@ -16,7 +16,7 @@ How do we check if the action is primitive?
 To begin with, orbit computation will help to check if the action is transitive. If the action is not primitive, we argue that for every $\alpha$, there must be a $\beta$ such that {$\alpha$, $\beta$} is contained in a non-trivial block.
 A non-trivial block cannot be a singleton. Hence, there must be a $\beta$ such that together $\alpha$ and $\beta$ are contained in a non-trivial block(shown in Section ~\ref{sec:min-block}).
 
-We run over all $\alpha$ and we run over all $\beta$ and check if they are present in a non-trivial block. If present, then the action is non-primitive. If action is primitive, we cant find such a non-trivial block containing $\alpha$ and $\beta$,which is a characterisation.
+We run over all $\alpha$ and we run over all $\beta$ and check if they are present in a non-trivial block. If present, then the action is non-primitive. If action is primitive, we cant find such a non-trivial block containing $\alpha$ and $\beta$,which is a characterization.
 
 \begin{problem}
 Given $\alpha \in \Omega$, compute the smallest block containing $\alpha$.
@@ -107,7 +107,7 @@ Suppose we only put the edges corresponding to $A$. The above claim still holds 
 
 It still holds that connected components has to be blocks as every element in the group is a subset of the automorphism group.
 
-Given $\alpha$ and $\beta$,there is going to be a block that contains $\alpha$ and $\beta$. There always exists an edge between $\alpha$ and $\beta$ and are contained in the same component always. With our algorthm,we are only interested in finding the smallest connected component containing $\alpha$ and $\beta$.
+Given $\alpha$ and $\beta$,there is going to be a block that contains $\alpha$ and $\beta$. There always exists an edge between $\alpha$ and $\beta$ and are contained in the same component always. With our algorithm,we are only interested in finding the smallest connected component containing $\alpha$ and $\beta$.
 
 
 We consider a graph $H : \Omega \times \Omega$ defined as $(V',E')$ where,
@@ -115,7 +115,7 @@ We consider a graph $H : \Omega \times \Omega$ defined as $(V',E')$ where,
 
 In the graph H, we consider $(\alpha , \beta)$ and $(\gamma , \delta)$ as vertices . We put an edge if there is a $g \in A$ that demonstrates that we can go from $\alpha$ to $\gamma$ and $\beta$ to $\delta$ simultaneously.
 
-\begin{claim} Given a graph $H$, the edgeset $E$ can be constructed.
+\begin{claim} Given a graph $H$, the edge set $E$ can be constructed.
 \begin{proof} Considering some $\alpha$, $\beta$,$\alpha'$ and $\beta'$, if there is a path from $\alpha$ and $\beta$ to $\alpha'$ and $\beta'$ , it means that there is a group element that takes $\alpha$ to $\alpha'$ and $\beta$ to $\beta'$ simultaneously.We compute the transitive closure of the graph, and define the edges in $E$.
 
 
@@ -147,9 +147,9 @@ We solve a special case of the Graph Automorphism Problem that reduces to the sp
 	
 	Given two graphs $X_1$ and $X_2$, we classify the cycles in the graphs of different sizes. Any cycle of length $k$ can be mapped to any cycle of length $k$ on the other.We can find the number of automorphisms, also find the generators of the automorphism group.
 	\item Case when $d$ $\leqslant$ 3:
-	In such cased, the reduction of $GI \leqslant GA$ breaks down, as we dont get a trivalency preserving reduction from $GI$ to $GA$ .
+	In such cased, the reduction of $GI \leqslant GA$ breaks down, as we don't get a trivalency preserving reduction from $GI$ to $GA$ .
 	
-	We may try to identify the connected components, say $C_{11}$, $C_{12}\cdots$ in graph $X_1$ and $C_{21}$, $C_{22} \cdots$ in graph $X_2$ and try mapping the connected components by bruteforce. This leads to an obvious problem of a large number of connected components.	 
+	We may try to identify the connected components, say $C_{11}$, $C_{12}\cdots$ in graph $X_1$ and $C_{21}$, $C_{22} \cdots$ in graph $X_2$ and try mapping the connected components by brute force. This leads to an obvious problem of a large number of connected components.	 
 \end{enumerate}	
 
 
@@ -192,7 +192,7 @@ The automorphisms are disjoint, as, if an $Aut_e(X)$,which is a mapping from $X_
 \end{theorem}
  
 $Aut_e(X)$ is a special, highly structured group. Consider the vertices that appear in the path containing $e$.
-Let $X_r$ be the subgraph of vertices and edges in $X$ which appear in a path through e of length $\leqslant$ $r$.
+Let $X_r$ be the sub graph of vertices and edges in $X$ which appear in a path through e of length $\leqslant$ $r$.
 
 
 The idea is to find $Aut_e(X)$ incrementally.
@@ -247,7 +247,7 @@ We thus have a tower(sequence to be precise) of subgroups as:
   \end{enumerate}
   \end{observation}
 We define a set as $\{g\in G ~|~ \Phi(g)=e\}$, which is called as Kernel of $\Phi$. The set of groups that gets mapped to identity is Kernel.
-We can say that, identity from $G$ maps to $H$. However, other elements can also be mapped, and the mapping neednt be onto.
+We can say that, identity from $G$ maps to $H$. However, other elements can also be mapped, and the mapping needn't be onto.
 
 \begin{claim}
 $Ker(\Phi)$ is a normal subgroup of $G$.
