@@ -1,0 +1,215 @@
+\Lecture{Jayalal Sarma}{Sep 21, 2015}{27}{Hilbert's Basis Theorem}{Manoj Kumar
+Sure}{$\alpha$}{Ramya C}
+We ended the last lecture by posing the following questions:
+\begin{itemize}
+\item Is $V$ = $\mathbb{V}(\mathbb{I}(V))$?
+\item Is $I$ = $\mathbb{I}(\mathbb{V}(I))$?
+\end{itemize}
+The answer is \textbf{No} for both the questions.\\\\
+Example for $I\neq\mathbb{I}(\mathbb{V}(I))$:\\
+Consider $I = <x^2,y^2>$. So, $(0,0)\in\mathbb{V}(I)$ .\\
+So, the polynomials $xy,\;x+y$ etc. satisfy (0,0). So, they will be present in $\mathbb{I}(\mathbb{V}(I))$ but not in $I$, because the minimum degree of the polynomials in $I$ is 2. So, $I\neq\mathbb{I}(\mathbb{V}(I))$.\\\\
+For $\mathbb{V}(\mathbb{I}(V))$, assuming the polynomials evaluate to 0 on 2 points, say $(0,0)$ and $(a,b)$.\\
+The polynomials can be a straight line passing through those two points or $2^{nd}$ degree, $3^{rd}$ degree curves etc. Consider, for a straight line all the points on the straight line will be in $\mathbb{V}(\mathbb{I}(V))$.So, $V \neq \mathbb{V}(\mathbb{I}(V))$.\\\\
+\textbf{Question:} Given a set of points, Can we get a polynomial that has zeroes exactly as these set of points?\\\\
+If we are given only one point, then we can come up with a polynomial that is zero at exactly that point. Similarly, if we are given a finite set of points $(x_1,y_1), (x_2,y_2), \ldots,(x_n,y_n)$, we can find the polynomial that has exactly these points as zeroes.
+$$P(x,y) = P_1(x,y)*P_2(x,y)*\ldots*P_n(x,y)$$
+where $P_i(x,y)$ has $(x_i,y_i)$ as the only zero.\\
+But, for an infinite set of points, we may not be able to find a polynomial with a finite degree.\\
+\textbf{Example:} $X=\{(x,y)\;|\;y - \sin x=0\}$.\\
+\begin{definition}(Algebraic set of points)
+A subset $V \subseteq \mathbb{F}^n$ is algebraic if 
+$\exists$ finite polynomial set $f_1,f_2,\ldots,f_k$ such that 
+$$
+	V = \{(a_1, a_2, \ldots, a_n) \in \mathbb{F}^n \;|\; \forall i\; f_i(a_1, a_2, \ldots, a_n) = 0\}
+$$
+\end{definition}
+Any finite set of points is algebraic, but the points in $y-\sin x\;=\;0$ are not algebraic.\\
+\begin{definition}(Ideal Membership Problem)
+Given an $I = <f_1,f_2, \ldots, f_k>$ and $g \in \mathbb{F}[x_1,x_2,\ldots,x_n]$, test whether $g$ belongs to $I$ or not.\\
+If so, can we find the representation $g_1,g_2,\ldots,g_k$ such that $$
+	g\;=\;\sum_{i=1}^k g_if_i
+$$
+\end{definition}
+\begin{theorem}(Hilbert's theorem)
+The following two statements are equivalent:
+\begin{enumerate}
+\item In the ring $\mathbb{F}[x_1,x_2,\ldots,x_n]$, all the ideals are finitely generated.\\
+$$\forall I, I\;is\;an\;ideal,\;\;\exists f_1,f_2,\ldots,f_k\;\in\;\mathbb{F}[x_1,x_2,\ldots,x_n]$$ 
+such that ,$$I = <f_1,f_2,\ldots,f_k>$$
+\item Any ascending chain of ideals in $\mathbb{F}[x_1,x_2,\ldots,x_n]$ is terminating.
+$$
+	I_1 \subseteq I_2\subseteq\ldots
+$$
+$$
+\exists\; N > 0 ,\; I_n = I_N\;\; \forall n \geq N
+$$
+\end{enumerate}
+\end{theorem}
+The proof of this theorem will be discussed in the next lecture.
+\Lecture{Jayalal Sarma}{Sep 21, 2015}{28}{Noetherian Rings}{Manoj Kumar
+Sure}{$\alpha$}{K Dinesh}
+We have stated the Hilbert's theorem in the last lecture. The proof of it goes as follows:
+\begin{proof}(Hilbert's theorem)
+To prove the equivalence, we first prove $1 \implies 2$ and then $2 \implies 1$.\\
+For $1 \implies 2$,\\
+Consider, $$ I = \bigcup_{i=1}^{\infty}I_i$$
+$I_i$'s are ideals in the ring $R$. We can easily prove that $RI$ is contained in $I$. So, $I$ is an ideal. So, $I$ is finitely generated(based on the assumption in $1$).Say, 
+$$
+	I = <f_1,f_2,\ldots,f_k>
+$$
+$k$ is finite. If all of $f_i$'s are in $I_j$ for some $j$, after all the $f_i$'s are included, $I$ is going to be constant.
+$$
+f_1 \in I \implies \exists i, f_1\in I_i
+$$
+take the smallest of such $i$. Similarly, do this for all other elements in the generating set and find the minimum $i$, where they occur in the sequence. Find the maximum of all such $i$'s. After that maximum point, $I$ is going to be constant. i.e; the chain of ideals is terminating.\\\\
+For $2 \implies 1$,\\
+Let $I$ be an ideal, that is not finitely generated in $R$.\\
+$$
+I = <f_1,f_2,\ldots>
+$$
+Consider, the following chain of ideals, 
+$$I_1=<f_1>$$
+$$I_2=<f_1,f_2>,\ldots$$
+So,
+$$
+I_1\subseteq I_2\subseteq \ldots
+$$
+If the chain is finite, then after some time, we run out of polynomials, which implies that $I$ will be finite. 
+This concludes the proof of Hilbert's theorem.
+\end{proof}
+\begin{definition}(Noetherian Rings)
+Rings which satisfy the above condition(s) are called Noetherian Rings.
+\end{definition}
+\begin{theorem}
+If $R$ is Noetherian, then $R[x]$ is Noetherian.
+\end{theorem}
+\begin{proof}
+Let, $J$ be an ideal in $R[x]$. Now, to that R[x] is Noetherian, it is sufficient to prove that $J$ is finitely generated.\\
+Define $$ I_n = \{r\in R\;| r \text{ is the leading coefficient of a degree } n \text{ polynomial in } J\}$$
+We claim that $I_n$ is also an ideal of $R$.\\
+Since, $J$ is an ideal, $$R[x]J\subseteq J$$
+We can easily prove that $I_n$ is closed under addition.\\
+To prove that $I_n$ is an ideal, we need to prove $$RI_n\subseteq I_n$$
+Let, $t\in R$ and $r \in I_n$. We need to argue that $tr\in I_n$.\\
+In other words, we need to show that $\exists$ degree $n$ polynomial in $J$ such that $tr$ is it's leading coefficient.\\
+Let $P(x)$ be the degree $n$ polynomial with $r$ as it's leading coefficient.($\exists\;a\;P(x)$ because $r\in I_n$).\\
+Consider $tP(x)$, the leading coefficient is $tr$.Since, $J$ is an ideal, $tP(x)\in J$. So, $tr\in I_n$. Which implies that $I_n$ is an ideal.\\
+To prove $I_n$ is contained in $I_{n+1}$.($I_n\subseteq I_{n+1}$), multiply $I_n$ with $x$, the resulting polynomial will have degree $n+1$ but with same leading coefficients. So, by definition of $I_n$, all the elements in $I_n$ belongs to $I_{n+1}$.So,$$I_1\subseteq I_2 \subseteq \ldots $$
+Since, $R$ is Noetherian, all the ideals $I_i$'s are finitely generated and terminated(say, after $I_N$).Let,$$ I_i=<r_{(i,1)},r_{(i,2)},\ldots,r_{(i,t_i)}>$$ with $i$ ranging from 1 to $N$.\\
+Let $f_{ij}$ represent the polynomial whose leading coefficient is $r_{ij}$ in $J$.\\
+Our claim is that $J$ can be generated by $<f_{ij}>,0\leq i\leq N\;and\;1\leq j \leq t_i$.\\
+Consider, the ideal generated by $<f_{ij}>$ as $J^*$. To prove that $J^* = J$, we need to prove 
+\begin{enumerate}
+\item $J^*\subseteq J$
+\item $J\subseteq J^*$
+\end{enumerate}
+Proving $J^* \subseteq J$ is trivial.(As all the $f_{ij}$'s represent a polynomial in $J$, all their generated polynomials will also be in $J$).\\\\
+To prove $J\subseteq J^*$,\\
+Use induction on the degree of the polynomial ($n$).\\
+Base: $n$ = 0; degree of the polynomial is zero implies that all of them are constants. So, they will be the leading coefficients.So, $I_0=J$, which also implies that $J=J^*$, so, the claim holds true.(i.e; $J \subseteq J^*$).\\
+Assume that the claim holds true $\forall n < N$.Let $r$ be a leading coefficient. So,$$r=\sum_{j=1}^{t_i} s_j r_{(i,j)} $$.
+Consider, the polynomial $$ g = \sum_{j=1}^{t_i}s_jf_{(i,j)}$$
+The leading coefficient of $g$ is $s_jr_{(i,j)}$.Consider the polynomial $f-g$, this has the coefficient of it's highest term as 0. So, the degree of the polynomial $f-g$ $ \leq (n-1)$.\\
+By induction hypothesis, $f-g$ is in $J^*$. Since, $g$ is also in $J^*$, the polynomial $f$ has to be in $J^*$.\\
+This proves that $J \subseteq J^*$. Hence, we can conclude that if $R$ is Noetherian, $R[x]$ is also Noetherian.
+\end{proof}
+\begin{theorem}
+Any ideal in $\mathbb{F}[x_1,x_2,x_3,\ldots,x_n]$ is finitely generated.
+\end{theorem}
+\begin{proof}
+Proof by induction on $n$.\\
+Base: $n$ = 0, the Ring would be $\mathbb{F}$. $\mathbb{F}$ has only two ideals. one is ${0}$ and the other is $\mathbb{F}$. Both can be verified to be generated by finite generating sets.Hence, the base case holds true.\\
+Assume that the given claim holds true for $n=k$, that is, $F[x_1,x_2,\ldots,x_k]$ has all it's ideals finitely generated, which implies that, it is a Noetherian ring. Using above theorem, we can say that $F[x_1,x_2,\ldots,x_k,x_{k+1}] = (F[x_1,x_2,\ldots,x_k])[x_{k+1}]$ has all it's ideals generated by finite generating sets. This concludes the proof for given claim.
+\end{proof}
+\Lecture{Jayalal Sarma}{Sep 22, 2015}{29}{Computing the generating sets of
+Ideals}{Manoj Kumar Sure}{$\alpha$}{K Dinesh}
+In the previous lecture, we proved that all the ideals in $\mathbb{F}[x_1,x_2,\ldots,x_n]$ are finitely generated. In this lecture, we compute the finite generating sets for two special cases of $\mathbb{F}[x_1,x_2,\ldots,x_n]$.
+\begin{enumerate}
+\item Linear Equations case
+\item Univariate case
+\end{enumerate}
+For Linear equations case, We can do guassian elimination and find out the generating set for the given Ideal.
+\begin{example}
+$$f_1 \rightarrow x+y-z=0$$
+$$f_2 \rightarrow 2x+3y+2z=0$$
+$$I=<f_1,f_2>$$
+We can rewrite the above ideal using guassian elimination as 
+$$f'_1 \leftarrow f_1$$
+$$f'_2 \leftarrow (1/2)f_2-f_1$$
+$$I=<f'_1,f'_2>$$
+\end{example}
+For univariate case, consider the following example
+\begin{example}
+$$f_1 \rightarrow x^3-2x^2+2x+8=0$$
+$$f_2 \rightarrow 2x^2+3x+1=0$$
+$$I=<f_1,f_2>$$
+We can write $f_1 = qf_2+r$, where $q=x/2 - 7/4\;and \; r=(27/4)x+(39/4)$\\
+\end{example}
+\begin{lemma}
+For any $f\in \mathbb{F}[x]$, $\exists\;q,r $ such that $$ f=q.g+r $$
+$q,r$ are unique and ($r=0$ or $deg(r)<deg(g)$)
+\end{lemma}
+The values of $q$ and $r$ can be found using Division algorithm. $lt(f),lc(f)$ represents the leading term of $f$ and leading coefficient of $f$ respectively.
+\begin{algorithm}
+\caption{Division algorithm for Univariate polynomials}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{Divide}{ Input : Polynomials $f$ and $g$ }
+\State $r \leftarrow f$
+\State $q \leftarrow 0$
+\State \emph{loop}:
+\If {$r\neq0$ and $deg(g) \leq deg(r)$}
+\State $q = q + \frac{lt(f)}{lt(g)}$
+\State $r=r-\frac{lt(f)}{lt(g)}.g$
+\State \textbf{goto} \emph{loop}.
+\EndIf
+\State \textbf{return} $q,r$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+\begin{definition}(Principle Ideal)
+An ideal is called a principle ideal, if it is generated by a single element.
+\end{definition}
+\begin{definition}(Principle Ideal Domain)
+Principle Ideal Domain($PID$) is an integral domain in which every ideal is generated by a single element.
+\end{definition}
+\begin{theorem}
+If $I$ is an ideal in $\mathbb{F}[x]$, then $I$ is generated by a single element.
+\end{theorem}
+\begin{proof}
+Let $g$ be a polynomial in $I$ of least degree, $I$ is any ideal in $\mathbb{F}[x]$.\\
+We need to prove $<g>=I$. Suppose, it is not, that is, $$\exists f \in I,\; f \notin <g>$$
+By the assumption of $g$, $deg(f)\geq deg(g)$. Apply division algorithm for $f$ and $g$, $$f=q.g+r$$
+$q$ and $r$ are returned by division algorithm and $r=0$ or $deg(r)<deg(g)$, if $r=0$, then $f$ is divisible by $g$, so, $f$ will be generated by $g$. If $deg(r)<deg(g)$, then $$r = f-q.g$$ 
+$ f\in I,\;q\in\mathbb{F}[x],\;g\in I$, which implies that $r\in I$ and $deg(r)<deg(g)$, which contradicts our assumption of $g$. So, $I$ can be generated by $g$. So, $\mathbb{F}[x]$ is a Principle Ideal Domain.
+\end{proof}
+For the set of univariate polynomials $f_1(x)=0,f_2(x)=0,\ldots,f_k(x)=0$, the generated Ideal will be $I=<f_1,f_2,\ldots,f_k>$, then $\exists g\in I$, such that $I=<g>$. It is sufficient to solve $g(x)=0$.\\
+Now, we need to argue how to find the value of $g$.\\
+\begin{problem}
+$$f_1(x)=0$$
+$$f_2(x)=0$$
+$$I=<f_1,f_2>$$
+find $g$ such that $I=<g>$
+\end{problem}
+\begin{definition}(GCD of 2 polynomials)
+GCD of polynomials $f_1,f_2$ is a polynomial $g$ such that 
+\begin{enumerate}
+\item $g\;|\;f_1\;\;,\;\;g\;|\;f_2$
+\item $\forall h, h\;|\;f_1\;\;,\;\;h\;|\;f_2\;\implies h\;|\;g$
+\item Leading Coefficient(lc) of $g$ = 1(to have unique $g$)
+\end{enumerate}
+\end{definition}
+\begin{definition}(Monic Polynomial)
+A polynomial with it's leading coefficient as 1 is called a Monic polynomial.
+\end{definition}
+\textbf{Euclidean Algorithm}:\\
+$$Input:f_1,f_2$$
+$$Output: gcd(f_1,f_2)$$
+$$gcd(f_1, f_2) = gcd(f_1-qf_2,f_2)\;\;\forall g \in \mathbb{F}[x]$$
+\begin{lemma}
+$$I = <f_1, f_2>, f_1 \neq 0\;and\;f_2\neq 0$$
+then,$$I=<gcd(f_1,f_2)>$$
+\end{lemma}
+\begin{proof}
+The proof of this lemma will be discussed in the next lecture.
+\end{proof}
