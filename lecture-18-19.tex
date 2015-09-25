@@ -1,6 +1,5 @@
-\Lecture{Jayalal Sarma}{September 2, 2015}{18}{Characterizing Primitive
-Actions(Continuation), Minimal Block Problem}{Arinjita Paul}{$\alpha$}{Ramya
-C}
+\Lecture{Jayalal Sarma}{September 2, 2015}{18}{Characterising Primitive
+Actions(Continuation), Minimal Block Problem}{Arinjita Paul}{$\gamma$}{Ramya C}
 
 
 
@@ -13,101 +12,136 @@ Let $G=\langle A \rangle$ act transitively on $\Omega$.
 How do we check if the action is primitive?
 \end{problem}
 
-To begin with, orbit computation will help to check if the action is transitive. If the action is not primitive, we argue that for every $\alpha$, there must be a $\beta$ such that {$\alpha$, $\beta$} is contained in a non-trivial block.
-A non-trivial block cannot be a singleton. Hence, there must be a $\beta$ such that together $\alpha$ and $\beta$ are contained in a non-trivial block(shown in Section ~\ref{sec:min-block}).
+To check if the group $G$ acts transitively on $\Omega$ we can check for every pair of elemets $\alpha,\beta\in G$ if $\beta\in Orbit(\alpha)$.
 
-We run over all $\alpha$ and we run over all $\beta$ and check if they are present in a non-trivial block. If present, then the action is non-primitive. If action is primitive, we cant find such a non-trivial block containing $\alpha$ and $\beta$,which is a characterization.
+%To begin with, orbit computation will help to check if the action is transitive. 
 
-\begin{problem}
-Given $\alpha \in \Omega$, compute the smallest block containing $\alpha$.
-\end{problem}
+Now if $G=\langle A \rangle$ act transitively on $\Omega$, then the action is not primitive (imprimitive) if there are non-trivial blocks. As any non-trivial block cannot be a singleton, any non-trivial block must have atleast 2 elements. In other words, 
 
-We solve the Min-block problem in order to compute the smallest block that contains $\alpha$ as follows.
+
+\begin{claim}
+If the action of $G$ on $\Omega$ is not primitive, then for every $\alpha\in\Omega$, there exists $\beta\neq\alpha$ such that $\{\alpha$, $\beta\}$ is contained in a non-trivial block.
+\end{claim}
+Proof of the above claim is left as an exercise.\\
+%\begin{proof}
+%\rsay{Is this proof not required ?}
+%\end{proof}
+
+
+
+Hence, for every $\alpha\in\Omega$ there must be a $\beta$ such that $\alpha$ and $\beta$ are contained in a non-trivial block. We can run over all pairs $\alpha,\beta\in\Omega$ and check if they are present in any non-trivial block. We solve a problem called min-block problems that helps us answer the question.  
+%shown in Section ~\ref{sec:min-block}).
+%
+%If present, then the action is non-primitive. If action is primitive, we cant find such a non-trivial block containing $\alpha$ and $\beta$,which is a characterisation.
+%\textcolor{red}{
+%\begin{problem}
+%Given $\alpha \in \Omega$, compute the smallest block containing $\alpha$.
+%\end{problem}
+%}
+
+
 
 \section{Min Block Problem}
 \label{sec:min-block}
-Given an $\alpha$ and $\beta$, we find the minimal sized block that contains {$\alpha$, $\beta$}.
+\begin{problem}
+Given an $\{\alpha,\beta\}\in\Omega$, compute the smallest block containing $\{\alpha, \beta\}$.
+\end{problem}
 
-\subsection{Graph Formulation}
+We solve the Min-block problem in order to compute the smallest block that contains $\alpha$ as follows. 
 
-Consider a graph $X_(a,b)$ = $(V,E)$, where $V$ = $\Omega$ and $\alpha$, $\beta$ are given.
-With respect to $\alpha$ and $\beta$, we define E as:
-\[ E = \{(\alpha^{(g)},\beta^{(g)}) ~|~ g \in G\} \]
+%\subsection{Graph Formulation}
+Let $\alpha,\beta\in\Omega$. Consider the undirected graph $X_{\alpha,\beta}=(V,E)$, where $V$ = $\Omega$ and the edge set $E$ is defined as follows
+\[ E = \{(\alpha^{g},\beta^{g}) ~|~ g \in G\} \]
 
-Say we have a non-trivial graph where $\alpha$ and $\beta$ are fixed and edges would be present to those which are simultaneously mapped from $\alpha$ to $\beta$.
+Now let us discuss the algorithm to solve the minblock problem \\
+\textbf{Step 1 :} Construct the graph $X_{\alpha,\beta}$.\\
+\textbf{Step 2 :} Output the connected component $C$ in $X_{\alpha,\beta}$ containing $\alpha$. 
 
-Consider $g'\in G$.
+
+As $e\in G$  by definition of $X_{\alpha,\beta}$ any connected component containing $\alpha$ also contains $\beta$.
+ 
+
+We will now argue correctness of the above algorithm. 
+ 
+%Say we have a non-trivial graph where $\alpha$ and $\beta$ are fixed and edges would be present to those which are simultaneously mapped from $\alpha$ to $\beta$. Consider $g'\in G$.
+
+%\textcolor{red}
+%{
+%\begin{claim}
+%There is an automorphism of the graph corresponding to $g'$. 
+%\end{claim}
+%Let us consider $g'$ and operate on all the elements in $\Omega$, which would take an edge to an edge in itself .
+%\[ \alpha^{(g)},\beta^{(g)}  \xrightarrow{g'}  \alpha^{(gg'')},\beta^{(gg'')}\equiv \alpha^{(g'')},\beta^{(g'')}\]
+%Such an edge $(\alpha^{(g'')},\beta^{(g'')})$ would be already present in the defined graph as $g''\in G$.
+%}
+\begin{lemma}
+\label{GsubsetAut}
+Let $\alpha,\beta\in \Omega$ and $X_{\alpha,\beta}$ be the graph defined above. Then 
+$G\leq Aut(X)$.
+\end{lemma}
+\begin{proof}
+We know that $G$ and $Aut(X_{\alpha,\beta})$ are both groups. Therefore it suffices to show that $G\subseteq Aut(X_{\alpha,\beta})$. Let $g'\in G$. To show that $g'\in Aut(X_{\alpha,\beta})$. That is we need to show the following :
+\begin{itemize}
+\item[(i)] For any edge $e\in X_{\alpha,\beta}$, $e^{g'}\in X_{\alpha,\beta}$ for any $g'\in G$. \\
+Let $e=(\alpha^g,\beta^g)\in E$. Then for any $g'\in G$ we have $e^{g'} = (\alpha^{gg'},\beta^{g'g}) = (\alpha^{g''},\beta^{g''})$ for some $gg'=g''\in G$. But observe that the edge $e'$ would be there in $X_{\alpha,\beta}$ by definition of $E(X_{\alpha,\beta})$.
+\item[(ii)] For any $\gamma,\delta\in V$, if $(\gamma,\delta)\not\in E$, then $(\gamma^g,\delta^g)\not\in E$ for any $g'\in G$.\\
+Let $\gamma,\delta\in V$ such that $(\gamma,\delta)\not\in E$ and let there exists $g'\in G$ such that $(\gamma^{g'},\delta^{g'})\in E$. As $G$ is a group $g'^{-1}\in G$. Therefore by definition of $X_{\alpha,\beta}$ we have
+$(\gamma^{g'g'^{-1}},\delta^{g'g'^{-1}})=(\gamma,\delta)\in E$ which is a contradiction. 
+\end{itemize}
+\end{proof}
+As a result, we have $G\leq Aut(X)$.
+
+
+%The connected component $C$ in $X_{\alpha,\beta}$ that contains $\alpha$ is the minimum block we are looking for. 
+
+%Given $\alpha$ and $\beta$, we compute the connected components of $X_{a,b}$ if it exists. We now need to argue that connected component containing $\alpha$ is a block.
+
+%The algorithm to compute the connected components may return a "no" as for every $\alpha$ and $\beta$,there may not be a non-trivial block containing them.
+%The connected component is the minimum block in our problem.
+
 \begin{claim}
-There is an automorphism of the graph corresponding to $g'$. 
-\end{claim}
-Let us consider $g'$ and operate on all the elements in $\Omega$, which would take an edge to an edge in itself .
-\[ \alpha^{(g)},\beta^{(g)}  \xrightarrow{g'}  \alpha^{(gg'')},\beta^{(gg'')}\equiv \alpha^{(g'')},\beta^{(g'')}\]
-
-
-Such an edge $(\alpha^{(g'')},\beta^{(g'')})$ would be already present in the defined graph as $g''\in G$.
-
-\begin{observation}
-Any element in G has a corresponding element in $Aut(X)$.
-\end{observation}
-The original graph given to us sits inside the automorphism group.
-\[G \leq Aut(X)\]
-
-\subsection{Computing the Connected Components}
-
-Given $\alpha$ and $\beta$, we compute the connected components of $X_{a,b}$ if it exists.
-The algorithm to compute the connected components may return a "no" as for every $\alpha$ and $\beta$,there may not be a non-trivial block containing them.
-The connected component is the minimum block in our problem.
-
-\begin{claim}
-Connected Components have to be blocks.
+Let $C$ be a connected component in $X_{\alpha,\beta}$ containing $\alpha$ output by the algorithm. Then $C$ is the minimum block containing $\{\alpha,\beta\}$.  
 \end{claim}
 \begin{proof}
-The elements in G are automorphisms of the graph.An automorphism can map connected components to itself or takes a connected component to a connected component (follows from the definition of Automorphism). We know that, any automorphism cannot move a part of the connected component outside itself.
+\textbf{(i) $C$ is a block}\\
+By Claim \ref{GsubsetAut} $G\leq Aut(X)$. Therefore $\forall g \in G$ we 
+have $g \in Aut(X)$. Let $C$ be a connected component in $X_{\alpha,\beta}$. Suppose $C$ is not a block then $C^g \cap C \neq \emptyset$ and $C^g \neq C$. Hence there exists a vertex $\gamma$ such that $\gamma\in C^g$ and $\gamma \in C$.
+As $C^g \neq C$ there exists a $\delta$ such that $\delta\in C^g$ such that $\delta\not\in C$. Observe that by definition of $C^g$ we have that $(\gamma,\delta)$ is an edge in $X_{\alpha,\beta}$. Since $\gamma\in C$ and 
+$(\gamma,\delta)$ is an edge in $X_{\alpha,\beta}$ we have $\delta\in C$ which is a contradiction.
+%The elements in G are automorphisms of the graph. 
 
-So, a connected component would remain a block in this action since the group is a subgroup of the automorphism group of the defined graph.
+
+%An automorphism can map connected components to itself or takes a connected component to a connected component (follows from the definition of Automorphism). We know that, any automorphism cannot move a part of the connected component outside itself.
+%
+%So, a connected component would remain a block in this action since the group is a subgroup of the automorphism group of the defined graph.
 
 
-Thus, $\forall g \in \G$, since $g \in Aut(X)$
-We argue that, if C is a connected component,
-  \[C^g \cap C = \emptyset\]
-  \[ or\]
-  \[ C^g = C\]
-  Suppose, $C^g \cap C = \emptyset$ , then there exists a vertex $\gamma \in C^g$ and $\gamma \in C$.
-  Hence, connected components cannot be moved out partly as that would lead to a contradiction.
+%Thus, $\forall g \in G$, since $g \in Aut(X)$
+%We argue that, if C is a connected component,
+%  \[C^g \cap C = \emptyset\]
+%  \[ or\]
+%  \[ C^g = C\]
+%  Suppose, $C^g \cap C = \emptyset$ , then there exists a vertex $\gamma \in C^g$ and $\gamma \in C$.
+%  Hence, connected components cannot be moved out partly as that would lead to a contradiction.
+
+\textbf{(ii) $C$ is the minimum block}\\ 
+Suppose not. Let $C_1 \subsetneq C$ be a smaller block in $X_{\alpha,\beta}$ containing $\alpha$. Therefore, there exists an edge  $(\gamma , \delta) \in E$ such that $\gamma \in C$ and $\delta \in C \setminus C_1$. By definition of $X_{\alpha,\beta}$ there must exist a $g \in G$ such that $\alpha^g = \gamma$ and $\beta^g = \delta$. Now observe that $\gamma\in C_1 \cap C_1^g$ and $\delta\in C_1^g\setminus C_1$ which is a contradiction to the fact that $C_1$ is a block.
 \end{proof}
+ 
+%\printexercise{minimal-group}
 
-\begin{claim}
-There cannot be a smaller block.
-\end{claim}
-\begin{proof}
-We prove the above claim by contradiction, considering that there exists a smaller block.
-Suppose $C_1 \subsetneq C$ is the block.
-
-Therefore, $\exists \gamma \in C_1$ and $\delta \in C \setminus C_1$ such that $(\delta , \gamma) \in E$ is an edge in the graph.
-
-This follows from the fact that there must be a group element that moved $\alpha$ to $\gamma$ and $\beta$ to $\delta$ simultaneously. That is,  $\exists g \in G$ such that $\alpha^g = \gamma$ and $\beta^g = \delta$
-
-We claim that both $\delta$ and $\gamma$ are in $C_1^g$.
+One question left to answer is that if the graph $X_{\alpha,\beta}$ be efficiently constructed ? We are only given as input the generating set $A$ of $G$ and not the entire group. So we now need to modify the definition of the graph $X_{\alpha,\beta}$ so that it can be efficiently constructed.
 
 
-This follows from the following statements.Since $\alpha,\beta \in C_1$, it implies that $\alpha^g,\beta^g \in C_1^g$.
-
-Hence, we can also add that $\delta$,$\gamma \in C_1^g$.
-Now, both $\delta$ and $\gamma$ gets inside $C_1^g$, and in $ C_1$,$\delta$ is outside while $\gamma$ is inside.
-
-therefore, $C_1 \cap C_1^g \neq \emptyset$ as $\gamma$ is present in the intersection of $\delta \in C_1^g \setminus C_1$.
-
-Therefore, $C_1$ is not a block. 
-
-\end{proof}
 We can compute minblock if E is defined based on $G$. 
 Replacing $G$ with $A$,suppose we define E as:
-\[ E = \{(\alpha^{(g)},\beta^{(g)}) ~|~ g \in A\} \]
+\[ E = \{(\alpha^{g},\beta^{g}) ~|~ g \in A\} \]
+
 Suppose we only put the edges corresponding to $A$. The above claim still holds as there are a fewer edges present in the modification. The bigger set of edges itself are preserved by any element in $G$. Hence, $G$ would still be an automorphism subgroup of the automorphism group of the modified graph. 
 
 It still holds that connected components has to be blocks as every element in the group is a subset of the automorphism group.
 
-Given $\alpha$ and $\beta$,there is going to be a block that contains $\alpha$ and $\beta$. There always exists an edge between $\alpha$ and $\beta$ and are contained in the same component always. With our algorithm,we are only interested in finding the smallest connected component containing $\alpha$ and $\beta$.
+Given $\alpha$ and $\beta$,there is going to be a block that contains $\alpha$ and $\beta$. There always exists an edge between $\alpha$ and $\beta$ and are contained in the same component always. With our algorthm,we are only interested in finding the smallest connected component containing $\alpha$ and $\beta$.
 
 
 We consider a graph $H : \Omega \times \Omega$ defined as $(V',E')$ where,
@@ -115,7 +149,7 @@ We consider a graph $H : \Omega \times \Omega$ defined as $(V',E')$ where,
 
 In the graph H, we consider $(\alpha , \beta)$ and $(\gamma , \delta)$ as vertices . We put an edge if there is a $g \in A$ that demonstrates that we can go from $\alpha$ to $\gamma$ and $\beta$ to $\delta$ simultaneously.
 
-\begin{claim} Given a graph $H$, the edge set $E$ can be constructed.
+\begin{claim} Given a graph $H$, the edgeset $E$ can be constructed.
 \begin{proof} Considering some $\alpha$, $\beta$,$\alpha'$ and $\beta'$, if there is a path from $\alpha$ and $\beta$ to $\alpha'$ and $\beta'$ , it means that there is a group element that takes $\alpha$ to $\alpha'$ and $\beta$ to $\beta'$ simultaneously.We compute the transitive closure of the graph, and define the edges in $E$.
 
 
@@ -135,29 +169,31 @@ In the previous lecture, we talked about an algorithm to find the minimal blocks
 \section{Special Case of Graph Automorphism Problem}
 We solve a special case of the Graph Automorphism Problem that reduces to the special case of Set Stabiliser Problem. 
 \[ GA \leqslant SetStab Problem = Group Intersection \]
-\begin{definition}[Trivalent Graphs] Graphs with maximum degree $d$ $\leqslant$ 3.
-\end{definition}
+
 \begin{enumerate}
 	\item Case when $d$ $\leqslant$ 1(trivial): 
-	In such a case, there shall exist only matchings(set of edges not intersecting with each other) and isolated vertices. 
+	In this case the graphs are only sets of vertex-disjoint edges(matchings) and isolated vertices. Given two graphs $X_1$ and $X_2$, we count the number of edges on both. If the count is same, then there is an isomorphism. 
 	
-	Given two graphs $X_1$ and $X_2$, we count the number of edges on both.If the count is same, then there is an isomorphism and also check for existence of automorphisms, the generating set of the automorphism, the number of isomorphisms.
+%	and also check for existence of automorphisms, the generating set of the automorphism, the number of isomorphisms.
 	\item Case when $d$ $\leqslant$ 2:
 	In such a case, there shall exist only paths and cycles.
 	
-	Given two graphs $X_1$ and $X_2$, we classify the cycles in the graphs of different sizes. Any cycle of length $k$ can be mapped to any cycle of length $k$ on the other.We can find the number of automorphisms, also find the generators of the automorphism group.
-	\item Case when $d$ $\leqslant$ 3:
-	In such cased, the reduction of $GI \leqslant GA$ breaks down, as we don't get a trivalency preserving reduction from $GI$ to $GA$ .
+	Given two graphs $X_1$ and $X_2$, we classify the cycles in the graphs of different sizes. Any cycle of length $k$ in $X_1$ can be mapped to any cycle of length $k$ in $X_2$.
 	
-	We may try to identify the connected components, say $C_{11}$, $C_{12}\cdots$ in graph $X_1$ and $C_{21}$, $C_{22} \cdots$ in graph $X_2$ and try mapping the connected components by brute force. This leads to an obvious problem of a large number of connected components.	 
+%	We can find the number of automorphisms, also find the generators of the automorphism group.
+	\item Case when $d$ $\leqslant$ 3:
+A graph is said to be {\em Trivalent} if the degree of every vertex in the graph is atmost 3.
+
+%	In such case, the reduction of $GI \leqslant GA$ breaks down, as we dont get a trivalency preserving reduction from $GI$ to $GA$ .
+	
+	We may try to identify the connected components, say $C_{11}$, $C_{12}\cdots$ in graph $X_1$ and $C_{21}$, $C_{22} \cdots$ in graph $X_2$ and try mapping the connected components by bruteforce. This leads to an obvious problem of a large number of connected components.	 
 \end{enumerate}	
 
+\textbf{Idea :}
 
+Consider two graphs $X_1$, $X_2$. Let $(p_1,q_1)$ be an edge in $X_1$ and $(p_2,q_2)$ be an edge in $X_2$. We split both the edges  into two and connect the mid-vertices by a special edge $e$. Let this be the gadget to construct the new graph $X$. If $X_1$ and $X_2$ are both trivalent then $X$ should be trivalent. Now observe that any isomorphism that maps $(p_1,q_1)\in X_1$ to $(p_2,q_2)\in X_2$ must fix the edge $e$. 
 
-Consider two graphs $X_1$, $X_2$, with edges $(p_1,q_1)$ in $X_1$ to be mapped to edges $(p_2,q_2)$ in $X_2$. We split both the edges and connect them by a special edge e. Following is an simpler question that we are interested in.
-\begin{problem} Find the isomorphisms that preserve edge e.
-\end{problem}
-We are interested in the automorphisms that preserves e. 
+Following is an simpler question that we are interested in. Find the isomorphisms that preserve edge $e$. Infact we will be interested in the automorphisms of $X$ hat preserves $e$. 
 
 Our approach is:
 \begin{itemize}
@@ -165,7 +201,7 @@ Our approach is:
 \item Find out the generating set of the automorphism group individually for each. 
 \item Take union.
 \end{itemize}
-The automorphisms are disjoint, as, if an $Aut_e(X)$,which is a mapping from $X_1$ to $X_2$ maps $(p_1,q_1)$ to $(p_2,q_2)$, then it cant map $(p_1,q_1)$ to somewhere else in the graph $X_2$.
+%The automorphisms are disjoint, as, if an $Aut_e(X)$,which is a mapping from $X_1$ to $X_2$ maps $(p_1,q_1)$ to $(p_2,q_2)$, then it cant map $(p_1,q_1)$ to somewhere else in the graph $X_2$.
   
   We consider and name the special edges. Say, graph $X_2$ has $l$ edges, then by ranging $(p_2,q_2)$ over all possible edges in $X_2$ for $X_1$ one by one, we shall have the special edges as:
    \[ e_1, e_2 , e_3,\cdots,e_l\]
@@ -173,81 +209,83 @@ The automorphisms are disjoint, as, if an $Aut_e(X)$,which is a mapping from $X_
   \end{observation}
   $ Aut_{e_{1}}(X), Aut_{e_{2}}(X),\cdots,Aut_{e_{l}}(X)$ are all disjoint except for identity.
   
-  \begin{problem} Given that $X$ is trivalent(with the assumption that it is connected by special edge e) and  given the special edge $e$, output the $GenSet$ of $Aut_e(X)$ that preserves the edges in the undirected graph.
+ \begin{problem} Given a graph $X$ is trivalent 
+% (with the assumption that it is connected by special edge e) 
+ and a distinguished edge $e$, output the generating set of $Aut_e(X)$ that preserves the edge $e$ in the undirected graph $X$.
   \end{problem}
-  
-  It outputs the set of all automorphisms of  $X$ which preserves the edge.
-  
-  
-  We try to build chains of subgroup bottom-up, and we define these chains of subgroups based on the graph structure.
-  
-  
-  Given an $X$ that is trivalent and connected and given an edge $e$, we want some inductive structure based on $e$ and in turn, tower of subgroups.
-  
-  
-  
-  
-   
-\begin{theorem}[Tutte's Theorem] If $X$ is a trivalent and connected graph, $Aut_e(X)$ is a 2-group. Size of the group is a power of prime.
+
+$Aut_e(X)$ is a special, highly structured group.
+
+\begin{theorem}[Tutte's Theorem] If $X$ is a trivalent and connected graph, $Aut_e(X)$ is a 2-group. That is size of  $Aut_e(X)$ is $2^p$ for some $p$.
 \end{theorem}
- 
-$Aut_e(X)$ is a special, highly structured group. Consider the vertices that appear in the path containing $e$.
-Let $X_r$ be the sub graph of vertices and edges in $X$ which appear in a path through e of length $\leqslant$ $r$.
+
+
+
+
+
+
+  
+ It outputs the set of all automorphisms of  $X$ which preserves the edge. We try to build chains of subgroup bottom-up, and we define these chains of subgroups based on the graph structure. Given an $X$ that is trivalent and connected and given an edge $e$, we want some inductive structure based on $e$ and in turn, tower of subgroups.
+  
+
+For every $r$, let $X_r$ be the subgraph of vertices and edges in $X$ which appear in a path passing through $e$ of length $\leqslant$ $r$.
 
 
 The idea is to find $Aut_e(X)$ incrementally.
-We thus have a tower(sequence to be precise) of subgroups as:
+We thus have a sequence of subgroups as:
 
- \[ Aut_e(X)\cdots Aut_e(X_{r-1})\cdots Aut_e(X_{r-2})\cdots Aut_e(X_{1})\]
- $Aut_e(X_{1})$ contains only 2 vertices and an edge, which is thus easy to compute and then, ascend upwards in the chain.
+ \[ Aut_e(X),\cdots  ,Aut_e(X_{r}),Aut_e(X_{r-1}),Aut_e(X_{r-2}),\cdots ,Aut_e(X_{2}),Aut_e(X_{1})\]
+$X_{1}$ contains only 2 vertices and an edge. Therefore $Aut_e(X_{1})$ is thus easy to compute. Now we need a method to ascend upwards in the chain.
  
  \begin{observation} \[Aut_e(X_i) \leqslant Aut_e(X_{i+1})\]
  \end{observation}
  
  
- \begin{proof}
- We provide a way to ascend through the above sequence of subgroups. 
- Let $\Phi$ : $Aut_e(X_{r+1})\rightarrow Aut_e(X_{r})$,
- $\Phi$ is the projection of $\sigma \in Aut_e(X_{r+1}$ to elements in $X_{r}$
- 
- $Aut_e(X_{r}$ is a subgroup of $S_n$ such that:
- \[ Aut_e(X_r)= \{\sigma ~|~ \sigma \quad preserves\quad edge-non\quad edge\quad relationships\quad in\quad X_r\}\]
- Two $\sigma$, $\sigma'$ in $Aut_e(X{i+1})$ could have the same image under $\Phi$.
- Also any element in $Aut_e(X)$ must preserve its layers.
- 
- \begin{observation}
- $Aut_e(X_{i})$ preserves the set $X_{i}$
- \end{observation}
- 
- We know, $\Phi$ : $Aut_e(X_{r+1})\rightarrow Aut_e(X_{r})$,
- 
- 
- therefore, $\Phi(\sigma\cdot\sigma')= \Phi(\sigma)\cdot\Phi(\sigma')$
- 
- \end{proof}
- Such a map from group to group that preserves actions of group to group is called Homomorphism.
- 
+% \begin{proof}
+%We provide a way to ascend through the above sequence of subgroups. 
+% Let $\Phi$ : $Aut_e(X_{r+1})\rightarrow Aut_e(X_{r})$,
+% $\Phi$ is the projection of $\sigma \in Aut_e(X_{r+1}$ to elements in $X_{r}$
+% 
+% $Aut_e(X_{r})$ is a subgroup of $S_n$ such that:
+% \[ Aut_e(X_r)= \{\sigma ~|~ \sigma \quad preserves\quad edge-non\quad edge\quad relationships\quad in\quad X_r\}\]
+% Two $\sigma$, $\sigma'$ in $Aut_e(X{i+1})$ could have the same image under $\Phi$.
+% Also any element in $Aut_e(X)$ must preserve its layers.
+% 
+% \begin{observation}
+% $Aut_e(X_{i})$ preserves the set $X_{i}$
+% \end{observation}
+% 
+% We know, $\Phi$ : $Aut_e(X_{r+1})\rightarrow Aut_e(X_{r})$,
+% 
+% 
+% therefore, $\Phi(\sigma\cdot\sigma')= \Phi(\sigma)\cdot\Phi(\sigma')$
+% 
+% \end{proof}
+%Such a map from group to group that preserves actions of group to group is called Homomorphism.
+% 
+
+We use group homomorphisms defined in the next secion to do this.
+
  \section{Introduction to Group Homomorphism}
  
- \begin{definition} We consider $\Phi$ : $G \Longrightarrow H$, where $G,H \leqslant S_n.$
- Such that, $\forall g_1,g_2, \Phi(g_1)\cdot\Phi(g_2)= \Phi(g_1,g_2).$
- Maps as these which preserves such actions are called as Homomorphisms.
+ \begin{definition}Let  $G,H \leqslant S_n$. A function $\Phi$ : $G \rightarrow H$  such that,
+\begin{center}
+ $\forall g_1,g_2\in G, \Phi(g_1\cdot g_2) = \Phi(g_1)\cdot\Phi(g_2) $
+\end{center} 
+is called a {\em group homomorphism}.
  \end{definition}
- 
- 
- \begin{observation}
+  \begin{observation}
  \begin{enumerate}
  \item If $G,H \leqslant S_n$, it implies that $\Phi(e_G)= \Phi(e_H)$
  That is, $\Phi(e)= e$ as $G,H \leqslant S_n$
- We can say, $\Phi(g_1)\cdot\Phi(g_1^-1) = \Phi(g_1G_1^-1)$, which is equal to $\Phi(e)$.
+ We can say, $\Phi(g_1)\cdot\Phi(g_1^{-1}) = \Phi(g_1g_1^{-1})$, which is equal to $\Phi(e)$.
  
  \item $\Phi(g_1^{-1}) = (\Phi(g_1))^{-1}$
  \item $\Phi(g)\Phi(e) = \Phi(ge) = \Phi(g)$
 
   \end{enumerate}
   \end{observation}
-We define a set as $\{g\in G ~|~ \Phi(g)=e\}$, which is called as Kernel of $\Phi$. The set of groups that gets mapped to identity is Kernel.
-We can say that, identity from $G$ maps to $H$. However, other elements can also be mapped, and the mapping needn't be onto.
+We define a set as $\{g\in G ~|~ \Phi(g)=e\}$, which is called as Kernel of $\Phi$. The set of elements that get mapped to identity is Kernel. We can say that, identity from $G$ maps to $H$. However, other elements can also be mapped, and the mapping need not be onto.
 
 \begin{claim}
 $Ker(\Phi)$ is a normal subgroup of $G$.
@@ -269,7 +307,7 @@ The size of the kernel times the size of the image equals size of $G$.
 $|Ker(\Phi)|/|Im(\Phi)|= |G|\quad (using\quad Lagrange's\quad Theorem)$.
 \end{claim}
 
-The above claims are called as First Isomorphism Theorem. 
+%The above claims are called as First Isomorphism Theorem. 
  
  
  
