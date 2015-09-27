@@ -47,81 +47,184 @@ $$
 \end{enumerate}
 \end{theorem}
 The proof of this theorem will be discussed in the next lecture.
-\Lecture{Jayalal Sarma}{Sep 21, 2015}{28}{Noetherian Rings}{Manoj Kumar
-Sure}{$\alpha$}{K Dinesh}
-We have stated the Hilbert's theorem in the last lecture. The proof of it goes as follows:
-\begin{proof}(Hilbert's theorem)
-To prove the equivalence, we first prove $1 \implies 2$ and then $2 \implies 1$.\\
-For $1 \implies 2$,\\
-Consider, $$ I = \bigcup_{i=1}^{\infty}I_i$$
-$I_i$'s are ideals in the ring $R$. We can easily prove that $RI$ is contained in $I$. So, $I$ is an ideal. So, $I$ is finitely generated(based on the assumption in $1$).Say, 
-$$
-	I = <f_1,f_2,\ldots,f_k>
-$$
-$k$ is finite. If all of $f_i$'s are in $I_j$ for some $j$, after all the $f_i$'s are included, $I$ is going to be constant.
-$$
-f_1 \in I \implies \exists i, f_1\in I_i
-$$
-take the smallest of such $i$. Similarly, do this for all other elements in the generating set and find the minimum $i$, where they occur in the sequence. Find the maximum of all such $i$'s. After that maximum point, $I$ is going to be constant. i.e; the chain of ideals is terminating.\\\\
-For $2 \implies 1$,\\
-Let $I$ be an ideal, that is not finitely generated in $R$.\\
-$$
-I = <f_1,f_2,\ldots>
-$$
-Consider, the following chain of ideals, 
-$$I_1=<f_1>$$
-$$I_2=<f_1,f_2>,\ldots$$
-So,
-$$
-I_1\subseteq I_2\subseteq \ldots
-$$
-If the chain is finite, then after some time, we run out of polynomials, which implies that $I$ will be finite. 
-This concludes the proof of Hilbert's theorem.
+\Lecture{Jayalal Sarma}{Sep 21, 2015}{28}{Proof of Hilbert Basis
+Theorem}{Manoj Kumar Sure}{$\gamma$}{K Dinesh}
+
+In last class, we saw the difference between variety of ideals and ideal of
+varieties. We had defined ideals based on a collection of finite set of
+polynomials from the ring generating them. Now, we are interested in
+ideals defined by a collection of points. We also some examples. This
+naturally leads to the question of the existence of finite collection of
+polynomials that can generate the ideal.
+
+Hilbert's theorem answers this question in affirmative.
+\begin{theorem}[Hilbert's Basis Theorem]
+	Every ideal $I$ in $\F[x_1,\ldots,x_n]$ is finitely generated. That
+	is, there exists a $k > 0$ and $f_1,f_2,\ldots,f_k \in
+	\F[x_1,\ldots,x_n]$ such that $I = \langle f_1,f_2,\ldots,f_k \rangle
+	$
+	\label{thm:hbt}
+\end{theorem}
+The polynomials $f_1,\ldots,f_k$ are sometimes referred to as \emph{basis} or
+\emph{generators} of ideal $I$. This theorem also says that in the Ideal
+Membership Problem defined in last
+% TODO : give backref
+lecture, it makes sense to ask for a representation of the element $g$ in
+terms of the generators. 
+
+\section{An equivalent characterization of Hilbert's Theorem}
+In last lecture, we stated two equivalent statements, one connecting ideals
+being finitely generated and other on chains of ideals. We prove
+the equivalence in this section.
+
+\begin{proof}[Proof of equivalence]	% TODO : give backref
+	[$1 \implies 2$] Suppose any ideal $I$ in $\F[x_1,\ldots,x_n]$ be
+	finitely generated. Consider any ascending chain in
+	$\F[x_1,\ldots,x_n]$. That is let $I_1,I_2,\ldots,I_k,\ldots$ be
+	ideals in $\F[x_1,\ldots,x_n]$ such that $I_1 \subseteq I_2 \subseteq
+	\ldots I_k \subseteq \ldots$. We need to show that this chain
+	terminates.  Consider, $$ I = \bigcup_{i=1}^{\infty}I_i$$ We claim
+	that $I$ is an ideal in $\F[x_1,\ldots,x_n]$ and this chain terminates
+	in $I$. Note that $(I,+)$ is Abelian\footnote{This can be observed
+	once we note that for any $a,b \in I$, there exists a $j\ge 1$ such that
+	$a,b \in I_j$}. Now $RI = \cup_{i \ge 1} RI_i \subseteq \cup_{i \ge 1}
+	I_i = I$. Hence $I$ is an ideal in $\F[x_1,\ldots,x_n]$. 
+	
+	By assumption that every ideal in $\F[x_1,\ldots,x_n]$ is finitely
+	generated, $I$ is also finitely	generated and let $I =  \langle 
+	f_1,f_2,\ldots,f_k \rangle$ where $k>0$ is finite. We now show that
+	the chain terminates in $I$.
+
+	Since $f_1 \in I$, there exists an $i$ such that $f_1\in I_i$ for
+	$I_i$ in the chain. Let $i_1$ be the least integer such that $f_1
+	\in I_{i_1}$. Similarly for $j \in [k]$, let $i_j$ be the least
+	integer such that $f_j \in I_{i_j}$. Now choose, $N = \max_{j \in [k]}
+	i_j$.  By choice of $N$, for every $i \le N$, $I_i \subseteq I_N$ and
+	for every $n \ge N$, $I_n = I_N$.
+	
+	[$2 \implies 1$] We prove the contrapositive. Let there exist an ideal 
+	$I$ that is not finitely generated in $R = \F[x_1,\ldots,x_n]$. We
+	show that there exists a chain that is non-terminating. 
+
+	Since $I$ is not finitely generated, there exists an infinite sequence 
+	of polynomials, $f_1,f_2,\ldots$ which generates $I$.
+	Consider, the following chain of ideals, 
+	\begin{align*}
+	I_1 &= \langle f_1 \rangle \\
+	I_2& =\langle f_1,f_2 \rangle \\ 
+	& \vdots \\
+	I_k & = \langle f_1,f_2, \ldots, f_k \rangle  \\
+	& \vdots 
+	\end{align*}
+
+	Clearly, $I_1\subseteq I_2\subseteq \ldots I_k \ldots$. This chain
+	never terminates. If the chain
+	is terminates say at $I_k$, then $f_1,\ldots,f_k$ generates $I$ 
+	implying that $I$ will be finite generated which is a contradiction. 
 \end{proof}
-\begin{definition}(Noetherian Rings)
-Rings which satisfy the above condition(s) are called Noetherian Rings.
+
+\section{Noetherian Rings and Proof of Hilbert's Theorem}
+The rings that satisfy the condition (2) has a special name given after the
+mathematician Emmy Noether\footnote{\url{https://en.wikipedia.org/wiki/Emmy_Noether}}.
+
+\begin{definition}[Noetherian Rings]
+	A ring $R$ is said to be Noetherian, if every ascending chain of
+	ideals in $R$ is terminating.
 \end{definition}
-\begin{theorem}
+Noetherian rings have the following nice property.
+\begin{lemma} \label{lem:noether}
 If $R$ is Noetherian, then $R[x]$ is Noetherian.
-\end{theorem}
-\begin{proof}
-Let, $J$ be an ideal in $R[x]$. Now, to that R[x] is Noetherian, it is sufficient to prove that $J$ is finitely generated.\\
-Define $$ I_n = \{r\in R\;| r \text{ is the leading coefficient of a degree } n \text{ polynomial in } J\}$$
-We claim that $I_n$ is also an ideal of $R$.\\
-Since, $J$ is an ideal, $$R[x]J\subseteq J$$
-We can easily prove that $I_n$ is closed under addition.\\
-To prove that $I_n$ is an ideal, we need to prove $$RI_n\subseteq I_n$$
-Let, $t\in R$ and $r \in I_n$. We need to argue that $tr\in I_n$.\\
-In other words, we need to show that $\exists$ degree $n$ polynomial in $J$ such that $tr$ is it's leading coefficient.\\
-Let $P(x)$ be the degree $n$ polynomial with $r$ as it's leading coefficient.($\exists\;a\;P(x)$ because $r\in I_n$).\\
-Consider $tP(x)$, the leading coefficient is $tr$.Since, $J$ is an ideal, $tP(x)\in J$. So, $tr\in I_n$. Which implies that $I_n$ is an ideal.\\
-To prove $I_n$ is contained in $I_{n+1}$.($I_n\subseteq I_{n+1}$), multiply $I_n$ with $x$, the resulting polynomial will have degree $n+1$ but with same leading coefficients. So, by definition of $I_n$, all the elements in $I_n$ belongs to $I_{n+1}$.So,$$I_1\subseteq I_2 \subseteq \ldots $$
-Since, $R$ is Noetherian, all the ideals $I_i$'s are finitely generated and terminated(say, after $I_N$).Let,$$ I_i=<r_{(i,1)},r_{(i,2)},\ldots,r_{(i,t_i)}>$$ with $i$ ranging from 1 to $N$.\\
-Let $f_{ij}$ represent the polynomial whose leading coefficient is $r_{ij}$ in $J$.\\
-Our claim is that $J$ can be generated by $<f_{ij}>,0\leq i\leq N\;and\;1\leq j \leq t_i$.\\
-Consider, the ideal generated by $<f_{ij}>$ as $J^*$. To prove that $J^* = J$, we need to prove 
-\begin{enumerate}
-\item $J^*\subseteq J$
-\item $J\subseteq J^*$
-\end{enumerate}
-Proving $J^* \subseteq J$ is trivial.(As all the $f_{ij}$'s represent a polynomial in $J$, all their generated polynomials will also be in $J$).\\\\
-To prove $J\subseteq J^*$,\\
-Use induction on the degree of the polynomial ($n$).\\
-Base: $n$ = 0; degree of the polynomial is zero implies that all of them are constants. So, they will be the leading coefficients.So, $I_0=J$, which also implies that $J=J^*$, so, the claim holds true.(i.e; $J \subseteq J^*$).\\
-Assume that the claim holds true $\forall n < N$.Let $r$ be a leading coefficient. So,$$r=\sum_{j=1}^{t_i} s_j r_{(i,j)} $$.
-Consider, the polynomial $$ g = \sum_{j=1}^{t_i}s_jf_{(i,j)}$$
-The leading coefficient of $g$ is $s_jr_{(i,j)}$.Consider the polynomial $f-g$, this has the coefficient of it's highest term as 0. So, the degree of the polynomial $f-g$ $ \leq (n-1)$.\\
-By induction hypothesis, $f-g$ is in $J^*$. Since, $g$ is also in $J^*$, the polynomial $f$ has to be in $J^*$.\\
-This proves that $J \subseteq J^*$. Hence, we can conclude that if $R$ is Noetherian, $R[x]$ is also Noetherian.
-\end{proof}
+\end{lemma}
+
+Let us assume the above theorem and prove our main theorem of this lecture.
 \begin{theorem}
-Any ideal in $\mathbb{F}[x_1,x_2,x_3,\ldots,x_n]$ is finitely generated.
+Any ideal in $\mathbb{F}[x_1,\ldots,x_n]$ is finitely generated.
 \end{theorem}
-\begin{proof}
-Proof by induction on $n$.\\
-Base: $n$ = 0, the Ring would be $\mathbb{F}$. $\mathbb{F}$ has only two ideals. one is ${0}$ and the other is $\mathbb{F}$. Both can be verified to be generated by finite generating sets.Hence, the base case holds true.\\
-Assume that the given claim holds true for $n=k$, that is, $F[x_1,x_2,\ldots,x_k]$ has all it's ideals finitely generated, which implies that, it is a Noetherian ring. Using above theorem, we can say that $F[x_1,x_2,\ldots,x_k,x_{k+1}] = (F[x_1,x_2,\ldots,x_k])[x_{k+1}]$ has all it's ideals generated by finite generating sets. This concludes the proof for given claim.
+\begin{proof}(By induction on $n$)
+Base case: $n$ = 0, the ring would be $\mathbb{F}$. It can be shown that
+$\F$ has only two ideals : one is ${0}$ and the other is $\F$ both
+of which can be verified to be generated by finite generating sets\footnote{
+Proof is left as an exercise}. Hence, the base case holds true.
+
+Assume that the given claim holds true for $n=k$, that is all ideals in 
+$R = F[x_1,x_2,\ldots,x_k]$ are finitely generated. By definition, this implies
+that, $R$ is a Noetherian ring. Using Lemma~\ref{lem:noether} on Noetherian
+rings, we can say that $F[x_1,x_2,\ldots,x_k,x_{k+1}] =
+(F[x_1,x_2,\ldots,x_k])[x_{k+1}]$ also must have its ideals finitely
+generated. This concludes the proof.
 \end{proof}
+
+We now prove Lemma~\ref{lem:noether}.
+\begin{proof}[Proof of Lemma~\ref{lem:noether}]
+Let, $J$ be an ideal in $R[x]$. To show that $R[x]$ is Noetherian, it is 
+sufficient to prove that $J$ is finitely generated. 
+For $n \ge 0$, define 
+\[ I_n = \{r\in R\;| r \text{ is the leading coefficient of a degree } n
+\text{ polynomial in } J\} \cup \{0\} \]
+Note that $I_0 \subseteq J$. Proof strategy is to show that for $n \ge 0$,
+$I_n$ is an ideal in $R$ and show that $\{I_n\}_{n \ge 0}$ satisfy the
+ascending chain condition. Now using the fact that $R$ is Noetherian, we get
+that this chain must terminate. This observation helps us in getting a finite 
+generator set for $J$.
+
+We claim that $I_n$ is also an ideal of $R$. It can be seen that $(I_n,+)$ is
+an Abelian group. Since, $J$ is an ideal, $(R[x]J)\subseteq J$.
+To prove that $I_n$ is an ideal, we need to prove $$RI_n\subseteq I_n$$
+Let, $t\in R$ and $r \in I_n$. We need to argue that $tr\in I_n$. 
+To prove this, we need to show that there exists a degree $n$
+polynomial\footnote{Polynomials in $J$ are treated as univariate polynomials
+over $R$.} in $J$ such that $tr$ is its leading coefficient.
+Since $r\in I_n$, there exists $p(x)$ with $deg(p)=n$ and $r$ as its leading 
+coefficient. Consider the polynomial $t\cdot p(x)$. Note that 
+the leading coefficient of this polynomial is $tr$. Since $J$ is an ideal,
+$t\cdot p(x)\in J$. Also $deg(t\cdot p) = n$. Hence, by definition, $tr\in
+I_n$. This shows that $I_n$ is an ideal in $R$.
+
+To see that $I_n$ is contained in $I_{n+1}$, let $r \in I_n$ witnessed by
+$h(x) \in J$. If we multiply $h$ with $x$, the resulting polynomial will have 
+degree $n+1$ but have same leading coefficient. Hence $r \in I_{n+1}$ by
+definition. This shows that $\forall~n \ge 0~ I_n\subseteq I_{n+1}$. 
+
+Since, $R$ is Noetherian, the above chain must be terminating at the ideal
+$I_N$ for an integer $N$. Also since $I_n$ are ideals in $R$ and chains in $R$
+always terminates, the equivalent characterization gives that each of the
+$I_n$ are finitely generated. 
+% TODO : give backref to thm.
+For $1 \le i \le N$, let $I_i$ be $ \langle
+r_{(i,1)},r_{(i,2)},\ldots,r_{(i,t_i)} \rangle$ where $t_i$ is an integer
+and each of the $r$'s belongs to $I_i$. Let $f_{ij}$ in $J$ whose degree 
+is $i$ such that $r_{ij}$ is the leading coefficient of $F_{ij}$ 
+We now claim that $J$ is finitely generated.
+\begin{claim}
+	Denote $J^*$ to be the ideal $\langle \{ f_{ij} ~|~ 0\leq i\leq N,
+	1\leq j \leq t_i \}\rangle $. Then $J^* = J$
+\end{claim}
+\begin{proof}
+	Since $f_{ij} \in J$, we have $J^*\subseteq J$. We now show that 
+	$J\subseteq J^*$. We prove this by induction on the degree of 
+	the polynomial $f$ in $J$.
+	
+	For base case, $n$ = 0. Hence degree of the polynomial is zero
+	implying that all polynomials are constants. Hence $J^* = I_0
+	\subseteq J$. 
+	
+	Assume, by inductive hypothesis, that any polynomial of degree $n-1$ in
+	$J$ also appears in $J^*$. Let $f$ be a degree $n$ polynomial in
+	$J^*$ and $r$ be its leading coefficient. Hence $r \in I_n$. This
+	gives
+	\[ r=\sum_{j=1}^{t_n} s_j r_{(i,j)} \]
+	where $s_j \in R$. 
+	Consider, the polynomial $g = \sum_{j=1}^{t_n}s_j f_{(i,j)} \in J^*$. 
+	Note that the leading coefficient of $g$ is exactly $r$ which is same
+	as the leading coefficient of $f$. Hence the degree of the polynomial 
+	$f-g$ is $(n-1)$. Since $f,g \in J$\footnote{$g \in J$ since $g \in
+	J^*$ and $J^* \subseteq J$.}, $f-g \in J$. Applying 
+	induction hypothesis, $f-g$ is in $J^*$. Since $g \in J^*$, we get
+	that $f \in J$. This proves that $J \subseteq J^*$. 
+\end{proof}
+The completes the proof that $R[x]$ is Noetherian if $R$ is Noetherian.
+\end{proof}
+
 \Lecture{Jayalal Sarma}{Sep 22, 2015}{29}{Computing the generating sets of
 Ideals}{Manoj Kumar Sure}{$\alpha$}{K Dinesh}
 In the previous lecture, we proved that all the ideals in $\mathbb{F}[x_1,x_2,\ldots,x_n]$ are finitely generated. In this lecture, we compute the finite generating sets for two special cases of $\mathbb{F}[x_1,x_2,\ldots,x_n]$.
@@ -129,12 +232,12 @@ In the previous lecture, we proved that all the ideals in $\mathbb{F}[x_1,x_2,\l
 \item Linear Equations case
 \item Univariate case
 \end{enumerate}
-For Linear equations case, We can do guassian elimination and find out the generating set for the given Ideal.
+For Linear equations case, We can do Gaussian elimination and find out the generating set for the given Ideal.
 \begin{example}
 $$f_1 \rightarrow x+y-z=0$$
 $$f_2 \rightarrow 2x+3y+2z=0$$
 $$I=<f_1,f_2>$$
-We can rewrite the above ideal using guassian elimination as 
+We can rewrite the above ideal using Gaussian elimination as 
 $$f'_1 \leftarrow f_1$$
 $$f'_2 \leftarrow (1/2)f_2-f_1$$
 $$I=<f'_1,f'_2>$$
