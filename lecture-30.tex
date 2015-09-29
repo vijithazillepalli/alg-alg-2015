@@ -1,22 +1,22 @@
-\Lecture{Jayalal Sarma}{Sep 23, 2015}{30}{Term Ordering}{Naga Varun}{$\alpha$}{Ramya C}
+\Lecture{Jayalal Sarma}{Sep 23, 2015}{30}{Term Ordering}{Naga Varun}{$\beta$}{Ramya C}
 We will first complete Eucledian algorithm and proof of lemma 30.1 from the previous lecture and then look at term ordering.
 \begin{lemma}
-$$I = \langle f_1, f_2\rangle , f_1 \neq 0\;and\;f_2\neq 0$$
-then,$$I=\langle gcd(f_1,f_2)\rangle $$
+$$I = <f_1, f_2>, f_1 \neq 0\;and\;f_2\neq 0$$
+then,$$I=<gcd(f_1,f_2)>$$
 \end{lemma}
 \begin{proof}
-We know from Theorem 29.6 that for any $g$ of least degree in $I$, $\langle g\rangle =I$ holds true. We also saw that there is exactly one $g$ of least degree in $I$ s.t $lc(g)=1$(where $lc(g)$ is the leading coefficient of $g$). We'll prove that this $g$ is indeed $gcd(f_{1},f_{2})$, thus proving $\langle gcd(f_{1},f_{2})\rangle =I$.
-$$\langle g\rangle =I\;\;\&\;\;f_{1},f_{2}\in I$$ 
+We know from Theorem 29.6 that for any $g$ of least degree in $I$, $<g>=I$ holds true. We also saw that there is exactly one $g$ of least degree in $I$ s.t $lc(g)=1$(where $lc(g)$ is the leading coefficient of $g$). We'll prove that this $g$ is indeed $gcd(f_{1},f_{2})$, thus proving $<gcd(f_{1},f_{2})>=I$.
+$$<g>=I\;\;\&\;\;f_{1},f_{2}\in I$$ 
 $$\therefore \exists\ g_{1},g_{2}\in \mathbb{F}[x]\;\;s.t\;\;f_{1}=g_{1}.g\;\;\&\;\;f_{2}=g_{2}.g$$ 
 $$\therefore g|f_{1}\;\;\&\;\;g|f_{2}$$.
-$$g\in I\;\;\&\;\;I=\langle f_{1},f_{2}\rangle $$
+$$g\in I\;\;\&\;\;I=<f_{1},f_{2}>$$
 $$\therefore\exists u_{1},u_{2}\in \mathbb{F}[x]\;s.t\;g=u_{1}.f_{1}+u_{2}.f_{2}$$
 $$\therefore h|f_{1}\;\;\&\;\;h|f_{2} \implies h|g$$
 and we chose $lc(g)=1$
 therefore, from the defn. of $gcd$, $g=gcd(f_{1},f_{2})$
 \end{proof}
 \section*{Eucledian algorithm:}
-Since $\langle f_{1},f_{2}\rangle =\langle f_{1}-qf_{2},f_{2}\rangle \forall q\in \mathbb{F}[x]$, from Lemma 30.1  $gcd(f_{1},f_{2})=gcd(f_{1}-qf_{2},f_{2})$.
+Since $<f_{1},f_{2}>=<f_{1}-qf_{2},f_{2}>\forall q\in \mathbb{F}[x]$, from Lemma 30.1  $gcd(f_{1},f_{2})=gcd(f_{1}-qf_{2},f_{2})$.
 \begin{algorithm}
 \caption{Eucledian algorithm for finding the gcd of two Univariate polynomials}\label{euclid}
 \begin{algorithmic}[1]
@@ -37,23 +37,44 @@ Since $\langle f_{1},f_{2}\rangle =\langle f_{1}-qf_{2},f_{2}\rangle \forall q\i
 %well-ordering
 %examples of term-ordering
 %over $\mathbb{F}[x_1,....x_n]$
+
 \begin{definition}(Power Products)
 Set of all power products($T^n$) over $\mathbb{F}[x_1,....x_n]$ is defined as follows:
 $$T^n=\{x_{1}^{\alpha_{1}}..x_{i}^{\alpha_{i}}..x_{n}^{\alpha_{n}}\;|\; \alpha_{i}\in \mathbb{N},\;1\leq i\leq n\}$$
 \end{definition}
 We will represent a power product/monomial $x_{1}^{\alpha_{1}}..x_{i}^{\alpha_{i}}..x_{n}^{\alpha_{n}}$ by $x^{\alpha}$ 
+\begin{definition}(Total Order)
+An ordering relationship $<$ over $T^n*T^n$ is called a Total Order iff it satisfies the following properties:
+
+$ \forall x^{\alpha},x^{\beta},x^{\gamma} \in T^n$
+
+$$ x^{\alpha} < x^{\beta}\; and \;x^{\beta} < x^{\alpha} \implies x^{\alpha} = x^{\beta} (antisymmetry)$$
+$$ x^{\alpha} < x^{\beta} \;and\; x^{\beta} < x^{\gamma} \implies x^{\alpha} < x^{\gamma} (transitivity)$$
+$$x^{\alpha} < x^{\beta} \;or\; x^{\beta} < x^{\alpha} (totality)$$.
+
+Note here that $x^{\alpha} < x^{\alpha}$ from $totality$ property.
+\end{definition}
+
+\begin{definition}(Well Ordering)
+An ordering relationship $<$ over $T^n*T^n$ is called a Well Ordering iff it's a Total Order and has a property that every non-empty subset of $T^n$ has a least element in this ordering.
+\end{definition}
+
 \begin{definition}(Term Ordering)
-An ordering relationship $<$ over $T^n*T^n$ is called a Term Ordering iff
+An ordering relationship $<$ over $T^n*T^n$ is called a Term Ordering iff it's a Total Order and satisfies the following properties:
 $$1<x^{\alpha}\;\; \forall x^{\alpha}\in T^n$$
 $$x^{\alpha}<x^{\beta}\implies x^{\alpha}x^{\gamma}<x^{\beta}x^{\gamma}\;\;\forall x^{\alpha},x^{\beta},x^{\gamma}\in T^n$$
 \end{definition}
+
+\begin{exercise}
+Prove that every Term Ordering is also a Well Ordering ( Hint: Use Hilbert's basis theorem).
+\end{exercise}
 \section*{Examples:}
 The following examples define ordering relationships $<$ over $T^{n}*T^{n}$
 \subsection*{lex ordering:}
 $$x^{\alpha},x^{\beta} \in T^{n}$$
 $$x^{\alpha}=x_{1}^{\alpha_{1}}....x_{n}^{\alpha_{n}}$$
 $$x^{\alpha}<x^{\beta}\; iff \;(x^{\alpha}=x^{\beta}) or ( \;for \;first \;i \;s.t\; \alpha_{i}\neq \beta_{i} , \alpha_{i}<\beta_{i})$$.
-We'll prove that this is a term ordering.
+It's an exercise to prove that this is a Total Order. We'll prove that this is a term ordering.
 
 Let us take $x^{\alpha}=1\;\&\;x^{\beta}\neq1$
 $$\therefore\exists 1\leq i\leq n\;s.t\;\beta_{i}>0 \;\&\;(\beta_{j}=0 \;\forall 1\leq j<i)$$
@@ -72,5 +93,5 @@ $x^{\alpha}<x^{\beta}$ if $\sum\alpha_{i}<\sum\beta_{i}$ or ($\sum\alpha_{i}=\su
 \subsection*{revlex ordering:}
 $x^{\alpha}<x^{\beta}$ if $\sum\alpha_{i}<\sum\beta_{i}$ or ($\sum\alpha_{i}=\sum\beta_{i}\; and\; x^{\alpha}>x^{\beta}\; w.r.t\; lex \;ordering)$.
 $$$$
-We can also prove that 'degree lex ordering' and 'revlex ordering' are 'Term Orderings'.
+We can also prove that 'degree lex ordering' and 'revlex ordering' are Term Orderings.
 \end{document}
