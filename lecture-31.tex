@@ -1,5 +1,4 @@
-\Lecture{Jayalal Sarma}{September, 29 2015}{31}{Multivariate Division
-Algorithm}{Subhadra Nanda}{$\alpha$}{K Dinesh}
+\Lecture{Jayalal Sarma}{September, 29 2015}{31}{Multivariate Division Algorithm}{Subhadra Nanda}{$\alpha$}{K Dinesh}
 \section{Recap}
 In previous lectures,we saw there are two cases of polynomial rings, univariate case and linear or multivariate case. 
 
@@ -51,7 +50,7 @@ As $x^2yz$ and $xy^3$ have same total degree, sort them using reverse lex orderi
 So,  $lt(f) = 3xy^3$ as $(2,1,1)>(1,3,0)$ and $lc(f) = 3$ and $lp(f) = xy^3$.
 
 \section{Multivariate Division}
-Let, polynomials $f,g,h \in  \mathbb{F}[x_1,...,x_n]$.
+Let, polynomials $f,g,h \in  \mathbb{F}[x_1, \ldots ,x_n]$.
 
 We will use new notations $f \mathop \rightarrow \limits^{g} h$, which implies "f reduces to h using g in one step",
 
@@ -144,11 +143,11 @@ We will try to give the answer of this question later.
 
 \section{Generalization of multivariate division algorithm}
 
-Given, $F = {f_1,f_2,...,f_k}$ and $f,h,f_1,f_2,...f_k \in \mathbb{F}[x_1,...,x_n]$.
+Given, $F = \{f_1,f_2, \ldots ,f_k\}$ and $f,h,f_1,f_2, \ldots f_k \in \mathbb{F}[x_1,\ldots,x_n]$.
 
-We can say, $f {\mathop \rightarrow \limits^{F}}_{+} h$, if $\exists i_1,i_2,...,i_t$ and $h_1,h_2,...,h_3$ such that,
+We can say, $f {\mathop \rightarrow \limits^{F}}_{+} h$, if $\exists i_1,i_2, \ldots ,i_t$ and $h_1,h_2, \ldots ,h_3$ such that,
 
-$$f \mathop \rightarrow\limits^{f_{i_1}} h_1 \mathop \rightarrow\limits^{f_{i_2}} h_2 \mathop \rightarrow\limits^{f_{i_3}}...  ... \rightarrow h_{t-1} \mathop \rightarrow\limits^{f_{i_t}} h$$
+$$f \mathop \rightarrow\limits^{f_{i_1}} h_1 \mathop \rightarrow\limits^{f_{i_2}} h_2 \mathop \rightarrow\limits^{f_{i_3}}\ldots \ldots \rightarrow h_{t-1} \mathop \rightarrow\limits^{f_{i_t}} h$$
 
 \begin{observation}
 The polynomial $h$ will have no term that can be divided by any leading term of any of those polynomials $f_1,...,f_k$.
@@ -158,21 +157,21 @@ In the division process we saw that,
 $$ f = h + \frac{X}{lt(g)}\cdot g  = h + u\cdot g$$ where, $u = \frac{X}{lt(g)}$.
 
 Similarly, we can generalize it as
-$$ f = u_{i_1}f_{i_1} + u_{i_2}f_{i_2} + ... + u_{i_t}f_{i_t} + h $$
+$$ f = u_{i_1}f_{i_1} + u_{i_2}f_{i_2} + \ldots + u_{i_t}f_{i_t} + h $$
 
 We can write it as,
 
-$$ f = u_1f_1 + u_2f_2 + ... + u_kf_k + h $$
+$$ f = u_1f_1 + u_2f_2 + \ldots + u_kf_k + h $$
 
 \begin{observation}
-Using the above process we can solve the Ideal Membership problem, where the ideal $ I = <f_1,f_2,...,f_k>$ and a polynomial $f \in \mathbb{F}[x_1,...,x_n]$ is given. We have to check whether $f$ is a member of the ideal $I$.
+Using the above process we can solve the Ideal Membership problem, where the ideal $ I = \langle f_1,f_2, \ldots ,f_k \rangle$ and a polynomial $f \in \mathbb{F}[x_1,...,x_n]$ is given. We have to check whether $f$ is a member of the ideal $I$.
 
 \end{observation}
 
 
 We will discuss on this ideal membership problem in the next lecture.
 
-\begin{exercise}
+ \begin{exercise}
 Let $f,g \in \F[x_1, x_2, \ldots, x_n]$ be nonzero polynomials and let $multdeg(f)$ denote the mult-degree of $f$. Argue how the leading terms of monomials change under addition and mutliplication. Use it to show that:
 \begin{enumerate}[(a)]
 \item $multdeg(fg)$ = $multdeg(f)+multdeg(g)$.
@@ -187,4 +186,21 @@ Let $f, g \in \F[x_1, x_2, \ldots x_n]$ and $x^\alpha$ and $x^\beta$ be monomial
 where
 \[ x^\gamma = \frac{LCM(x^\alpha LM(f),x^\alpha LM(g))}{LCM(LM(f),LM(g))} \]
 \end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
