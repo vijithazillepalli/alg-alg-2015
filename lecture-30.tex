@@ -18,7 +18,7 @@ therefore, from the defn. of $gcd$, $g=gcd(f_{1},f_{2})$
 \section*{Eucledian algorithm:}
 Since $<f_{1},f_{2}>=<f_{1}-qf_{2},f_{2}>\forall q\in \mathbb{F}[x]$, from Lemma 30.1  $gcd(f_{1},f_{2})=gcd(f_{1}-qf_{2},f_{2})$.
 \begin{algorithm}
-\caption{Eucledian algorithm for finding the gcd of two Univariate polynomials}\label{euclid}
+\caption{Eucledian algorithm for finding the gcd of two Univariate polynomials}\label{div-euclid}
 \begin{algorithmic}[1]
 \Procedure{GCD}{ Input : Polynomials $f$ and $g$ (where $deg(g)\leq deg(f)$ and $f,g\neq0$)}
 \State \emph{loop}:
@@ -94,3 +94,13 @@ $x^{\alpha}<x^{\beta}$ if $\sum\alpha_{i}<\sum\beta_{i}$ or ($\sum\alpha_{i}=\su
 $x^{\alpha}<x^{\beta}$ if $\sum\alpha_{i}<\sum\beta_{i}$ or ($\sum\alpha_{i}=\sum\beta_{i}\; and\; x^{\alpha}>x^{\beta}\; w.r.t\; lex \;ordering)$.
 $$$$
 We can also prove that 'degree lex ordering' and 'revlex ordering' are Term Orderings.
+\begin{exercise}
+The usual $<$ ordering of $\mathbb{Z}_{\ge 0}$ has some nice (trivial to state) properties.
+\begin{itemize}
+\item ~there are only finitely many integers between any two integers. 
+\item ~$\alpha > 0$ for all nonzero $\alpha \in \mathbb{Z}$. 
+\end{itemize}
+Let $<$ be a total order on $\mathbb{Z}_{\ge 0}^n$ that satisifes: $\forall \alpha, \beta$,  $\alpha > \beta \implies \alpha+\gamma > \beta+\gamma$.
+Check if any of the above conditions are necessary and sufficient $<$  to be a monomial ordering?
+\end{exercise}
+
