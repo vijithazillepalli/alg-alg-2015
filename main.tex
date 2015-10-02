@@ -4,8 +4,8 @@
 \usepackage{complexity}
 \usepackage{graphicx}
 \usepackage{tocloft}
-\usepackage{standalone}
 \usepackage{enumerate}
+\usepackage{collect}		% for problem sets, exercises collection
 
 \usepackage{xcolor}
 \usepackage{color}
@@ -26,6 +26,76 @@
 \newcounter{todocounter}
 \newcommand{\todonum}[2][]{\stepcounter{todocounter}\todo[#1]{\thetodocounter: #2}}
 \newcommand{\jsay}[1]{\todonum[inline,color=red!20]{\small JS says: #1}}
+
+\newcounter{excount}
+\setcounter{excount}{0}
+\theoremstyle{plain}
+\newtheorem{ex}            [excount]{Exercise}  % modified to use with collect
+                                                % package
+
+%%%%%%%%%%%%%%%%%%%% Exercise and pset macros (start) %%%%%%%%%%%%%%%%%%%%%%%5
+
+% For exercise
+\definecollection{ex.tmp}
+\makeatletter
+\newenvironment{exercise}
+    {\@nameuse{collect*}{ex.tmp}
+		  {\begin{ex}}
+		    {\end{ex}}{}{}
+    }{\@nameuse{endcollect*}}
+\makeatother
+
+% For ps1 
+\definecollection{ps1.tmp}
+\makeatletter
+\newenvironment{show-ps1}[1]
+    {\@nameuse{collect*}{ps1.tmp}
+		    {}
+		    {}
+	    {\item \label{#1}}{}
+    }{\@nameuse{endcollect*}}
+\makeatother
+
+\makeatletter
+\newenvironment{ps1}
+    {\@nameuse{collect}{ps1.tmp}
+		{\item}{}
+    }{\@nameuse{endcollect}}
+\makeatother
+
+%%% For ps2
+\definecollection{ps2.tmp}
+\makeatletter
+\newenvironment{show-ps2}[1]
+    {\@nameuse{collect*}{ps2.tmp}
+		    {}
+		    {}
+	    {\item \label{#1}}{}
+    }{\@nameuse{endcollect*}}
+\makeatother
+
+\makeatletter
+\newenvironment{ps2}
+    {\@nameuse{collect}{ps2.tmp}
+		{\item}{}
+    }{\@nameuse{endcollect}}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%% Exercise and pset macros (end) %%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+%
+%\definecollection{ps2.tmp}
+%\makeatletter
+%\newenvironment{ps2}
+%    {\@nameuse{collect}{ps2.tmp}
+%	          {\begin{ps2}}
+%		    {\end{ps2}}
+%    }{\@nameuse{endcollect}}
+%\makeatother
+%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Lecture specific macros % 
@@ -114,11 +184,32 @@ Draft---\today\ and forever
 \input{lecture-27-28-29.tex}
 \input{lecture-30.tex}
 \input{lecture-31.tex}
-\def\psnumber{\theproblemsetcounter}
 \input{problemsets.tex}
-\stepcounter{problemsetcounter}
-\input{problemsets.tex}
-\def\psnumber{0}
-\input{problemsets.tex}
+%\def\psnumber{\theproblemsetcounter}
+%\input{problemsets.tex}
+%\stepcounter{problemsetcounter}
+%\input{problemsets.tex}
+%\def\psnumber{0}
+%\input{problemsets.tex}
+
+\newpage
+\section{Exercises}
+\setcounter{excount}{0}
+\includecollection{ex.tmp}
+
+% Convention : Call all problem set collection names with psXX.tmp
+% This helps in managing the auxillary files created by collect package.
+
+\newpage
+\section*{Problem Set \#1}
+\begin{enumerate}[(1)]
+\includecollection{ps1.tmp}
+\end{enumerate}
+
+\newpage
+\section*{Problem Set \#2}
+\begin{enumerate}[(1)]
+\includecollection{ps2.tmp}
+\end{enumerate}
 
 \end{document}
