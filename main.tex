@@ -27,11 +27,15 @@
 \newcommand{\todonum}[2][]{\stepcounter{todocounter}\todo[#1]{\thetodocounter: #2}}
 \newcommand{\jsay}[1]{\todonum[inline,color=red!20]{\small JS says: #1}}
 
+% modified exercise enviornment to use with collect  package
 \newcounter{excount}
 \setcounter{excount}{0}
 \theoremstyle{plain}
-\newtheorem{ex}            [excount]{Exercise}  % modified to use with collect
-                                                % package
+\newtheorem{ex}            [excount]{Exercise}  
+                                               
+% for exercises which are problem set questions
+\newtheorem{exercise-prob}	[theorem]{Exercise} 
+						    
 
 %%%%%%%%%%%%%%%%%%%% Exercise and pset macros (start) %%%%%%%%%%%%%%%%%%%%%%%5
 % For problem set back reference.
@@ -47,13 +51,37 @@
     }{\@nameuse{endcollect*}}
 \makeatother
 
-% For ps1 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% To create a a new pset with pset number n, copy paste the following code
+% with XX replaced by n.
+%
+% 	 \definecollection{psXX.tmp}
+%	 \makeatletter
+%	 \newenvironment{show-psXX}[1]
+%	     {\@nameuse{collect*}{psXX.tmp}
+%	         {\ifthenelse{ \equal{\psetbackref}{1} }{\label{prob:#1}}{}} {}
+%   	         {\item \label{#1} (See Exercise~\ref{prob:#1})} {}
+%	     }{\@nameuse{endcollect*}}
+%	 \makeatother
+%
+%	 \makeatletter
+%	 \newenvironment{psXX}
+%	     {\@nameuse{collect}{psXX.tmp}
+%			{\item}{}
+%	     }{\@nameuse{endcollect}}
+%	 \makeatother
+%
+% 
+
+
+%%% For ps1 
 \definecollection{ps1.tmp}
 \makeatletter
 \newenvironment{show-ps1}[1]
     {\@nameuse{collect*}{ps1.tmp}
 	    {\ifthenelse{ \equal{\psetbackref}{1} }{\label{prob:#1}}{}} {}
-	    {\item \label{#1} (See Problem~\ref{prob:#1})} {}
+	    {\item \label{#1} (See Exercise~\ref{prob:#1})} {}
     }{\@nameuse{endcollect*}}
 \makeatother
 
@@ -69,9 +97,8 @@
 \makeatletter
 \newenvironment{show-ps2}[1]
     {\@nameuse{collect*}{ps2.tmp}
-		    {}
-		    {}
-	    {\item \label{#1}}{}
+	    {\ifthenelse{ \equal{\psetbackref}{1} }{\label{prob:#1}}{}} {}
+	    {\item \label{#1} (See Exercise~\ref{prob:#1})} {}
     }{\@nameuse{endcollect*}}
 \makeatother
 
@@ -202,6 +229,7 @@ Draft---\today\ and forever
 
 \newpage
 \section*{Problem Set \#2}
+
 \begin{enumerate}[(1)]
 \includecollection{ps2.tmp}
 \end{enumerate}
