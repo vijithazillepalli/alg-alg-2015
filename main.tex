@@ -34,6 +34,8 @@
                                                 % package
 
 %%%%%%%%%%%%%%%%%%%% Exercise and pset macros (start) %%%%%%%%%%%%%%%%%%%%%%%5
+% For problem set back reference.
+\def\psetbackref{1}
 
 % For exercise
 \definecollection{ex.tmp}
@@ -50,9 +52,8 @@
 \makeatletter
 \newenvironment{show-ps1}[1]
     {\@nameuse{collect*}{ps1.tmp}
-		    {}
-		    {}
-	    {\item \label{#1}}{}
+	    {\ifthenelse{ \equal{\psetbackref}{1} }{\label{prob:#1}}{}} {}
+	    {\item \label{#1} (See Problem~\ref{prob:#1})} {}
     }{\@nameuse{endcollect*}}
 \makeatother
 
@@ -84,17 +85,6 @@
 
 %%%%%%%%%%%%%%%%%%%% Exercise and pset macros (end) %%%%%%%%%%%%%%%%%%%%%%%%%5
 
-
-%
-%\definecollection{ps2.tmp}
-%\makeatletter
-%\newenvironment{ps2}
-%    {\@nameuse{collect}{ps2.tmp}
-%	          {\begin{ps2}}
-%		    {\end{ps2}}
-%    }{\@nameuse{endcollect}}
-%\makeatother
-%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,6 +190,9 @@ Draft---\today\ and forever
 
 % Convention : Call all problem set collection names with psXX.tmp
 % This helps in managing the auxillary files created by collect package.
+
+% Give back reference to problems in lectures.
+\def\psetbackref{0}
 
 \newpage
 \section*{Problem Set \#1}
