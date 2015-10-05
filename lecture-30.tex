@@ -29,12 +29,8 @@ From Lemma \ref{gcd} we have $gcd(f_{1},f_{2})=gcd(f_{1}-qf_{2},f_{2})$.
 
 
 \begin{algorithm}
-<<<<<<< HEAD
 \caption{Euclidean algorithm for finding the gcd of two Univariate polynomials}
 \label{euclid}
-=======
-\caption{Eucledian algorithm for finding the gcd of two Univariate polynomials}\label{div-euclid}
->>>>>>> 2a047b89b106f4c32a06a2b842938e7b831dc81a
 \begin{algorithmic}[1]
 \Procedure{GCD}{ Input : Polynomials $f$ and $g$ (where $deg(g)\leq deg(f)$ and $f,g\neq0$)}
 \State \emph{loop}:
@@ -83,7 +79,6 @@ $ \forall x^{\alpha},x^{\beta},x^{\gamma} \in T^n$
 Note that $x^{\alpha} < x^{\alpha}$ from $totality$ property.
 \end{definition}
 
-<<<<<<< HEAD
 \begin{definition}(Well Ordering)
 An ordering relationship $<$ over $T^n\times T^n$ is called a Well Ordering iff it is a Total Order and has a property that every non-empty subset of $T^n$ has a least element in this ordering.
 \end{definition}
@@ -94,16 +89,6 @@ An ordering relationship $<$ over $T^n\times T^n$ is called a Term Ordering iff 
 \item $1<x^{\alpha}$ for all $x^{\alpha}\in T^n$
 \item For all $x^{\alpha},x^{\beta},x^{\gamma}\in T^n$ we have $x^{\alpha}<x^{\beta}\implies x^{\alpha}x^{\gamma}<x^{\beta}x^{\gamma}$
 \end{itemize}
-=======
-\begin{definition}[Well Ordering] 
-An ordering relationship $<$ over $T^n*T^n$ is called a Well Ordering iff it's a Total Order and has a property that every non-empty subset of $T^n$ has a least element in this ordering.
-\end{definition}
-
-\begin{definition}[Term Ordering] \label{def:term-order}
-An ordering relationship $<$ over $T^n*T^n$ is called a Term Ordering iff it's a Total Order and satisfies the following properties:
-$$1<x^{\alpha}\;\; \forall x^{\alpha}\in T^n$$
-$$x^{\alpha}<x^{\beta}\implies x^{\alpha}x^{\gamma}<x^{\beta}x^{\gamma}\;\;\forall x^{\alpha},x^{\beta},x^{\gamma}\in T^n$$
->>>>>>> 2a047b89b106f4c32a06a2b842938e7b831dc81a
 \end{definition}
 
 \begin{exercise}
@@ -162,16 +147,3 @@ $x^{\alpha}<x^{\beta}$ iff
 \end{itemize}
 
 We can also prove that 'degree lex ordering' and 'revlex ordering' are Term Orderings.
-<<<<<<< HEAD
-=======
-\begin{exercise}
-The usual $<$ ordering of $\mathbb{Z}_{\ge 0}$ has some nice (trivial to state) properties.
-\begin{itemize}
-\item ~there are only finitely many integers between any two integers. 
-\item ~$\alpha > 0$ for all nonzero $\alpha \in \mathbb{Z}$. 
-\end{itemize}
-Let $<$ be a total order on $\mathbb{Z}_{\ge 0}^n$ that satisifes: $\forall \alpha, \beta$,  $\alpha > \beta \implies \alpha+\gamma > \beta+\gamma$.
-Check if any of the above conditions are necessary and sufficient $<$  to be a monomial ordering?
-\end{exercise}
-
->>>>>>> 2a047b89b106f4c32a06a2b842938e7b831dc81a
