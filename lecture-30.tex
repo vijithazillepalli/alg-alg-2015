@@ -30,7 +30,7 @@ From Lemma \ref{gcd} we have $gcd(f_{1},f_{2})=gcd(f_{1}-qf_{2},f_{2})$.
 
 \begin{algorithm}
 \caption{Euclidean algorithm for finding the gcd of two Univariate polynomials}
-\label{euclid}
+\label{alg:euclid}
 \begin{algorithmic}[1]
 \Procedure{GCD}{ Input : Polynomials $f$ and $g$ (where $deg(g)\leq deg(f)$ and $f,g\neq0$)}
 \State \emph{loop}:
@@ -83,7 +83,7 @@ Note that $x^{\alpha} < x^{\alpha}$ from $totality$ property.
 An ordering relationship $<$ over $T^n\times T^n$ is called a Well Ordering iff it is a Total Order and has a property that every non-empty subset of $T^n$ has a least element in this ordering.
 \end{definition}
 
-\begin{definition}(Term Ordering)
+\begin{definition}(Term Ordering) \label{def:term-order}
 An ordering relationship $<$ over $T^n\times T^n$ is called a Term Ordering iff it is a Total Order and satisfies the following properties:
 \begin{itemize}
 \item $1<x^{\alpha}$ for all $x^{\alpha}\in T^n$
