@@ -329,9 +329,9 @@ $f_1$ and $f_2$. We formally define greatest common division (GCD) formally.
 	For $f_1,f_2 \in \F[x]$, $gcd(f_1,f_2)$ is a polynomial $g \in \F[x]$ 
 	such that 
 \begin{enumerate}
-\item $g\;|\;f_1\;\;,\;\;g\;|\;f_2$
-\item $\forall h \in \F[x], h\;|\;f_1\;\;,\;\;h\;|\;f_2\;\implies h\;|\;g$
-\item leading Coefficient of $g$ = 1 
+\item $g \mid f_1, g \mid f_2$
+\item $\forall h \in \F[x], h \mid f_1 $ and $h \mid f_2$ implies $h \mid g$
+\item leading coefficient of $g$ = 1 
 \end{enumerate}
 \end{definition}
 %The last requirement (to have unique $g$)
@@ -341,6 +341,20 @@ polynomial.}
 	GCD of two polynomials $f_1,f_2 \in \F[x]$ has the following property.
 $gcd(f_1, f_2) = gcd(f_1-qf_2,f_2)\;\;\forall q \in \mathbb{F}[x]$
 \end{observation}
+
+\begin{exercise}
+%{}{
+\begin{enumerate}[(a)]
+\item Show that there are ${n+d-1 \choose d}$ monomial of total degree $d$ in $n$ variables.
+\item Let $f_1, f_2, \ldots, f_k \in \F[x]$ be univariate polynomials.\\
+Prove that $GCD(f_1, \ldots, f_k) = GCD(f_1, GCD(f_2, \ldots, f_k))$.
+\end{enumerate}
+\end{exercise}
+
+
+
+
+
 In the next lecture, we discuss an algorithm for computing GCD of two
 univariate polynomials.
 %\begin{lemma}

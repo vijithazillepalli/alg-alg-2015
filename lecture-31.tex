@@ -1,0 +1,220 @@
+\Lecture{Jayalal Sarma}{September, 29 2015}{31}{Multivariate Division
+Algorithm}{Subhadra Nanda}{$\gamma$}{K Dinesh} 
+
+\section{Recap}
+In previous lectures, we saw how to handle ideal membership question when the
+set of polynomials are univariate or linear equations.  We also discussed
+about two key ingredients (1) term ordering and (2) division algorithm that 
+needs to be define carefully to generalise our earlier approach.
+
+In the last lecture we defined two properties of term ordering
+(Definition~\ref{def:term-order}) and showed that these properties 
+implies that the ordering is well ordered. We want the ordering to be well
+ordered as this helps us to argue termination of the division algorithm.  We 
+also talked about the three term ordering : (1) Lex ordering (lex) (2) 
+Degree lex ordering (deglex) and (3) Degree reverse lex ordering (degrevlex).
+Now, we will see some examples on term ordering.
+
+\section{An example demonstrating term orderings}
+
+Let $f \in \polyring$, $f = 2x^2yz + 3xy^3 - 2x^3$. with the variable ordering
+$x>y>z$.
+
+Recall the following terminologies on polynomial $f$.
+\begin{enumerate}
+	\item $lc(f)$ : leading coefficient of $f$
+	\item $lp(f)$ : leading power product of $f$
+	\item $lt(f)$: leading term of $f$
+\end{enumerate}
+We give the value of $lc(f), lp(f)$ and $lt(f)$ for the three ordering
+mentioned before.
+\begin{center}
+	\begin{tabular}{|l|c|c|c|}
+		\hline 
+		  & lex & deglex & degrevlex  \\ 
+		\hline \hline
+		$lc(f)$ & $-1$ & $2$ & $3$ \\ 
+		\hline 
+		$lp(f)$ & $x^3$ & $x^2yz$ & $xy^3$ \\ 
+		\hline 
+			$lt(f)$ & $-2x^3$ & $2x^2yz$ & $3xy^3$ \\ 
+			\hline
+		\end{tabular}
+\end{center}
+Following is the justification for the table entries.
+\begin{itemize}
+	\item (Lex ordering) The terms in $f$, $x^2y, xy^3, x^3$ can be
+		represented as $(2,1,1), (1,3,0), (3,0,0)$. Hence
+		$lt(f) = -2x^3$ as $(3,0,0)>(2,1,1)>(1,3,0)$. Also
+		$lc(f) = -2$ and $lp(f) = x^3$.
+	\item (Degree Lex ordering)
+	It sorts the terms using total degree first and then uses lex
+	ordering.  Total degrees of $x^2y, xy^3, x^3$ are $4, 4, 3$
+	respectively.  As $x^2yz$ and $xy^3$ have same total degree,
+	we sort them using lex ordering.  So, $lt(f) = 2x^yz$ as
+	$(2,1,1)>(1,3,0)$ and $lc(f) = 2$ and $lp(f) = x^2yz$.  
+	\item (Degree Reverse Lex ordering) It sorts the terms using
+	total degree first and then uses reverse lex ordering.
+	As $x^2yz$ and $xy^3$ have same total degree, we sort
+	them using reverse lex ordering.  So, $lt(f) = 3xy^3$
+	as $(2,1,1)>(1,3,0)$ and $lc(f) = 3$ and $lp(f) =
+	xy^3$.
+\end{itemize}
+
+\section{Multivariate Division}
+Let $f,g,h \in  \mathbb{F}[x_1, \ldots ,x_n]$. We denote $f \stackrel{g}{\longrightarrow} h$, to imply ``$f$ reduces to $h$ using $g$ in
+one step''.  We denote $f \stackrel{g}{\longrightarrow}_{+} h$, to imply ``$f$
+reduces to $h$ using $g$ in multiple steps''.
+ 
+We generalize the ideas that we saw in univariate division.  In case of
+univariate polynomial division, we did $ h = f - \frac{lt(f)}{lt(g)}\cdot g$.
+By doing this we ensure that $h$ is smaller in the term ordering, so that the
+division algorithm terminates.
+
+Now, we will generalize it for  multivariate polynomials.
+
+\begin{definition}
+We say, $f \stackrel{g}{\longrightarrow} h$ if and only if $lp(g)$ divides
+one of the non-zero terms (say $X$) in the polynomial $f$ and 
+$$ h = f - \frac{X}{lt(g)}\cdot g$$
+\end{definition}
+
+\begin{exercise} 
+	Use the properties of term ordering to show the following. For  $f
+	\stackrel{g}{\longrightarrow}_{+} h$ with $h = f -
+	\frac{X}{lt(g)}\cdot g$.
+	\begin{enumerate}
+		\item Term $X$ gets removed completely from the polynomial $f$.
+		\item Any new terms generated in $\frac{X}{lt(g)}\cdot g$, is
+			less than $X$ in the term ordering.
+	\end{enumerate}
+\end{exercise}
+
+Let us consider an example with $ f = 6x^2y - x + 4y^3 -1 $ and $ 
+g = 2xy + y^3$. Assume, $x>y$ in term ordering.  We demonstrate division for
+lex ordering and degree lex ordering.
+\begin{description}
+	\item[ Using Lex Ordering ] We have $lt(g) = 2xy$ and $lp(g) = xy$,
+		and $xy$ divides the term $6x^2y$ of $f$. So, $X = 6x^2y$. 
+		Therefore,
+		\begin{align*}
+		 h & = 6x^2y - x + 4y^3 -1 - \frac{6x^2y}{2xy}\cdot
+		{(2xy + y^3)}\\
+		&  = -x + 4y^3 -1 -3xy^3  \\
+		& = -3xy^3 - x + 4y^3 - 1
+		\end{align*}
+		We can observe that, the term $6x^2y$ is removed from $h$ and
+		a new term $3xy^3$ is introduced here, which is lesser than
+		$6x^2y$.
+	\item[Using Degree Lex Ordering] We  have $lp(g) = y^3$ and it divides
+		the term $4y^3$ of $f$.  Therefore, 
+		\begin{align*}
+		 h & = 6x^2y - x + 4y^3 -1- \frac{4y^3}{y^3}\cdot {(2xy +
+		 y^3)}\\
+		 & = 6x^2y - 8xy -x-1
+		\end{align*}
+		Observe that, the term $4y^3$ is completely removed and a new
+		term $8xy$ is introduced, which is lesser than $4y^3$.
+\end{description}
+
+\noindent We now demonstrate multivariate polynomial division by an example
+(instead of providing a pseudo code). Let, $f, g \in \polyring$  with $f =
+y^2x + 4yx - 3x^2$ and $ g = 2y + x + 1$
+with $y>x$ in the lex term order. We divide $f$ by $g$ via long division.
+
+\newcommand{\ldsym}{$\left.\mathstrut\right)$}% unbalanced )
+\newlength{\ldwidth}
+\newcommand{\longdivide}[2]% #1 = denominator, #2 = numerator
+{\settowidth{\ldwidth}{\ldsym}
+#1\,\raisebox{1.5pt}{\ldsym}\hspace*{-.65\ldwidth}\overline{
+\mathstrut\hspace*{.35\ldwidth}\ #2}}
+
+\begin{center}
+\begin{tabular}{r}
+	$\frac{yx}{2} - \frac{x^2}{4} + \frac{7x}{4}$  \hphantom{$\strut-3x^2$} \\
+	$\longdivide{2y+x+1}{y^2x+4yx-3x^2\hphantom{\strut-3x^2}}$ \hphantom{$\strut-3x^2$} \\
+	\underline{$y^2x+\frac{yx^2}{2}+\frac{yx}{2}$} \hphantom{$\strut-3x^2 $}  \hphantom{$\strut-3x^2$} \\
+	$\frac{-yx^2}{2}+\frac{7yx}{2} - 3x^2$ \hphantom{$\strut-3x^2$} \\ 
+	\underline{$\frac{-yx^2}{2}-\frac{x^3}{4} - \frac{x^2}{4}$} \hphantom{$\strut-3x^2$} \\
+	$\frac{7yx}{2}-\frac{x^3}{4}-\frac{11x^2}{4}$  \\
+	\underline{$\frac{7yx}{2}-\frac{7x^2}{4}+\frac{7x}{4}$} \\
+	$-\frac{x^3}{4}-\frac{9x^2}{2}-\frac{7x}{4}$ 
+\end{tabular}
+\end{center}
+
+The long division gives us quotient as $\frac{yx}{2} - \frac{x^2}{4} +
+\frac{7x}{4}$ and remainder $-\frac{x^3}{4}-\frac{9x^2}{2}-\frac{7x}{4}$.
+In the division process above, we could have chosen $y^2x$ or $4yx$ as $X$ as
+both of them are divisible\footnote{$2y$ can divide $y^2x$ if we choose
+$\F$ as rational field.} by $lt(g) = 2y$. But we chose $y^2x$ as term
+$X$.
+
+So a natural question is : if we choose the term $X$ differently, will it end 
+up with the same quotient and remainder (or at least the same remainder) ? 
+Does the choice of $X$ really matter?
+
+\section{Generalization of multivariate division algorithm}
+Before, we try to answer this, let us first try to generalise multivariate
+polynomial division further and then answer this question there.
+
+\begin{definition}
+Given, $F = \{f_1,f_2, \ldots ,f_k\}$ and $f,h,f_1,f_2, \ldots f_k \in
+\mathbb{F}[x_1,\ldots,x_n]$.  We say, $f \stackrel{g}{\longrightarrow} h$, if
+$\exists$ indices $i_1,i_2, \ldots ,i_t \in [k]$ and $h_1,h_2, \ldots ,h_{t-1}
+\in \polyring$ such that, 
+\[f \stackrel{f_{i_1}}{\longrightarrow} h_1\stackrel{f_{i_2}} {\longrightarrow}
+h_2 \stackrel{ f_{i_3}}{\longrightarrow}\ldots \longrightarrow h_{t-1}
+\stackrel{f_{i_t}}{\longrightarrow} h \]
+\end{definition}
+
+\begin{observation}
+	Note that while performing the division, we need inverse of elements.
+	Hence the fact that we are working over $\F$ helps.
+\end{observation}
+\begin{observation}
+By division algorithm, the polynomial $h$ will have no term that can be
+divided by leading term of any of those polynomials $f_1,\ldots ,f_k$.
+\end{observation}
+In the multivariate division process we saw that, $$ f = h +
+\frac{X}{lt(g)}\cdot g  = h + u\cdot g$$ where, $u = \frac{X}{lt(g)}$.
+
+Similarly, we can generalize this statement here as
+$$ f = u_{i_1}f_{i_1} + u_{i_2}f_{i_2} + \ldots + u_{i_t}f_{i_t} + h $$
+Since some of the $f_i$s can be the same, the above expression can be better
+written as,
+$$ f = u_1f_1 + u_2f_2 + \ldots + u_kf_k + h $$
+
+\begin{observation}
+Using the above process we can solve the Ideal Membership problem, where given
+ideal $I = \langle f_1,f_2, \ldots ,f_k \rangle$ and a polynomial $f \in
+\mathbb{F}[x_1,...,x_n]$ we check if $f \in I$. Now the problem is reduced to 
+checking if $f \stackrel{F}{\longrightarrow}_{+} 0$ where $F = \{f_1,f_2,
+\ldots ,f_k\}$.
+\end{observation}
+
+Let us now get back to the question we had asked. In ideal membership for
+univariate case, it suffices to compute the GCD of the polynomials and check
+if $f$ (whose membership in ideal is to checked) gives zero remainder when
+divided by GCD. But is this a sufficient condition in multivariate case too ?
+For instance, what if for some ordering of $F$, we get that the remainder is
+$0$ while for others we get it to be non-zero ? Can we construct such 
+an example ? We will discuss more on this problem and how to address it in the next lecture. 
+
+Following are some exercise related to today's lecture.
+\begin{exercise}
+Let $f,g \in \F[x_1, x_2, \ldots, x_n]$ be nonzero polynomials and let $multdeg(f)$ denote the mult-degree of $f$. Argue how the leading terms of monomials change under addition and multiplication. Use it to show that:
+\begin{enumerate}[(a)]
+\item $multdeg(fg)$ = $multdeg(f)+multdeg(g)$.
+\item If $f+g \ne 0$, then $multdeg(f+g) \le \max(multdeg(f),multdeg(g))$.
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+Let $f, g \in \F[x_1, x_2, \ldots x_n]$ and $x^\alpha$ and $x^\beta$ be monomials. Prove that 
+\[ S(x^\alpha.f,x^\beta.g) = x^\gamma S(f,g) \]
+where
+\[ x^\gamma = \frac{LCM(x^\alpha lp(f),x^\alpha lp(g))}{LCM(lp(f),lp(g))} \]
+\end{exercise}
+
+

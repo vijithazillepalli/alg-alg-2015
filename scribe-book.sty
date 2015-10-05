@@ -29,6 +29,8 @@
 \newcommand{\calY}{{\cal Y}}
 \newcommand{\calZ}{{\cal Z}}
 
+\newcommand{\polyring}{{\mathbb{F}[x_1,x_2, \ldots x_n]}}
+
 \newtheoremstyle{myremark}     {10pt}{10pt}{}{}{\scshape}{.}{.5em}{}
 
 \renewcommand{\qedsymbol}{\leavevmode
@@ -54,7 +56,6 @@
 \newtheorem{assumption}    [theorem]{Assumption}
 \newtheorem{openproblem}   [theorem]{Open Problem}
 \newtheorem{problem}	   [theorem]{Problem}
-\newtheorem{exercise}      [theorem]{Exercise}
 \newtheorem{notation}	[theorem]{Notation}
 
 
@@ -193,54 +194,3 @@
 %\thispagestyle{empty}
 }
 
-
-% Problem Set Commands
-
-\usepackage{ifthen}
-
-\def\standalonepsflag{0} % 1 if standalone, 0 if in lecturenotes
-\def\psnumber{0} % 0 if only labelled one needs to be printed.
-\def\pslabel{graph-iso-problem} % ignored if psnumber is not 0.
-
-\newcounter{problemsetcounter}
-\stepcounter{problemsetcounter}
-\newcounter{problemcounter}
-\stepcounter{problemcounter}
-%\usepackage{showlabels}
-\usepackage{etoolbox}
-
-\newcommand{\homework}[3]
-{
-	\ifthenelse {\equal{\psnumber}{-1}} 
-	% If psnumber is -1, we include only one with matching pslabel.
-	{
-		\ifthenelse {\equal{\pslabel}{#2}}
-		{
-			\begin{exercise}[Problem Set #1, Question \ref{problem:#2}]
-			\label{exercise:#2}
-			#3 	
-			\end{exercise}
-		}
-	}
-	{
-	% If psnumber is not -1, include all psnumber matches.
-	% check if it is standalone
-		\ifthenelse {\equal{\psnumber}{#1}} 
-		{
-			\stepcounter{problemcounter}
-			\item\label{problem:#2}
-			\makeatletter
-			\@ifundefined{r@exercise:#2}{}{(See Exercise \ref{exercise:#2})}
-			\makeatother
-			 #3 % in-lecturenote question.
-		}
-	}
-}
-
-\newcommand{\printexercise}[1]
-{
-\def\standalonepsflag{0} % 1 if standalone, 0 if in lecturenotes
-\def\psnumber{-1} % 0 if only labelled one needs to be printed.
-\def\pslabel{#1} % ignored if psnumber is not 0.
-\input{problemsets.tex}
-}

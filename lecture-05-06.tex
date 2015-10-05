@@ -189,6 +189,16 @@ $X_1 \cong X_2$ if and only if there exists a $\sigma \in S$ and $v \in V(X_1)$ 
 
 What do we do if the graphs are not connected? We simply add an extra vertex each to both the graphs that is adjacent to all the vertices in the corresponding graphs. Since the new vertices have degree $n$, they can only be mapped to each other by any isomorphism (or an automorphism of $X$). Thus GI $\le$ GA.
 
-\printexercise{graph-iso-variants}
+%\homework{1}{graph-iso-variants}
+
+\begin{exercise-prob}[See Problem Set 1(problem~\ref{graph-iso-variants})]
+	\begin{show-ps1}{graph-iso-variants}
+	We will reduce variants of graph isomorphism problem to the original problem.
+	\begin{enumerate}[(a)]
+	\item We defined the graph rigidity problem {\sc GR} as - given a graph $X$, test if $Aut(X)$ is trivial. Show that {\sc GR} $\le$ {\sc GI}.
+	\item Notice that the {\sc GI} is defined for undirected graphs. Define the graph isomorphism problem for directed graphs {\sc DirGI}. Show that {\sc DirGI} $\le$ {\sc GI}.
+	\end{enumerate}
+	\end{show-ps1}
+\end{exercise-prob}
 
 
