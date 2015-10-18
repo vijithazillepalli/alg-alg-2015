@@ -1,0 +1,142 @@
+\Lecture{Jayalal Sarma}{October 12 2015}{38}{Univariate Polynomial
+Factorization and Unique Factorization Domains}{K Dinesh}{$\beta$}{K Dinesh}
+
+Recall that our aim is to obtain a solution to $f_i(x_1,\ldots,x_n) = 0$ for
+$i \in [k]$ where $f_i \in \polyring$.
+
+We saw that given $f_1,\ldots,f_k$, with respect to some term ordering and $I
+= \langle f_1,\ldots,f_k \rangle$ with $G$ as its Grobner basis,  
+it is possible to obtain the ideal $I_i = I \cap \F[x_i,\ldots, x_n]$ 
+(called the elimination ideal). We saw in last lecture that the 
+generator set of $I_i$, is precisely all polynomials in $G \cap
+\F[x_i,\ldots, x_n]$. Using elimination ideals, we can express the equations
+$f_i$ as another polynomial $f_i'$ which is only in variables $x_i,
+\ldots,x_n$. 
+\begin{align*}
+	f_1'(x_1,\ldots,x_n) & = 0 \\
+	\vdots \\
+	f_{n-1}'(x_{n-1},x_n)  & = 0 \\
+	f_n'(x_n) & = 0
+\end{align*}
+
+Now if we can solve for the univariate case $f_n'(x_n) = 0$, then the solution 
+can be substituted back in $f_{n-1}'(x_{n-1},x_n) = 0$ to get a univariate 
+polynomial in $x_{n-1}$ and is solved similarly. This highlights the
+need for algorithms for solving univariate polynomials.
+
+Natural questions that comes up are : when does a univariate polynomial admit
+a solution ? Note that if we can factorize a polynomial we can get it
+solution. Hence we need to understand more general question : when can a
+polynomial be factorized ? when is it unique ? can we characterize
+polynomials that cannot be factored ?
+
+\section{Units, Irreducible and Prime}
+Recall that in the ring of integers ($\Z,+, \cdot)$ we have a very
+good understanding about the notion of factorization, primes etc.
+We want to generalize this notion to an arbitrary ring and ask
+questions on when is an element factorizable, what are irreducibles,
+what are primes etc?
+
+Recall the definitions of algebraic structures from earlier lectures. 
+\begin{definition}
+	A ring $(R,+,\cdot)$ is an algebraic structure with $(R,+)$ being an
+	Abelian group, $(R,\cdot)$ is a monoid. Also the operation $\cdot$
+	distributes over $+$.  An integral domain is a ring where no two
+	non-zero elements can multiply to give a zero ($\forall a, b \in R,
+	a\cdot b = 0 \implies a =0 \text{ or } b = 0$).  A field is an
+	integral domain where multiplicative inverse exists for every non-zero
+	element.
+\end{definition}
+Note that $\Z$ is an integral domain (For brevity, we will skip the 
+operations ($+, \cdot$) involved from now on).
+
+We also argued, by a pigeon hole argument, that every finite integral domain is
+field. Integral domains have the following useful cancellation property.
+\begin{lemma} \label{lem:id-cancel}
+	For an integral domain $R$, with $c,d,e \in R$. If 
+	$c\cdot d = c\cdot e$ and $c \ne 0$, then $d=e$
+\end{lemma}
+\begin{proof}
+	Since $c\cdot d = c \cdot e$, $c(d-e) = 0$. Since $c \ne 0$ and $R$ is
+	an integral domain, it must be that $d-e = 0$ or $d=e$.
+\end{proof}
+
+Our aim is to see properties of the integral domain $\Z$ and generalise them
+general integral domains. Let $R$ denote an integral domain in the following
+definitions.
+\begin{definition}[Unit]
+	A unit in $R$ is an element which has a multiplicative inverse.
+\end{definition}
+For example in $\Z$, units are $1,-1$. Consider $\Z[i] = \{a + bi ~|~ a,b \in
+\Z \}$\footnote{Verify that this is indeed an integral domain}.  The units are
+$\{1,-1,i,-i\}$. 
+\begin{definition}[Irreducible]
+	An element $p \in R$ is irreducible if whenever $p$ can be expressed
+	as $a \cdot b$ where $a,b \in R$ either $a$ or $b$ is a unit.
+\end{definition}
+For example, in $\Z$, $7 = (-1)(-7)$. Hence $7$ is irreducible. Similarly $2$
+is irreducible in $\Z$ but $2 = (1+i)(1-i)$ in $\Z[i]$. Hence $2$ is not
+irreducible in $\Z[i]$.
+
+\begin{definition}[Factorization]
+	Let $f \in R$. A factorization of $f$ into irreducibles is an
+	expression of the form \[ f = c\prod_i p_i^{\alpha_i}\] where $c$ is a
+	unit in $R$, $p_i \in R$ are irreducibles and $\alpha_i \in \Z^{\ge
+	0}$
+\end{definition}
+
+Note that $\Z$ has the property that any factorization is always unique.
+\begin{definition}[Unique factorization Domain]
+	An integral domain $R$ is said to be a unique factorization domain
+	(UFD) if for every $f \in R$, $f$ has a unique factorization upto
+	muliplication by units.
+\end{definition}
+We need to work over UFDs since only then factorization is well defined. 
+Our aim is to characterise UFD and show that some of the rings that we have
+seen $\Z[x], \polyring$ are indeed UFDs. Hence it makes sense to ask for
+factorization of polynomials in these rings.
+
+Similar to the notion of primes in $\Z$, let us define the notion of primes
+for integral domains.
+\begin{definition}[Prime]
+	An element $p \in R$ is said to be a prime if for all $a,b \in R$,
+	$p \mid a\cdot b \implies p \mid a$ or $p \mid b$.
+\end{definition}
+
+\section{Characterization of UFD}
+We now characterize UFDs. Firstly, we show that in a UDF, every prime is 
+an irreducible.
+\begin{lemma}
+	For a UFD $R$, every prime in $R$ is an irreducible in $R$
+\end{lemma}
+\begin{proof}
+	Let $p$ be a prime in $R$. We want to show that if $p=a\cdot b$ for
+	some $a,b \in R$, then $a$ or $b$ is a unit.
+
+	Let $p =a\cdot b$ for some $a, b \in R$. Since $p$ is a prime, it must
+	be that $p \mid a$ or $p \mid b$. Suppose $p \mid a$ and $c \in R$ be
+	such that $a = p\cdot  c$. Hence $p =a \cdot b$ implies, $p = p \cdot
+	b \cdot c$. Hence by cancellation property of integral domains
+	(Lemma~\ref{lem:id-cancel}), we get $b\cdot c = 1$. Hence $b$ has an
+	inverse and it a unit. If $p \mid b$, then a similar argument shows
+	that $a$ is a unit.
+\end{proof}
+So a natural question to ask is when are irreducibles also primes. It turns
+out that this is true iff $R$ is a UFD. 
+\begin{theorem}
+	Let $R$ be an integral domain. Then,
+	\begin{itemize}
+		\item $R$ is a UFD implies all irreducibles in $R$ are also
+			prime.
+		\item If factorization exists in $R$ and all irreducibles are
+			primes in $R$, then $R$ is a UFD.
+	\end{itemize}
+	\label{thm:ufd-characterisation}
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
+
+\Lecture{Jayalal Sarma}{October 13 2015}{39}{Principal ideal domain, relation
+to Unique factorization domain and Gauss's lemma}{K Dinesh}{$\beta$}{K Dinesh}
