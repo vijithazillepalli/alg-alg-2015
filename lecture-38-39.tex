@@ -92,8 +92,8 @@ irreducible in $\Z[i]$.
 Note that $\Z$ has the property that any factorization is always unique.
 \begin{definition}[Unique factorization Domain]
 	An integral domain $R$ is said to be a unique factorization domain
-	(UFD) if for every $f \in R$, $f$ has a unique factorization upto
-	muliplication by units.
+	(UFD) if for every $f \in R$, $f$ has a unique factorization up to
+	multiplication by units.
 \end{definition}
 We need to work over UFDs since only then factorization exists and is well
 defined.  Our aim is to characterise UFD and show that some of the rings that
@@ -179,7 +179,7 @@ out that this is true iff $R$ is a UFD.
 
 
 \Lecture{Jayalal Sarma}{October 13 2015}{39}{Principal ideal domain, relation
-to Unique factorization domain and Gauss's lemma}{K Dinesh}{$\beta$}{K Dinesh}
+to Unique factorization domain and Gauss's lemma}{K Dinesh}{$\gamma$}{K Dinesh}
 
 Last lecture, we saw that to prove that an integral domain is a UFD, we need
 to argue that
@@ -268,8 +268,9 @@ We now prove the two theorems.
 	$\alpha' = \alpha c^{-1}$ and $\beta' = \beta c^{-1}$. Now $a = \alpha'
 	pa + \beta' ba$. Since $p \mid ab$, we get that $p  \mid
 za	\alpha' pa+\beta' ba$. Hence $p \mid a$.
-	\item [Factorisation exists in $R$ : ] We show that every element in $R$
-	has an irreducible factor. If we show this, then the process of
+	\item [Factorisation exists for every $f$ in $R$ : ] We show that
+	every element in $R$ has an irreducible factor. If we show
+		this, then the process of
 	factorisation cannot happen infintely and this would prove that
 	factorisation exists.
 		
@@ -295,4 +296,45 @@ To show that $R[x]$ is a UFD, we need to show (similar to the previous proof)
 that (1) every irreducible in $R[x]$ is prime and (2) factorisation exists for
 every $f \in R$.
 
+We give a proof that every irreducible in $R[x]$ is a prime in $R[x]$.
+Note that the irreducibles in $R[x]$ can come from the following :
+\begin{enumerate}
+	\item irreducibles of $R$, or
+	\item irreducibles which are polynomials in variable $x$
+\end{enumerate}
+We handle the first case : namely, we show that every prime\footnote{Note that
+since $R$ is a UFD, primes and irreducibles are the same. Hence the statement
+is same as saying every irreducible in $R$ is a prime in $R[x]$} in $R$ is
+also a prime in $R[x]$. This is known as Gauss's lemma.
+
+\begin{lemma}\label{lem:gauss}
+	Every prime in $R$ remains prime in $R[x]$.
+\end{lemma}
+\begin{proof}
+	Let $p$ be a prime in $R$ and $f,g \in R[x]$ such that $p \mid fg$. We
+	want to show that $p \mid f$ or $p \mid g$. If $p \mid f$ or $p \mid
+	g$ we are done. Suppose $p \nmid f$. We show that $p \mid g$.
+
+	For $a_i, b_i \in R$ and $a_0, b_0 \ne 0$,
+	\begin{align*}
+		f(x) & = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0 \\
+		g(x) & = b_mx^m + b_{n-1}x^{n-1} + \ldots + b_1x + b_0 
+	\end{align*}
+	Since $p \nmid f$, let $r$ be the largest index such that $p \nmid
+	a_r$ (i,e. for all $a_i$ with $i > r, p \mid a_i$). Consider the
+	coefficient of $x^{m+r}$ in $f(x)g(x)$ which is given by $b_ma_r +
+	b_{m-1}a_{r+1} + \ldots$. Since $p \mid fg$, $p$ divides this
+	summation. Also since $\forall~i > r, p \mid a_i$, we get that $p$
+	must divide $b_ma_r$. Since $p$ is a prime and $p \nmid a_r$, it must
+	be that $p \mid b_m$. 
+	
+	For the remaining $b_i$, we argue similarly. Consider the coefficient
+	of $x^{m+r-1}$ in $f(x)g(x)$ given by $b_ma_{r-1} + b_{m-1}a_r +
+	b{m-2}a_{r+1} \ldots$. Again this whole summation is divisible by $p$
+	and the term $b_ma_{r-1}$ and $b_{m-j}a_{r-j+1}$ from $j \ge 2$ are
+	divisible by $p$. Hence it must be that $p \mid b_{m-1}$. In this way
+	the argument can be used to show that $p$ divides all coefficients of
+	$g$ and hence it $p \mid g$.
+\end{proof}
+We will complete the proof in the next lecture.
 
