@@ -1,7 +1,116 @@
-\Lecture{Jayalal Sarma}{October 14 2015}{40}{Proof of $R$ is a UFD then $R[x]$
-is a UFD}{K Dinesh}{$\beta$}{K Dinesh}
-
-
+\Lecture{Jayalal Sarma}{October 14 2015}{40}{Proof of $R$ is a UFD implies
+$R[x]$ is a UFD}{K Dinesh}{$\beta$}{K Dinesh}
 
 \Lecture{Jayalal Sarma}{October 16 2015}{41}{Characterization of irreducible
 polynomials}{K Dinesh}{$\beta$}{K Dinesh}
+
+We saw in last two lectures that the following problems are well defined.
+\begin{problem}
+	Given a polynomial $f \in \polyring$, 
+	\begin{itemize}
+		\item test if it is irreducible
+		\item if it is not, factorise $f$ into irreducible factors.
+	\end{itemize}
+\end{problem}
+
+In this lecture, we give a characterisation of irreducible polynomials over
+$\F[x]$. Recall the following definitions.
+
+\begin{definition}[Quotient Ring]
+	For an ideal $I$ in a ring $R(+,\cdot)$, the quotient ring $(R/I, +
+	,\cdot)$ is a ring defined as the collection of $\{a+I ~|~ a \in R\}$
+	with operations defined as : for all $a+I, b+I \in R \ I$,
+	$(a+I)+(b+I) = (a+b+ I)$ and $(a+I) \cdot (b+I) = a\cdot b+I$.
+\end{definition}
+The element of $R/I$ are the cosets of $I$ in $R$ and this forms a ring for
+the operations defined.  Following lemma gives as a characterisation of when
+do two elements in $R$ fall in the same coset.
+\begin{lemma} \label{lem:mem-ideal}
+	For an ideal $I$ of a ring $R$, for any $a,b \in R$ 
+	\[ a+I = b + I \iff a-b \in I \]
+\end{lemma}
+\begin{proof}
+	($\Longrightarrow$) Let $a+I = b+I$. In particular $a \in a+I$. Hence
+	$a \in b+I$ and $a-b \in I$.
+
+	($\Longleftarrow$) We show that if $a-b \in I$, then $a+I \subseteq
+	b+I$. Let $a-b = \alpha$ for some $\alpha \in I$. Hence $a = b +
+	\alpha$ which implies $a \in b+I$. Now for any $c \in a+I$, $c \in
+	b+(a-b)+I$. Since $a-b = \alpha \in I$, $(a-b)+I = I$ giving $c \in
+	b+I$. Now interchange the role of $a$ and $b$ in the above proof to
+	get $b+I \subseteq a+I$. This completes the proof.
+\end{proof}
+
+Let us consider an example of quotient rings. As usual, consider the ring $\Z$
+and let $a\Z$ for $a \in \Z$ be an ideal. Recall that $\Z$ is a PID and hence
+every ideal is singly generated. Consider the quotient ring $\Z/a\Z$. 
+By earlier lemma (Lemma~\ref{lem:mem-ideal}), we get that 
+\begin{observation} \label{obs:mem-z}
+	For any $\alpha + I$, $\beta + I \in \Z/a\Z$, $\alpha$ and $\beta$
+	are in the same cosets if and only if $\alpha - \beta \in a\Z$. 
+\end{observation}
+This is essentially same as that of saying $\alpha = \beta \mod a$. 
+Note that there cannot be two representatives for any coset. If $\alpha,
+\beta$ represent the same coset $a\Z$ with $\alpha \ne \beta$, then
+$\alpha-\beta \ne 0 \mod a$ which violates the above observation
+(Observation~\ref{obs:mem-z}).
+
+Also coset representatives is of the coset are those that are less than
+$a$ in value. If not, then we can always go modulo $a$ and get a
+representative smaller than $a$. Hence the set quotient ring $\Z/a\Z$ can be
+looked as $\Z_a$.
+\begin{claim}
+	$\Z/a\Z$ is isomorphic to $\Z_a$
+\end{claim}
+\begin{proof}
+	For any $\alpha + a\Z \in \Z/a\Z$, define the map $\phi$ which takes
+	$\alpha + z\Z$ to $\alpha \mod a$. This is indeed a bijection.  
+	Also the operation is preserved because,
+	\begin{align*}
+		\phi(\alpha + a\Z + \beta +b\Z) = & \phi(\alpha + \beta +a\Z)
+		= (\alpha + \beta) \mod a \\ 
+		& = (\alpha \mod a + \beta \mod a ) \mod a \\
+		& = \phi(\alpha + a\Z) + \phi(\beta +a\Z)
+	\end{align*}
+\end{proof}
+
+\section{Quotient rings over $\F[x]$}
+For a polynomial $p(x) \in \F[x]$ with $deg(p) = d$, consider the ideal $I =
+\langle p(x) \rangle$ and the quotient ring $\F[x]/I$. Similar to the integer
+rings, we make the following observations.
+
+\begin{observation}
+	No two polynomials with degree strictly smaller than $deg(p)$ can be
+	in the same coset. 
+\end{observation}
+This follows from Lemma~\ref{lem:mem-ideal} and the argument is similar to the
+integer case. Hence every coset has at most one polynomial of degree strictly
+smaller in it. The next observation says that every coset must have an element
+of degree strictly smaller than $deg(p)$.
+
+\begin{observation}
+	Every coset in $\F[x]/I$ must have a polynomial of degree strictly
+	smaller than $deg(p)$.
+\end{observation}
+\begin{proof}
+	Let $g + I$ be a coset in $\F[x]/I$. By division algorithm, $g(x)$ can
+	be written as $q(x)p(x) + r(x)$ with $deg(r) < deg(p)$ and $r$ is
+	unique. Hence $r(x) = g(x) - p(x)q(x) \in g +I$.
+\end{proof}
+
+This tells us that corresponding to every polynomial of degree strictly
+smaller than $deg(p)$, there is exactly one coset. Hence for a finite field
+$\F$ of size $q$, $|\F[x]/I| = q^d$. 
+
+We now give a characterisation of irreducibles.
+\section{Characterisation of irreduciblity}
+The characterisation essentially says that checking for irreducibilty biolds
+down to checking if a ring is a field.
+\begin{theorem}
+	For an ideal $I$ in $\F[x]$ generated by $p(x) \in \F[x]$, 
+	\[ \F[x]/I \text{ is a field} \iff p(x) \text{ is irreducible over }
+	\F[x] \]
+\end{theorem}
+\begin{proof}
+	($\Longleftarrow$)
+\end{proof}
