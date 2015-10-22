@@ -104,7 +104,7 @@ Isomorphism}{Vidhya Ramaswamy}{$\beta$}{Ramya C}
 In order to decide which vertices of graph $X_1$ to individualise, we introduce the notion of \textbf{Colour Valence}.
 
 \begin{definition}
-Colour valence of a graph $X$ with a colouring $f$ is $d$, if, for every colour class $c$, and for every vertex $v \in V(X)$, there are atmost $d$ neighbours of $v$ in colour class $c$ or there are at most $d$ non-neighbours of $v$ in the colour class $c$
+Colour valence of a graph $X$ with a colouring $f$ is $d$, if, for every colour class $c$, and for every vertex $v \in V(X)$, there are at most $d$ neighbours of $v$ in colour class $c$ or there are at most $d$ non-neighbours of $v$ in the colour class $c$
 \end{definition}
 
 Like having a bounded degree, having a bounded colour valence gives us an interesting bound on checking if 2 graphs are isomorphic.
@@ -146,7 +146,7 @@ Hence, we have an algorithm for graph isomorphism, modulo the proofs of Claim \r
 \paragraph*{}
 \textbf{Proof of Lemma \ref{PickVertexIndividualisation}}
 \begin{proof}
-Let $S$ be a a set of vertices chosen upto stage $i$, that is, $S = \lbrace x_1, x_2, ... x_{i-1} \rbrace$. Let the colouring after these individualisations be $f_S$.
+Let $S$ be a a set of vertices chosen up to stage $i$, that is, $S = \lbrace x_1, x_2, ... x_{i-1} \rbrace$. Let the colouring after these individualisations be $f_S$.
 Since we are not yet done, colour valence of $(X, f_s) > \frac{d}{2}$.
 
 Therefore, $\exists$ a colour $m$, and a vertex $x \in V(X)$ such that

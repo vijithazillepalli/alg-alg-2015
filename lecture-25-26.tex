@@ -5,7 +5,7 @@ So far, we have studied various problems through the framework of group theory. 
 We give broad definitions of the problems on polynomials that we're interested in:\\
 
 \begin{problem}
-Given a system of $k$ $n$-variate polynomial equtions
+Given a system of $k$ $n$-variate polynomial equations
 \begin{center}
 $f_1(x_1, x_2, \ldots, x_n) = 0$\\
 $f_2(x_1, x_2, \ldots, x_n) = 0$\\
@@ -23,7 +23,7 @@ find assignments to the variables $x_1, x_2, \ldots, x_n$ such that they satisfy
 Given a polynomial, enumerate its irreducible factors.
 \end{problem}
 
-A polynomial $f$ is said to be {\em identically zero} if all its cofficients are 0. 
+A polynomial $f$ is said to be {\em identically zero} if all its coefficients are 0. 
 
 \begin{problem}[\textsc{Polynomial Identity Testing}]
 Given a polynomial $f$, test if it is identically 0.
@@ -42,7 +42,7 @@ system of $k$ linear equations as the matrix $A_{k \times n}$ acting on the left
 Here the column vector $B$ will be 0.\\
 To solve this system of equations, we carry out the familiar process called \textbf{Gaussian Elimination}. We use a sequence of elementary row operations on $A_{k \times n}$ to transform it into a upper triangular matrix. Also observe that some of the rows of the matrix thus obtained can be completely zero. However solving the equations is now easy. When we apply this matrix on the column vector, the first non-zero row from the bottom is in only one variable ($x_n$); the equation resulting from the row just above has two variables (one of which $x_n$, has already been fixed), and so on.\\
 
-Inorder to solve a system of linear equations we transfor the matrix representing the system of linear equation by applying elementary row and column operations. Why is this process correct ? Why does it not change the linear equations in the system ? To see this we will need a few basic definitions. We can view the rows of the matrix  $A_{k \times n}$ as vectors of the form $(a_1,\ldots,a_n)$. 
+In order to solve a system of linear equations we transfer the matrix representing the system of linear equation by applying elementary row and column operations. Why is this process correct ? Why does it not change the linear equations in the system ? To see this we will need a few basic definitions. We can view the rows of the matrix  $A_{k \times n}$ as vectors of the form $(a_1,\ldots,a_n)$. 
 %such that the lower half of the matrix as divided by the diagonal coomes to consist entirely of elements equal to 0.
 
 \begin{definition} (Row Space)
@@ -72,7 +72,7 @@ At this point we ask ourselves a question. How is the kernel related to the row 
 We can see that for $B$ to be a zero vector, each row vector in $A$ must a dot product with $X$ equal to 0. Only then will the kernel contain $X$.\\
 
 
-So far we were interested in linear combinations of polynomials. NOw we will look at combinations of polynomials by using polynomials as coefficients.
+So far we were interested in linear combinations of polynomials. Now we will look at combinations of polynomials by using polynomials as coefficients.
 
 
 We now define a combination of the polynomials $f_1,f_2,...,f_k$ as follows:\\
@@ -186,7 +186,7 @@ $\implies h \in R$
 Observe that the above property is a stronger closure property than the usual closure property.
 
 
-Having obtained this characterisation of $I$ as defined above, we give the following definition:
+Having obtained this characterization of $I$ as defined above, we give the following definition:
 \begin{definition} (Ideal)
 A set $I\subseteq R$ is said to be an ideal of the ring $R$ if :
 \begin{itemize}
