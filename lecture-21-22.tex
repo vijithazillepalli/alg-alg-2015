@@ -159,8 +159,9 @@ with a trees $T$  such that
 Action of G on the set ${\Gamma_{1}, \Gamma_{2}, ..., \Gamma_{m}}$ is primitive.
 \end{claim}
 \begin{proof}
-Consider action of $G$ on the set $\{1, 2, 3, ... m\}$. Suppose there was a non-trivial block $\delta \subset \text{ \{1, 2, ... m\}}$ and$|\delta| 
-\neq 1 $. Let $B$ be defined as $ B = \bigcup_{i \in \delta} \Gamma_{i} $
+Consider action of $G$ on the set $\{1, 2, 3, ... m\}$. Suppose there was a
+non-trivial block $\delta \subset \text{ \{1, 2, ... m\}}$ and$|\delta| \neq 1
+$. Let $B$ be defined as $ B = \bigcup_{i \in \delta} \Gamma_{i} $
 Note that, $B$ is a block in $G$ acting on $\Omega$. 
 Hence for any $i \in \delta$, $B$ forms a non-trivial block as $\Gamma_{i}$ $\subset$ B $\subset$
  $\Gamma$. But then $\Gamma_i$ is no longer maximal block of $\Gamma$  contradicts the existence of the edge $\Gamma$ to  $\Gamma_{i}$.
@@ -185,7 +186,10 @@ Consider the structure tree for this action.
 	\caption{Structure tree for one orbit of $\Omega$ under the action of $G$.}
 	\label{fig:structurestree}
 \end{figure}
-Let $H$ = \{ $g$ $\in$ $G$ $|$ $\forall$ $i$ $\Gamma_{i}^{g}$ = $\Gamma_{i}$ \}. $H$ is the setwise stabilizer of $\Gamma_{i}$. This means we can write $G$ in terms of the cosets of $H$. Let there be $k$ cosets and $\tau_i$ denote the coset representatives. Hence,
+Let $H$ = \{ $g$ $\in$ $G$ $|$ $\forall$ $i$ $\Gamma_{i}^{g}$ = $\Gamma_{i}$ 
+\}. $H$ is the setwise stabilizer of $\Gamma_{i}$. This means we can write $G$ 
+in terms of the cosets of $H$. Let there be $k$ cosets and $\tau_i$ denote the 
+right coset representatives. Hence,
 \begin{figure}[htp!]
 	\centering
 	\includegraphics[scale=0.45]{images/setstabgroup.pdf}
@@ -195,7 +199,7 @@ Let $H$ = \{ $g$ $\in$ $G$ $|$ $\forall$ $i$ $\Gamma_{i}^{g}$ = $\Gamma_{i}$ \}.
 
 \[ G =  \bigcup_{i=1}^kH\tau_{i} \]
 \[ G_{\Delta} = \bigcup_{i=1}^k(H\tau_{i})_{\Delta} \]
-
+We denote $(H\tau_i)_{\Delta} = \{g \in H\tau_i \mid g \in G_{\Delta}$.
 We need to find the elements in each coset of $H$, which stabilizes $\Delta$. This leads to a natural recursive formulation which we formalize below. 
 
 \begin{problem}[Generalized Set Stabilizer]
