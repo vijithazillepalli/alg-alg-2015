@@ -1,6 +1,21 @@
-\Lecture{Jayalal Sarma}{October, 19 2015*}{42}{Chinese Remainder Theorem}{Vijitha}{$\alpha$}{TA}
+\Lecture{Jayalal Sarma}{October, 19 2015}{42}{Chinese Remainder Theorem}{Vijitha}{$\alpha$}{TA}
 In this lecture, we will see a factorization tool called Chinese Remainder Theorem (CRT), which in its basic form determines a number n that, when divided by some given divisors, leaves given remainders. For example, what is the lowest number n that, when divided by 3 leaves a remainder of 2, when divided by 5 leaves a remainder of 3, when divided by 7 leaves a remainder of 2? We'll see the formal version of CRT for ideals in this lecture.
 
+\section{Notion of Relatively prime ideals}
+Let $I$ and $J$ be two ideals in ring $R$. $I + J = \{ x + y | x \in I , y \in J \}$
+\begin{definition}[Relatively prime ideals]
+Two ideals $I$ and $J$ in ring $R$ are relatively prime if  $I + J = R$.
+\end{definition}
+
+Let us take a simple example. Let $a\Z$ and $b\Z$ be two ideals in $\Z$. 
+\begin{align*}
+	gcd(a,b)=1.
+	\implies a,b are relatively prime.
+	1 \in a$\Z$ +  b$\Z$.
+	\implies \exists c, d suchthat ca+db=1.
+	IF and ideal contains 1, it contains $R$.
+	a$\Z$ + b$\Z$ = 1 iff gcd(a,b)=1. 
+\end{align*}
 \begin{note}
 	Enter date, lecture number, title and your name. 
 \end{note}
